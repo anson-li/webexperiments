@@ -1,0 +1,26 @@
+.full-page {
+  height: 100%;
+  width: 100%;
+}
+
+.background-dev-dark {
+  position: fixed;
+  top: -150px;
+  z-index: -2;
+}
+
+.error-hidden {
+  display: none;
+}
+
+body::-webkit-scrollbar {
+  display: none;
+}
+
+.fixed {
+  width: 100%;
+  overflow-x: hidden;
+  height: 100%;
+  overflow-y: hidden;
+  position: fixed;
+}

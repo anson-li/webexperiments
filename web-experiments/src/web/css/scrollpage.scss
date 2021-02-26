@@ -1,0 +1,31 @@
+/* * * * * * * * * * *
+* ansonli.ca supplementary stylesheet
+* used for scrollable page implementation
+* reorganised for general use
+* * * * * * * * * * * */
+
+#scroll-page {
+  overflow: auto;
+  background-color: #000000;
+  color: #ffffff;
+
+  .scroll-title {
+    padding-bottom: 0.5em;
+  }
+
+  .main-container {
+    background: #1e5799; /* Old browsers */
+    background: #111111;/* -moz-linear-gradient(-45deg, #1e5799 0%, #fef8ed 0%, #fff7ef 8%, #fff7ef 8%, #fff7ef 100%, #fff7ef 100%, #fff7ef 100%, #fff7ef 100%, #fff7ef 100%, #fff7ef 100%, #fff7ef 100%, #feefff 100%, #fff7ef 100%); /* FF3.6-15 */
+    background: #111111;/* -webkit-linear-gradient(-45deg, #1e5799 0%,#fef8ed 0%,#fff7ef 8%,#fff7ef 8%,#fff7ef 100%,#fff7ef 100%,#fff7ef 100%,#fff7ef 100%,#fff7ef 100%,#fff7ef 100%,#fff7ef 100%,#feefff 100%,#fff7ef 100%); /* Chrome10-25,Safari5.1-6 */
+    background: #111111;/* linear-gradient(135deg, #1e5799 0%,#fef8ed 0%,#fff7ef 8%,#fff7ef 8%,#fff7ef 100%,#fff7ef 100%,#fff7ef 100%,#fff7ef 100%,#fff7ef 100%,#fff7ef 100%,#fff7ef 100%,#feefff 100%,#fff7ef 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:dximagetransform.microsoft.gradient(startColorstr='#1e5799', endColorstr='#fff7ef', GradientType=1); /* IE6-9 fallback on horizontal gradient */
+  }
+
+  .hide-under {
+    z-index: 0;
+  }
+
+  #bottom {
+    position: static;
+  }
+}
