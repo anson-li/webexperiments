@@ -3,6 +3,7 @@ import React, { PureComponent } from 'react';
 import { TransitionGroup } from 'react-transition-group';
 import { matchPath } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import CustomCursor from './common/CustomCursor';
 
 import Border from './common/Border';
 import MainLogo from './common/MainLogo';
@@ -14,6 +15,18 @@ class App extends PureComponent {
     this.showLoader = this.showLoader.bind(this);
     this.hideLoader = this.hideLoader.bind(this);
     this.loader = React.createRef();
+    this.onCursorHover = this.onCursorHover.bind(this);
+    this.onCursorUnhover = this.onCursorUnhover.bind(this);
+    this.cursor = React.createRef();
+  }
+
+  onCursorHover() {
+    console.log('Hit appjs');
+    this.cursor.current.hoverFunc();
+  };
+
+  onCursorUnhover() {
+    this.cursor.current.unhoverFunc();
   }
 
   matchPath = (path) => matchPath(window.location.pathname, path);
@@ -26,10 +39,13 @@ class App extends PureComponent {
     this.loader.current.fadeOut();
   }
 
+  
+
   render() {
     const { routes } = this.props;
     return (
       <div id="app">
+        <CustomCursor ref={this.cursor} />
         <div className="fixed-header">
           {/* {/* <Border /> */}
           {/* <MainLogo /> */}
@@ -43,6 +59,8 @@ class App extends PureComponent {
                 key={key}
                 showLoader={this.showLoader}
                 hideLoader={this.hideLoader}
+                cursorHover = {this.onCursorHover}
+                cursorUnhover = {this.onCursorUnhover}
               />
             ))}
         </TransitionGroup>

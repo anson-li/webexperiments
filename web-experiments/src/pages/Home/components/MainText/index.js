@@ -37,11 +37,11 @@ class MainText extends PureComponent {
             </Link>
           </div>
         </div>
-        <div className="col-md-12 fixed-bottom">
+        {/* <div className="col-md-12 fixed-bottom">
           <p className="item">
             <span className="serif wow fadeIn d-none d-lg-block" data-wow-duration="1s" data-wow-delay="0.5s">hello@anson.li</span>
           </p>
-        </div>
+        </div> */}
       </div>
     );
   }
