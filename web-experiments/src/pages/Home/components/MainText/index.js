@@ -2,7 +2,6 @@ import React, { PureComponent } from 'react';
 import WOW from 'wowjs';
 import { Link } from 'react-router-dom';
 
-import DarkBackground from '../../../../web/assets/background/bg-index-dev-dark.png';
 import FadeText from '../../../../common/FadeText';
 
 class MainText extends PureComponent {
@@ -21,12 +20,11 @@ class MainText extends PureComponent {
       <div className="full-page">
         <div className="flex-container container ">
           <div className="col-md-12 mid-center">
-            <img className="background-dev-dark" src={DarkBackground} alt="Background subfill" />
             <div className="spacer-sm d-lg-none" />
             <FadeText
               type="h1"
               id="main-text"
-              text="Hey - I'm Anson Li, and I am a software engineer at ATB."
+              text="ANSON'S WEB EXPERIMENTS"
             />
             <Link to="/work" id="sub-link" href="work">
               <FadeText

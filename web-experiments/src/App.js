@@ -31,8 +31,8 @@ class App extends PureComponent {
     return (
       <div id="app">
         <div className="fixed-header">
-          <Border />
-          <MainLogo />
+          {/* {/* <Border /> */}
+          {/* <MainLogo /> */}
         </div>
         <Loader ref={this.loader} />
         <TransitionGroup id="content">

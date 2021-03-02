@@ -42,18 +42,18 @@ class Home extends PureComponent {
     }).finished;
   }
 
+  componentDidMount() {
+    this.props.hideLoader();
+  }
+
   render() {
-    const { hideLoader } = this.props;
     return (
       <div id="main-page" ref={(e) => { this.el = e; }}>
         <Background />
         <div className="fixed">
-          <ThreeSphere
-            hideLoader={hideLoader}
-          />
           <MainText />
         </div>
-        <div id="bottom" />
+        {/* <div id="bottom" /> */}
       </div>
     );
   }
