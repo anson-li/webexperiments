@@ -18,6 +18,7 @@ class App extends PureComponent {
     this.onCursorHover = this.onCursorHover.bind(this);
     this.onCursorUnhover = this.onCursorUnhover.bind(this);
     this.cursor = React.createRef();
+    this.mainPageRedirect = this.mainPageRedirect.bind(this);
   }
 
   onCursorHover() {
@@ -39,7 +40,9 @@ class App extends PureComponent {
     this.loader.current.fadeOut();
   }
 
-  
+  mainPageRedirect() {
+    this.cursor.current.mainPageRedirect();
+  }
 
   render() {
     const { routes } = this.props;
@@ -61,6 +64,7 @@ class App extends PureComponent {
                 hideLoader={this.hideLoader}
                 cursorHover = {this.onCursorHover}
                 cursorUnhover = {this.onCursorUnhover}
+                mainPageRedirect = {this.mainPageRedirect}
               />
             ))}
         </TransitionGroup>

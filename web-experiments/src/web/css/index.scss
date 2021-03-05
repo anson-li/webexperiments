@@ -698,17 +698,6 @@ li a {
   * 5.5 - Additional
   * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-#main-text {
-  line-height: 130%;
-  padding-top: 25vh;
-}
-
-@media (min-width: 1024px) {
-  #main-text {
-    padding-top: 10vh;
-  }
-}
-
 @media (min-width: 1024px) {
   .highlight {
     position: relative;

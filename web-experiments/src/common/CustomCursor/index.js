@@ -9,6 +9,7 @@ class CustomCursor extends PureComponent {
     this.moveCircle = this.moveCircle.bind(this);
     this.hoverFunc = this.hoverFunc.bind(this);
     this.unhoverFunc = this.unhoverFunc.bind(this);
+    this.mainPageRedirect = this.mainPageRedirect.bind(this);
     this.circleTween = null;
     this.followTween = null;
   }
@@ -38,7 +39,17 @@ class CustomCursor extends PureComponent {
     });
     TweenLite.to(this.follow, 0.3, {
       scale: 2,
-      borderColor: '#ffd5a8',
+      borderColor: '#333',
+    });
+  }
+
+  mainPageRedirect() {
+    TweenLite.to(this.circle, 0.3, {
+      opacity: 1,
+      scale: 1,
+    });
+    TweenLite.to(this.follow, 0.3, {
+      scale: 0,
     });
   }
 
@@ -49,7 +60,7 @@ class CustomCursor extends PureComponent {
     });
     TweenLite.to(this.follow, 0.3, {
       scale: 1,
-      borderColor: '#FFFFFF',
+      borderColor: '#333',
     });
   }
 
@@ -69,6 +80,7 @@ class CustomCursor extends PureComponent {
       <>
         <div className="cursor-circle" ref={(ref) => { this.circle = ref; }} />
         <div className="cursor-circle-follow" ref={(ref) => { this.follow = ref; }} />
+        <div className="cursor-circle-name" ref={(ref) => { this.list = ref; }} />
       </>
     );
   }

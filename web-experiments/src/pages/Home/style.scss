@@ -24,3 +24,15 @@ body::-webkit-scrollbar {
   overflow-y: hidden;
   position: fixed;
 }
+
+#main-text {
+  line-height: 130%;
+  padding-top: 25vh;
+  text-align: center;
+}
+
+@media (min-width: 1024px) {
+  #main-text {
+    padding-top: 10vh;
+  }
+}

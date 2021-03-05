@@ -4,8 +4,8 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
 import Background from '../../common/Background';
-import ThreeSphere from './components/ThreeSphere';
 import MainText from './components/MainText';
+import BubbleLink from '../../common/BubbleLink';
 
 import withTransition from '../../common/WithTransition';
 
@@ -44,11 +44,15 @@ class Home extends PureComponent {
 
   componentDidMount() {
     this.props.hideLoader();
+    this.props.mainPageRedirect();
   }
 
   render() {
     return (
       <div id="main-page" ref={(e) => { this.el = e; }}>
+        <BubbleLink
+          text="EXPLORE"
+        />
         <Background />
         <div className="fixed">
           <MainText />
@@ -62,6 +66,7 @@ class Home extends PureComponent {
 Home.propTypes = {
   showLoader: PropTypes.func.isRequired,
   hideLoader: PropTypes.func.isRequired,
+  mainPageRedirect: PropTypes.func.isRequired,
 };
 
 export default withTransition(Home);

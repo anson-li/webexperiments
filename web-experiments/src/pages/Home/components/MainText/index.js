@@ -1,6 +1,5 @@
 import React, { PureComponent } from 'react';
 import WOW from 'wowjs';
-import { Link } from 'react-router-dom';
 
 import FadeText from '../../../../common/FadeText';
 
@@ -26,15 +25,6 @@ class MainText extends PureComponent {
               id="main-text"
               text="ANSON'S WEB EXPERIMENTS"
             />
-            <Link to="/work" id="sub-link" href="work">
-              <FadeText
-                type="h6"
-                id="sub-text"
-                className="strikethrough"
-                text="Let's take a look →"
-                base={1800}
-              />
-            </Link>
           </div>
         </div>
         {/* <div className="col-md-12 fixed-bottom">
