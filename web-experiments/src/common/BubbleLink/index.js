@@ -13,6 +13,10 @@ class BubbleLink extends PureComponent {
 
   componentDidMount() {
     window.addEventListener('mousemove', this.moveLink);
+    TweenLite.to(this.bubbleLink, 0.1, {
+      x: this.windowHalfX,
+      y: this.windowHalfY,
+    });
   }
 
   moveLink(e) {

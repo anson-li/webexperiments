@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import Background from '../../common/Background';
 import MainText from './components/MainText';
 import BubbleLink from '../../common/BubbleLink';
+import ThreeSphere from './components/ThreeSphere';
 
 import withTransition from '../../common/WithTransition';
 
@@ -48,6 +49,7 @@ class Home extends PureComponent {
   }
 
   render() {
+    const { hideLoader } = this.props;
     return (
       <div id="main-page" ref={(e) => { this.el = e; }}>
         <BubbleLink
@@ -57,6 +59,9 @@ class Home extends PureComponent {
         <div className="fixed">
           <MainText />
         </div>
+        <ThreeSphere
+          hideLoader={hideLoader}
+        />
         {/* <div id="bottom" /> */}
       </div>
     );

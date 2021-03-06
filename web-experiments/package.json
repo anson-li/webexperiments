@@ -10,6 +10,7 @@
     "bootstrap": "^4.5.3",
     "concurrently": "^5.3.0",
     "gsap": "^3.6.0",
+    "lodash.debounce": "^4.0.8",
     "node-sass": "^4.14.1",
     "prop-types": "^15.7.2",
     "proptypes": "^1.1.0",
@@ -25,7 +26,7 @@
     "source-map-explorer": "^2.5.2",
     "stylelint": "^13.8.0",
     "stylelint-config-standard": "^20.0.0",
-    "three": "^0.122.0",
+    "three": "^0.126.1",
     "web-vitals": "^0.2.4",
     "wow.js": "^1.2.2",
     "wowjs": "^1.1.3"
