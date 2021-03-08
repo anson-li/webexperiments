@@ -68,7 +68,7 @@ class ThreeSphere extends PureComponent {
 
   componentWillUnmount() {
     window.removeEventListener('resize', this.resizeRenderer);
-    // this.container.removeChild(this.renderer.domElement);
+    this.container.removeChild(this.renderer.domElement);
     this.stop();
 
     this.loader = null;
@@ -119,7 +119,7 @@ class ThreeSphere extends PureComponent {
     // Create Renderer
     this.renderer = new THREE.WebGLRenderer();
     this.renderer.setSize(window.innerWidth, window.innerHeight);
-    document.getElementById('app').appendChild(this.renderer.domElement);
+    this.container.appendChild(this.renderer.domElement);
 
     // Load 3D Model
     this.loader = new GLTFLoader();  

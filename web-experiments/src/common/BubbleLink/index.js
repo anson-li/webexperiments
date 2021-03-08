@@ -12,10 +12,12 @@ class BubbleLink extends PureComponent {
 
     this.hoverLink = this.hoverLink.bind(this);
     this.stopHoverLink = this.stopHoverLink.bind(this);
+    this.onWindowResize = this.onWindowResize.bind(this);
   }
 
 
   componentDidMount() {
+    window.addEventListener('resize', this.onWindowResize, false);
     window.addEventListener('mousemove', this.moveLink);
     this.bubbleLink.addEventListener('mouseenter', this.hoverLink);
     this.bubbleLink.addEventListener('mouseleave', this.stopHoverLink);
@@ -26,8 +28,6 @@ class BubbleLink extends PureComponent {
   }
 
   hoverLink(e) {
-    console.log(e);
-    console.log('hoverlink');
     TweenLite.to(this.bubbleLink, 0.5, {
       background: '#333',
       color: 'white'
@@ -35,11 +35,15 @@ class BubbleLink extends PureComponent {
   }
 
   stopHoverLink() {
-    console.log('stophoverlink');
     TweenLite.to(this.bubbleLink, 0.5, {
       background: 'transparent',
       color: '#333'
     });
+  }
+
+  onWindowResize() {
+    this.windowHalfX = window.innerWidth / 2;
+    this.windowHalfY = window.innerHeight / 2;
   }
 
   moveLink(e) {
