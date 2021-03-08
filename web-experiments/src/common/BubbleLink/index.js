@@ -9,13 +9,36 @@ class BubbleLink extends PureComponent {
     this.moveLink = this.moveLink.bind(this);
     this.windowHalfX = window.innerWidth / 2;
     this.windowHalfY = window.innerHeight / 2;
+
+    this.hoverLink = this.hoverLink.bind(this);
+    this.stopHoverLink = this.stopHoverLink.bind(this);
   }
+
 
   componentDidMount() {
     window.addEventListener('mousemove', this.moveLink);
+    this.bubbleLink.addEventListener('mouseenter', this.hoverLink);
+    this.bubbleLink.addEventListener('mouseleave', this.stopHoverLink);
     TweenLite.to(this.bubbleLink, 0.1, {
       x: this.windowHalfX,
       y: this.windowHalfY,
+    });
+  }
+
+  hoverLink(e) {
+    console.log(e);
+    console.log('hoverlink');
+    TweenLite.to(this.bubbleLink, 0.5, {
+      background: '#333',
+      color: 'white'
+    });
+  }
+
+  stopHoverLink() {
+    console.log('stophoverlink');
+    TweenLite.to(this.bubbleLink, 0.5, {
+      background: 'transparent',
+      color: '#333'
     });
   }
 
@@ -28,7 +51,12 @@ class BubbleLink extends PureComponent {
 
   render() {
     return (
-      <Link id="sub-link" to="/work" href="work" ref={(ref) => { this.bubbleLink = ref; }}>
+      <Link
+        id="sub-link"
+        to="/work"
+        href="work"
+        ref={(ref) => { this.bubbleLink = ref; }}
+      >
         <div id="sub-link-text">
           { this.props.text }
         </div>

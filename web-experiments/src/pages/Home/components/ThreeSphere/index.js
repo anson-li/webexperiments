@@ -67,7 +67,7 @@ class ThreeSphere extends PureComponent {
   }
 
   componentWillUnmount() {
-    window.removeEventListener('resize', this.onWindowResize);
+    window.removeEventListener('resize', this.resizeRenderer);
     // this.container.removeChild(this.renderer.domElement);
     this.stop();
 
@@ -262,7 +262,7 @@ class ThreeSphere extends PureComponent {
     this.modelContainer.rotation.y = 5.7;
 
     window.addEventListener("mousemove", this.mousemove);
-    window.addEventListener("resize", debounce(this.resizeRenderer, 50));
+    window.addEventListener("resize", this.resizeRenderer);
 
     this.renderScene();
   }
@@ -314,12 +314,13 @@ class ThreeSphere extends PureComponent {
 
   // Handle Window Resize
   resizeRenderer() {
-    this.occlusionComposer.setSize(window.innerWidth * 0.5, window.innerHeight * 0.5);
-    this.renderer.setSize(window.innerWidth, window.innerHeight);
     this.mainCamera.aspect = window.innerWidth / window.innerHeight;
     this.mainCamera.updateProjectionMatrix();
-    this.occlusionCamera.aspect = this.mainCamera.aspect;
-    this.occlusionCamera.updateProjectionMatrix();
+    this.renderer.setSize(window.innerWidth, window.innerHeight);
+    // this.occlusionCamera.aspect = this.mainCamera.aspect;
+    // this.occlusionCamera.updateProjectionMatrix();
+    // this.occlusionComposer.setSize(window.innerWidth * 0.5, window.innerHeight * 0.5);
+
   }
 
   // Render Scene
