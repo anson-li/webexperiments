@@ -50,7 +50,7 @@ class App extends PureComponent {
       <div id="app">
         <CustomCursor ref={this.cursor} />
         <div className="fixed-header">
-          {/* {/* <Border /> */}
+          <Border />
           {/* <MainLogo /> */}
         </div>
         <Loader ref={this.loader} />

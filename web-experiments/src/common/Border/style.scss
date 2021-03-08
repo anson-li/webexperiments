@@ -32,6 +32,7 @@
 #bottom {
   bottom: 0;
   height: 10px;
+  z-index: 1000;
 }
 
 @media (min-width: 1024px) {
@@ -63,13 +64,19 @@
   font-weight: 100px;
 }
 
+.menu-item {
+  text-decoration: none;
+  // text-transform: uppercase;
+  color: #fff !important;
+}
+
 .menulink {
   text-align: center;
   font-family: 'Calibre';
 }
 
 .top-item {
-  margin-right: 3rem;
+  margin-right: 10rem;
 }
 
 .menu {

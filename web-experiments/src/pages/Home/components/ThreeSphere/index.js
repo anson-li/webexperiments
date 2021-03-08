@@ -92,8 +92,8 @@ class ThreeSphere extends PureComponent {
       12 // far plane, or the maximum range to render. Important to note it's affecting your render quality too.
     )
     this.mainCamera.position.z = 10; // zooms out to capture detail - everything is x10 size to capture detail
-    this.mainCamera.position.x = 1; // shifts the camera more towards the middle of the frame
-    this.mainCamera.position.y = 1; // moves the camera slightly higher
+    this.mainCamera.position.x = 1.3; // shifts the camera more towards the middle of the frame
+    this.mainCamera.position.y = 0.5; // moves the camera slightly higher
     
     this.occlusionCamera = this.mainCamera.clone();
     this.occlusionCamera.layers.set(this.OCCLUSION_LAYER);
