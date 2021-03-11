@@ -105,20 +105,22 @@ class Work extends PureComponent {
       console.log(section);
       console.log(index);
       if (index + 1 !== sections.length) {
-        console.log('hey');
         timeline.to(text, { xPercent:  'random(25,50,5)', duration: tweenDuration}, sectionStart)
       }
     })
 
     ScrollTrigger.refresh();
-    // timeline.play();
   }
 
   render() {
+    const { cursorHover, cursorUnhover } = this.props;
     return (
       <div id="work-page" ref={(e) => { this.el = e; }}>
         <div id="animation-wrapper">
-          <TextLogo />
+          <TextLogo
+            hover={cursorHover}
+            unhover={cursorUnhover}
+          />
           <div id='track' className='track' ref={(e) => { this.track = e; }}>
             <section className='section'>
               <h1>Moving sideways is fun</h1>
@@ -147,6 +149,8 @@ Work.propTypes = {
   showLoader: PropTypes.func.isRequired,
   hideLoader: PropTypes.func.isRequired,
   mainPageRedirect: PropTypes.func.isRequired,
+  cursorHover: PropTypes.func.isRequired,
+  cursorUnhover: PropTypes.func.isRequired,
 };
 
 export default withTransition(Work);

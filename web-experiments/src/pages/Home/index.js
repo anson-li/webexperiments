@@ -22,6 +22,7 @@ class Home extends PureComponent {
 
   animateIn() {
     anime.remove(this.el);
+    this.props.hideFollow();
     return anime({
       targets: this.el,
       opacity: [0, 1],
@@ -33,6 +34,7 @@ class Home extends PureComponent {
 
   animateOut() {
     anime.remove(this.el);
+    this.props.showFollow();
     const { showLoader } = this.props;
     showLoader();
     return anime({
@@ -45,7 +47,6 @@ class Home extends PureComponent {
 
   componentDidMount() {
     this.props.hideLoader();
-    this.props.mainPageRedirect();
   }
 
   render() {
@@ -72,7 +73,8 @@ class Home extends PureComponent {
 Home.propTypes = {
   showLoader: PropTypes.func.isRequired,
   hideLoader: PropTypes.func.isRequired,
-  mainPageRedirect: PropTypes.func.isRequired,
+  hideFollow: PropTypes.func.isRequired,
+  showFollow: PropTypes.func.isRequired,
 };
 
 export default withTransition(Home);

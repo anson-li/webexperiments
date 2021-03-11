@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import { TweenLite } from 'gsap';
 
 import './style.scss';
+import { Tween } from 'gsap/gsap-core';
 
 class CustomCursor extends PureComponent {
   constructor(props) {
@@ -9,7 +10,8 @@ class CustomCursor extends PureComponent {
     this.moveCircle = this.moveCircle.bind(this);
     this.hoverFunc = this.hoverFunc.bind(this);
     this.unhoverFunc = this.unhoverFunc.bind(this);
-    this.mainPageRedirect = this.mainPageRedirect.bind(this);
+    this.hideFollow = this.hideFollow.bind(this);
+    this.showFollow = this.showFollow.bind(this);
     this.circleTween = null;
     this.followTween = null;
   }
@@ -33,6 +35,7 @@ class CustomCursor extends PureComponent {
   }
 
   hoverFunc(e) {
+    console.log('E');
     TweenLite.to(this.circle, 0.3, {
       opacity: 1,
       scale: 0,
@@ -43,7 +46,7 @@ class CustomCursor extends PureComponent {
     });
   }
 
-  mainPageRedirect() {
+  hideFollow() {
     TweenLite.to(this.circle, 0.3, {
       opacity: 1,
       scale: 1,
@@ -53,7 +56,14 @@ class CustomCursor extends PureComponent {
     });
   }
 
+  showFollow() {
+    TweenLite.to(this.follow, 0.3, {
+      scale: 1,
+    })
+  }
+
   unhoverFunc(e) {
+    console.log('REEE');
     TweenLite.to(this.circle, 0.3, {
       opacity: 1,
       scale: 1,

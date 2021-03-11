@@ -18,11 +18,12 @@ class App extends PureComponent {
     this.onCursorHover = this.onCursorHover.bind(this);
     this.onCursorUnhover = this.onCursorUnhover.bind(this);
     this.cursor = React.createRef();
-    this.mainPageRedirect = this.mainPageRedirect.bind(this);
+    this.hideFollow = this.hideFollow.bind(this);
+    this.showFollow = this.showFollow.bind(this);
   }
 
   onCursorHover() {
-    console.log('Hit appjs');
+    console.log('RASMODPA');
     this.cursor.current.hoverFunc();
   };
 
@@ -40,8 +41,12 @@ class App extends PureComponent {
     this.loader.current.fadeOut();
   }
 
-  mainPageRedirect() {
-    this.cursor.current.mainPageRedirect();
+  hideFollow() {
+    this.cursor.current.hideFollow();
+  }
+
+  showFollow() {
+    this.cursor.current.showFollow();
   }
 
   render() {
@@ -64,7 +69,8 @@ class App extends PureComponent {
                 hideLoader={this.hideLoader}
                 cursorHover = {this.onCursorHover}
                 cursorUnhover = {this.onCursorUnhover}
-                mainPageRedirect = {this.mainPageRedirect}
+                hideFollow = {this.hideFollow}
+                showFollow = {this.showFollow}
               />
             ))}
         </TransitionGroup>

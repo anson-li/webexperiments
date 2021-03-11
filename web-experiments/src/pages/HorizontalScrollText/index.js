@@ -111,7 +111,7 @@ class Work extends PureComponent {
     })
 
     ScrollTrigger.refresh();
-    timeline.play();
+    // timeline.play();
   }
 
   render() {
