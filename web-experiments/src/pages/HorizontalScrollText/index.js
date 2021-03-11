@@ -51,7 +51,7 @@ class Work extends PureComponent {
 
     const trackWidth = track.clientWidth;
 
-    gsap.set('#work-page', { height: trackWidth })
+    gsap.set('#hz-page', { height: trackWidth })
 
     const scrollDistance = trackWidth - innerWidth;
 
@@ -111,32 +111,30 @@ class Work extends PureComponent {
     })
 
     ScrollTrigger.refresh();
-    // timeline.play();
+    timeline.play();
   }
 
   render() {
     return (
-      <div id="work-page" ref={(e) => { this.el = e; }}>
-        <div id="animation-wrapper">
-          <TextLogo />
-          <div id='track' className='track' ref={(e) => { this.track = e; }}>
-            <section className='section'>
-              <h1>Moving sideways is fun</h1>
-            </section>
+      <div id="hz-page" ref={(e) => { this.el = e; }}>
+        <TextLogo />
+        <div id='track' className='track' ref={(e) => { this.track = e; }}>
+          <section className='section'>
+            <h1>Moving sideways is fun</h1>
+          </section>
 
-            <section className='section'>
-              <h1>Horizontal relationships</h1>
-            </section>
+          <section className='section'>
+            <h1>Horizontal relationships</h1>
+          </section>
 
-            <section className='section'>
-              <h1>Contribution to others</h1>
-            </section>
+          <section className='section'>
+            <h1>Contribution to others</h1>
+          </section>
 
-          </div>
+        </div>
 
-          <div id='progress'>
-            <div id='progressBar'/>
-          </div>
+        <div id='progress'>
+          <div id='progressBar'/>
         </div>
       </div>
     );
