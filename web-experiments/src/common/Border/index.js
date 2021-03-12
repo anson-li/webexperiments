@@ -17,7 +17,7 @@ class Border extends PureComponent {
         <div id="bottom">
           <div className="col-md-12 top-center d-none d-sm-block">
             <h5 className="connect">
-              <a href="http://anson.li" className="menu-item strikethrough top-item">Main</a>
+              <Link to="/work" href="/work" className="menu-item strikethrough top-item">Experiments</Link>
               <a href="http://anson.li/resume" className="menu-item strikethrough top-item">Resume</a>
               <a href="https://github.com/anson-li" className="menu-item strikethrough top-item">Github</a>
               <a href="https://www.linkedin.com/in/anson-ii" className="menu-item strikethrough top-item">LinkedIn</a>

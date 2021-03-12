@@ -8,7 +8,10 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Section from './components/Section';
 
 import EdmontonWall from '../../web/assets/edmonton-wall.png';
-
+import JellicentBanner from '../../web/assets/images/project-banner/jellicent.png';
+import AdditiveShaderBanner from '../../web/assets/images/project-banner/additiveshader.PNG'
+import ASCIIShaderBanner from '../../web/assets/images/project-banner/asciishader.PNG'
+import CoffeeCupBanner from '../../web/assets/images/project-banner/coffeecup.PNG'
 
 import withTransition from '../../common/WithTransition';
 import './style.scss';
@@ -52,10 +55,6 @@ class Work extends PureComponent {
     this.props.hideLoader();
     const innerWidth = window.innerWidth;
     const track = this.track;
-
-    console.log(track);
-    console.log(track.clientWidth);
-
     const trackWidth = track.clientWidth;
 
     gsap.set('#work-page', { height: trackWidth });
@@ -79,34 +78,7 @@ class Work extends PureComponent {
       duration: 100,
       x: -scrollDistance
     });
-
-
-    /**
-     * Timeline progress bar translates on X from -100% to 0% over the full duration (100)
-     */
     timeline.to('#progressBar', { xPercent: 100, duration: 100 }, 0)
-    
-    /**
-     * Map tweens for each section
-     */
-    // const sections = gsap.utils.toArray('.section');
-    // const sectionDuration = Math.floor(100 / (sections.length - 1)) ;
-
-    // sections.forEach((section, index) => {
-    //   const text = section.querySelector('h1');
-    //   const sectionStart = Math.max(sectionDuration * (index -1), 0)
-    //   const tweenDuration = 100 + sectionStart <= 100 ? 100 : 100 - sectionStart;
-    //   console.log({index},{sectionStart},{sectionDuration});
-
-    //   // Move the text
-    //   // if (index + 1 !== sections.length) {
-    //   //   timeline.to(text, {
-    //   //     xPercent: 'random(-25, 0, 5)',
-    //   //     duration: tweenDuration
-    //   //   }, sectionStart);
-    //   // }
-    // })
-
     ScrollTrigger.refresh();
   }
 
@@ -126,8 +98,7 @@ class Work extends PureComponent {
               description="Additive shader designed to 'wash' out the color in a three.js scene."
               date="MAR 2021"
               link="/additiveshader"
-              hover={cursorHover}
-              unhover={cursorUnhover}
+              image={AdditiveShaderBanner}
             />
             <Section
               id="02"
@@ -135,17 +106,15 @@ class Work extends PureComponent {
               description="ASCII shader designed to render text and shapes via passthrough."
               date="FEB 2021"
               link="/asciishader"
-              hover={cursorHover}
-              unhover={cursorUnhover}
+              image={ASCIIShaderBanner}
             />
             <Section
               id="03"
               title="Coffee Cup"
               description="Designed in Blender, completed the Blender tutorial and converted to three.js."
               date="FEB 2021"
-              link="/jellicent"
-              hover={cursorHover}
-              unhover={cursorUnhover}
+              link="/coffeecup"
+              image={CoffeeCupBanner}
             />
             <Section
               id="04"
@@ -153,8 +122,7 @@ class Work extends PureComponent {
               description="First foray into three.js. Basic exploration of imported models, post-processing and camera movement."
               date="DEC 2020"
               link="/jellicent"
-              hover={cursorHover}
-              unhover={cursorUnhover}
+              image={JellicentBanner}
             />
             <img
               className="img-wall"

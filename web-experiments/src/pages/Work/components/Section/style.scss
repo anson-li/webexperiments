@@ -1,4 +1,4 @@
-section {
+.section {
   position: relative;
   width: 400px;
   height: 100vh;
@@ -37,6 +37,15 @@ section {
     height: 200px;
     top: 60vh;
     width: 75%;
+    overflow: hidden;
+
+    .image {
+      object-fit: cover;
+      height: 100%;
+      width: 100%;
+      background-position: center center;
+      background-size: cover;
+    }
   }
 
   .section-box {

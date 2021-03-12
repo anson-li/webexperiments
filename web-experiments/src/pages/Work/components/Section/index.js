@@ -2,29 +2,66 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import { TweenLite } from 'gsap';
 
 import './style.scss';
 
 class Section extends PureComponent {
+  constructor(props) {
+    super(props);
+    this.hoverSection = this.hoverSection.bind(this);
+    this.unhoverSection = this.unhoverSection.bind(this);
+  }
+
+  hoverSection() {
+    TweenLite.to(this.id, 0.2, {
+      top: '14vh'
+    });
+    TweenLite.to(this.image, 0.2, {
+      scaleX: 1.1,
+      scaleY: 1.1
+    });
+  }
+
+  unhoverSection() {
+    TweenLite.to(this.id, 0.2, {
+      top: '10vh'
+    });
+    TweenLite.to(this.image, 0.2, {
+      scaleX: 1,
+      scaleY: 1
+    });
+  }
 
   render() {
-    const { id, title, description, date, link, hover, unhover } = this.props;
+    const { id, title, description, date, link, image } = this.props;
     return (
-      <section
+      <Link
         className='section'
         to={link}
         href={link}
-        onMouseEnter={hover}
-        onMouseLeave={unhover}  
+        onMouseEnter={this.hoverSection}
+        onMouseLeave={this.unhoverSection}  
       >
-        <div className="id">{id}</div>
+        <div
+          className="id"
+          ref={(ref) => { this.id = ref; }}
+        >
+          {id}
+        </div>
         <p className="section-title">{title}</p>
         <div className="section-box">
           <p className="description">{description}</p>
         </div>
-        <div className="section-image" />
+        <div className="section-image">
+          <div
+            className="image"
+            style={{ backgroundImage: `url(${image})`}}
+            ref={(ref) => { this.image = ref; }}
+              alt="Project banner" />
+        </div>
         <p className="date">{date}</p>
-      </section>
+      </Link>
     );
   }
 }
@@ -35,8 +72,7 @@ Section.propTypes = {
   description: PropTypes.string.isRequired,
   date: PropTypes.string.isRequired,
   link: PropTypes.string.isRequired,
-  hover: PropTypes.func.isRequired,
-  unhover: PropTypes.func.isRequired
+  image: PropTypes.string.isRequired,
 };
 
 export default Section;
