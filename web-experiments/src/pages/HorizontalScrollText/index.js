@@ -66,7 +66,7 @@ class Work extends PureComponent {
         start: 0,
         scrub: 1,
         end: () => `+=${scrollDistance}`,
-        onUpdate: (update) => console.log(update.progress)
+        // onUpdate: (update) => console.log(update.progress)
       } 
     }).to('#track', { 
       duration: 100,
@@ -88,24 +88,10 @@ class Work extends PureComponent {
     sections.forEach((section, index) => {
       const text = section.querySelector('h1')
       const sectionStart = Math.max(sectionDuration * (index -1), 0)
-
-      // Section 0
-      // Start -50 (0), End 50,
-
-      // Section 1
-      // Start 0, End 100,
-
-      // Section 2
-      // Start 50, End 100
-      // Total can't be more than 100.
       const tweenDuration = 100 + sectionStart <= 100 ? 100 : 100 - sectionStart;
-      console.log({index},{sectionStart},{sectionDuration})
 
       // Move the text
-      console.log(section);
-      console.log(index);
       if (index + 1 !== sections.length) {
-        console.log('hey');
         timeline.to(text, { xPercent:  'random(25,50,5)', duration: tweenDuration}, sectionStart)
       }
     })

@@ -6,7 +6,6 @@ import PropTypes from 'prop-types';
 import CustomCursor from './common/CustomCursor';
 
 import Border from './common/Border';
-import MainLogo from './common/MainLogo';
 import Loader from './common/Loader';
 
 class App extends PureComponent {
@@ -23,7 +22,6 @@ class App extends PureComponent {
   }
 
   onCursorHover() {
-    console.log('RASMODPA');
     this.cursor.current.hoverFunc();
   };
 
@@ -56,7 +54,6 @@ class App extends PureComponent {
         <CustomCursor ref={this.cursor} />
         <div className="fixed-header">
           <Border />
-          {/* <MainLogo /> */}
         </div>
         <Loader ref={this.loader} />
         <TransitionGroup id="content">

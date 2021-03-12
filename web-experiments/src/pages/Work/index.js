@@ -5,6 +5,10 @@ import PropTypes from 'prop-types';
 import TextLogo from '../../common/TextLogo';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import Section from './components/Section';
+
+import EdmontonWall from '../../web/assets/edmonton-wall.png';
+
 
 import withTransition from '../../common/WithTransition';
 import './style.scss';
@@ -49,9 +53,12 @@ class Work extends PureComponent {
     const innerWidth = window.innerWidth;
     const track = this.track;
 
+    console.log(track);
+    console.log(track.clientWidth);
+
     const trackWidth = track.clientWidth;
 
-    gsap.set('#work-page', { height: trackWidth })
+    gsap.set('#work-page', { height: trackWidth });
 
     const scrollDistance = trackWidth - innerWidth;
 
@@ -82,32 +89,23 @@ class Work extends PureComponent {
     /**
      * Map tweens for each section
      */
-    const sections = gsap.utils.toArray('.section');
-    const sectionDuration = Math.floor(100/(sections.length - 1)) 
+    // const sections = gsap.utils.toArray('.section');
+    // const sectionDuration = Math.floor(100 / (sections.length - 1)) ;
 
-    sections.forEach((section, index) => {
-      const text = section.querySelector('h1')
-      const sectionStart = Math.max(sectionDuration * (index -1), 0)
+    // sections.forEach((section, index) => {
+    //   const text = section.querySelector('h1');
+    //   const sectionStart = Math.max(sectionDuration * (index -1), 0)
+    //   const tweenDuration = 100 + sectionStart <= 100 ? 100 : 100 - sectionStart;
+    //   console.log({index},{sectionStart},{sectionDuration});
 
-      // Section 0
-      // Start -50 (0), End 50,
-
-      // Section 1
-      // Start 0, End 100,
-
-      // Section 2
-      // Start 50, End 100
-      // Total can't be more than 100.
-      const tweenDuration = 100 + sectionStart <= 100 ? 100 : 100 - sectionStart;
-      console.log({index},{sectionStart},{sectionDuration})
-
-      // Move the text
-      console.log(section);
-      console.log(index);
-      if (index + 1 !== sections.length) {
-        timeline.to(text, { xPercent:  'random(25,50,5)', duration: tweenDuration}, sectionStart)
-      }
-    })
+    //   // Move the text
+    //   // if (index + 1 !== sections.length) {
+    //   //   timeline.to(text, {
+    //   //     xPercent: 'random(-25, 0, 5)',
+    //   //     duration: tweenDuration
+    //   //   }, sectionStart);
+    //   // }
+    // })
 
     ScrollTrigger.refresh();
   }
@@ -122,20 +120,48 @@ class Work extends PureComponent {
             unhover={cursorUnhover}
           />
           <div id='track' className='track' ref={(e) => { this.track = e; }}>
-            <section className='section'>
-              <h1>Moving sideways is fun</h1>
-            </section>
-
-            <section className='section'>
-              <h1>Horizontal relationships</h1>
-            </section>
-
-            <section className='section'>
-              <h1>Contribution to others</h1>
-            </section>
-
+            <Section
+              id="01"
+              title="Color Shader"
+              description="Additive shader designed to 'wash' out the color in a three.js scene."
+              date="MAR 2021"
+              link="/additiveshader"
+              hover={cursorHover}
+              unhover={cursorUnhover}
+            />
+            <Section
+              id="02"
+              title="ASCII Shader"
+              description="ASCII shader designed to render text and shapes via passthrough."
+              date="FEB 2021"
+              link="/asciishader"
+              hover={cursorHover}
+              unhover={cursorUnhover}
+            />
+            <Section
+              id="03"
+              title="Coffee Cup"
+              description="Designed in Blender, completed the Blender tutorial and converted to three.js."
+              date="FEB 2021"
+              link="/jellicent"
+              hover={cursorHover}
+              unhover={cursorUnhover}
+            />
+            <Section
+              id="04"
+              title="Jellicent"
+              description="First foray into three.js. Basic exploration of imported models, post-processing and camera movement."
+              date="DEC 2020"
+              link="/jellicent"
+              hover={cursorHover}
+              unhover={cursorUnhover}
+            />
+            <img
+              className="img-wall"
+              src={EdmontonWall}
+              alt="Skyline of Edmonton"
+            />
           </div>
-
           <div id='progress'>
             <div id='progressBar'/>
           </div>
@@ -148,7 +174,6 @@ class Work extends PureComponent {
 Work.propTypes = {
   showLoader: PropTypes.func.isRequired,
   hideLoader: PropTypes.func.isRequired,
-  mainPageRedirect: PropTypes.func.isRequired,
   cursorHover: PropTypes.func.isRequired,
   cursorUnhover: PropTypes.func.isRequired,
 };

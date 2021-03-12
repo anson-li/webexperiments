@@ -5,6 +5,7 @@
   height: 100vh;
   overflow: hidden;
   overscroll-behavior: none;
+  background-color: #FFE9BC;
 }
 
 #animation-wrapper {
@@ -17,44 +18,6 @@
   height: 100vh;
   width: fit-content;
 }
-
-section {
-  position: relative;
-  width: 100vw;
-  height: 100vh;
-  box-sizing: border-box;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  > h1 {
-    position: absolute;
-    right: 0;
-    font-size: 6vmax;
-    width: 30vw;
-    opacity: 0.4
-  }
-}
-
-
-.imageContainer {
-  position: relative;
-  width: 60vw;
-  height: 60vh;
-  box-sizing: border-box;
-  overflow: hidden;
-  border-radius: 3px;
-
-  > img {
-    position: absolute;
-    left: 0px;
-    top: 0px;
-    width: 120%;
-    height: 100%;
-    object-fit: cover;
-  }
-}
-
 
 #progress {
   position: absolute;
@@ -74,4 +37,10 @@ section {
     background-color: black;
     transform: translateX(-100%);
   }
+}
+
+.img-wall {
+  width: 2500px;
+  height: 100vh;
+  position: relative;
 }

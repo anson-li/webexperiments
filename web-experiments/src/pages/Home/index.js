@@ -22,7 +22,6 @@ class Home extends PureComponent {
 
   animateIn() {
     anime.remove(this.el);
-    this.props.hideFollow();
     return anime({
       targets: this.el,
       opacity: [0, 1],
@@ -47,6 +46,7 @@ class Home extends PureComponent {
 
   componentDidMount() {
     this.props.hideLoader();
+    this.props.hideFollow();
   }
 
   render() {
