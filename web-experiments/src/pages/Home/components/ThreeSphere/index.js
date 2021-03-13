@@ -231,7 +231,7 @@ class ThreeSphere extends PureComponent {
     const colorShader = {
       uniforms: {
         tDiffuse: { value: null },
-        color:    { value: new THREE.Color(0xffc99b) },
+        color:    { value: new THREE.Color(0xcbc7d1) },
       },
       vertexShader: `
         varying vec2 vUv;

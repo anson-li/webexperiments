@@ -124,11 +124,13 @@ class Work extends PureComponent {
               link="/jellicent"
               image={JellicentBanner}
             />
-            <img
-              className="img-wall"
-              src={EdmontonWall}
-              alt="Skyline of Edmonton"
-            />
+            <div className="wall">
+              <img
+                className="img-wall"
+                src={EdmontonWall}
+                alt="Skyline of Edmonton"
+              />
+            </div>
           </div>
           <div id='progress'>
             <div id='progressBar'/>

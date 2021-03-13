@@ -2,7 +2,6 @@ import React, { PureComponent } from 'react';
 import { TweenLite } from 'gsap';
 
 import './style.scss';
-import { Tween } from 'gsap/gsap-core';
 
 class CustomCursor extends PureComponent {
   constructor(props) {

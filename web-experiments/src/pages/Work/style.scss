@@ -5,7 +5,7 @@
   height: 100vh;
   overflow: hidden;
   overscroll-behavior: none;
-  background-color: #FFE9BC;
+  background-color: #f3f4f7;
 }
 
 #animation-wrapper {
@@ -39,8 +39,17 @@
   }
 }
 
-.img-wall {
-  width: 2500px;
-  height: 100vh;
-  position: relative;
+.wall {
+  -webkit-box-shadow: inset 188px 0px 55px -198px rgba(128,128,128,1);
+  -moz-box-shadow: inset 188px 0px 55px -198px rgba(128,128,128,1);
+  box-shadow: inset 188px 0px 55px -198px rgba(128,128,128,1);
+  mix-blend-mode: multiply;
+  
+  .img-wall {
+    width: 2500px;
+    height: 100vh;
+    position: relative;
+    z-index: -1;
+  }
 }
+
