@@ -78,7 +78,8 @@ class Work extends PureComponent {
       duration: 100,
       x: -scrollDistance
     });
-    timeline.to('#progressBar', { xPercent: 100, duration: 100 }, 0)
+    timeline.to('#progressBar', { xPercent: 100, duration: 100 }, 0);
+    timeline.to(this.wall, { x: scrollDistance * 0.2, duration: 100 }, 0);
     ScrollTrigger.refresh();
   }
 
@@ -124,7 +125,10 @@ class Work extends PureComponent {
               link="/jellicent"
               image={JellicentBanner}
             />
-            <div className="wall">
+            <div
+              className="wall"
+              ref={(e) => { this.wall = e; }}
+            >
               <img
                 className="img-wall"
                 src={EdmontonWall}

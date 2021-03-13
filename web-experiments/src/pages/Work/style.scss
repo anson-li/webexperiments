@@ -44,6 +44,8 @@
   -moz-box-shadow: inset 188px 0px 55px -198px rgba(128,128,128,1);
   box-shadow: inset 188px 0px 55px -198px rgba(128,128,128,1);
   mix-blend-mode: multiply;
+  margin-left: -300px;
+  z-index: -1;
   
   .img-wall {
     width: 2500px;
