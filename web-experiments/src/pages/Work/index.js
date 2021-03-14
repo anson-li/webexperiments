@@ -59,7 +59,7 @@ class Work extends PureComponent {
 
     gsap.set('#work-page', { height: trackWidth });
 
-    const scrollDistance = trackWidth - innerWidth;
+    const scrollDistance = trackWidth - innerWidth + 300; // +300 is to offset the movement from the background wall at the beginning
 
     const timeline = gsap.timeline({
       smoothChildTiming: true,
@@ -72,7 +72,7 @@ class Work extends PureComponent {
         start: 0,
         scrub: 1,
         end: () => `+=${scrollDistance}`,
-        onUpdate: (update) => console.log(update.progress)
+        onUpdate: () => {},
       } 
     }).to('#track', { 
       duration: 100,

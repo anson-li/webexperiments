@@ -1,7 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import * as THREE from 'three';
-import debounce from 'lodash.debounce';
 
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer';
@@ -12,7 +11,6 @@ import modelFile from '../../../../web/assets/objects/skullcrane.glb';
 import fontFile from '../../../../web/assets/objects/font2.png';
 
 import ASCIIShader from './shaders/ASCII';
-import AdditiveShader from "./shaders/Additive";
 import VolumetricLightScattering from "./shaders/VolumetricLightScattering";
 import VolumetricLightCylinder from "./shaders/VolumetricLightCylinder";
 
@@ -317,19 +315,10 @@ class ThreeSphere extends PureComponent {
     this.mainCamera.aspect = window.innerWidth / window.innerHeight;
     this.mainCamera.updateProjectionMatrix();
     this.renderer.setSize(window.innerWidth, window.innerHeight);
-    // this.occlusionCamera.aspect = this.mainCamera.aspect;
-    // this.occlusionCamera.updateProjectionMatrix();
-    // this.occlusionComposer.setSize(window.innerWidth * 0.5, window.innerHeight * 0.5);
-
   }
 
   // Render Scene
   renderScene() {
-    const delta = this.clock.getDelta();
-    // this.modelContainer.rotation.x += delta * 0.5;
-    // this.modelContainer.rotation.y += delta * 0.1;
-    // console.log(this.modelContainer.rotation.y);
-
     this.lightCone.lookAt(this.lightConeTarget);
     this.lightCylinderMaterial.uniforms.spotPosition.value = this.lightCone.position;
     const lightConePosition = this.lightCone.position.clone();
@@ -340,7 +329,6 @@ class ThreeSphere extends PureComponent {
     );
 
     this.renderer.setRenderTarget(this.occlusionRenderTarget);
-    // this.occlusionComposer.render();
     this.renderer.setRenderTarget(null);
 
     this.renderer.setRenderTarget(this.lowResRenderTarget);

@@ -23,63 +23,85 @@ class CustomCursor extends PureComponent {
   }
 
   moveCircle(e) {
-    TweenLite.to(this.circle, 0.2, {
-      x: e.x,
-      y: e.y,
-    });
-    TweenLite.to(this.follow, 0.7, {
-      x: e.x,
-      y: e.y,
-    });
+    if (this.circle) {
+      TweenLite.to(this.circle, 0.2, {
+        x: e.x,
+        y: e.y,
+      });
+    }
+    if (this.follow) {
+      TweenLite.to(this.follow, 0.7, {
+        x: e.x,
+        y: e.y,
+      });
+    }
   }
 
   hoverFunc(e) {
-    TweenLite.to(this.circle, 0.3, {
-      opacity: 1,
-      scale: 0,
-    });
-    TweenLite.to(this.follow, 0.3, {
-      scale: 2,
-      borderColor: '#333',
-    });
+    if (this.circle) {
+      TweenLite.to(this.circle, 0.3, {
+        opacity: 1,
+        scale: 0,
+      });
+    }
+    if (this.follow) {
+      TweenLite.to(this.follow, 0.3, {
+        scale: 2,
+        borderColor: '#333',
+      });
+    }
   }
 
   hideFollow() {
-    TweenLite.to(this.circle, 0.3, {
-      opacity: 1,
-      scale: 1,
-    });
-    TweenLite.to(this.follow, 0.3, {
-      scale: 0,
-    });
+    if (this.circle) {
+      TweenLite.to(this.circle, 0.3, {
+        opacity: 1,
+        scale: 1,
+      });
+    }
+    if (this.follow) {
+      TweenLite.to(this.follow, 0.3, {
+        scale: 0,
+      });
+    }
   }
 
   showFollow() {
-    TweenLite.to(this.follow, 0.3, {
-      scale: 1,
-    })
+    if (this.follow) {
+      TweenLite.to(this.follow, 0.3, {
+        scale: 1,
+      })
+    }
   }
 
   unhoverFunc(e) {
-    TweenLite.to(this.circle, 0.3, {
-      opacity: 1,
-      scale: 1,
-    });
-    TweenLite.to(this.follow, 0.3, {
-      scale: 1,
-      borderColor: '#333',
-    });
+    if (this.circle) {
+      TweenLite.to(this.circle, 0.3, {
+        opacity: 1,
+        scale: 1,
+      });
+    }
+    if (this.follow) {
+      TweenLite.to(this.follow, 0.3, {
+        scale: 1,
+        borderColor: '#333',
+      });
+    }
   }
 
   onScroll(e) {
-    TweenLite.to(this.circle, 0.2, {
-      x: e.x,
-      y: e.y,
-    });
-    TweenLite.to(this.follow, 0.7, {
-      x: e.x,
-      y: e.y,
-    });
+    if (this.circle) {
+      TweenLite.to(this.circle, 0.2, {
+        x: e.x,
+        y: e.y,
+      });
+    }
+    if (this.follow) {
+      TweenLite.to(this.follow, 0.7, {
+        x: e.x,
+        y: e.y,
+      });
+    }
   }
 
   render() {
