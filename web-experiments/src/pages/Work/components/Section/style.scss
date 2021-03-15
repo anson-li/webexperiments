@@ -34,7 +34,7 @@
 
   .section-image {
     position: absolute;
-    background-color: #DEDDDF;
+    background-color: #dedddf;
     height: 200px;
     top: 60vh;
     width: 75%;
@@ -50,7 +50,6 @@
   }
 
   .section-box {
-
     .description {
       text-align: left;
       font-size: 12px;
@@ -83,6 +82,6 @@
   @media (max-height: 1080px) {
     .date {
       top: 82vh;
-    } 
+    }
   }
 }

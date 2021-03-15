@@ -1,4 +1,4 @@
-export default () => ({
+const Additive = () => ({
   uniforms: {
     tDiffuse: { value: null },
     tAdd: { value: null },
@@ -20,3 +20,5 @@ export default () => ({
     }
   `,
 })
+
+export default Additive;

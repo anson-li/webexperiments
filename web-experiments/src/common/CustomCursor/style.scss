@@ -1,6 +1,6 @@
 .cursor-circle {
   position: fixed;
-  background-color: #333;
+  background-color: #333333;
   width: 10px;
   height: 10px;
   left: -10px;
@@ -20,7 +20,7 @@
 
 .cursor-circle-follow {
   position: fixed;
-  border: 1px solid #333;
+  border: 1px solid #333333;
   width: 30px;
   height: 30px;
   left: -21px;
@@ -41,7 +41,10 @@ body {
   cursor: none !important;
 }
 
-a:hover, a:visited, a:link, a:active {
+a:hover,
+a:visited,
+a:link,
+a:active {
   cursor: none;
 }
 

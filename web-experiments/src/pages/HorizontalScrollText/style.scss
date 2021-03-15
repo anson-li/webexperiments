@@ -29,10 +29,9 @@ section {
     right: 0;
     font-size: 6vmax;
     width: 30vw;
-    opacity: 0.4
+    opacity: 0.4;
   }
 }
-
 
 .imageContainer {
   position: relative;
@@ -44,14 +43,13 @@ section {
 
   > img {
     position: absolute;
-    left: 0px;
-    top: 0px;
+    left: 0;
+    top: 0;
     width: 120%;
     height: 100%;
     object-fit: cover;
   }
 }
-
 
 #progress {
   position: absolute;
@@ -61,7 +59,7 @@ section {
   width: 100px;
   left: calc(50vw - 50px);
   overflow: hidden;
-  background-color: rgba(#000, 0.2);
+  background-color: rgba(#000000, 0.2);
   border-radius: 2px;
 
   > div {
