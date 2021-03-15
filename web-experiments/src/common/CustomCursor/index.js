@@ -27,12 +27,14 @@ class CustomCursor extends PureComponent {
       TweenLite.to(this.circle, 0.2, {
         x: e.x,
         y: e.y,
+        z: 0.1,
       });
     }
     if (this.follow) {
       TweenLite.to(this.follow, 0.7, {
         x: e.x,
         y: e.y,
+        z: 0.1,
       });
     }
   }
@@ -47,7 +49,6 @@ class CustomCursor extends PureComponent {
     if (this.follow) {
       TweenLite.to(this.follow, 0.3, {
         scale: 2,
-        borderColor: '#333',
       });
     }
   }
@@ -84,7 +85,6 @@ class CustomCursor extends PureComponent {
     if (this.follow) {
       TweenLite.to(this.follow, 0.3, {
         scale: 1,
-        borderColor: '#333',
       });
     }
   }
@@ -106,11 +106,11 @@ class CustomCursor extends PureComponent {
 
   render() {
     return (
-      <>
+      <div className="cursor">
         <div className="cursor-circle" ref={(ref) => { this.circle = ref; }} />
         <div className="cursor-circle-follow" ref={(ref) => { this.follow = ref; }} />
         <div className="cursor-circle-name" ref={(ref) => { this.list = ref; }} />
-      </>
+      </div>
     );
   }
 }
