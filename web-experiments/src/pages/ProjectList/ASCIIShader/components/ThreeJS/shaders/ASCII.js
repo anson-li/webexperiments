@@ -1,6 +1,6 @@
 import * as THREE from 'three'
 
-export default () => ({
+const ASCII = () => ({
   uniforms: {
     tLowRes: { value: null },
     tFont: { value: null },
@@ -68,3 +68,5 @@ export default () => ({
     }
   `,
 })
+
+export default ASCII;

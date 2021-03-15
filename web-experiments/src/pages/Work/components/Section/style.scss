@@ -80,5 +80,9 @@
     top: 80vh;
   }
 
-  
+  @media (max-height: 1080px) {
+    .date {
+      top: 82vh;
+    } 
+  }
 }

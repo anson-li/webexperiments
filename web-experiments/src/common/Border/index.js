@@ -1,6 +1,5 @@
 import React, { PureComponent } from 'react';
 import { Link } from 'react-router-dom';
-import anime from 'animejs';
 
 class Border extends PureComponent {
   constructor(props) {

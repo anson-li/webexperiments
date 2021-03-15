@@ -1,6 +1,6 @@
 import { Vector2 } from 'three'
 
-export default () => ({
+const VolumetricLightScattering = () => ({
   uniforms: {
     tDiffuse: { value: null },
     lightPosition: { value: new Vector2(0.5, 0.5) },
@@ -49,4 +49,6 @@ export default () => ({
       gl_FragColor = color * exposure;
     }
   `,
-})
+});
+
+export default VolumetricLightScattering;

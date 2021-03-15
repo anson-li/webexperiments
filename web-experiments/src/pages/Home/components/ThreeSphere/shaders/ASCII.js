@@ -1,6 +1,6 @@
 import * as THREE from 'three'
 
-export default () => ({
+const ASCII = () => ({
   uniforms: {
     tLowRes: { value: null },
     tFont: { value: null },
@@ -67,4 +67,6 @@ export default () => ({
       gl_FragColor = texture2D(tFont, fontuv) * color;
     }
   `,
-})
+});
+
+export default ASCII;

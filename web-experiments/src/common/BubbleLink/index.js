@@ -28,17 +28,21 @@ class BubbleLink extends PureComponent {
   }
 
   hoverLink(e) {
-    TweenLite.to(this.bubbleLink, 0.5, {
-      background: '#333',
-      color: 'white'
-    });
+    if (this.bubbleLink) {
+      TweenLite.to(this.bubbleLink, 0.5, {
+        background: '#333',
+        color: 'white'
+      });
+    }
   }
 
   stopHoverLink() {
-    TweenLite.to(this.bubbleLink, 0.5, {
-      background: 'transparent',
-      color: '#333'
-    });
+    if (this.bubbleLink) {
+      TweenLite.to(this.bubbleLink, 0.5, {
+        background: 'transparent',
+        color: '#333'
+      });
+    }
   }
 
   onWindowResize() {
@@ -47,10 +51,12 @@ class BubbleLink extends PureComponent {
   }
 
   moveLink(e) {
-    TweenLite.to(this.bubbleLink, 0.7, {
-      x: (e.x - this.windowHalfX) / 2 + this.windowHalfX,
-      y: (e.y - this.windowHalfY) / 2 + this.windowHalfY,
-    });
+    if (this.bubbleLink) {
+      TweenLite.to(this.bubbleLink, 0.7, {
+        x: (e.x - this.windowHalfX) / 2 + this.windowHalfX,
+        y: (e.y - this.windowHalfY) / 2 + this.windowHalfY,
+      });
+    }
   }
 
   render() {

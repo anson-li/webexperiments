@@ -5,7 +5,7 @@ import CoffeeCup from './pages/ProjectList/CoffeeCup';
 import Jellicent from './pages/ProjectList/Jellicent';
 import Work from './pages/Work';
 
-export default [
+const Routes = [
   {
     key: 'work',
     Component: Work,
@@ -50,3 +50,5 @@ export default [
     },
   },
 ];
+
+export default Routes;

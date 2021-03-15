@@ -1,6 +1,6 @@
 import * as THREE from 'three'
 
-export default () => ({
+const VolumetricLightCylinder = () => ({
   lights: true,
   transparent: true,
   depthWrite: false,
@@ -82,4 +82,6 @@ export default () => ({
       gl_FragColor = vec4(vColor.rgb, intensity);
     }
   `,
-})
+});
+
+export default VolumetricLightCylinder;
