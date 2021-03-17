@@ -120,7 +120,7 @@ class Work extends PureComponent {
             <Section
               id="04"
               title="Jellicent"
-              description="First foray into three.js. Basic exploration of imported models, post-processing and camera movement."
+              description="First foray into three.js. Exploration of imported models &nbsp; camera movement."
               date="DEC 2020"
               link="/jellicent"
               image={JellicentBanner}
