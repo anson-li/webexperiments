@@ -7,11 +7,11 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Section from './components/Section';
 
-import EdmontonWall from '../../web/assets/edmonton-wall.png';
-import JellicentBanner from '../../web/assets/images/project-banner/jellicent.png';
-import AdditiveShaderBanner from '../../web/assets/images/project-banner/additiveshader.PNG'
+import EdmontonWall from '../../web/assets/edmonton-wall.jpg';
+import JellicentBanner from '../../web/assets/images/project-banner/jellicent.jpg';
+import AdditiveShaderBanner from '../../web/assets/images/project-banner/additiveshader.jpg'
 import ASCIIShaderBanner from '../../web/assets/images/project-banner/asciishader.PNG'
-import CoffeeCupBanner from '../../web/assets/images/project-banner/coffeecup.PNG'
+import CoffeeCupBanner from '../../web/assets/images/project-banner/coffeecup.jpg'
 
 import withTransition from '../../common/WithTransition';
 import './style.scss';

@@ -15,7 +15,7 @@
     font-size: 6vmax;
     width: 100%;
     height: 100vh;
-    top: 10vh;
+    top: 13vh;
     color: #4a5455;
     font-weight: 800;
   }
@@ -71,17 +71,6 @@
   }
 
   .date {
-    position: absolute;
-    text-align: left;
-    font-size: 10px;
-    width: 100%;
-    padding-left: 50px;
-    top: 80vh;
-  }
-
-  @media (max-height: 1080px) {
-    .date {
-      top: 82vh;
-    }
+    color: #999999;
   }
 }

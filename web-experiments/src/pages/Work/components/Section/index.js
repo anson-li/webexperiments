@@ -25,7 +25,7 @@ class Section extends PureComponent {
 
   unhoverSection() {
     TweenLite.to(this.id, 0.2, {
-      top: '10vh'
+      top: '13vh'
     });
     TweenLite.to(this.image, 0.2, {
       scaleX: 1,
@@ -49,7 +49,8 @@ class Section extends PureComponent {
         >
           {id}
         </div>
-        <p className="section-title">{title}</p>
+        <p className="section-title">{title} • <span className="date">{date}</span>
+        </p>
         <div className="section-box">
           <p className="description">{description}</p>
         </div>
@@ -60,7 +61,6 @@ class Section extends PureComponent {
             ref={(ref) => { this.image = ref; }}
               alt="Project banner" />
         </div>
-        <p className="date">{date}</p>
       </Link>
     );
   }

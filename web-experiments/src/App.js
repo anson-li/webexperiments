@@ -7,6 +7,7 @@ import CustomCursor from './common/CustomCursor';
 
 import Border from './common/Border';
 import Loader from './common/Loader';
+import MobilePageOverlay from './common/MobilePageOverlay';
 
 class App extends PureComponent {
   constructor(props) {
@@ -51,6 +52,7 @@ class App extends PureComponent {
     const { routes } = this.props;
     return (
       <div id="app">
+        <MobilePageOverlay />
         <CustomCursor ref={this.cursor} />
         <div className="fixed-header">
           <Border />

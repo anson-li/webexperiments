@@ -36,10 +36,6 @@
   // z-index: 20000;
 }
 
-body {
-  cursor: none !important;
-}
-
 a:hover,
 a:visited,
 a:link,
@@ -49,4 +45,10 @@ a:active {
 
 .btn:not(:disabled):not(.disabled) {
   cursor: none;
+}
+
+@media only screen and (min-width: 1024px) {
+  body {
+    cursor: none !important;
+  }  
 }

@@ -1,0 +1,28 @@
+.mobile-overlay {
+  opacity: 1;
+  z-index: 50000;
+  position: absolute;
+  height: 100vh;
+  width: 100vw;
+  background-color: #050505;
+  color: white;
+
+  p {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    a {
+      color: rgba(255, 201, 155, 0.9);
+    }
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .mobile-overlay {
+    opacity: 0;
+    z-index: -1;
+  }
+}
