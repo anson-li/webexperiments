@@ -20,21 +20,20 @@
 }
 
 #progress {
-  position: absolute;
-  top: 90vh;
-  left: 45vw;
+  position: fixed;
   z-index: 1000;
-  width: 100px;
-  bottom: 100px;
+  width: 100vw;
+  bottom: 55px;
   overflow: hidden;
   background-color: rgba(0, 0, 0, 0.2);
   border-radius: 2px;
-  height: 3px;
+  height: 10px;
+  mix-blend-mode: exclusion;
 
   > div {
-    height: 3px;
+    height: 10px;
     width: 100%;
-    background-color: black;
+    background-color: #0C4C8F;
     transform: translateX(-100%);
   }
 }
@@ -54,4 +53,14 @@
     position: relative;
     z-index: -1;
   }
+}
+
+.scroll-hint {
+  position: fixed;
+  top: 20px;
+  right: 40px;
+  font-family: ivymode, serif;
+  font-weight: 400;
+  width: 250px;
+  padding: 20px;
 }

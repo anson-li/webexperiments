@@ -3,4 +3,15 @@
   top: 20px;
   left: 40px;
   z-index: 150;
+  border-color: black;
+}
+
+.subtext-logo {
+  position: absolute;
+  top: 90px;
+  left: 60px;
+  z-index: 150;
+  font-family: upgrade-lights, sans-serif;
+  letter-spacing: 5px;
+  font-weight: 800;
 }

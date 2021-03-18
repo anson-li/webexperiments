@@ -45,7 +45,6 @@ class Home extends PureComponent {
   }
 
   componentDidMount() {
-    this.props.hideLoader();
     this.props.hideFollow();
   }
 

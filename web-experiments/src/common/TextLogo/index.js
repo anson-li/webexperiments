@@ -45,6 +45,11 @@ class TextLogo extends PureComponent {
         >
           AWE.
         </h1>
+        {/* <p
+          className="subtext-logo"
+        >
+          ANSON LI
+        </p> */}
       </Link>
     );
   }

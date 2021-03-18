@@ -19,6 +19,14 @@ import './style.scss';
 gsap.registerPlugin(ScrollTrigger);
 
 class Work extends PureComponent {
+  constructor(props) {
+    super(props);
+    this.onWindowResize = this.onWindowResize.bind(this);
+    this.setupTrackAnimation = this.setupTrackAnimation.bind(this);
+    this.setupScrollHintAnimation = this.setupScrollHintAnimation.bind(this);
+    this.timeline = null;
+  }
+
   hidePage() {
     anime.remove(this.el);
     return anime({
@@ -51,8 +59,12 @@ class Work extends PureComponent {
     }).finished;
   }
 
-  componentDidMount() {
-    this.props.hideLoader();
+  onWindowResize() {
+    this.setupTrackAnimation();
+    ScrollTrigger.refresh();
+  }
+
+  setupTrackAnimation() {
     const innerWidth = window.innerWidth;
     const track = this.track;
     const trackWidth = track.clientWidth;
@@ -61,7 +73,7 @@ class Work extends PureComponent {
 
     const scrollDistance = trackWidth - innerWidth + 300; // +300 is to offset the movement from the background wall at the beginning
 
-    const timeline = gsap.timeline({
+    this.timeline = gsap.timeline({
       smoothChildTiming: true,
       defaults: {
         ease: 'none'
@@ -78,9 +90,34 @@ class Work extends PureComponent {
       duration: 100,
       x: -scrollDistance
     });
-    timeline.to('#progressBar', { xPercent: 100, duration: 100 }, 0);
-    timeline.to(this.wall, { x: scrollDistance * 0.2, duration: 100 }, 0);
+    this.timeline.to('#progressBar', { xPercent: 100, duration: 100 }, 0);
+    this.timeline.to(this.wall, { x: scrollDistance * 0.2, duration: 100 }, 0);
+    this.timeline.to(this.scrollHint, { opacity: 0, duration: 20 }, 0);
+  }
+
+  setupScrollHintAnimation() {
+    const scrollHintTimeline = gsap.timeline({
+
+    });
+    scrollHintTimeline.to(this.hintArrow, 1, {
+      paddingLeft: '5px',
+      onComplete: function () {
+        scrollHintTimeline.reverse();
+     }, onReverseComplete: function () {
+        scrollHintTimeline.play(0);
+     }}, 0)
+  }
+
+  componentDidMount() {
+    this.props.hideLoader();
+    this.setupTrackAnimation();
+    this.setupScrollHintAnimation();
     ScrollTrigger.refresh();
+    // window.addEventListener('resize', this.onWindowResize);
+  }
+
+  componentWillUnmount() {
+    // window.removeEventListener('resize', this.onWindowResize);
   }
 
   render() {
@@ -135,6 +172,12 @@ class Work extends PureComponent {
                 alt="Skyline of Edmonton"
               />
             </div>
+          </div>
+          <div
+            className="scroll-hint"
+            ref={(e) => { this.scrollHint = e; }}
+          >
+            Scroll to Explore <span className="hint-arrow" ref={(e) => { this.hintArrow = e; }}>→</span>
           </div>
           <div id='progress'>
             <div id='progressBar'/>

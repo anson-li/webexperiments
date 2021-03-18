@@ -262,6 +262,7 @@ class ThreeSphere extends PureComponent {
     window.addEventListener("mousemove", this.mousemove);
     window.addEventListener("resize", this.resizeRenderer);
 
+    this.props.hideLoader();
     this.renderScene();
   }
 
