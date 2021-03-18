@@ -15,7 +15,7 @@ class Section extends PureComponent {
 
   hoverSection() {
     TweenLite.to(this.id, 0.2, {
-      top: '14vh'
+      top: '19vh'
     });
     TweenLite.to(this.image, 0.2, {
       scaleX: 1.1,
@@ -25,7 +25,7 @@ class Section extends PureComponent {
 
   unhoverSection() {
     TweenLite.to(this.id, 0.2, {
-      top: '13vh'
+      top: '18vh'
     });
     TweenLite.to(this.image, 0.2, {
       scaleX: 1,
