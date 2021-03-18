@@ -16,35 +16,6 @@
 * * * * * * * * * * * */
 
 /* * * * * * *
-  * Font-face
-  * * * * * * */
-
-@font-face {
-  font-family: 'Calibre';
-  src: url('../fonts/calibre-light.ttf');
-}
-
-@font-face {
-  font-family: 'Calibre-Bold';
-  src: url('../fonts/calibre-bold.ttf');
-}
-
-@font-face {
-  font-family: 'Tiempo';
-  src: url('../fonts/tiempo.ttf');
-}
-
-@font-face {
-  font-family: 'Tiempo-Bold';
-  src: url('../fonts/tiempo-bold.ttf');
-}
-
-@font-face {
-  font-family: 'Dala-Floda';
-  src: url('../fonts/dala-floda-medium.ttf');
-}
-
-/* * * * * * *
   * 2.0: Formatting
   * * * * * * */
 
@@ -62,7 +33,7 @@ html {
 }
 
 body {
-  font-family: upgrade-lights, sans-serif;
+  font-family: sans-serif;
   font-weight: 100;
   font-size: 1em;
   text-align: left;

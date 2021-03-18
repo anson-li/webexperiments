@@ -77,3 +77,13 @@
     color: #999999;
   }
 }
+
+@media (max-height: 900px) {
+  .section .section-title {
+    top: 40vh;
+  }
+
+  .section .section-box .description {
+    top: 45vh;
+  }
+}
