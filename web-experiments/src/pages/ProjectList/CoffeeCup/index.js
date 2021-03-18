@@ -44,7 +44,6 @@ class CoffeeCup extends PureComponent {
   }
 
   componentDidMount() {
-    // this.props.hideLoader();
     this.props.hideFollow();
   }
 

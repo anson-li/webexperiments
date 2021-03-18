@@ -2,7 +2,6 @@ import React, { PureComponent } from 'react';
 import * as THREE from 'three';
 import PropTypes from 'prop-types';
 
-import './style.scss';
 import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer';
 import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass';
 import { GlitchPass } from 'three/examples/jsm/postprocessing/GlitchPass';
@@ -23,6 +22,7 @@ class JellicentObject extends PureComponent {
     this.init = this.init.bind(this);
     this.animate = this.animate.bind(this);
     this.animateCamera = this.animateCamera.bind(this);
+    this.mousemove = this.mousemove.bind(this);
     this.stop = this.stop.bind(this);
   }
 
@@ -82,16 +82,24 @@ class JellicentObject extends PureComponent {
     // eslint-disable-next-line global-require
     const jsonObject = require('../../../../../web/assets/scene/jellicent.json');
     this.scene = new THREE.ObjectLoader().parse(jsonObject);
+    this.scene.background = new THREE.Color( 0x111111 );
 
     this.composer = new EffectComposer(this.renderer);
     this.renderPass = new RenderPass(this.scene, this.camera);
     this.composer.addPass(this.renderPass);
 
-    this.glitchPass = new GlitchPass();
-    this.composer.addPass(this.glitchPass);
+    // this.glitchPass = new GlitchPass();
+    // this.composer.addPass(this.glitchPass);
 
     window.addEventListener('resize', this.onWindowResize, false);
+    window.addEventListener("mousemove", this.mousemove);
+
     const { hideLoader } = this.props;
+
+    this.camera.rotation.x = 0;
+    this.camera.rotation.z = 0.5;
+    this.camera.rotation.y = 6.1;
+
     hideLoader();
     this.animate();
   }
@@ -111,38 +119,23 @@ class JellicentObject extends PureComponent {
 
   animateCamera() {
     if (this.camera) {
-      this.camera.rotation.x -= 0.001;
+      this.camera.rotation.x -= 0.0005;
       if (this.camera.rotation.x < -1.3) {
         this.camera.rotation.x = 0.8;
       }
+    }
+  }
+  
+  mousemove(e) {
+    if (this.camera) {
+      this.camera.rotation.z = 0.5 + 0.0001 * e.clientX;
+      this.camera.rotation.y = 6.1 + 0.0001 * e.clientY;  
     }
   }
 
   render() {
     return (
       <>
-        <div id="jellicent-details" className="col-4 d-none d-lg-block">
-          <h4 id="jellicent-details-header">
-            Jellicent - #593
-          </h4>
-          <p id="jellicent-details-body">
-            Jellicent is a large jellyfish-like Pokémon whose
-            appearance varies based on gender. Both genders
-            have five tentacles, two of which are long with
-            petal-shaped ends. The remaining three are short and tapered.
-            {' '}
-            <br />
-            <br />
-            A male is blue with a short, white crown, and a white,
-            mustache-like collar. Its eyes are red with blue sclerae,
-            and there is one eyelash over each eye. Its long tentacles
-            have white edges, while its short tentacles have white spots.
-            A female is pink with a tall, white crown and a puffy, white
-            collar. Its eyes are blue with red sclerae and surrounded by
-            two eyelashes. Its mouth is red and heart-shaped. The long
-            tentacles have white edges like the male, but the short ones have white frills.
-          </p>
-        </div>
         <div ref={(ref) => { this.mount = ref; }} />
       </>
     );

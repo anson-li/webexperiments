@@ -104,6 +104,7 @@ class ThreeJS extends PureComponent {
         this.modelContainer.add(gltf.scene);
         this.mixer = new THREE.AnimationMixer(gltf.scene);
         this.action = this.mixer.clipAction( gltf.animations[ 0 ] );
+        this.props.hideLoader();
         this.action.play();
       },
       undefined,
@@ -121,7 +122,6 @@ class ThreeJS extends PureComponent {
     window.addEventListener("resize", this.resizeRenderer);
 
     this.renderScene();
-    this.props.hideLoader();
   }
 
   mousemove(e) {
