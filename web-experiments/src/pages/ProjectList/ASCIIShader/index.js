@@ -49,10 +49,13 @@ class AdditiveShader extends PureComponent {
   }
 
   render() {
-    const { hideLoader } = this.props;
+    const { hideLoader, cursorHover, cursorUnhover } = this.props;
     return (
       <div id="additiveshader-page" ref={(e) => { this.el = e; }}>
-        <TextLogo />
+        <TextLogo
+          hover={cursorHover}
+          unhover={cursorUnhover}
+        />
         <Background />
         <ThreeJS
           hideLoader={hideLoader}
@@ -67,6 +70,8 @@ AdditiveShader.propTypes = {
   hideLoader: PropTypes.func.isRequired,
   hideFollow: PropTypes.func.isRequired,
   showFollow: PropTypes.func.isRequired,
+  cursorUnhover: PropTypes.func.isRequired,
+  cursorHover: PropTypes.func.isRequired,
 };
 
 export default withTransition(AdditiveShader);

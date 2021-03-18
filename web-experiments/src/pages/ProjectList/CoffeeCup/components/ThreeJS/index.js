@@ -121,6 +121,7 @@ class ThreeJS extends PureComponent {
     window.addEventListener("resize", this.resizeRenderer);
 
     this.renderScene();
+    this.props.hideLoader();
   }
 
   mousemove(e) {

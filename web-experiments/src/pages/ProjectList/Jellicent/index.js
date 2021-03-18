@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import Background from '../../../common/Background';
 import JellicentObject from './components/JellicentObject';
 import withTransition from '../../../common/WithTransition';
+import TextLogo from '../../../common/TextLogo';
 
 class Jellicent extends PureComponent {
   hidePage() {
@@ -40,9 +41,13 @@ class Jellicent extends PureComponent {
   }
 
   render() {
-    const { hideLoader } = this.props;
+    const { hideLoader, cursorHover, cursorUnhover } = this.props;
     return (
       <div id="main-page" ref={(e) => { this.el = e; }}>
+        <TextLogo
+          hover={cursorHover}
+          unhover={cursorUnhover}
+        />
         <Background />
         <JellicentObject
           hideLoader={hideLoader}
@@ -55,6 +60,8 @@ class Jellicent extends PureComponent {
 Jellicent.propTypes = {
   showLoader: PropTypes.func.isRequired,
   hideLoader: PropTypes.func.isRequired,
+  cursorUnhover: PropTypes.func.isRequired,
+  cursorHover: PropTypes.func.isRequired,
 };
 
 export default withTransition(Jellicent);
