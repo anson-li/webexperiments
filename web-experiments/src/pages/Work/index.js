@@ -60,8 +60,8 @@ class Work extends PureComponent {
   }
 
   onWindowResize() {
-    this.setupTrackAnimation();
-    ScrollTrigger.refresh();
+    this.timeline.invalidate().restart();
+    this.setupTrackAnimation();  
   }
 
   setupTrackAnimation() {
@@ -93,12 +93,22 @@ class Work extends PureComponent {
     this.timeline.to('#progressBar', { xPercent: 100, duration: 100 }, 0);
     this.timeline.to(this.wall, { x: scrollDistance * 0.2, duration: 100 }, 0);
     this.timeline.to(this.scrollHint, { opacity: 0, duration: 20 }, 0);
+
+    // Scrolltrigger to resize on fixed points
+    var pageST = ScrollTrigger.create({});
+    var progress = 0;
+    ScrollTrigger.addEventListener("refreshInit", function() {
+      progress = pageST.scroll() / ScrollTrigger.maxScroll(window);
+    });
+    ScrollTrigger.addEventListener("refresh", function() {
+      pageST.scroll(progress * ScrollTrigger.maxScroll(window));
+    });
+
+    ScrollTrigger.refresh();
   }
 
   setupScrollHintAnimation() {
-    const scrollHintTimeline = gsap.timeline({
-
-    });
+    const scrollHintTimeline = gsap.timeline();
     scrollHintTimeline.to(this.hintArrow, 1, {
       paddingLeft: '5px',
       onComplete: function () {
@@ -112,7 +122,6 @@ class Work extends PureComponent {
     this.props.hideLoader();
     this.setupTrackAnimation();
     this.setupScrollHintAnimation();
-    ScrollTrigger.refresh();
     // window.addEventListener('resize', this.onWindowResize);
   }
 
