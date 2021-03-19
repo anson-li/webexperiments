@@ -2,6 +2,7 @@ import Home from './pages/Home';
 import AdditiveShader from './pages/ProjectList/AdditiveShader';
 import ASCIIShader from './pages/ProjectList/ASCIIShader';
 import CoffeeCup from './pages/ProjectList/CoffeeCup';
+import DinosaurLoader from './pages/ProjectList/DinosaurLoader';
 import Jellicent from './pages/ProjectList/Jellicent';
 import Work from './pages/Work';
 
@@ -11,6 +12,13 @@ const Routes = [
     Component: Work,
     path: {
       path: '/work',
+    },
+  },
+  {
+    key: 'dinosaurloader',
+    Component: DinosaurLoader,
+    path: {
+      path: '/dinosaurloader',
     },
   },
   {

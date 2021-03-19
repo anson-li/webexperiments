@@ -9,9 +9,10 @@ import Section from './components/Section';
 
 import EdmontonWall from '../../web/assets/edmonton-wall.jpg';
 import JellicentBanner from '../../web/assets/images/project-banner/jellicent.jpg';
-import AdditiveShaderBanner from '../../web/assets/images/project-banner/additiveshader.jpg'
-import ASCIIShaderBanner from '../../web/assets/images/project-banner/asciishader.PNG'
-import CoffeeCupBanner from '../../web/assets/images/project-banner/coffeecup.jpg'
+import AdditiveShaderBanner from '../../web/assets/images/project-banner/additiveshader.jpg';
+import ASCIIShaderBanner from '../../web/assets/images/project-banner/asciishader.PNG';
+import CoffeeCupBanner from '../../web/assets/images/project-banner/coffeecup.jpg';
+import DinosaurLoader from '../../web/assets/images/project-banner/dinoloader.PNG';
 
 import withTransition from '../../common/WithTransition';
 import './style.scss';
@@ -24,6 +25,7 @@ class Work extends PureComponent {
     this.onWindowResize = this.onWindowResize.bind(this);
     this.setupTrackAnimation = this.setupTrackAnimation.bind(this);
     this.setupScrollHintAnimation = this.setupScrollHintAnimation.bind(this);
+    this.setupResizeAnimation = this.setupResizeAnimation.bind(this);
     this.timeline = null;
   }
 
@@ -60,8 +62,8 @@ class Work extends PureComponent {
   }
 
   onWindowResize() {
-    this.timeline.invalidate().restart();
-    this.setupTrackAnimation();  
+    // this.timeline.invalidate().restart();
+    // this.setupTrackAnimation();
   }
 
   setupTrackAnimation() {
@@ -94,17 +96,21 @@ class Work extends PureComponent {
     this.timeline.to(this.wall, { x: scrollDistance * 0.2, duration: 100 }, 0);
     this.timeline.to(this.scrollHint, { opacity: 0, duration: 20 }, 0);
 
+    this.setupResizeAnimation();
+    ScrollTrigger.refresh();
+  }
+
+  setupResizeAnimation() {
     // Scrolltrigger to resize on fixed points
     var pageST = ScrollTrigger.create({});
     var progress = 0;
     ScrollTrigger.addEventListener("refreshInit", function() {
       progress = pageST.scroll() / ScrollTrigger.maxScroll(window);
+      console.log(progress);
     });
     ScrollTrigger.addEventListener("refresh", function() {
       pageST.scroll(progress * ScrollTrigger.maxScroll(window));
     });
-
-    ScrollTrigger.refresh();
   }
 
   setupScrollHintAnimation() {
@@ -140,7 +146,15 @@ class Work extends PureComponent {
           />
           <div id='track' className='track' ref={(e) => { this.track = e; }}>
             <Section
-              id="01"
+              id="05"
+              title="Fill Loader"
+              description="Fill loader template built via SVG and GSAP. Replace with your logo!"
+              date="MAR 2021"
+              link="/dinosaurloader"
+              image={DinosaurLoader}
+            />
+            <Section
+              id="04"
               title="Color Shader"
               description="Additive shader designed to 'wash' out the color in a three.js scene."
               date="MAR 2021"
@@ -148,7 +162,7 @@ class Work extends PureComponent {
               image={AdditiveShaderBanner}
             />
             <Section
-              id="02"
+              id="03"
               title="ASCII Shader"
               description="ASCII shader designed to render text and shapes via passthrough."
               date="FEB 2021"
@@ -156,7 +170,7 @@ class Work extends PureComponent {
               image={ASCIIShaderBanner}
             />
             <Section
-              id="03"
+              id="02"
               title="Coffee Cup"
               description="Designed in Blender, completed the Blender tutorial and converted to three.js."
               date="FEB 2021"
@@ -164,7 +178,7 @@ class Work extends PureComponent {
               image={CoffeeCupBanner}
             />
             <Section
-              id="04"
+              id="01"
               title="Jellicent"
               description="First foray into three.js. Exploration of imported models &amp; camera movement."
               date="DEC 2020"
