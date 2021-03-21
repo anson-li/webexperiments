@@ -2,24 +2,17 @@
 import anime from 'animejs';
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import TextLogo from '../../common/TextLogo';
+import TextLogo from '../../../common/TextLogo';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Section from './components/Section';
 
-import EdmontonWall from '../../web/assets/edmonton-wall.jpg';
-import JellicentBanner from '../../web/assets/images/project-banner/jellicent.jpg';
-import AdditiveShaderBanner from '../../web/assets/images/project-banner/additiveshader.jpg';
-import ASCIIShaderBanner from '../../web/assets/images/project-banner/asciishader.PNG';
-import CoffeeCupBanner from '../../web/assets/images/project-banner/coffeecup.jpg';
-import DinosaurLoader from '../../web/assets/images/project-banner/dinoloader.PNG';
-
-import withTransition from '../../common/WithTransition';
+import withTransition from '../../../common/WithTransition';
 import './style.scss';
 
 gsap.registerPlugin(ScrollTrigger);
 
-class Work extends PureComponent {
+class DrumhellerConcept extends PureComponent {
   constructor(props) {
     super(props);
     this.onWindowResize = this.onWindowResize.bind(this);
@@ -145,64 +138,8 @@ class Work extends PureComponent {
             unhover={cursorUnhover}
           />
           <div id='track' className='track' ref={(e) => { this.track = e; }}>
-            <Section
-              id="06"
-              title="Drumheller Concept"
-              description="Drumheller Concept"
-              date="MAR 2021"
-              link="/drumheller"
-              image={DinosaurLoader}
-            />
-            <Section
-              id="05"
-              title="Fill Loader"
-              description="Fill loader template built via SVG and GSAP. Replace with your logo!"
-              date="MAR 2021"
-              link="/dinosaurloader"
-              image={DinosaurLoader}
-            />
-            <Section
-              id="04"
-              title="Color Shader"
-              description="Additive shader designed to 'wash' out the color in a three.js scene."
-              date="MAR 2021"
-              link="/additiveshader"
-              image={AdditiveShaderBanner}
-            />
-            <Section
-              id="03"
-              title="ASCII Shader"
-              description="ASCII shader designed to render text and shapes via passthrough."
-              date="FEB 2021"
-              link="/asciishader"
-              image={ASCIIShaderBanner}
-            />
-            <Section
-              id="02"
-              title="Coffee Cup"
-              description="Designed in Blender, completed the Blender tutorial and converted to three.js."
-              date="FEB 2021"
-              link="/coffeecup"
-              image={CoffeeCupBanner}
-            />
-            <Section
-              id="01"
-              title="Jellicent"
-              description="First foray into three.js. Exploration of imported models &amp; camera movement."
-              date="DEC 2020"
-              link="/jellicent"
-              image={JellicentBanner}
-            />
-            <div
-              className="wall"
-              ref={(e) => { this.wall = e; }}
-            >
-              <img
-                className="img-wall"
-                src={EdmontonWall}
-                alt="Skyline of Edmonton"
-              />
-            </div>
+            <Section 
+              text="Drumheller" />
           </div>
           <div
             className="scroll-hint"
@@ -219,11 +156,11 @@ class Work extends PureComponent {
   }
 }
 
-Work.propTypes = {
+DrumhellerConcept.propTypes = {
   showLoader: PropTypes.func.isRequired,
   hideLoader: PropTypes.func.isRequired,
   cursorHover: PropTypes.func.isRequired,
   cursorUnhover: PropTypes.func.isRequired,
 };
 
-export default withTransition(Work);
+export default withTransition(DrumhellerConcept);

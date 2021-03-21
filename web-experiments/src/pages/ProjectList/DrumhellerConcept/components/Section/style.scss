@@ -1,0 +1,37 @@
+.drumheller-section {
+  position: relative;
+  width: fit-content;
+  padding-left: 200px;
+  padding-right: 100px;
+  height: 100vh;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-right: rgba(0, 0, 0, 0.2) 1px solid;
+  background-color: #f3f4f7;
+
+  .text {
+    font-family: ivymode, serif;
+    font-weight: 600;
+    
+    .primary {
+      font-size: 7em;
+      line-height: 90%;
+    }
+
+    .secondary {
+      font-size: 5em;
+      padding-left: 0.5em;
+    }
+  }
+
+  .drumheller-italic {
+    font-style: italic;
+  }
+  
+  .drumheller-outline {
+    color: transparent;
+    -webkit-text-stroke: 1px #262422;
+  }
+}

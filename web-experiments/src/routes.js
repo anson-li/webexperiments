@@ -3,6 +3,7 @@ import AdditiveShader from './pages/ProjectList/AdditiveShader';
 import ASCIIShader from './pages/ProjectList/ASCIIShader';
 import CoffeeCup from './pages/ProjectList/CoffeeCup';
 import DinosaurLoader from './pages/ProjectList/DinosaurLoader';
+import DrumhellerConcept from './pages/ProjectList/DrumhellerConcept';
 import Jellicent from './pages/ProjectList/Jellicent';
 import Work from './pages/Work';
 
@@ -12,6 +13,13 @@ const Routes = [
     Component: Work,
     path: {
       path: '/work',
+    },
+  },
+  {
+    key: 'drumheller',
+    Component: DrumhellerConcept,
+    path: {
+      path: '/drumheller',
     },
   },
   {
