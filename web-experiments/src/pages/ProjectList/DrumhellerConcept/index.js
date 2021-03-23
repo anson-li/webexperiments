@@ -20,6 +20,7 @@ class DrumhellerConcept extends PureComponent {
     this.setupScrollHintAnimation = this.setupScrollHintAnimation.bind(this);
     this.setupResizeAnimation = this.setupResizeAnimation.bind(this);
     this.timeline = null;
+    this.scrollDistance = null;
   }
 
   hidePage() {
@@ -66,7 +67,7 @@ class DrumhellerConcept extends PureComponent {
 
     gsap.set('#work-page', { height: trackWidth });
 
-    const scrollDistance = trackWidth - innerWidth + 300; // +300 is to offset the movement from the background wall at the beginning
+    this.scrollDistance = trackWidth - innerWidth + 300; // +300 is to offset the movement from the background wall at the beginning
 
     this.timeline = gsap.timeline({
       smoothChildTiming: true,
@@ -78,15 +79,14 @@ class DrumhellerConcept extends PureComponent {
         trigger: '#track',
         start: 0,
         scrub: 1,
-        end: () => `+=${scrollDistance}`,
+        end: () => `+=${this.scrollDistance}`,
         onUpdate: () => {},
       } 
     }).to('#track', { 
       duration: 100,
-      x: -scrollDistance
+      x: -this.scrollDistance
     });
     this.timeline.to('#progressBar', { xPercent: 100, duration: 100 }, 0);
-    this.timeline.to(this.wall, { x: scrollDistance * 0.2, duration: 100 }, 0);
     this.timeline.to(this.scrollHint, { opacity: 0, duration: 20 }, 0);
 
     this.setupResizeAnimation();
@@ -139,7 +139,10 @@ class DrumhellerConcept extends PureComponent {
           />
           <div id='track' className='track' ref={(e) => { this.track = e; }}>
             <Section 
-              text="Drumheller" />
+              text="Drumheller"
+              timeline={this.timeline}
+              scrollDistance={this.scrollDistance} 
+            />
           </div>
           <div
             className="scroll-hint"
