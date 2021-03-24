@@ -345,36 +345,25 @@
     }
   }
 
-  .bottom-image-section {
+  .bottom-image-title {
     position: absolute;
-    left: 3700px;
+    left: 2400px;
 
     .upper-text {
       position: absolute;
+      top: 12vh;
       width: 800px;
-      font-family: upgrade-lights, sans-serif;
-      font-weight: 500;
-      font-size: 1.2em;
+      padding-left: 50px;
+      font-family: ivymode, serif;
+      font-weight: 400;
       color: #3F1B1F;
-
-      .panel-left {
-        width: 500px;
-        position: absolute;
-        top: 15vh;
-        left: -100px;
-      }
-
-      .panel-right {
-        width: 500px;
-        position: absolute;
-        top: 15vh;
-        left: 500px;
-      }
+      font-size: 3.5em;
     }
 
     .bottom-image {
       position: absolute;
-      top: 35vh;
+      top: 45vh;
+      width: 900px;
       mask-border-source: url(../Images/border-template.png);
       mask-border-slice: 44 90 90 108 fill;
       mask-border-width: 10px 10px 0px 10px;
@@ -382,36 +371,36 @@
       mask-border-repeat: stretch stretch;
 
       img {
-        height: 80vh;
+        height: 65vh;
       }
     }
   }
 
-  .top-video-section {
+  .top-image-description {
     position: absolute;
-    left: 2400px;
+    left: 3700px;
 
     .lower-text {
       position: absolute;
-      left: 100px;
       top: 50vh;
       width: 1000px;
       padding-left: 50px;
-      font-family: ivymode, serif;
-      font-weight: 400;
+      font-family: upgrade-lights, sans-serif;
+      font-weight: 500;
       color: #3F1B1F;
-      font-size: 4em;
+      font-size: 1.2em;
     }
 
-    .upper-video {
+    .top-image {
       position: absolute;
       mask-border-source: url(../Images/border-template.png);
       mask-border-slice: 44 90 90 108 fill;
       mask-border-width: 0px 10px 10px 10px;
       mask-border-outset: 0px 0px 0px 0px;
       mask-border-repeat: stretch stretch;
+      left: 100px;
   
-      video {
+      img {
         height: 40vh;
       }
     }

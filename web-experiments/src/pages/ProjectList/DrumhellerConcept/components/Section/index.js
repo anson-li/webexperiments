@@ -11,11 +11,12 @@ import VideoOneTwo from '../Images/section-1-2.mp4';
 import ImageOneThree from '../Images/section-1-3.jpg';
 
 import ImageTwoOne from '../Images/section-2-1.jpg';
+import ImageTwoTwo from '../Images/section-2-2.jpg';
+import ImageTwoThree from '../Images/section-2-3.jpg';
 
 import ImageThreeOne from '../Images/section-3-1.jpg';
 
 import DinosaurBackground from '../Images/dinosaur-background.jpg';
-import DinosaurMask from '../Images/dinosaur-mask.svg';
 
 import './style.scss';
 
@@ -139,27 +140,30 @@ class Section extends PureComponent {
             <div className="fullscreen-image">
               <img src={ImageTwoOne} alt="Gorgosaurus!" />
             </div>
-            <div className="top-video-section">
-              <div className="upper-video">
-                <video autoplay="autoplay" muted="true" loop="true">
-                  <source src={VideoOneTwo} type="video/mp4" />
-                </video>
-              </div>
-              <div className="lower-text">
-                The Tyrrell is Canada’s only museum dedicated exclusively to the science of palaeontology.
-              </div>
-            </div>
-            <div className="bottom-image-section">
+            <div className="bottom-image-title">
               <div className="upper-text">
-                <div className="panel-left">
-                “Part of what’s special about the museum is it’s situated in the Badlands, so the surrounding landscape is very rich in Cretaceous Period fossils and a lot of the material that’s found in the museum is Alberta fossil material.
-                </div>
-                <div className="panel-right">
-                I think what’s special about coming here is the landscape, and knowing that what you’re looking at in the museum is so rooted in place and time and connected, and our scientists are doing research on the materials.”
-                </div>
+                In 1884, Joseph B. Tyrrell stumbled upon a 70-million-year-old dinosaur skull.
               </div>
               <div className="bottom-image">
-                <img src={ImageOneThree} alt="Run!" />
+                <img src={ImageTwoTwo} alt="Fossils!" />
+              </div>
+            </div>
+            <div className="top-image-description">
+              <div className="top-image">
+                <img src={ImageTwoThree} alt="Gorgosaurus!" />
+              </div>
+              <div className="lower-text">
+              The young geologist stumbled upon the treasure deep in the heart of Alberta’s Badlands.
+              The carnivorous dinosaur, the first of its species ever found, was later named Albertosaurus Sarcophagus.
+              <br /><br />
+              The excavations continued after Tyrrell’s find – in 1910 American palaeontologist, Barnum Brown,
+              from the American Museum of Natural History in New York City, visited the area and over a period
+              of five years removed 16 dinosaur specimens, some that were new discoveries.
+              <br /><br />
+              When the Museum opened in 1985 it was called the Tyrrell Museum of Palaeontology,
+              commemorating Joseph Burr Tyrrell. In 1990, the Museum was granted the "Royal" appellation by Her Majesty Queen Elizabeth II.
+              While the Museum is now officially the Royal Tyrrell Museum of Palaeontology,
+              it's most often referred to as the Royal Tyrrell Museum.
               </div>
             </div>
           </div>
