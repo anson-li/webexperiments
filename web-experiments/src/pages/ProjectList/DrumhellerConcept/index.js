@@ -67,7 +67,7 @@ class DrumhellerConcept extends PureComponent {
 
     gsap.set('#work-page', { height: trackWidth });
 
-    this.scrollDistance = trackWidth - innerWidth + 300; // +300 is to offset the movement from the background wall at the beginning
+    this.scrollDistance = trackWidth - innerWidth; // +300 is to offset the movement from the background wall at the beginning
 
     this.timeline = gsap.timeline({
       smoothChildTiming: true,
