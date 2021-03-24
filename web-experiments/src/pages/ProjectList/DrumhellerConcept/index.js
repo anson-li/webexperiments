@@ -150,7 +150,7 @@ class DrumhellerConcept extends PureComponent {
           >
             Scroll to Explore <span className="hint-arrow" ref={(e) => { this.hintArrow = e; }}>→</span>
           </div>
-          <div id='progress'>
+          <div id='drumheller-progress'>
             <div id='progressBar'/>
           </div>
         </div>

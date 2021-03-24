@@ -19,21 +19,21 @@
   width: fit-content;
 }
 
-#progress {
+#drumheller-progress  {
   position: fixed;
   z-index: 1000;
   width: 100vw;
   bottom: 55px;
   overflow: hidden;
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: rgba(100, 100, 100, 0.1);
   border-radius: 2px;
   height: 10px;
-  mix-blend-mode: exclusion;
+  // mix-blend-mode: exclusion;
 
   > div {
     height: 10px;
     width: 100%;
-    background-color: #0C4C8F;
+    background-color: #912034;
     transform: translateX(-100%);
   }
 }
