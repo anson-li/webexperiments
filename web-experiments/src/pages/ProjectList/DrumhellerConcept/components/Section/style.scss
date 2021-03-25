@@ -239,11 +239,14 @@
 
       img {
         height: 80vh;
+        width: 800px;
+        object-fit: cover;
+        object-position: 40% 50%;
       }
     }
   }
 
-  .top-video-section {
+  .top-image-title {
     position: absolute;
     left: 2400px;
 
@@ -259,7 +262,7 @@
       font-size: 4em;
     }
 
-    .upper-video {
+    .top-image {
       position: absolute;
       mask-border-source: url(../Images/border-template.png);
       mask-border-slice: 44 90 90 108 fill;
@@ -267,7 +270,7 @@
       mask-border-outset: 0px 0px 0px 0px;
       mask-border-repeat: stretch stretch;
   
-      video {
+      img {
         height: 40vh;
       }
     }
@@ -280,7 +283,8 @@
     img {
       object-fit: cover;
       width: 1200px;
-      height: 100vh;
+      height: 150vh;
+      object-position: 100% 50%;
       mask-border-source: url(../Images/border-template.png);
       mask-border-slice: 44 90 90 108 fill;
       mask-border-width: 0px 20px 0px 0px;

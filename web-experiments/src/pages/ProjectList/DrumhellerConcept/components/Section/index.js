@@ -15,6 +15,8 @@ import ImageTwoTwo from '../Images/section-2-2.jpg';
 import ImageTwoThree from '../Images/section-2-3.jpg';
 
 import ImageThreeOne from '../Images/section-3-1.jpg';
+import ImageThreeTwo from '../Images/section-3-2.jpg';
+import ImageThreeThree from '../Images/section-3-3.jpg';
 
 import DinosaurBackground from '../Images/dinosaur-background.jpg';
 
@@ -180,29 +182,27 @@ class Section extends PureComponent {
               </div>
             </div>
             <div className="fullscreen-image">
-              <img src={ImageThreeOne} alt="Drawings!" />
+              <img src={ImageThreeOne} alt="Dinosaur!" />
             </div>
-            <div className="top-video-section">
-              <div className="upper-video">
-                <video autoplay="autoplay" muted="true" loop="true">
-                  <source src={VideoOneTwo} type="video/mp4" />
-                </video>
+            <div className="top-image-title">
+              <div className="top-image">
+                <img src={ImageThreeTwo} alt="Dinosaur?" />
               </div>
               <div className="lower-text">
-                The Tyrrell is Canada’s only museum dedicated exclusively to the science of palaeontology.
+                New discoveries are made everyday, thanks to the great work at Tyrrell.
               </div>
             </div>
             <div className="bottom-image-section">
               <div className="upper-text">
                 <div className="panel-left">
-                “Part of what’s special about the museum is it’s situated in the Badlands, so the surrounding landscape is very rich in Cretaceous Period fossils and a lot of the material that’s found in the museum is Alberta fossil material.
+                  Every year, new discoveries are made at the Royal Tyrrell Museum that change the landscape of the world of Palaeontology. Most recently, researchers have discovered a brand new Tyrannosaurus species; the first in 50 years.
                 </div>
                 <div className="panel-right">
-                I think what’s special about coming here is the landscape, and knowing that what you’re looking at in the museum is so rooted in place and time and connected, and our scientists are doing research on the materials.”
+                  Additionally, the Royal Tyrrell offers an interactive space, where people take part in interactive displays to learn about how the dinosaur ate, moved and interacted with other organisms in its environment.
                 </div>
               </div>
               <div className="bottom-image">
-                <img src={ImageOneThree} alt="Run!" />
+                <img src={ImageThreeThree} alt="Dinosaur!" />
               </div>
             </div>
           </div>
