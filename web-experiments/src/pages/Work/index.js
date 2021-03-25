@@ -13,6 +13,7 @@ import AdditiveShaderBanner from '../../web/assets/images/project-banner/additiv
 import ASCIIShaderBanner from '../../web/assets/images/project-banner/asciishader.PNG';
 import CoffeeCupBanner from '../../web/assets/images/project-banner/coffeecup.jpg';
 import DinosaurLoader from '../../web/assets/images/project-banner/dinoloader.PNG';
+import DrumhellerConcept from '../../web/assets/images/project-banner/drumhellerconcept.PNG';
 
 import withTransition from '../../common/WithTransition';
 import './style.scss';
@@ -151,7 +152,7 @@ class Work extends PureComponent {
               description="Drumheller Concept"
               date="MAR 2021"
               link="/drumheller"
-              image={DinosaurLoader}
+              image={DrumhellerConcept}
             />
             <Section
               id="05"

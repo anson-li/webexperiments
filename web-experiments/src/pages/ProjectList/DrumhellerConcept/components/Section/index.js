@@ -55,6 +55,7 @@ class Section extends PureComponent {
       this.props.timeline.to(this.imageone, { x: -this.props.scrollDistance * 0.12, duration: 100 }, 0);
       this.props.timeline.to(this.imagetwo, { x: -this.props.scrollDistance * 0.1, duration: 100 }, 0);
       this.props.timeline.to(this.titleitalic, { x: -this.props.scrollDistance * 0.15, duration: 100 }, 0);
+      this.props.timeline.to(this.dinosaurmask, { height: "120vh", duration: 10 }, 90);
     }
   }
 
@@ -225,7 +226,7 @@ class Section extends PureComponent {
               </div>
             </div>
             <div className="drumheller-imagemask">
-              <img src={DinosaurBackground} alt="Badlands!" /> 
+              <img  ref={(e) => { this.dinosaurmask = e; }} src={DinosaurBackground} alt="Badlands!" /> 
             </div>
           </div>
         </div>
