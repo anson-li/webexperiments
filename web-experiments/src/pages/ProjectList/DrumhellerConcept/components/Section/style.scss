@@ -25,16 +25,16 @@
 
   .text {
     font-family: ivymode, serif;
-    font-weight: 600;
+    font-weight: 400;
     color: #3F1B1F;
     
     .primary {
-      font-size: 7em;
+      font-size: 9em;
       line-height: 90%;
     }
 
     .secondary {
-      font-size: 5em;
+      font-size: 9em;
       padding-left: 0.5em;
     }
   }
@@ -45,8 +45,31 @@
   }
   
   .drumheller-outline {
-    color: transparent;
+    color: #F3E2E4;
     -webkit-text-stroke: 1px #3F1B1F;
+    position: relative;
+    z-index: 1;
+
+    .custom-underline {
+      clip-path: inset(0% 0% 0% 0%); // second value is right bounding box; change it to show streaking animation
+      z-index: -1;
+      display: block;
+      position: absolute;
+      top: 80%;
+      left: 0;
+      width: 100%;
+      height: 25.5%;
+      min-height: .5rem;
+
+      img {
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+      }
+    }
   }
 
   .description {
@@ -114,7 +137,8 @@
     position: absolute;
     top: 75vh;
     left: 1000px;
-    width: 400px;
+    width: 280px;
+    z-index: 10;
 
     .sub-text {
       font-family: upgrade-lights, sans-serif;
@@ -128,6 +152,48 @@
       font-weight: 400;
       font-size: 2em;
       color: #3F1B1F;
+    }
+  }
+
+  .custom-underline-3 {
+    clip-path: inset(0 0 0 0);
+    z-index: 1000;
+    display: block;
+    position: absolute;
+    // top: 88%;
+    left: 2%;
+    width: 95%;
+    height: 5%;
+    min-height: .5rem;
+
+    img {
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+    }
+  }
+
+  .custom-underline-2 {
+    clip-path: inset(0% 0% 0% 0%);
+    z-index: 1000;
+    display: block;
+    position: absolute;
+    top: 88%;
+    left: 2%;
+    width: 95%;
+    height: 5%;
+    min-height: .5rem;
+
+    img {
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
     }
   }
 
@@ -375,6 +441,7 @@
       font-weight: 400;
       color: #3F1B1F;
       font-size: 3.5em;
+      white-space: nowrap;
     }
 
     .bottom-image {
@@ -406,6 +473,10 @@
       font-weight: 500;
       color: #3F1B1F;
       font-size: 1.2em;
+
+      .paragraph-spacing {
+        margin-bottom: 1em;
+      }
     }
 
     .top-image {
