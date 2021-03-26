@@ -1,7 +1,9 @@
 /* eslint-disable no-return-assign */
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { TweenLite } from 'gsap';
+import { TweenLite, gsap } from 'gsap';
+import { SplitText } from "gsap/SplitText";
+import { InView } from 'react-intersection-observer';
 
 import ImageIntroOne from '../Images/intro-1.jpg';
 import ImageIntroTwo from '../Images/intro-2.jpg';
@@ -22,11 +24,14 @@ import DinosaurBackground from '../Images/dinosaur-background.jpg';
 
 import './style.scss';
 
+gsap.registerPlugin(SplitText);
+
 class Section extends PureComponent {
   constructor(props) {
     super(props);
     this.hoverSection = this.hoverSection.bind(this);
     this.unhoverSection = this.unhoverSection.bind(this);
+    this.animateInDiv = this.animateInDiv.bind(this);
   }
 
   hoverSection() {
@@ -50,17 +55,47 @@ class Section extends PureComponent {
   }
 
   componentDidUpdate() {
-    console.log(this.props);
     if (this.props.timeline) {
       this.props.timeline.to(this.imageone, { x: -this.props.scrollDistance * 0.12, duration: 100 }, 0);
       this.props.timeline.to(this.imagetwo, { x: -this.props.scrollDistance * 0.1, duration: 100 }, 0);
+
+      this.props.timeline.to(this.sectiononepartonetop, { x: -this.props.scrollDistance * 0.05, duration: 82 }, 18);
+      this.props.timeline.to(this.sectiononepartonetbottom, { x: -this.props.scrollDistance * 0.05, duration: 82 }, 15);
+
       this.props.timeline.to(this.titleitalic, { x: -this.props.scrollDistance * 0.15, duration: 100 }, 0);
       this.props.timeline.to(this.dinosaurmask, { height: "120vh", duration: 10 }, 90);
     }
   }
 
+  animateInDiv(inView, entry) {
+    // Slide up when in view
+    if (inView) {
+      const childSplit = new SplitText(entry.target, {
+        type: "lines",
+        linesClass: "split-child"
+      });
+      new SplitText(entry.target, {
+        type: "lines",
+        linesClass: "split-parent"
+      });
+      gsap.set(entry.target, {
+        opacity: 1,
+      });
+      gsap.from(childSplit.lines, {
+        duration: 1.5,
+        yPercent: 100,
+        ease: "power4",
+        stagger: 0.1,
+      });
+    } else {
+      // Don't show when out of view
+      gsap.set(entry.target, {
+        opacity: 0
+      });
+    }
+  }
+
   render() {
-    const { text } = this.props;
     return (
       <>
         <div className="drumheller-section one">
@@ -94,34 +129,38 @@ class Section extends PureComponent {
           <div className="drumheller-section-two">
             <div className="main-banner">
               <div className="banner-index">01</div>
-              <div className="banner-title">Our Vision</div>
-              <div className="banner-description">We inspire a lifelong passion for science and foster a better understanding of the past, nurturing stewardship of our changing planet.</div>
-              <div className="banner-right-hint">
+              <InView as="div" delay={100} triggerOnce className="banner-title" onChange={(inView, entry) => this.animateInDiv(inView, entry)}>
+                Our Vision
+              </InView>
+              <InView as="div" delay={1000} triggerOnce className="banner-description" onChange={(inView, entry) => this.animateInDiv(inView, entry)}>
+                We inspire a lifelong passion for science and foster a better understanding of the past, nurturing stewardship of our changing planet.
+              </InView>
+              <InView as="div" delay={1000} triggerOnce className="banner-right-hint" onChange={(inView, entry) => this.animateInDiv(inView, entry)}>
                 <div className="banner-right-hint-title">RIGHT</div>
                 <div className="banner-right-hint-description">A ceratopsid skeleton</div>
-              </div>
+              </InView>
             </div>
             <div className="fullscreen-image">
               <img src={ImageOneOne} alt="Ceratopsid!" />
             </div>
             <div className="top-video-section">
-              <div className="upper-video">
-                <video autoplay="autoplay" muted="true" loop="true">
+              <div className="upper-video" ref={(e) => { this.sectiononepartonetop = e; }}>
+                <video autoPlay="autoplay" muted={true} loop={true}>
                   <source src={VideoOneTwo} type="video/mp4" />
                 </video>
               </div>
-              <div className="lower-text">
-                The Tyrrell is Canada’s only museum dedicated exclusively to the science of palaeontology.
-              </div>
+              <InView as="div" className="lower-text" ref={(e) => { this.sectiononepartonebottom = e; }} delay={100} triggerOnce onChange={(inView, entry) => this.animateInDiv(inView, entry)}>
+                The Tyrrell is Canada’s only<br />museum dedicated exclusively<br />to the science of palaeontology.
+              </InView>
             </div>
             <div className="bottom-image-section">
               <div className="upper-text">
-                <div className="panel-left">
-                “Part of what’s special about the museum is it’s situated in the Badlands, so the surrounding landscape is very rich in Cretaceous Period fossils and a lot of the material that’s found in the museum is Alberta fossil material.
-                </div>
-                <div className="panel-right">
-                I think what’s special about coming here is the landscape, and knowing that what you’re looking at in the museum is so rooted in place and time and connected, and our scientists are doing research on the materials.”
-                </div>
+                <InView as="div" className="panel-left" delay={100} triggerOnce onChange={(inView, entry) => this.animateInDiv(inView, entry)}>
+                  “Part of what’s special about the museum is it’s situated in the Badlands, so the surrounding landscape is very rich in Cretaceous Period fossils and a lot of the material that’s found in the museum is Alberta fossil material.
+                </InView>
+                <InView as="div" className="panel-right" delay={100} triggerOnce onChange={(inView, entry) => this.animateInDiv(inView, entry)}>
+                  I think what’s special about coming here is the landscape, and knowing that what you’re looking at in the museum is so rooted in place and time and connected, and our scientists are doing research.”
+                </InView>
               </div>
               <div className="bottom-image">
                 <img src={ImageOneThree} alt="Run!" />
@@ -133,20 +172,24 @@ class Section extends PureComponent {
           <div className="drumheller-section-three">
             <div className="main-banner">
               <div className="banner-index">02</div>
-              <div className="banner-title">Our Past</div>
-              <div className="banner-description">Established in 1985, we celebrate the 3.9 billion year history of life on Earth.</div>
-              <div className="banner-right-hint">
+              <InView as="div" delay={100} triggerOnce className="banner-title" onChange={(inView, entry) => this.animateInDiv(inView, entry)}>
+                Our Past
+              </InView>
+              <InView as="div" delay={1000} triggerOnce className="banner-description" onChange={(inView, entry) => this.animateInDiv(inView, entry)}>
+                Established in 1985, we celebrate the 3.9 billion year history of life on Earth.
+              </InView>
+              <InView as="div" delay={1000} triggerOnce className="banner-right-hint" onChange={(inView, entry) => this.animateInDiv(inView, entry)}>
                 <div className="banner-right-hint-title">RIGHT</div>
                 <div className="banner-right-hint-description">A Gorgosaurus fossil</div>
-              </div>
+              </InView>
             </div>
             <div className="fullscreen-image">
               <img src={ImageTwoOne} alt="Gorgosaurus!" />
             </div>
             <div className="bottom-image-title">
-              <div className="upper-text">
+              <InView as="div" className="upper-text" ref={(e) => { this.sectiononepartonebottom = e; }} delay={100} triggerOnce onChange={(inView, entry) => this.animateInDiv(inView, entry)}>
                 In 1884, Joseph B. Tyrrell stumbled upon a 70-million-year-old dinosaur skull.
-              </div>
+              </InView>
               <div className="bottom-image">
                 <img src={ImageTwoTwo} alt="Fossils!" />
               </div>
@@ -155,7 +198,7 @@ class Section extends PureComponent {
               <div className="top-image">
                 <img src={ImageTwoThree} alt="Gorgosaurus!" />
               </div>
-              <div className="lower-text">
+              <InView as="div" className="lower-text" ref={(e) => { this.sectiononepartonebottom = e; }} delay={100} triggerOnce onChange={(inView, entry) => this.animateInDiv(inView, entry)}>
               The young geologist stumbled upon the treasure deep in the heart of Alberta’s Badlands.
               The carnivorous dinosaur, the first of its species ever found, was later named Albertosaurus Sarcophagus.
               <br /><br />
@@ -167,7 +210,7 @@ class Section extends PureComponent {
               commemorating Joseph Burr Tyrrell. In 1990, the Museum was granted the "Royal" appellation by Her Majesty Queen Elizabeth II.
               While the Museum is now officially the Royal Tyrrell Museum of Palaeontology,
               it's most often referred to as the Royal Tyrrell Museum.
-              </div>
+              </InView>
             </div>
           </div>
         </div>
@@ -175,12 +218,16 @@ class Section extends PureComponent {
           <div className="drumheller-section-four">
             <div className="main-banner">
               <div className="banner-index">03</div>
-              <div className="banner-title">Our Future</div>
-              <div className="banner-description">We foster an environment of learning and development for future generations.</div>
-              <div className="banner-right-hint">
+              <InView as="div" delay={100} triggerOnce className="banner-title" onChange={(inView, entry) => this.animateInDiv(inView, entry)}>
+                Our Future
+              </InView>
+              <InView as="div" delay={1000} triggerOnce className="banner-description" onChange={(inView, entry) => this.animateInDiv(inView, entry)}>
+                We foster an environment of learning and development for future generations.
+              </InView>
+              <InView as="div" delay={1000} triggerOnce className="banner-right-hint" onChange={(inView, entry) => this.animateInDiv(inView, entry)}>
                 <div className="banner-right-hint-title">RIGHT</div>
                 <div className="banner-right-hint-description">Inspiring creativity</div>
-              </div>
+              </InView>
             </div>
             <div className="fullscreen-image">
               <img src={ImageThreeOne} alt="Dinosaur!" />
@@ -189,18 +236,25 @@ class Section extends PureComponent {
               <div className="top-image">
                 <img src={ImageThreeTwo} alt="Dinosaur?" />
               </div>
-              <div className="lower-text">
+              <InView as="div" className="lower-text" delay={100} triggerOnce onChange={(inView, entry) => this.animateInDiv(inView, entry)}>
                 New discoveries are made everyday, thanks to the great work at Tyrrell.
-              </div>
+              </InView>
             </div>
             <div className="bottom-image-section">
               <div className="upper-text">
-                <div className="panel-left">
-                  Every year, new discoveries are made at the Royal Tyrrell Museum that change the landscape of the world of Palaeontology. Most recently, researchers have discovered a brand new Tyrannosaurus species; the first in 50 years.
-                </div>
-                <div className="panel-right">
-                  Additionally, the Royal Tyrrell offers an interactive space, where people take part in interactive displays to learn about how the dinosaur ate, moved and interacted with other organisms in its environment.
-                </div>
+                <InView as="div" className="panel-left" delay={100} triggerOnce onChange={(inView, entry) => this.animateInDiv(inView, entry)}>
+                  Every year, new discoveries are made at the<br />
+                  Royal Tyrrell Museum that change the landscape of<br />
+                  the world of Palaeontology. Most recently, researchers<br />
+                  have discovered a brand new Tyrannosaurus species;<br />
+                  the first in 50 years.
+                </InView>
+                <InView as="div" className="panel-right" delay={100} triggerOnce onChange={(inView, entry) => this.animateInDiv(inView, entry)}>
+                  Additionally, the Royal Tyrrell offers an interactive<br />
+                  space, where people take part in interactive displays<br />
+                  to learn about how the dinosaur ate, moved and<br />
+                  interacted with other organisms in its environment.
+                </InView>
               </div>
               <div className="bottom-image">
                 <img src={ImageThreeThree} alt="Dinosaur!" />
@@ -212,16 +266,22 @@ class Section extends PureComponent {
           <div className="drumheller-section-footer">
             <div className="drumheller-fulltext-textblock">
               <div className="footer-text">
-                Get lost in <br />
-                &nbsp;&nbsp;<span className="drumheller-italic">the</span> <span className="drumheller-outline">wonder</span><br />
-                of Tyrell
+                <InView as="div" delay={100} threshold={0.3} triggerOnce onChange={(inView, entry) => this.animateInDiv(inView, entry)}>
+                  Get lost in
+                </InView>
+                <InView as="div" delay={300} className="left-shifted" triggerOnce onChange={(inView, entry) => this.animateInDiv(inView, entry)}>
+                 <span className="drumheller-italic">the</span> <span className="drumheller-outline">wonder</span><br />
+                </InView>
+                <InView as="div" delay={600} threshold={0.3} triggerOnce onChange={(inView, entry) => this.animateInDiv(inView, entry)}>
+                  of Tyrell
+                </InView>
               </div>
             </div>
             <div className="drumheller-redirect">
-              <div class="sub-text">
+              <div className="sub-text">
                 Discover more
               </div>
-              <div class="main-text">
+              <div className="main-text">
                 Web Experiments
               </div>
             </div>
