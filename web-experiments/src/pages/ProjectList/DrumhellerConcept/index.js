@@ -87,7 +87,6 @@ class DrumhellerConcept extends PureComponent {
       x: -this.scrollDistance
     });
     this.timeline.to('#progressBar', { xPercent: 100, duration: 100 }, 0);
-    this.timeline.to(this.scrollHint, { opacity: 0, duration: 20 }, 0);
 
     this.setupResizeAnimation();
     ScrollTrigger.refresh();
@@ -143,12 +142,6 @@ class DrumhellerConcept extends PureComponent {
               timeline={this.timeline}
               scrollDistance={this.scrollDistance} 
             />
-          </div>
-          <div
-            className="scroll-hint"
-            ref={(e) => { this.scrollHint = e; }}
-          >
-            Scroll to Explore <span className="hint-arrow" ref={(e) => { this.hintArrow = e; }}>→</span>
           </div>
           <div id='drumheller-progress'>
             <div id='progressBar'/>

@@ -1,3 +1,23 @@
+.scroll-explore {
+  position: absolute;
+  top: 55vh;
+  left: 900px;
+  z-index: 1;
+
+  .rotating-logo {
+    position: absolute;
+    width: 300px;
+    height: 300px;
+  }
+
+  .skull-logo {
+    position: absolute;
+    height: 80px;
+    left: 111px;
+    top: 111px;
+  }
+}
+
 .split-parent {
   overflow: hidden;
 }

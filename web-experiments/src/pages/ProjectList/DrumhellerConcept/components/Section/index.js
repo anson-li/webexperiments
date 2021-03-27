@@ -6,6 +6,9 @@ import { SplitText } from "gsap/SplitText";
 import { InView } from 'react-intersection-observer';
 import { Link } from 'react-router-dom';
 
+import ScrollToExplore from '../Images/scroll-to-explore.svg';
+import DinosaurSkull from '../Images/dinosaur-skull.png';
+
 import ImageIntroOne from '../Images/intro-1.jpg';
 import ImageIntroTwo from '../Images/intro-2.jpg';
 
@@ -77,6 +80,13 @@ class Section extends PureComponent {
         ease: Power4,
         stagger: 0.5,
       });
+
+      gsap.from('.rotating-logo', {
+        rotation: 360,
+        duration: 10,
+        repeat: -1,
+        ease: "none",
+      });
     }
   }
 
@@ -140,6 +150,10 @@ class Section extends PureComponent {
   render() {
     return (
       <>
+        <div className="scroll-explore">
+          <img className="rotating-logo" src={ScrollToExplore} alt="Scroll to Explore" />
+          <img className="skull-logo" src={DinosaurSkull} alt="Dino skull!" />
+        </div> 
         <div className="drumheller-section one">
           <div className="drumheller-section-one">
             <div className="drumheller-textblock">

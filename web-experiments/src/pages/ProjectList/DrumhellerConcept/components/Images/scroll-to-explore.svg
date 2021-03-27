@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" 
+    xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 400 400">
+    <title>Scroll to Explore</title>
+<defs>
+    <path d="M 200, 200 m -160, 0 a 160, 160 0 0,1 320,0 a 160, 160 0 0,1 -320,0" id="textcircle" />
+    <style>
+        text { 
+            font-size: 16px;
+            font-family: upgrade-lights, sans-serif;
+            font-weight: 400; 
+            text-transform: uppercase;
+            letter-spacing: 15px;
+            fill: #912034;
+        }
+    </style>
+</defs> 
+    <circle fill="none" stroke="#912034" cx="200" cy="200" r="80" stroke-width="1" id="rim" />
+     <circle fill="none" stroke="#912034" cx="200" cy="200" r="110" stroke-width="1" id="rim" />
+    <text dy="70" textLength="1200">
+        <textPath xlink:href="#textcircle">
+          SCROLL TO EXPLORE - SCROLL TO EXPLORE -
+        </textPath>
+    </text>
+</svg>

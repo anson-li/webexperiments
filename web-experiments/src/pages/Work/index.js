@@ -149,7 +149,7 @@ class Work extends PureComponent {
             <Section
               id="06"
               title="Drumheller Concept"
-              description="Drumheller Concept"
+              description="Proof of concept for Drumheller's main page. Used advanced GSAP techniques &amp; video manipulation."
               date="MAR 2021"
               link="/drumheller"
               image={DrumhellerConcept}
