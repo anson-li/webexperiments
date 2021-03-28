@@ -32,7 +32,8 @@
 #bottom {
   bottom: 0;
   height: 10px;
-  z-index: 1000;
+  z-index: 2000;
+  user-select: none;
 }
 
 @media (min-width: 1024px) {

@@ -1,9 +1,10 @@
 .text-logo {
-  position: absolute;
+  position: fixed;
   top: 20px;
   left: 40px;
-  z-index: 150;
+  z-index: 1500;
   border-color: black;
+  user-select: none;
 }
 
 .subtext-logo {

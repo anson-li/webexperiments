@@ -6,11 +6,12 @@ import TextLogo from '../../../common/TextLogo';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Section from './components/Section';
+import { Draggable, InertiaPlugin } from 'gsap/all';
 
 import withTransition from '../../../common/WithTransition';
 import './style.scss';
 
-gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(ScrollTrigger, Draggable, InertiaPlugin);
 
 class DrumhellerConcept extends PureComponent {
   constructor(props) {
@@ -21,6 +22,7 @@ class DrumhellerConcept extends PureComponent {
     this.setupResizeAnimation = this.setupResizeAnimation.bind(this);
     this.timeline = null;
     this.scrollDistance = null;
+    this.pageST = null;
   }
 
   hidePage() {
@@ -67,42 +69,47 @@ class DrumhellerConcept extends PureComponent {
 
     gsap.set('#work-page', { height: trackWidth });
 
-    this.scrollDistance = trackWidth - innerWidth; // +300 is to offset the movement from the background wall at the beginning
+    this.scrollDistance = trackWidth - innerWidth;
 
+    gsap.set('#track-wrapper', { width: trackWidth });
+    
     this.timeline = gsap.timeline({
       smoothChildTiming: true,
       defaults: {
         ease: 'none'
       },
-      scrollTrigger: {
-        horizontal: false,
-        trigger: '#track',
-        start: 0,
-        scrub: 1,
-        end: () => `+=${this.scrollDistance}`,
-        onUpdate: () => {},
-      } 
     }).to('#track', { 
       duration: 100,
       x: -this.scrollDistance
     });
     this.timeline.to('#progressBar', { xPercent: 100, duration: 100 }, 0);
 
+    this.pageST = ScrollTrigger.create({
+      animation: this.timeline,
+      horizontal: false,
+      trigger: '#track',
+      start: 0,
+      scrub: 1,
+      end: () => `+=${this.scrollDistance}`,
+      onUpdate: (event) => {
+        console.log(event);
+      },
+    });
+
     this.setupResizeAnimation();
-    ScrollTrigger.refresh();
   }
 
   setupResizeAnimation() {
-    // Scrolltrigger to resize on fixed points
-    var pageST = ScrollTrigger.create({});
-    var progress = 0;
+    console.log(this.pageST);
+    // var progress = 0;
     ScrollTrigger.addEventListener("refreshInit", function() {
-      progress = pageST.scroll() / ScrollTrigger.maxScroll(window);
-      console.log(progress);
+      // progress = this.pageST.scroll() / ScrollTrigger.maxScroll(window);
+      // console.log(progress);
     });
     ScrollTrigger.addEventListener("refresh", function() {
-      pageST.scroll(progress * ScrollTrigger.maxScroll(window));
+      // this.pageST.scroll(progress * ScrollTrigger.maxScroll(window));
     });
+    ScrollTrigger.refresh();
   }
 
   setupScrollHintAnimation() {
@@ -120,6 +127,22 @@ class DrumhellerConcept extends PureComponent {
     this.props.hideLoader();
     this.setupTrackAnimation();
     this.setupScrollHintAnimation();
+
+    Draggable.create('#track', {
+      type: 'x',
+      bounds: {minX: -1 * this.scrollDistance, maxX: 0}, // scroll X is done by offsetting to the right, so we move in negative values
+      dragClickables: true,
+      inertia: false,
+      autoScroll: false,
+      onDrag: (event) => { // WIP WIP WIP
+        const values = this.track.style.transform.split(/\w+\(|\);?/);
+        const transform = values[1].split(/,\s?/g).map(parseInt);
+        console.log(-1 * transform[0] / this.scrollDistance);
+        this.timeline.progress(-1 * transform[0] / this.scrollDistance);
+        this.pageST.scroll(-1 * transform[0]);
+        console.log(this.pageST);
+      },
+    });
     // window.addEventListener('resize', this.onWindowResize);
   }
 
@@ -131,7 +154,7 @@ class DrumhellerConcept extends PureComponent {
     const { cursorHover, cursorUnhover } = this.props;
     return (
       <div id="work-page" ref={(e) => { this.el = e; }}>
-        <div id="animation-wrapper">
+        <div id="track-wrapper">
           <TextLogo
             hover={cursorHover}
             unhover={cursorUnhover}
