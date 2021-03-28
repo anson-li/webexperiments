@@ -132,15 +132,21 @@ class DrumhellerConcept extends PureComponent {
       type: 'x',
       bounds: {minX: -1 * this.scrollDistance, maxX: 0}, // scroll X is done by offsetting to the right, so we move in negative values
       dragClickables: true,
-      inertia: false,
+      inertia: true,
       autoScroll: false,
+      dragResistance: 0.5,
+      throwResistance: 250,
+      onThrowUpdate: (event) => {
+        const values = this.track.style.transform.split(/\w+\(|\);?/);
+        const transform = values[1].split(/,\s?/g).map(parseInt);
+        this.timeline.progress(-1 * transform[0] / this.scrollDistance);
+        this.pageST.scroll(-1 * transform[0]);
+      },
       onDrag: (event) => { // WIP WIP WIP
         const values = this.track.style.transform.split(/\w+\(|\);?/);
         const transform = values[1].split(/,\s?/g).map(parseInt);
-        console.log(-1 * transform[0] / this.scrollDistance);
         this.timeline.progress(-1 * transform[0] / this.scrollDistance);
         this.pageST.scroll(-1 * transform[0]);
-        console.log(this.pageST);
       },
     });
     // window.addEventListener('resize', this.onWindowResize);
