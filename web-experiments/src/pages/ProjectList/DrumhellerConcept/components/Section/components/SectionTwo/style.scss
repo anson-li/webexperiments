@@ -1,0 +1,77 @@
+@import '../../style';
+
+.drumheller-section.two {
+  width: 200vw;
+
+  .drumheller-section-two {
+    position: absolute;
+
+    .main-banner .banner-description {
+      width: 70%;
+    }
+
+    .bottom-image-section {
+      position: absolute;
+      left: 3700px;
+
+      .upper-text {
+        position: absolute;
+        width: 800px;
+        @include description-font;
+
+        .panel-left {
+          width: 500px;
+          position: absolute;
+          top: 15vh;
+          left: -100px;
+        }
+
+        .panel-right {
+          width: 500px;
+          position: absolute;
+          top: 15vh;
+          left: 500px;
+        }
+      }
+
+      .bottom-image {
+        @include jagged-image-border;
+        position: absolute;
+        top: 35vh;
+        mask-border-width: 10px 10px 0px 10px;
+
+        img {
+          height: 80vh;
+        }
+      }
+    }
+
+    .top-video-section {
+      position: absolute;
+      left: 2500px;
+
+      .lower-text {
+        white-space: nowrap; 
+        position: absolute;
+        left: 0px;
+        top: 50vh;
+        width: 1000px;
+        padding-left: 50px;
+        font-family: ivymode, serif;
+        font-weight: 400;
+        color: #3F1B1F;
+        font-size: 4em;
+      }
+
+      .upper-video {
+        @include jagged-image-border;
+        position: absolute;
+        mask-border-width: 0px 10px 10px 10px;
+    
+        video {
+          height: 40vh;
+        }
+      }
+    }
+  }
+}

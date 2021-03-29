@@ -1,0 +1,33 @@
+@import '../../style';
+
+.drumheller-section-one {
+  @extend .drumheller-section;
+  padding-left: 200px;
+  width: 100vw;
+  
+  .drumheller-textblock {
+    position: absolute;
+    top: 25vh;
+    width: 800px;
+  }
+  
+  .text {
+    @include title-font;
+    
+    .primary {
+      line-height: 90%;
+    }
+  
+    .secondary {
+      padding-left: 0.5em;
+    }
+  }
+  
+  .description {
+    @include description-font;
+  
+    width: 500px;
+    padding-left: 100px;
+    padding-top: 100px;
+  }
+}

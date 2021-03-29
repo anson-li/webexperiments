@@ -1,0 +1,95 @@
+@import '../../style';
+
+.footer {
+  width: 80vw;
+}
+
+.drumheller-section-footer {
+  position: absolute;
+
+  .drumheller-redirect {
+    position: absolute;
+    top: 75vh;
+    left: 1000px;
+    width: 280px;
+    z-index: 10;
+
+    .sub-text {
+      @include description-font;
+    }
+
+    .main-text {
+      font-family: ivymode, serif;
+      font-weight: 400;
+      font-size: 2em;
+      color: #3F1B1F;
+    }
+  }
+
+  .custom-underline-3 {
+    clip-path: inset(0 0 0 0);
+    z-index: 1000;
+    display: block;
+    position: absolute;
+    // top: 88%;
+    left: 2%;
+    width: 95%;
+    height: 5%;
+    min-height: .5rem;
+
+    img {
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+    }
+  }
+
+  .custom-underline-2 {
+    clip-path: inset(0% 0% 0% 0%);
+    z-index: 1000;
+    display: block;
+    position: absolute;
+    top: 88%;
+    left: 2%;
+    width: 95%;
+    height: 5%;
+    min-height: .5rem;
+
+    img {
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+    }
+  }
+
+  .drumheller-fulltext-textblock {
+    @include title-font;
+
+    position: absolute;
+    top: 30vh;
+    width: 900px;
+    line-height: 1.2em;
+
+    .left-shifted {
+      margin-left: 50px;
+    }
+  }
+
+  .drumheller-imagemask {
+    position: absolute;
+    left: 1000px;
+    top: 100px;
+    
+    img {
+      height: 100vh;
+      background-position: center center;
+      mask: url(../../../Images/dinosaur-mask.svg);
+    }
+  }
+}

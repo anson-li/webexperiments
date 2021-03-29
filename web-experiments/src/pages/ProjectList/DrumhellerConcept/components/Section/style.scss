@@ -1,27 +1,40 @@
-.scroll-explore {
-  position: absolute;
-  top: 55vh;
-  left: 900px;
-  z-index: 1;
-
-  .rotating-logo {
-    position: absolute;
-    width: 300px;
-    height: 300px;
-  }
-
-  .skull-logo {
-    position: absolute;
-    height: 80px;
-    left: 111px;
-    top: 111px;
-  }
+@mixin title-font {
+  font-family: ivymode, serif;
+  font-weight: 400;
+  color: #3F1B1F;
+  font-size: 9em;
 }
 
-.split-parent {
+@mixin description-font {
+  font-family: upgrade-lights, sans-serif;
+  font-weight: 500;
+  color: #3F1B1F;
+  font-size: 1.2em;
+  white-space: nowrap;
+}
+
+@mixin jagged-image-border {
+  mask-border-source: url(../Images/border-template.png);
+  mask-border-slice: 44 90 90 108 fill;
+  mask-border-outset: 0px 0px 0px 0px;
+  mask-border-repeat: stretch stretch;
+}
+
+@mixin italic-title-font {
+  font-style: italic;
+}
+
+@mixin outline-title-font {
+  color: #F3E2E4;
+  -webkit-text-stroke: 1px #3F1B1F;
+  position: relative;
+  z-index: 1;
+}
+
+.inview-split-parent {
   overflow: hidden;
 }
-.split-child {
+.inview-split-child {
   display: inline-block;
 }
 
@@ -32,43 +45,15 @@
   width: 100vw;
   box-sizing: border-box;
   display: flex;
-  // align-items: center;
-  // justify-content: center;
   background-color: #F3E2E4;
   overflow: hidden;
 
-  .drumheller-textblock {
-    position: absolute;
-    top: 25vh;
-    width: 800px;
-  }
-
-  .text {
-    font-family: ivymode, serif;
-    font-weight: 400;
-    color: #3F1B1F;
-    
-    .primary {
-      font-size: 9em;
-      line-height: 90%;
-    }
-
-    .secondary {
-      font-size: 9em;
-      padding-left: 0.5em;
-    }
-  }
-
   .drumheller-italic {
-    font-weight: 400;
-    font-style: italic;
+    @include italic-title-font;
   }
   
   .drumheller-outline {
-    color: #F3E2E4;
-    -webkit-text-stroke: 1px #3F1B1F;
-    position: relative;
-    z-index: 1;
+    @include outline-title-font;
 
     .custom-underline {
       clip-path: inset(0% 0% 0% 0%); // second value is right bounding box; change it to show streaking animation
@@ -92,25 +77,12 @@
     }
   }
 
-  .description {
-    font-family: upgrade-lights, sans-serif;
-    font-weight: 500;
-    color: #3F1B1F;
-    width: 500px;
-    padding-left: 100px;
-    font-size: 1.2em;
-    padding-top: 100px;
-  }
-
   .image-block {
     position: absolute;
 
     img {
-      mask-border-source: url(../Images/border-template.png);
-      mask-border-slice: 44 90 90 108 fill;
+      @include jagged-image-border;
       mask-border-width: 10px 10px 10px 10px;
-      mask-border-outset: 0px 0px 0px 0px;
-      mask-border-repeat: stretch stretch;
     }
 
     .image-block-description {
@@ -133,546 +105,6 @@
     
     img {
       height: 650px;
-    }
-  }
-}
-
-.one {
-  padding-left: 200px;
-  width: 100vw;
-}
-
-.two, .three, .four {
-  width: 200vw;
-}
-
-.footer {
-  width: 80vw;
-}
-
-.drumheller-section-footer {
-  position: absolute;
-
-  .drumheller-redirect {
-    position: absolute;
-    top: 75vh;
-    left: 1000px;
-    width: 280px;
-    z-index: 10;
-
-    .sub-text {
-      font-family: upgrade-lights, sans-serif;
-      font-weight: 500;
-      font-size: 1.2em;
-      color: #3F1B1F;
-    }
-
-    .main-text {
-      font-family: ivymode, serif;
-      font-weight: 400;
-      font-size: 2em;
-      color: #3F1B1F;
-    }
-  }
-
-  .custom-underline-3 {
-    clip-path: inset(0 0 0 0);
-    z-index: 1000;
-    display: block;
-    position: absolute;
-    // top: 88%;
-    left: 2%;
-    width: 95%;
-    height: 5%;
-    min-height: .5rem;
-
-    img {
-      display: block;
-      position: absolute;
-      top: 0;
-      left: 0;
-      height: 100%;
-      width: 100%;
-    }
-  }
-
-  .custom-underline-2 {
-    clip-path: inset(0% 0% 0% 0%);
-    z-index: 1000;
-    display: block;
-    position: absolute;
-    top: 88%;
-    left: 2%;
-    width: 95%;
-    height: 5%;
-    min-height: .5rem;
-
-    img {
-      display: block;
-      position: absolute;
-      top: 0;
-      left: 0;
-      height: 100%;
-      width: 100%;
-    }
-  }
-
-  .drumheller-fulltext-textblock {
-    position: absolute;
-    top: 30vh;
-    width: 900px;
-    font-family: ivymode, serif;
-    font-weight: 400;
-    color: #3F1B1F;
-    font-size: 9em;
-    line-height: 1.2em;
-
-    .left-shifted {
-      margin-left: 50px;
-    }
-  }
-
-  .drumheller-imagemask {
-    position: absolute;
-    left: 1000px;
-    top: 100px;
-    
-    img {
-      height: 100vh;
-      background-position: center center;
-      mask: url(../Images/dinosaur-mask.svg);
-    }
-  }
-}
-
-.drumheller-section-four {
-  position: absolute;
-
-  .main-banner {
-    width: 1000px;
-    height: 100vh;
-    background-color: #912034;
-    overflow: hidden;
-    position: absolute;  
-
-    .banner-index {
-      font-family: ivymode, serif;
-      font-weight: 600;
-      color: #3F1B1F;
-      opacity: 50%;
-      font-size: 20em;
-      position: absolute;
-      top: 18vh;
-      left: -80px;
-      overflow: hidden;
-    }
-  
-    .banner-title {
-      position: absolute;
-      bottom: 30vh;
-      color: white;
-      font-family: ivymode, serif;
-      font-weight: 400;
-      font-size: 7em;
-      left: 80px;
-    }
-  
-    .banner-description {
-      position: absolute;
-      bottom: 18vh;
-      color: white;
-      font-family: ivymode, serif;
-      font-weight: 400;
-      font-size: 1.8em;
-      left: 80px;
-      width: 60%;
-      white-space: nowrap;
-    }
-  
-    .banner-right-hint {
-      position: absolute;
-      bottom: 18vh;
-      text-align: right;
-      width: 100%;
-      padding-right: 50px;
-      color: white;
-      font-size: 0.8em;
-    }
-  }
-
-  .bottom-image-section {
-    position: absolute;
-    left: 3700px;
-
-    .upper-text {
-      position: absolute;
-      width: 800px;
-      font-family: upgrade-lights, sans-serif;
-      font-weight: 500;
-      font-size: 1.2em;
-      color: #3F1B1F;
-      white-space: nowrap;
-
-      .panel-left {
-        width: 500px;
-        position: absolute;
-        top: 15vh;
-        left: -100px;
-      }
-
-      .panel-right {
-        width: 500px;
-        position: absolute;
-        top: 15vh;
-        left: 500px;
-      }
-    }
-
-    .bottom-image {
-      position: absolute;
-      top: 35vh;
-      mask-border-source: url(../Images/border-template.png);
-      mask-border-slice: 44 90 90 108 fill;
-      mask-border-width: 10px 10px 0px 10px;
-      mask-border-outset: 0px 0px 0px 0px;
-      mask-border-repeat: stretch stretch;
-
-      img {
-        height: 80vh;
-        width: 800px;
-        object-fit: cover;
-        object-position: 40% 50%;
-      }
-    }
-  }
-
-  .top-image-title {
-    position: absolute;
-    left: 2400px;
-
-    .lower-text {
-      position: absolute;
-      left: 100px;
-      top: 50vh;
-      width: 1000px;
-      padding-left: 50px;
-      font-family: ivymode, serif;
-      font-weight: 400;
-      color: #3F1B1F;
-      font-size: 4em;
-    }
-
-    .top-image {
-      position: absolute;
-      mask-border-source: url(../Images/border-template.png);
-      mask-border-slice: 44 90 90 108 fill;
-      mask-border-width: 0px 10px 10px 10px;
-      mask-border-outset: 0px 0px 0px 0px;
-      mask-border-repeat: stretch stretch;
-  
-      img {
-        height: 40vh;
-      }
-    }
-  }
-
-  .fullscreen-image {
-    position: absolute;
-    left: 999px;
-
-    img {
-      object-fit: cover;
-      width: 1200px;
-      height: 150vh;
-      object-position: 100% 50%;
-      mask-border-source: url(../Images/border-template.png);
-      mask-border-slice: 44 90 90 108 fill;
-      mask-border-width: 0px 20px 0px 0px;
-      mask-border-outset: 0px 0px 0px 0px;
-      mask-border-repeat: stretch stretch;
-    }
-  }
-}
-
-
-.drumheller-section-three {
-  position: absolute;
-
-  .main-banner {
-    width: 1000px;
-    height: 100vh;
-    background-color: #912034;
-    overflow: hidden;
-    position: absolute;  
-
-    .banner-index {
-      font-family: ivymode, serif;
-      font-weight: 600;
-      color: #3F1B1F;
-      opacity: 50%;
-      font-size: 20em;
-      position: absolute;
-      top: 18vh;
-      left: -80px;
-      overflow: hidden;
-    }
-  
-    .banner-title {
-      position: absolute;
-      bottom: 30vh;
-      color: white;
-      font-family: ivymode, serif;
-      font-weight: 400;
-      font-size: 7em;
-      left: 80px;
-    }
-  
-    .banner-description {
-      position: absolute;
-      bottom: 18vh;
-      color: white;
-      font-family: ivymode, serif;
-      font-weight: 400;
-      font-size: 1.8em;
-      left: 80px;
-      width: 60%;
-      white-space: nowrap;
-    }
-  
-    .banner-right-hint {
-      position: absolute;
-      bottom: 18vh;
-      text-align: right;
-      width: 100%;
-      padding-right: 50px;
-      color: white;
-      font-size: 0.8em;
-    }
-  }
-
-  .bottom-image-title {
-    position: absolute;
-    left: 2400px;
-
-    .upper-text {
-      position: absolute;
-      top: 12vh;
-      width: 800px;
-      padding-left: 50px;
-      font-family: ivymode, serif;
-      font-weight: 400;
-      color: #3F1B1F;
-      font-size: 3.5em;
-      white-space: nowrap;
-    }
-
-    .bottom-image {
-      position: absolute;
-      top: 45vh;
-      width: 900px;
-      mask-border-source: url(../Images/border-template.png);
-      mask-border-slice: 44 90 90 108 fill;
-      mask-border-width: 10px 10px 0px 10px;
-      mask-border-outset: 0px 0px 0px 0px;
-      mask-border-repeat: stretch stretch;
-
-      img {
-        height: 65vh;
-      }
-    }
-  }
-
-  .top-image-description {
-    position: absolute;
-    left: 3700px;
-
-    .lower-text {
-      position: absolute;
-      top: 50vh;
-      width: 1000px;
-      padding-left: 50px;
-      font-family: upgrade-lights, sans-serif;
-      font-weight: 500;
-      color: #3F1B1F;
-      font-size: 1.2em;
-
-      .paragraph-spacing {
-        margin-bottom: 1em;
-      }
-    }
-
-    .top-image {
-      position: absolute;
-      mask-border-source: url(../Images/border-template.png);
-      mask-border-slice: 44 90 90 108 fill;
-      mask-border-width: 0px 10px 10px 10px;
-      mask-border-outset: 0px 0px 0px 0px;
-      mask-border-repeat: stretch stretch;
-      left: 100px;
-  
-      img {
-        height: 40vh;
-      }
-    }
-  }
-
-  .fullscreen-image {
-    position: absolute;
-    left: 999px;
-
-    img {
-      object-fit: cover;
-      width: 1200px;
-      height: 120vh;
-      mask-border-source: url(../Images/border-template.png);
-      mask-border-slice: 44 90 90 108 fill;
-      mask-border-width: 0px 20px 0px 0px;
-      mask-border-outset: 0px 0px 0px 0px;
-      mask-border-repeat: stretch stretch;
-    }
-  }
-}
-
-.drumheller-section-two {
-  position: absolute;
-
-  .main-banner {
-    width: 1000px;
-    height: 100vh;
-    background-color: #912034;
-    overflow: hidden;
-    position: absolute;  
-
-    .banner-index {
-      font-family: ivymode, serif;
-      font-weight: 600;
-      color: #3F1B1F;
-      opacity: 50%;
-      font-size: 20em;
-      position: absolute;
-      top: 18vh;
-      left: -80px;
-      overflow: hidden;
-    }
-  
-    .banner-title {
-      position: absolute;
-      bottom: 30vh;
-      color: white;
-      font-family: ivymode, serif;
-      font-weight: 400;
-      font-size: 7em;
-      left: 80px;
-    }
-  
-    .banner-description {
-      position: absolute;
-      bottom: 18vh;
-      color: white;
-      font-family: ivymode, serif;
-      font-weight: 400;
-      font-size: 1.8em;
-      left: 80px;
-      width: 70%;
-      white-space: nowrap;
-    }
-  
-    .banner-right-hint {
-      position: absolute;
-      bottom: 18vh;
-      text-align: right;
-      width: 100%;
-      padding-right: 50px;
-      color: white;
-      font-size: 0.8em;
-    }
-  }
-
-  .bottom-image-section {
-    position: absolute;
-    left: 3700px;
-
-    .upper-text {
-      position: absolute;
-      width: 800px;
-      font-family: upgrade-lights, sans-serif;
-      font-weight: 500;
-      font-size: 1.2em;
-      color: #3F1B1F;
-
-      .panel-left {
-        width: 500px;
-        position: absolute;
-        top: 15vh;
-        left: -100px;
-      }
-
-      .panel-right {
-        width: 500px;
-        position: absolute;
-        top: 15vh;
-        left: 500px;
-      }
-    }
-
-    .bottom-image {
-      position: absolute;
-      top: 35vh;
-      mask-border-source: url(../Images/border-template.png);
-      mask-border-slice: 44 90 90 108 fill;
-      mask-border-width: 10px 10px 0px 10px;
-      mask-border-outset: 0px 0px 0px 0px;
-      mask-border-repeat: stretch stretch;
-
-      img {
-        height: 80vh;
-      }
-    }
-  }
-
-  .top-video-section {
-    position: absolute;
-    left: 2500px;
-
-    .lower-text {
-      white-space: nowrap; 
-      position: absolute;
-      left: 0px;
-      top: 50vh;
-      width: 1000px;
-      padding-left: 50px;
-      font-family: ivymode, serif;
-      font-weight: 400;
-      color: #3F1B1F;
-      font-size: 4em;
-    }
-
-    .upper-video {
-      position: absolute;
-      mask-border-source: url(../Images/border-template.png);
-      mask-border-slice: 44 90 90 108 fill;
-      mask-border-width: 0px 10px 10px 10px;
-      mask-border-outset: 0px 0px 0px 0px;
-      mask-border-repeat: stretch repeat;
-  
-      video {
-        height: 40vh;
-      }
-    }
-  }
-
-  .fullscreen-image {
-    position: absolute;
-    left: 999px;
-
-    img {
-      object-fit: cover;
-      height: 120vh;
-      mask-border-source: url(../Images/border-template.png);
-      mask-border-slice: 44 90 90 108 fill;
-      mask-border-width: 0px 20px 0px 0px;
-      mask-border-outset: 0px 0px 0px 0px;
-      mask-border-repeat: stretch stretch;
     }
   }
 }

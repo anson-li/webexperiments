@@ -1,0 +1,19 @@
+.scroll-explore {
+  position: absolute;
+  top: 55vh; // Dependent on implementation
+  left: 900px; // Dependent on implementation
+  z-index: 1;
+
+  .rotating-logo {
+    position: absolute;
+    width: 300px;
+    height: 300px;
+  }
+
+  .skull-logo {
+    position: absolute;
+    height: 80px;
+    left: 111px;
+    top: 111px;
+  }
+}
