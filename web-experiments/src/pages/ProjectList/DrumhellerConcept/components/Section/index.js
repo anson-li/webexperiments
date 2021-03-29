@@ -195,7 +195,7 @@ class Section extends PureComponent {
                 Our Vision
               </InView>
               <InView as="div" delay={1000} triggerOnce className="banner-description" onChange={(inView, entry) => this.animateInDiv(inView, entry)}>
-                We inspire a lifelong passion for science and foster a better understanding of the past, nurturing stewardship of our changing planet.
+                We inspire a lifelong passion for science<br />and foster a better understanding of the past,<br />nurturing stewardship of our changing planet.
               </InView>
               <InView as="div" delay={1000} triggerOnce className="banner-right-hint" onChange={(inView, entry) => this.animateInDiv(inView, entry)}>
                 <div className="banner-right-hint-title">RIGHT</div>
@@ -238,7 +238,7 @@ class Section extends PureComponent {
                 Our Past
               </InView>
               <InView as="div" delay={1000} triggerOnce className="banner-description" onChange={(inView, entry) => this.animateInDiv(inView, entry)}>
-                Established in 1985, we celebrate the 3.9 billion year history of life on Earth.
+                Established in 1985, we celebrate the<br />3.9 billion year history of life on Earth.
               </InView>
               <InView as="div" delay={1000} triggerOnce className="banner-right-hint" onChange={(inView, entry) => this.animateInDiv(inView, entry)}>
                 <div className="banner-right-hint-title">RIGHT</div>
@@ -288,7 +288,7 @@ class Section extends PureComponent {
                 Our Future
               </InView>
               <InView as="div" delay={1000} triggerOnce className="banner-description" onChange={(inView, entry) => this.animateInDiv(inView, entry)}>
-                We foster an environment of learning and development for future generations.
+                We foster an environment of learning<br />and development for future generations.
               </InView>
               <InView as="div" delay={1000} triggerOnce className="banner-right-hint" onChange={(inView, entry) => this.animateInDiv(inView, entry)}>
                 <div className="banner-right-hint-title">RIGHT</div>
