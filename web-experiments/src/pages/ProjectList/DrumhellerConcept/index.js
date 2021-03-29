@@ -135,7 +135,7 @@ class DrumhellerConcept extends PureComponent {
       inertia: true,
       autoScroll: false,
       dragResistance: 0.5,
-      throwResistance: 250,
+      throwResistance: 2000,
       onThrowUpdate: (event) => {
         const values = this.track.style.transform.split(/\w+\(|\);?/);
         const transform = values[1].split(/,\s?/g).map(parseInt);
