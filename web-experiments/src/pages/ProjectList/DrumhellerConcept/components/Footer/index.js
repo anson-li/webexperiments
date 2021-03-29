@@ -3,8 +3,8 @@ import { gsap, Power4 } from 'gsap';
 import { InView } from 'react-intersection-observer';
 import { Link } from 'react-router-dom';
 
-import Underline2 from '../../../Images/underline-2.png';
-import DinosaurBackground from '../../../Images/dinosaur-background.jpg';
+import Underline2 from '../Images/underline-2.png';
+import DinosaurBackground from '../Images/dinosaur-background.jpg';
 
 import './style.scss';
 

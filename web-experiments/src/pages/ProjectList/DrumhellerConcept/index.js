@@ -2,16 +2,24 @@
 import anime from 'animejs';
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import TextLogo from '../../../common/TextLogo';
+
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import Section from './components/Section';
+import { SplitText } from "gsap/SplitText";
 import { Draggable, InertiaPlugin } from 'gsap/all';
 
+import DinosaurScrollHint from './components/DinosaurScrollHint';
+import SectionOne from './components/SectionOne';
+import SectionTwo from './components/SectionTwo';
+import SectionThree from './components/SectionThree';
+import SectionFour from './components/SectionFour';
+import Footer from './components/Footer';
+
+import TextLogo from '../../../common/TextLogo';
 import withTransition from '../../../common/WithTransition';
 import './style.scss';
 
-gsap.registerPlugin(ScrollTrigger, Draggable, InertiaPlugin);
+gsap.registerPlugin(ScrollTrigger, Draggable, InertiaPlugin, SplitText);
 
 class DrumhellerConcept extends PureComponent {
   constructor(props) {
@@ -20,6 +28,8 @@ class DrumhellerConcept extends PureComponent {
     this.setupTrackAnimation = this.setupTrackAnimation.bind(this);
     this.setupScrollHintAnimation = this.setupScrollHintAnimation.bind(this);
     this.setupResizeAnimation = this.setupResizeAnimation.bind(this);
+    this.animateInDiv = this.animateInDiv.bind(this);
+
     this.timeline = null;
     this.scrollDistance = null;
     this.pageST = null;
@@ -123,6 +133,34 @@ class DrumhellerConcept extends PureComponent {
      }}, 0)
   }
 
+  animateInDiv(inView, entry) {
+    // Slide up when in view
+    if (inView) {
+      const childSplit = new SplitText(entry.target, {
+        type: "lines",
+        linesClass: "inview-split-child"
+      });
+      new SplitText(entry.target, {
+        type: "lines",
+        linesClass: "inview-split-parent"
+      });
+      gsap.set(entry.target, {
+        opacity: 1,
+      });
+      gsap.from(childSplit.lines, {
+        duration: 1.5,
+        yPercent: 100,
+        ease: "power4",
+        stagger: 0.1,
+      });
+    } else {
+      // Don't show when out of view
+      gsap.set(entry.target, {
+        opacity: 0
+      });
+    }
+  }
+
   componentDidMount() {
     this.props.hideLoader();
     this.setupTrackAnimation();
@@ -166,10 +204,30 @@ class DrumhellerConcept extends PureComponent {
             unhover={cursorUnhover}
           />
           <div id='track' className='track' ref={(e) => { this.track = e; }}>
-            <Section 
-              text="Drumheller"
+            <DinosaurScrollHint />
+            <SectionOne
               timeline={this.timeline}
-              scrollDistance={this.scrollDistance} 
+              scrollDistance={this.scrollDistance}
+            />
+            <SectionTwo
+              timeline={this.timeline}
+              scrollDistance={this.scrollDistance}
+              animateInDiv={this.animateInDiv}
+            />
+            <SectionThree
+              timeline={this.timeline}
+              scrollDistance={this.scrollDistance}
+              animateInDiv={this.animateInDiv}
+            />
+            <SectionFour
+              timeline={this.timeline}
+              scrollDistance={this.scrollDistance}
+              animateInDiv={this.animateInDiv}
+            />
+            <Footer
+              timeline={this.timeline}
+              scrollDistance={this.scrollDistance}
+              animateInDiv={this.animateInDiv}
             />
           </div>
           <div id='drumheller-progress'>

@@ -3,9 +3,9 @@ import { InView } from 'react-intersection-observer';
 
 import MainBanner from '../MainBanner';
 
-import ImageOneOne from '../../../Images/section-1-1.jpg';
-import VideoOneTwo from '../../../Images/section-1-2.mp4';
-import ImageOneThree from '../../../Images/section-1-3.jpg';
+import ImageOneOne from '../Images/section-1-1.jpg';
+import VideoOneTwo from '../Images/section-1-2.mp4';
+import ImageOneThree from '../Images/section-1-3.jpg';
 
 import './style.scss';
 

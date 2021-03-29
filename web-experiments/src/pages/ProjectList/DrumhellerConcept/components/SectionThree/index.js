@@ -3,9 +3,9 @@ import { gsap, Power4 } from 'gsap';
 import { InView } from 'react-intersection-observer';
 
 import MainBanner from '../MainBanner';
-import ImageTwoOne from '../../../Images/section-2-1.jpg';
-import ImageTwoTwo from '../../../Images/section-2-2.jpg';
-import ImageTwoThree from '../../../Images/section-2-3.jpg';
+import ImageTwoOne from '../Images/section-2-1.jpg';
+import ImageTwoTwo from '../Images/section-2-2.jpg';
+import ImageTwoThree from '../Images/section-2-3.jpg';
 
 import './style.scss';
 

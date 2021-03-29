@@ -1,9 +1,9 @@
 import React, { PureComponent } from 'react';
 import { gsap, Power4 } from 'gsap';
 
-import ImageIntroOne from '../../../Images/intro-1.jpg';
-import ImageIntroTwo from '../../../Images/intro-2.jpg';
-import Underline from '../../../Images/underline.png';
+import ImageIntroOne from '../Images/intro-1.jpg';
+import ImageIntroTwo from '../Images/intro-2.jpg';
+import Underline from '../Images/underline.png';
 
 import './style.scss';
 
