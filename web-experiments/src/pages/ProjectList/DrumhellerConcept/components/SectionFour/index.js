@@ -12,9 +12,9 @@ import './style.scss';
 class SectionFour extends PureComponent {
   componentDidUpdate() {
     if (this.props.timeline) {
-      this.props.timeline.to(this.topone, { x: -this.props.scrollDistance * 0.04, duration: 30 }, 70);
+      this.props.timeline.to(this.topone, { x: -this.props.scrollDistance * 0.03, duration: 30 }, 70);
       this.props.timeline.to(this.bottomone, { x: -this.props.scrollDistance * 0.02, duration: 30 }, 70);
-      this.props.timeline.to(this.toptwo, { x: -this.props.scrollDistance * 0.04, duration: 30 }, 70);
+      this.props.timeline.to(this.toptwo, { x: -this.props.scrollDistance * 0.03, duration: 30 }, 70);
       this.props.timeline.to(this.bottomtwo, { x: -this.props.scrollDistance * 0.02, duration: 30 }, 70);
     }
   }
