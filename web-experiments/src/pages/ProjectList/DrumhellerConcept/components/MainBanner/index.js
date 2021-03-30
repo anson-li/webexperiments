@@ -5,7 +5,7 @@ import './style.scss';
 
 class MainBanner extends PureComponent {
   render() {
-    const { id, title, description, imageHint, image, animateInDiv, imageAlt } = this.props;
+    const { id, title, description, imageHint, image, animateInDiv, imageAlt, validateImagesLoaded } = this.props;
     return (
       <>
         <div className="main-banner">
@@ -22,7 +22,7 @@ class MainBanner extends PureComponent {
           </InView>
         </div>
         <div className="fullscreen-image">
-          <img src={image} alt={imageAlt} />
+          <img src={image} onLoad={validateImagesLoaded()} alt={imageAlt} />
         </div>
       </>
     );

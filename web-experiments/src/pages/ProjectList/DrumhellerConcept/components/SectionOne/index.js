@@ -24,6 +24,7 @@ class SectionOne extends PureComponent {
   }
 
   render() {
+    const { validateImagesLoaded } = this.props;
     return (
       <div className="drumheller-section-one">
         <div className="drumheller-textblock">
@@ -51,11 +52,11 @@ class SectionOne extends PureComponent {
           </div>
         </div>
         <div ref={(e) => { this.imagetwo = e; }} className="image-block drumheller-imageblock-two">
-          <img src={ImageIntroTwo} alt="Skeleton!" />
+          <img src={ImageIntroTwo} onLoad={validateImagesLoaded()} alt="Skeleton!" />
           <div className="image-block-description">Tyrannosaurus Rex Skeleton</div>
         </div>
         <div ref={(e) => { this.imageone = e; }} className="image-block drumheller-imageblock-one">
-          <img src={ImageIntroOne} alt="Dinosaurs!" />
+          <img src={ImageIntroOne} onLoad={validateImagesLoaded()} alt="Dinosaurs!" />
           <div className="image-block-description">Dinosaurs Recreated for Today</div>
         </div>
       </div>

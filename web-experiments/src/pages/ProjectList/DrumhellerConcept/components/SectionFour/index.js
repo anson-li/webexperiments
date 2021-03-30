@@ -20,6 +20,7 @@ class SectionFour extends PureComponent {
   }
 
   render() {
+    const { validateImagesLoaded } = this.props;
     return (
       <div className="drumheller-section four">
         <div className="drumheller-section-four">
@@ -31,10 +32,11 @@ class SectionFour extends PureComponent {
             image={ImageThreeOne}
             imageAlt='Dinosaur!'
             animateInDiv={this.props.animateInDiv}
+            validateImagesLoaded={validateImagesLoaded}
           />
           <div className="top-image-title">
             <div className="top-image" ref={(e) => { this.topone = e; }}>
-              <img src={ImageThreeTwo} alt="Dinosaur?" />
+              <img src={ImageThreeTwo} onLoad={validateImagesLoaded()} alt="Dinosaur?" />
             </div>
             <InView as="div" className="lower-text" delay={100} triggerOnce onChange={(inView, entry) => this.props.animateInDiv(inView, entry)}>
               New discoveries are made everyday, thanks to the great work at Tyrrell.
@@ -57,7 +59,7 @@ class SectionFour extends PureComponent {
               </InView>
             </div>
             <div className="bottom-image" ref={(e) => { this.bottomtwo = e; }}>
-              <img src={ImageThreeThree} alt="Dinosaur!" />
+              <img src={ImageThreeThree} onLoad={validateImagesLoaded()} alt="Dinosaur!" />
             </div>
           </div>
         </div>

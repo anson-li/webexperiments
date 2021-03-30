@@ -37,7 +37,9 @@ class App extends PureComponent {
   }
 
   hideLoader() {
-    this.loader.current.fadeOut();
+    if (this.loader.current) {
+      this.loader.current.fadeOut();
+    }
   }
 
   hideFollow() {

@@ -52,6 +52,7 @@ class SectionFour extends PureComponent {
 
 
   render() {
+    const { validateImagesLoaded } = this.props;
     return (
       <div className="drumheller-section footer">
         <div className="drumheller-section-footer">
@@ -65,7 +66,7 @@ class SectionFour extends PureComponent {
                 <span className="drumheller-outline">
                   wonder
                   <InView as="span" delay={300} className="custom-underline-2" triggerOnce onChange={(inView, entry) => this.slideInUnderline(inView, entry)}>
-                    <img src={Underline2} alt="Underline" />
+                    <img src={Underline2} onLoad={validateImagesLoaded()} alt="Underline" />
                   </InView>
                 </span>
                 <br />
@@ -82,12 +83,12 @@ class SectionFour extends PureComponent {
             <Link to="/work" href="/work" onMouseEnter={this.onHighlightLink} className="main-text">
               Web Experiments
               <span className="custom-underline-3">
-              <img src={Underline2} alt="Underline" />
+              <img onLoad={validateImagesLoaded()} src={Underline2} alt="Underline" />
               </span>
             </Link>
           </div>
           <div className="drumheller-imagemask">
-            <img  ref={(e) => { this.dinosaurmask = e; }} src={DinosaurBackground} alt="Badlands!" /> 
+            <img ref={(e) => { this.dinosaurmask = e; }} onLoad={validateImagesLoaded()} src={DinosaurBackground} alt="Badlands!" /> 
           </div>
         </div>
       </div>

@@ -29,10 +29,24 @@ class DrumhellerConcept extends PureComponent {
     this.setupScrollHintAnimation = this.setupScrollHintAnimation.bind(this);
     this.setupResizeAnimation = this.setupResizeAnimation.bind(this);
     this.animateInDiv = this.animateInDiv.bind(this);
+    this.validateImagesLoaded = this.validateImagesLoaded.bind(this);
+    this.checkLoaderStatus = this.checkLoaderStatus.bind(this);
 
     this.timeline = null;
     this.scrollDistance = null;
     this.pageST = null;
+    this.loadedImages = 26;
+  }
+
+  validateImagesLoaded() {
+    this.loadedImages -= 1;
+    this.checkLoaderStatus();
+  }
+
+  checkLoaderStatus() {
+    if (this.loadedImages <= 0) {
+      this.props.hideLoader();
+    }
   }
 
   hidePage() {
@@ -158,9 +172,9 @@ class DrumhellerConcept extends PureComponent {
   }
 
   componentDidMount() {
-    this.props.hideLoader();
     this.setupTrackAnimation();
     this.setupScrollHintAnimation();
+    this.checkLoaderStatus();
 
     Draggable.create('#track', {
       type: 'x',
@@ -200,30 +214,37 @@ class DrumhellerConcept extends PureComponent {
             unhover={cursorUnhover}
           />
           <div id='track' className='track' ref={(e) => { this.track = e; }}>
-            <DinosaurScrollHint />
+            <DinosaurScrollHint
+              validateImagesLoaded={this.validateImagesLoaded}
+            />
             <SectionOne
               timeline={this.timeline}
               scrollDistance={this.scrollDistance}
+              validateImagesLoaded={this.validateImagesLoaded}
             />
             <SectionTwo
               timeline={this.timeline}
               scrollDistance={this.scrollDistance}
               animateInDiv={this.animateInDiv}
+              validateImagesLoaded={this.validateImagesLoaded}
             />
             <SectionThree
               timeline={this.timeline}
               scrollDistance={this.scrollDistance}
               animateInDiv={this.animateInDiv}
+              validateImagesLoaded={this.validateImagesLoaded}
             />
             <SectionFour
               timeline={this.timeline}
               scrollDistance={this.scrollDistance}
               animateInDiv={this.animateInDiv}
+              validateImagesLoaded={this.validateImagesLoaded}
             />
             <Footer
               timeline={this.timeline}
               scrollDistance={this.scrollDistance}
               animateInDiv={this.animateInDiv}
+              validateImagesLoaded={this.validateImagesLoaded}
             />
           </div>
           <div id='drumheller-progress'>

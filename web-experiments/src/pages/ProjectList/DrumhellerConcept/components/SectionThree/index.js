@@ -1,5 +1,4 @@
 import React, { PureComponent } from 'react';
-import { gsap, Power4 } from 'gsap';
 import { InView } from 'react-intersection-observer';
 
 import MainBanner from '../MainBanner';
@@ -20,6 +19,7 @@ class SectionThree extends PureComponent {
   }
 
   render() {
+    const { validateImagesLoaded } = this.props;
     return (
       <div className="drumheller-section three">
         <div className="drumheller-section-three">
@@ -31,18 +31,19 @@ class SectionThree extends PureComponent {
             image={ImageTwoOne}
             imageAlt='Gorgosaurus!'
             animateInDiv={this.props.animateInDiv}
+            validateImagesLoaded={validateImagesLoaded}
           />
           <div className="bottom-image-title">
             <InView as="div" className="upper-text" ref={(e) => { this.topone = e; }} delay={100} triggerOnce onChange={(inView, entry) => this.props.animateInDiv(inView, entry)}>
               In 1884, Joseph B. Tyrrell stumbled<br />upon a 70-million-year-old<br />dinosaur skull.
             </InView>
             <div className="bottom-image" ref={(e) => { this.bottomone = e; }}>
-              <img src={ImageTwoTwo} alt="Fossils!" />
+              <img src={ImageTwoTwo} onLoad={validateImagesLoaded()} alt="Fossils!" />
             </div>
           </div>
           <div className="top-image-description">
             <div className="top-image" ref={(e) => { this.toptwo = e; }}>
-              <img src={ImageTwoThree} alt="Gorgosaurus!" />
+              <img src={ImageTwoThree} onLoad={validateImagesLoaded()} alt="Gorgosaurus!" />
             </div>
             <div className="lower-text" ref={(e) => { this.bottomtwo = e; }}>
               <InView as="div" className="paragraph-spacing" delay={100} triggerOnce onChange={(inView, entry) => this.props.animateInDiv(inView, entry)}>

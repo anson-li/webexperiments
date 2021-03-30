@@ -2,7 +2,6 @@ import React, { PureComponent } from 'react';
 import { InView } from 'react-intersection-observer';
 
 import MainBanner from '../MainBanner';
-
 import ImageOneOne from '../Images/section-1-1.jpg';
 import VideoOneTwo from '../Images/section-1-2.mp4';
 import ImageOneThree from '../Images/section-1-3.jpg';
@@ -20,6 +19,7 @@ class SectionTwo extends PureComponent {
   }
 
   render() {
+    const { validateImagesLoaded } = this.props;
     return (
       <div className="drumheller-section two">
         <div className="drumheller-section-two">
@@ -31,10 +31,11 @@ class SectionTwo extends PureComponent {
             image={ImageOneOne}
             imageAlt='Ceratopsid!'
             animateInDiv={this.props.animateInDiv}
+            validateImagesLoaded={validateImagesLoaded}
           />
           <div className="top-video-section">
             <div className="upper-video" ref={(e) => { this.topone = e; }}>
-              <video autoPlay="autoplay" muted={true} loop={true}>
+              <video onLoad={validateImagesLoaded()} autoPlay="autoplay" muted={true} loop={true}>
                 <source src={VideoOneTwo} type="video/mp4" />
               </video>
             </div>
@@ -58,7 +59,7 @@ class SectionTwo extends PureComponent {
               </InView>
             </div>
             <div className="bottom-image" ref={(e) => { this.bottomtwo = e; }}>
-              <img src={ImageOneThree} alt="Run!" />
+              <img src={ImageOneThree} onLoad={validateImagesLoaded()} alt="Run!" />
             </div>
           </div>
         </div>

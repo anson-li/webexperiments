@@ -16,10 +16,11 @@ class DinosaurScrollHint extends PureComponent {
   }
 
   render() {
+    const { validateImagesLoaded } = this.props;
     return (
       <div className="scroll-explore">
-        <img className="rotating-logo" ref={(e) => { this.rotatinglogo = e; }} src={ScrollToExplore} alt="Scroll to Explore" />
-        <img className="skull-logo" src={DinosaurSkull} alt="Dino skull!" />
+        <img className="rotating-logo" onLoad={validateImagesLoaded()} ref={(e) => { this.rotatinglogo = e; }} src={ScrollToExplore} alt="Scroll to Explore" />
+        <img className="skull-logo" onLoad={validateImagesLoaded()} src={DinosaurSkull} alt="Dino skull!" />
       </div> 
     );
   }
