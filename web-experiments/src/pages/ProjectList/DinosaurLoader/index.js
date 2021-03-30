@@ -78,8 +78,8 @@ class DinosaurLoader extends PureComponent {
           >
             <defs>
               <linearGradient id="dino-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                <stop ref={(e) => { this.dinosaurGradientBase = e; }} offset="100%" stopColor="#CCCCCC"/>
-                <stop ref={(e) => { this.dinosaurGradientHighlight = e; }} offset="100%" stopColor="#ffb86f"/>
+                <stop ref={(e) => { this.dinosaurGradientBase = e; }} offset="100%" stopColor="#FFA548"/>
+                <stop ref={(e) => { this.dinosaurGradientHighlight = e; }} offset="100%" stopColor="#EEEEEE"/>
               </linearGradient>
             </defs>
             <g>
@@ -109,7 +109,7 @@ class DinosaurLoader extends PureComponent {
             </g>
           </svg>
         </div>
-        <Background />
+        <div class="loader-background"></div>
       </div>
     );
   }

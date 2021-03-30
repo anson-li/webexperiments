@@ -184,13 +184,13 @@ class DrumhellerConcept extends PureComponent {
       autoScroll: false,
       dragResistance: 0.5,
       throwResistance: 2000,
-      onThrowUpdate: (event) => {
+      onThrowUpdate: (event) => { // Grabs the scroll value while being updated by Draggable and updates the GSAP timeline to match
         const values = this.track.style.transform.split(/\w+\(|\);?/);
         const transform = values[1].split(/,\s?/g).map(parseInt);
         this.timeline.progress(-1 * transform[0] / this.scrollDistance);
         this.pageST.scroll(-1 * transform[0]);
       },
-      onDrag: (event) => { // WIP WIP WIP
+      onDrag: (event) => { // Grabs the scroll value while being updated by Draggable and updates the GSAP timeline to match
         const values = this.track.style.transform.split(/\w+\(|\);?/);
         const transform = values[1].split(/,\s?/g).map(parseInt);
         this.timeline.progress(-1 * transform[0] / this.scrollDistance);
