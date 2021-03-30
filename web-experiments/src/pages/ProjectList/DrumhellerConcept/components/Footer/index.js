@@ -15,9 +15,9 @@ class SectionFour extends PureComponent {
     this.slideInUnderline = this.slideInUnderline.bind(this);
   }
   
-  componentDidMount() {
+  componentDidUpdate() {
     if (this.props.timeline) {
-      this.props.timeline.to(this.dinosaurmask, { height: "120vh", duration: 10 }, 90);
+      this.props.timeline.to(this.dinosaurmask, { height: "120vh", duration: 20 }, 80);
     }
   }
 
