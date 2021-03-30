@@ -101,16 +101,12 @@ class DrumhellerConcept extends PureComponent {
       start: 0,
       scrub: 1,
       end: () => `+=${this.scrollDistance}`,
-      onUpdate: (event) => {
-        console.log(event);
-      },
     });
 
     this.setupResizeAnimation();
   }
 
   setupResizeAnimation() {
-    console.log(this.pageST);
     // var progress = 0;
     ScrollTrigger.addEventListener("refreshInit", function() {
       // progress = this.pageST.scroll() / ScrollTrigger.maxScroll(window);

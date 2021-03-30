@@ -107,7 +107,6 @@ class Work extends PureComponent {
     var progress = 0;
     ScrollTrigger.addEventListener("refreshInit", function() {
       progress = pageST.scroll() / ScrollTrigger.maxScroll(window);
-      console.log(progress);
     });
     ScrollTrigger.addEventListener("refresh", function() {
       pageST.scroll(progress * ScrollTrigger.maxScroll(window));
