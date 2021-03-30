@@ -8,19 +8,32 @@ import Underline from '../Images/underline.png';
 import './style.scss';
 
 class SectionOne extends PureComponent {
+  constructor(props) {
+    super(props);
+    this.drawUnderline = this.drawUnderline.bind(this);
+    this.tl = null;
+  }
+
   componentDidUpdate() {
     if (this.props.timeline) {
       this.props.timeline.to(this.imageone, { x: -this.props.scrollDistance * 0.12, duration: 100 }, 0);
       this.props.timeline.to(this.imagetwo, { x: -this.props.scrollDistance * 0.1, duration: 100 }, 0);
       this.props.timeline.to(this.titleitalic, { x: -this.props.scrollDistance * 0.15, duration: 100 }, 0);
-
-      gsap.from('.custom-underline', {
-        clipPath: 'inset(0% 100% 0% 0%)',
-        duration: 1,
-        ease: Power4,
-        stagger: 0.5,
-      });
     }
+  }
+
+  drawUnderline() {
+    console.log(this.props.timeline);
+    if (!this.tl || !this.tl.isActive()) {
+      this.tl = gsap.timeline()
+        .from(this.underline, 1.5, {
+          clipPath: 'inset(0% 100% 0% 0%)',
+          ease: Power4,
+          delay: 1,
+        });
+      this.tl.play();
+    }
+    console.log(this.tl);
   }
 
   render() {
@@ -36,7 +49,7 @@ class SectionOne extends PureComponent {
               <span className="drumheller-italic">at</span>&nbsp;
               <span className="drumheller-outline">
                 Tyrrell
-                <span className="custom-underline">
+                <span className="custom-underline" ref={(e) => { this.underline = e; }}>
                   <img src={Underline} alt="Underline" />
                 </span>
               </span>

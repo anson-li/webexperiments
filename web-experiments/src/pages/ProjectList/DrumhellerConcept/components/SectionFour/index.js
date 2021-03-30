@@ -38,7 +38,7 @@ class SectionFour extends PureComponent {
             <div className="top-image" ref={(e) => { this.topone = e; }}>
               <img src={ImageThreeTwo} onLoad={validateImagesLoaded()} alt="Dinosaur?" />
             </div>
-            <InView as="div" className="lower-text" delay={100} triggerOnce onChange={(inView, entry) => this.props.animateInDiv(inView, entry)}>
+            <InView as="div" className="lower-text" ref={(e) => { this.bottomone = e; }} delay={100} triggerOnce onChange={(inView, entry) => this.props.animateInDiv(inView, entry)}>
               New discoveries are made everyday, thanks to the great work at Tyrrell.
             </InView>
           </div>

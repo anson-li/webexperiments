@@ -26,7 +26,6 @@ class DrumhellerConcept extends PureComponent {
     super(props);
     this.onWindowResize = this.onWindowResize.bind(this);
     this.setupTrackAnimation = this.setupTrackAnimation.bind(this);
-    this.setupScrollHintAnimation = this.setupScrollHintAnimation.bind(this);
     this.setupResizeAnimation = this.setupResizeAnimation.bind(this);
     this.animateInDiv = this.animateInDiv.bind(this);
     this.validateImagesLoaded = this.validateImagesLoaded.bind(this);
@@ -35,7 +34,8 @@ class DrumhellerConcept extends PureComponent {
     this.timeline = null;
     this.scrollDistance = null;
     this.pageST = null;
-    this.loadedImages = 26;
+    this.loadedImages = 27;
+    this.sectionOne = React.createRef();
   }
 
   validateImagesLoaded() {
@@ -44,8 +44,10 @@ class DrumhellerConcept extends PureComponent {
   }
 
   checkLoaderStatus() {
+    console.log(this.loadedImages);
     if (this.loadedImages <= 0) {
       this.props.hideLoader();
+      this.sectionOne.current.drawUnderline();
     }
   }
 
@@ -132,17 +134,6 @@ class DrumhellerConcept extends PureComponent {
     ScrollTrigger.refresh();
   }
 
-  setupScrollHintAnimation() {
-    const scrollHintTimeline = gsap.timeline();
-    scrollHintTimeline.to(this.hintArrow, 1, {
-      paddingLeft: '5px',
-      onComplete: function () {
-        scrollHintTimeline.reverse();
-     }, onReverseComplete: function () {
-        scrollHintTimeline.play(0);
-     }}, 0)
-  }
-
   animateInDiv(inView, entry) {
     // Slide up when in view
     if (inView) {
@@ -173,7 +164,6 @@ class DrumhellerConcept extends PureComponent {
 
   componentDidMount() {
     this.setupTrackAnimation();
-    this.setupScrollHintAnimation();
     this.checkLoaderStatus();
 
     Draggable.create('#track', {
@@ -221,6 +211,7 @@ class DrumhellerConcept extends PureComponent {
               timeline={this.timeline}
               scrollDistance={this.scrollDistance}
               validateImagesLoaded={this.validateImagesLoaded}
+              ref={this.sectionOne}
             />
             <SectionTwo
               timeline={this.timeline}
