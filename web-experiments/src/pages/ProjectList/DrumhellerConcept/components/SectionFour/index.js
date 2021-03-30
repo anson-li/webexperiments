@@ -10,6 +10,15 @@ import ImageThreeThree from '../Images/section-3-3.jpg';
 import './style.scss';
 
 class SectionFour extends PureComponent {
+  componentDidUpdate() {
+    if (this.props.timeline) {
+      this.props.timeline.to(this.topone, { x: -this.props.scrollDistance * 0.04, duration: 30 }, 70);
+      this.props.timeline.to(this.bottomone, { x: -this.props.scrollDistance * 0.02, duration: 30 }, 70);
+      this.props.timeline.to(this.toptwo, { x: -this.props.scrollDistance * 0.04, duration: 30 }, 70);
+      this.props.timeline.to(this.bottomtwo, { x: -this.props.scrollDistance * 0.02, duration: 30 }, 70);
+    }
+  }
+
   render() {
     return (
       <div className="drumheller-section four">
@@ -24,7 +33,7 @@ class SectionFour extends PureComponent {
             animateInDiv={this.props.animateInDiv}
           />
           <div className="top-image-title">
-            <div className="top-image">
+            <div className="top-image" ref={(e) => { this.topone = e; }}>
               <img src={ImageThreeTwo} alt="Dinosaur?" />
             </div>
             <InView as="div" className="lower-text" delay={100} triggerOnce onChange={(inView, entry) => this.props.animateInDiv(inView, entry)}>
@@ -32,7 +41,7 @@ class SectionFour extends PureComponent {
             </InView>
           </div>
           <div className="bottom-image-section">
-            <div className="upper-text">
+            <div className="upper-text" ref={(e) => { this.toptwo = e; }}>
               <InView as="div" className="panel-left" delay={100} triggerOnce onChange={(inView, entry) => this.props.animateInDiv(inView, entry)}>
                 Every year, new discoveries are made at the<br />
                 Royal Tyrrell Museum that change the landscape of<br />
@@ -47,7 +56,7 @@ class SectionFour extends PureComponent {
                 interacted with other organisms in its environment.
               </InView>
             </div>
-            <div className="bottom-image">
+            <div className="bottom-image" ref={(e) => { this.bottomtwo = e; }}>
               <img src={ImageThreeThree} alt="Dinosaur!" />
             </div>
           </div>

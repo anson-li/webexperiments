@@ -3,7 +3,7 @@ import { InView } from 'react-intersection-observer';
 
 import './style.scss';
 
-class SectionFour extends PureComponent {
+class MainBanner extends PureComponent {
   render() {
     const { id, title, description, imageHint, image, animateInDiv, imageAlt } = this.props;
     return (
@@ -30,4 +30,4 @@ class SectionFour extends PureComponent {
 }
 
 
-export default SectionFour;
+export default MainBanner;

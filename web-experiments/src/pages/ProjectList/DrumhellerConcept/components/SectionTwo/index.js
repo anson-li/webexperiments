@@ -12,8 +12,10 @@ import './style.scss';
 class SectionTwo extends PureComponent {
   componentDidUpdate() {
     if (this.props.timeline) {
-      this.props.timeline.to(this.sectiononepartonetop, { x: -this.props.scrollDistance * 0.05, duration: 82 }, 18);
-      this.props.timeline.to(this.sectiononepartonetbottom, { x: -this.props.scrollDistance * 0.05, duration: 82 }, 15);
+      this.props.timeline.to(this.topone, { x: -this.props.scrollDistance * 0.03 + 300, duration: 30 }, 18);
+      this.props.timeline.to(this.bottomone, { x: -this.props.scrollDistance * 0.02 + 300, duration: 30 }, 18);
+      this.props.timeline.to(this.toptwo, { x: -this.props.scrollDistance * 0.01 + 300, duration: 30 }, 18);
+      this.props.timeline.to(this.bottomtwo, { x: -this.props.scrollDistance * 0.02 + 300, duration: 30 }, 18);
     }
   }
 
@@ -31,17 +33,17 @@ class SectionTwo extends PureComponent {
             animateInDiv={this.props.animateInDiv}
           />
           <div className="top-video-section">
-            <div className="upper-video" ref={(e) => { this.sectiononepartonetop = e; }}>
+            <div className="upper-video" ref={(e) => { this.topone = e; }}>
               <video autoPlay="autoplay" muted={true} loop={true}>
                 <source src={VideoOneTwo} type="video/mp4" />
               </video>
             </div>
-            <InView as="div" className="lower-text" ref={(e) => { this.sectiononepartonebottom = e; }} delay={100} triggerOnce onChange={(inView, entry) => this.props.animateInDiv(inView, entry)}>
+            <InView as="div" className="lower-text" ref={(e) => { this.bottomone = e; }} delay={100} triggerOnce onChange={(inView, entry) => this.props.animateInDiv(inView, entry)}>
               The Tyrrell is Canada’s only<br />museum dedicated exclusively<br />to the science of palaeontology.
             </InView>
           </div>
           <div className="bottom-image-section">
-            <div className="upper-text">
+            <div className="upper-text" ref={(e) => { this.toptwo = e; }}>
               <InView as="div" className="panel-left" delay={100} triggerOnce onChange={(inView, entry) => this.props.animateInDiv(inView, entry)}>
                 “Part of what’s special about the museum is it’s situated<br />
                 in the Badlands, so the surrounding landscape is very<br />
@@ -55,7 +57,7 @@ class SectionTwo extends PureComponent {
                 connected, and our scientists are doing research.”
               </InView>
             </div>
-            <div className="bottom-image">
+            <div className="bottom-image" ref={(e) => { this.bottomtwo = e; }}>
               <img src={ImageOneThree} alt="Run!" />
             </div>
           </div>
