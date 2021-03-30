@@ -39,7 +39,7 @@ class SectionFour extends PureComponent {
               <img src={ImageThreeTwo} onLoad={validateImagesLoaded()} alt="Dinosaur?" />
             </div>
             <InView as="div" className="lower-text" ref={(e) => { this.bottomone = e; }} delay={100} triggerOnce onChange={(inView, entry) => this.props.animateInDiv(inView, entry)}>
-              New discoveries are made<br />everyday, thanks to the great work at Tyrrell.
+              New discoveries are made<br />everyday, thanks to the<br />great work at Tyrrell.
             </InView>
           </div>
           <div className="bottom-image-section">
