@@ -2,13 +2,14 @@
 
 .drumheller-section-one {
   @extend .drumheller-section;
+
   padding-left: 200px;
   width: 2560px;
 
   @media (max-width: 1440px) {
     width: 2200px;
   }
-  
+
   .drumheller-textblock {
     position: absolute;
     top: 25vh;
@@ -20,22 +21,22 @@
       top: 15vh;
     }
   }
-  
+
   .text {
     @include title-font;
-    
+
     .primary {
       line-height: 90%;
     }
-  
+
     .secondary {
       padding-left: 0.5em;
     }
   }
-  
+
   .description {
     @include description-font;
-  
+
     width: 500px;
     padding-left: 100px;
     padding-top: 100px;
@@ -47,6 +48,7 @@
 
   img {
     @include jagged-image-border;
+
     mask-border-width: 10px 10px 10px 10px;
   }
 
@@ -55,7 +57,7 @@
     text-align: right;
     font-size: 0.9em;
     margin-right: 15px;
-    color: #3F1B1F;
+    color: #3f1b1f;
   }
 }
 
@@ -67,7 +69,7 @@
 .drumheller-imageblock-two {
   top: 15vh;
   left: 1500px;
-  
+
   img {
     height: 650px;
   }

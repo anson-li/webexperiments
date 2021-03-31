@@ -11,11 +11,13 @@
   overflow: hidden;
 }
 
-.inview-split-child-1, .inview-split-child-2 {
+.inview-split-child-1,
+.inview-split-child-2 {
   display: inline-block;
 }
 
-.inview-split-child-1:first-child, .inview-split-child-2:first-child {
+.inview-split-child-1:first-child,
+.inview-split-child-2:first-child {
   letter-spacing: -5px;
 }
 

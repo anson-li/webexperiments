@@ -21,7 +21,7 @@
       .upper-text {
         position: absolute;
         width: 800px;
-        
+
         @include description-font;
 
         .panel-left {
@@ -41,9 +41,10 @@
 
       .bottom-image {
         @include jagged-image-border;
+
         position: absolute;
         top: 35vh;
-        mask-border-width: 10px 10px 0px 10px;
+        mask-border-width: 10px 10px 0 10px;
 
         img {
           height: 80vh;
@@ -66,20 +67,21 @@
 
       .lower-text {
         position: absolute;
-        left: 0px;
+        left: 0;
         top: 50vh;
         width: 1000px;
         font-family: ivymode, serif;
         font-weight: 400;
-        color: #3F1B1F;
+        color: #3f1b1f;
         font-size: 4em;
       }
 
       .top-image {
         @include jagged-image-border;
+
         position: absolute;
-        mask-border-width: 0px 10px 10px 10px;
-    
+        mask-border-width: 0 10px 10px 10px;
+
         img {
           height: 40vh;
         }

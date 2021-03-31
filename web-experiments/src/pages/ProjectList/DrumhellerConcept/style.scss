@@ -19,7 +19,7 @@
   width: fit-content;
 }
 
-#drumheller-progress  {
+#drumheller-progress {
   position: fixed;
   z-index: 2000;
   width: 100vw;
@@ -30,8 +30,8 @@
   height: 15px;
   mask-border-source: url(./components/Images/border-template.png);
   mask-border-slice: 44 90 90 108 fill;
-  mask-border-width: 5px 0px 0px 0px;
-  mask-border-outset: 0px 0px 0px 0px;
+  mask-border-width: 5px 0 0 0;
+  mask-border-outset: 0 0 0 0;
   mask-border-repeat: repeat repeat;
 
   > div {
@@ -73,14 +73,14 @@
 @mixin title-font {
   font-family: ivymode, serif;
   font-weight: 400;
-  color: #3F1B1F;
+  color: #3f1b1f;
   font-size: 9em;
 }
 
 @mixin description-font {
   font-family: upgrade-lights, sans-serif;
   font-weight: 500;
-  color: #3F1B1F;
+  color: #3f1b1f;
   font-size: 1.2em;
   white-space: nowrap;
 }
@@ -88,7 +88,7 @@
 @mixin jagged-image-border {
   mask-border-source: url(./components/Images/border-template.png);
   mask-border-slice: 44 90 90 108 fill;
-  mask-border-outset: 0px 0px 0px 0px;
+  mask-border-outset: 0 0 0 0;
   mask-border-repeat: stretch stretch;
 }
 
@@ -97,8 +97,8 @@
 }
 
 @mixin outline-title-font {
-  color: #F3E2E4;
-  -webkit-text-stroke: 1px #3F1B1F;
+  color: #f3e2e4;
+  -webkit-text-stroke: 1px #3f1b1f;
   position: relative;
   z-index: 1;
 }
@@ -106,6 +106,7 @@
 .inview-split-parent {
   overflow: hidden;
 }
+
 .inview-split-child {
   display: inline-block;
 }
@@ -117,13 +118,13 @@
   width: 2560px;
   box-sizing: border-box;
   display: flex;
-  background-color: #F3E2E4;
+  background-color: #f3e2e4;
   overflow: hidden;
 
   .drumheller-italic {
     @include italic-title-font;
   }
-  
+
   .drumheller-outline {
     @include outline-title-font;
 
@@ -136,7 +137,7 @@
       left: 0;
       width: 100%;
       height: 25.5%;
-      min-height: .5rem;
+      min-height: 0.5rem;
 
       img {
         display: block;
