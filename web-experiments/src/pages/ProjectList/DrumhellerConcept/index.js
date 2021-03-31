@@ -44,7 +44,7 @@ class DrumhellerConcept extends PureComponent {
   }
 
   checkLoaderStatus() {
-    console.log(this.loadedImages);
+    console.log(`Loaded ${Math.round((27 - this.loadedImages) / 27 * 100)}%`);
     if (this.loadedImages <= 0) {
       this.props.hideLoader();
       this.sectionOne.current.drawUnderline();

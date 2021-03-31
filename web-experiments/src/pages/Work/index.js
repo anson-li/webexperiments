@@ -14,7 +14,7 @@ import AdditiveShaderBanner from '../../web/assets/images/project-banner/additiv
 import ASCIIShaderBanner from '../../web/assets/images/project-banner/asciishader.PNG';
 import CoffeeCupBanner from '../../web/assets/images/project-banner/coffeecup.jpg';
 import DinosaurLoader from '../../web/assets/images/project-banner/dinoloader.PNG';
-import DrumhellerConcept from '../../web/assets/images/project-banner/drumhellerconcept.PNG';
+import DrumhellerConcept from '../../web/assets/images/project-banner/drumhellerconcept.jpg';
 
 import withTransition from '../../common/WithTransition';
 import './style.scss';
