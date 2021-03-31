@@ -40,6 +40,10 @@
     width: 500px;
     padding-left: 100px;
     padding-top: 100px;
+
+    @media (max-height: 768px) {
+      padding-top: 50px;
+    }
   }
 }
 

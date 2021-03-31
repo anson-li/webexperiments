@@ -14,6 +14,10 @@
     width: 280px;
     z-index: 10;
 
+    @media (max-height: 768px) {
+      left: 800px;
+    }
+
     .sub-text {
       @include description-font;
     }
@@ -91,6 +95,10 @@
     position: absolute;
     left: 1000px;
     top: 100px;
+
+    @media (max-height: 768px) {
+      top: 10px;
+    }
 
     img {
       height: 100vh;

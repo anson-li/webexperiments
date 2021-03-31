@@ -21,20 +21,23 @@
       .upper-text {
         position: absolute;
         width: 800px;
+        top: 15vh;
 
         @include description-font;
+
+        @media (max-height: 768px) {
+          top: 18vh;
+        }
 
         .panel-left {
           width: 500px;
           position: absolute;
-          top: 15vh;
           left: -100px;
         }
 
         .panel-right {
           width: 500px;
           position: absolute;
-          top: 15vh;
           left: 500px;
         }
       }
@@ -45,6 +48,10 @@
         position: absolute;
         top: 35vh;
         mask-border-width: 10px 10px 0 10px;
+
+        @media (max-height: 768px) {
+          top: 45vh;
+        }
 
         img {
           height: 80vh;
@@ -84,6 +91,8 @@
 
         img {
           height: 40vh;
+          min-width: 800px;
+          object-fit: cover;
         }
       }
     }

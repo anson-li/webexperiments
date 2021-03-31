@@ -39,6 +39,10 @@
         mask-border-width: 10px 10px 0 10px;
         left: 100px;
 
+        @media (max-height: 768px) {
+          top: 55vh;
+        }
+
         img {
           height: 65vh;
         }
@@ -71,6 +75,8 @@
 
         img {
           height: 40vh;
+          min-width: 800px;
+          object-fit: cover;
         }
       }
     }

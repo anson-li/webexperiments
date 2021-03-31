@@ -56,6 +56,10 @@
   color: #3f1b1f;
   font-size: 1.2em;
   white-space: nowrap;
+
+  @media (max-height: 768px) {
+    font-size: 0.9em;
+  }
 }
 
 @mixin jagged-image-border {

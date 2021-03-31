@@ -48,6 +48,8 @@
 
         img {
           height: 80vh;
+          min-width: 800px;
+          object-fit: cover;
         }
       }
     }

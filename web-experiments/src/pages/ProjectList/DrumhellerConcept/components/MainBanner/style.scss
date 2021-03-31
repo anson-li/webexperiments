@@ -25,6 +25,10 @@
     font-weight: 400;
     font-size: 7em;
     left: 80px;
+
+    @media (max-height: 768px) {
+      bottom: 40vh;
+    }
   }
 
   .banner-description {
