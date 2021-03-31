@@ -21,20 +21,19 @@
       .upper-text {
         position: absolute;
         width: 800px;
+        top: 18vh;
 
         @include description-font;
 
         .panel-left {
           width: 500px;
           position: absolute;
-          top: 15vh;
           left: -100px;
         }
 
         .panel-right {
           width: 500px;
           position: absolute;
-          top: 15vh;
           left: 500px;
         }
       }
