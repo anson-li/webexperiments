@@ -28,6 +28,10 @@
         color: #3f1b1f;
         font-size: 3.5em;
         white-space: nowrap;
+
+        @media (max-height: 768px) {
+          font-size: 3em;
+        }
       }
 
       .bottom-image {

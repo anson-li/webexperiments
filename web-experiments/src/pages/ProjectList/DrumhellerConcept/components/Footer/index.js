@@ -65,7 +65,7 @@ class SectionFour extends PureComponent {
                 <span className="drumheller-italic" style={{ paddingRight: '35px' }}>the</span>
                 <span className="drumheller-outline">
                   wonder
-                  <InView as="span" delay={300} className="custom-underline-2" triggerOnce onChange={(inView, entry) => this.slideInUnderline(inView, entry)}>
+                  <InView as="span" delay={600} className="custom-underline-2" triggerOnce onChange={(inView, entry) => this.slideInUnderline(inView, entry)}>
                     <img src={Underline2} onLoad={validateImagesLoaded()} alt="Underline" />
                   </InView>
                 </span>

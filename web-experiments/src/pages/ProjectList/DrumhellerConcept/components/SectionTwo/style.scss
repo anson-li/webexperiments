@@ -69,6 +69,10 @@
         font-weight: 400;
         color: #3f1b1f;
         font-size: 4em;
+
+        @media (max-height: 768px) {
+          font-size: 3em;
+        }
       }
 
       .upper-video {
