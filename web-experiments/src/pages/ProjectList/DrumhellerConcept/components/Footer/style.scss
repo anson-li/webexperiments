@@ -81,6 +81,12 @@
     }
   }
 
+  @media (max-height: 900px) {
+    .drumheller-fulltext-textblock {
+      top: 15vh;
+    }
+  }
+
   .drumheller-imagemask {
     position: absolute;
     left: 1000px;

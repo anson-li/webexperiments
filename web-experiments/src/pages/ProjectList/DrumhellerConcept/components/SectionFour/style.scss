@@ -3,6 +3,10 @@
 .drumheller-section.four {
   width: 5120px;
 
+  @media (max-width: 1440px) {
+    width: 4920px;
+  }
+
   .drumheller-section-four {
     position: absolute;
 
@@ -50,6 +54,12 @@
       }
     }
 
+    @media (max-width: 1440px) {
+      .bottom-image-section {
+        left: 3900px;
+      }
+    }
+
     .top-image-title {
       position: absolute;
       left: 2800px;
@@ -73,6 +83,12 @@
         img {
           height: 40vh;
         }
+      }
+    }
+
+    @media (max-width: 1440px) {
+      .top-image-title {
+        left: 2600px;
       }
     }
   }

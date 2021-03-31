@@ -3,6 +3,10 @@
 .drumheller-section.two {
   width: 5120px;
 
+  @media (max-width: 1440px) {
+    width: 4920px;
+  }
+
   .drumheller-section-two {
     position: absolute;
 
@@ -66,8 +70,8 @@
       .upper-video {
         @include jagged-image-border;
         position: absolute;
-        mask-border-width: 0px 10px 10px 10px;
-    
+        mask-border-width: 0px 10px 30px 10px;
+        
         video {
           height: 40vh;
         }

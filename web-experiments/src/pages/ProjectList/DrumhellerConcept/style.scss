@@ -148,35 +148,4 @@
       }
     }
   }
-
-  .image-block {
-    position: absolute;
-
-    img {
-      @include jagged-image-border;
-      mask-border-width: 10px 10px 10px 10px;
-    }
-
-    .image-block-description {
-      padding-top: 10px;
-      text-align: right;
-      font-size: 0.9em;
-      margin-right: 15px;
-      color: #3F1B1F;
-    }
-  }
-
-  .drumheller-imageblock-one {
-    top: 40vh;
-    left: 1100px;
-  }
-
-  .drumheller-imageblock-two {
-    top: 15vh;
-    left: 1500px;
-    
-    img {
-      height: 650px;
-    }
-  }
 }
