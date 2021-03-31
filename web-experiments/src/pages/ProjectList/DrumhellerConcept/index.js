@@ -119,6 +119,8 @@ class DrumhellerConcept extends PureComponent {
       end: () => `+=${this.scrollDistance}`,
     });
 
+    ScrollTrigger.refresh();
+
     this.setupResizeAnimation();
   }
 
