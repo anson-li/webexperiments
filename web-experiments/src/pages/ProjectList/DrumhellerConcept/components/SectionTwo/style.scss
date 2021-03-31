@@ -79,6 +79,9 @@
 
         video {
           height: 40vh;
+          width: 800px;
+          object-position: 50% 0%;
+          object-fit: cover;
         }
       }
     }
