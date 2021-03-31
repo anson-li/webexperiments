@@ -34,9 +34,11 @@ class SectionThree extends PureComponent {
             validateImagesLoaded={validateImagesLoaded}
           />
           <div className="bottom-image-title">
-            <InView as="div" className="upper-text" ref={(e) => { this.topone = e; }} delay={100} triggerOnce onChange={(inView, entry) => this.props.animateInDiv(inView, entry)}>
-              In 1884, Joseph B. Tyrrell stumbled<br />upon a 70-million-year-old<br />dinosaur skull.
-            </InView>
+            <div ref={(e) => { this.topone = e; }}>
+              <InView as="div" className="upper-text" delay={100} triggerOnce onChange={(inView, entry) => this.props.animateInDiv(inView, entry)}>
+                In 1884, Joseph B. Tyrrell<br />stumbled upon a 70 million<br />year-old dinosaur skull.
+              </InView>
+            </div>
             <div className="bottom-image" ref={(e) => { this.bottomone = e; }}>
               <img src={ImageTwoTwo} onLoad={validateImagesLoaded()} alt="Fossils!" />
             </div>

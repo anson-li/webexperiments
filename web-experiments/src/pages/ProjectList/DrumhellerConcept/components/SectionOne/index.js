@@ -23,7 +23,6 @@ class SectionOne extends PureComponent {
   }
 
   drawUnderline() {
-    console.log(this.props.timeline);
     if (!this.tl || !this.tl.isActive()) {
       this.tl = gsap.timeline()
         .from(this.underline, 1.5, {
@@ -33,7 +32,6 @@ class SectionOne extends PureComponent {
         });
       this.tl.play();
     }
-    console.log(this.tl);
   }
 
   render() {

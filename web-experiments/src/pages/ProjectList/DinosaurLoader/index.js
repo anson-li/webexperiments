@@ -3,7 +3,6 @@ import anime from 'animejs';
 import PropTypes from 'prop-types';
 import { TweenLite } from 'gsap';
 
-import Background from '../../../common/Background';
 import withTransition from '../../../common/WithTransition';
 import TextLogo from '../../../common/TextLogo';
 

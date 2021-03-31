@@ -39,9 +39,11 @@ class SectionTwo extends PureComponent {
                 <source src={VideoOneTwo} type="video/mp4" />
               </video>
             </div>
-            <InView as="div" className="lower-text" ref={(e) => { this.bottomone = e; }} delay={100} triggerOnce onChange={(inView, entry) => this.props.animateInDiv(inView, entry)}>
-              The Tyrrell is Canada’s only<br />museum dedicated exclusively<br />to the science of palaeontology.
-            </InView>
+            <span ref={(e) => { this.bottomone = e; }}>
+              <InView as="div" className="lower-text" delay={100} triggerOnce onChange={(inView, entry) => this.props.animateInDiv(inView, entry)}>
+                The Tyrrell is Canada’s only<br />museum dedicated exclusively<br />to the science of palaeontology.
+              </InView>
+            </span>
           </div>
           <div className="bottom-image-section">
             <div className="upper-text" ref={(e) => { this.toptwo = e; }}>
