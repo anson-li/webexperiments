@@ -18,6 +18,7 @@
     "react": "^17.0.1",
     "react-bootstrap": "^1.4.0",
     "react-curtains": "^1.0.10",
+    "react-dat-gui": "^4.1.1",
     "react-dom": "^17.0.1",
     "react-draggable": "^4.4.3",
     "react-gsap": "^2.2.1",
