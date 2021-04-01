@@ -15,6 +15,7 @@ import ASCIIShaderBanner from '../../web/assets/images/project-banner/asciishade
 import CoffeeCupBanner from '../../web/assets/images/project-banner/coffeecup.jpg';
 import DinosaurLoader from '../../web/assets/images/project-banner/dinoloader.PNG';
 import DrumhellerConcept from '../../web/assets/images/project-banner/drumhellerconcept.jpg';
+import CanvasMountain from '../../web/assets/images/project-banner/canvasmountain.PNG';
 
 import withTransition from '../../common/WithTransition';
 import './style.scss';
@@ -174,6 +175,14 @@ class Work extends PureComponent {
           />
           <div id="track-wrapper">
             <div id='track' className='track' ref={(e) => { this.track = e; }}>
+              <Section
+                id="07"
+                title="WEBGL - Curtains"
+                description="Test implementation for WebGL, converting images into live canvas."
+                date="MAR 2021"
+                link="/webglcurtains"
+                image={CanvasMountain}
+              />
               <Section
                 id="06"
                 title="Drumheller Concept"

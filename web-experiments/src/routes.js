@@ -5,6 +5,7 @@ import CoffeeCup from './pages/ProjectList/CoffeeCup';
 import DinosaurLoader from './pages/ProjectList/DinosaurLoader';
 import DrumhellerConcept from './pages/ProjectList/DrumhellerConcept';
 import Jellicent from './pages/ProjectList/Jellicent';
+import WebGLCurtains from './pages/ProjectList/WebGLCurtains';
 import Work from './pages/Work';
 
 const Routes = [
@@ -13,6 +14,13 @@ const Routes = [
     Component: Work,
     path: {
       path: '/work',
+    },
+  },
+  {
+    key: 'webglcurtains',
+    Component: WebGLCurtains,
+    path: {
+      path: '/webglcurtains',
     },
   },
   {
