@@ -51,7 +51,7 @@ class SectionTwo extends PureComponent {
                 “Part of what’s special about the museum is it’s situated<br />
                 in the Badlands, so the surrounding landscape is very<br />
                 rich in Cretaceous Period fossils and a lot of the<br />
-                material that’s found in the museum is Alberta fossil material.
+                material that’s found in the museum are Alberta fossils.
               </InView>
               <InView as="div" className="panel-right" delay={100} triggerOnce onChange={(inView, entry) => this.props.animateInDiv(inView, entry)}>
                 I think what’s special about coming here is the<br />
