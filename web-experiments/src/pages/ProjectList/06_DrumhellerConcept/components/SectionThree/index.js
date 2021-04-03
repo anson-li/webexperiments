@@ -6,7 +6,7 @@ import ImageTwoOne from '../Images/section-2-1.jpg';
 import ImageTwoTwo from '../Images/section-2-2.jpg';
 import ImageTwoThree from '../Images/section-2-3.jpg';
 
-import './style.scss';
+import styles from './style.module.scss';
 
 class SectionThree extends PureComponent {
   componentDidUpdate() {
@@ -21,8 +21,8 @@ class SectionThree extends PureComponent {
   render() {
     const { validateImagesLoaded } = this.props;
     return (
-      <div className="drumheller-section three">
-        <div className="drumheller-section-three">
+      <div className={`${styles["drumheller-section"]} ${styles["three"]}`}>
+        <div className={styles["drumheller-section-three"]}>
           <MainBanner  
             id='02'
             title='Our Past'
@@ -33,26 +33,26 @@ class SectionThree extends PureComponent {
             animateInDiv={this.props.animateInDiv}
             validateImagesLoaded={validateImagesLoaded}
           />
-          <div className="bottom-image-title">
+          <div className={styles["bottom-image-title"]}>
             <div ref={(e) => { this.topone = e; }}>
-              <InView as="div" className="upper-text" delay={100} triggerOnce onChange={(inView, entry) => this.props.animateInDiv(inView, entry)}>
+              <InView as="div" className={styles["upper-text"]} delay={100} triggerOnce onChange={(inView, entry) => this.props.animateInDiv(inView, entry)}>
                 In 1884, Joseph B. Tyrrell<br />stumbled upon a 70 million<br />year-old dinosaur skull.
               </InView>
             </div>
-            <div className="bottom-image" ref={(e) => { this.bottomone = e; }}>
+            <div className={styles["bottom-image"]} ref={(e) => { this.bottomone = e; }}>
               <img src={ImageTwoTwo} onLoad={validateImagesLoaded()} alt="Fossils!" />
             </div>
           </div>
-          <div className="top-image-description">
-            <div className="top-image" ref={(e) => { this.toptwo = e; }}>
+          <div className={styles["top-image-description"]}>
+            <div className={styles["top-image"]} ref={(e) => { this.toptwo = e; }}>
               <img src={ImageTwoThree} onLoad={validateImagesLoaded()} alt="Gorgosaurus!" />
             </div>
-            <div className="lower-text" ref={(e) => { this.bottomtwo = e; }}>
-              <InView as="div" className="paragraph-spacing" delay={100} triggerOnce onChange={(inView, entry) => this.props.animateInDiv(inView, entry)}>
+            <div className={styles["lower-text"]} ref={(e) => { this.bottomtwo = e; }}>
+              <InView as="div" className={styles["paragraph-spacing"]} delay={100} triggerOnce onChange={(inView, entry) => this.props.animateInDiv(inView, entry)}>
                 The young geologist stumbled upon the treasure deep in the heart of Alberta’s Badlands.<br />
                 The carnivorous dinosaur, the first of its species ever found, was later named Albertosaurus Sarcophagus.
               </InView>
-              <InView as="div" className="paragraph-spacing" delay={500} triggerOnce onChange={(inView, entry) => this.props.animateInDiv(inView, entry)}>
+              <InView as="div" className={styles["paragraph-spacing"]} delay={500} triggerOnce onChange={(inView, entry) => this.props.animateInDiv(inView, entry)}>
                 The excavations continued after Tyrrell’s find – in 1910 American palaeontologist, Barnum Brown,<br />
                 from the American Museum of Natural History in New York City, visited the area and over a period<br />
                 of five years removed 16 dinosaur specimens, some that were new discoveries.

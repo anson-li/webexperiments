@@ -5,7 +5,7 @@ import ImageIntroOne from '../Images/intro-1.jpg';
 import ImageIntroTwo from '../Images/intro-2.jpg';
 import Underline from '../Images/underline.png';
 
-import './style.scss';
+import styles from './style.module.scss';
 
 class SectionOne extends PureComponent {
   constructor(props) {
@@ -37,23 +37,23 @@ class SectionOne extends PureComponent {
   render() {
     const { validateImagesLoaded } = this.props;
     return (
-      <div className="drumheller-section-one">
-        <div className="drumheller-textblock">
-          <div className="text">
-            <div className="primary">
+      <div className={styles["drumheller-section-one"]}>
+        <div className={styles["drumheller-textblock"]}>
+          <div className={styles["text"]}>
+            <div className={styles["primary"]}>
               Our Story
             </div>
-            <div className="secondary" ref={(e) => { this.titleitalic = e; }}>
-              <span className="drumheller-italic">at</span>&nbsp;
-              <span className="drumheller-outline">
+            <div className={styles["secondary"]} ref={(e) => { this.titleitalic = e; }}>
+              <span className={styles["drumheller-italic"]}>at</span>&nbsp;
+              <span className={styles["drumheller-outline"]}>
                 Tyrrell
-                <span className="custom-underline" ref={(e) => { this.underline = e; }}>
+                <span className={styles["custom-underline"]} ref={(e) => { this.underline = e; }}>
                   <img src={Underline} alt="Underline" />
                 </span>
               </span>
             </div>
           </div>
-          <div className="description">
+          <div className={styles["description"]}>
           Set in the rugged Alberta badlands, the Royal Tyrrell<br/>
           Museum of Palaeontology displays one of the world's<br/>
           largest collections of dinosaurs.<br/><br/>
@@ -62,13 +62,13 @@ class SectionOne extends PureComponent {
           year-round, there is always something new to discover.
           </div>
         </div>
-        <div ref={(e) => { this.imagetwo = e; }} className="image-block drumheller-imageblock-two">
+        <div ref={(e) => { this.imagetwo = e; }} className={`${styles["image-block"]} ${styles["drumheller-imageblock-two"]}`}>
           <img src={ImageIntroTwo} onLoad={validateImagesLoaded()} alt="Skeleton!" />
-          <div className="image-block-description">Tyrannosaurus Rex Skeleton</div>
+          <div className={styles["image-block-description"]}>Tyrannosaurus Rex Skeleton</div>
         </div>
-        <div ref={(e) => { this.imageone = e; }} className="image-block drumheller-imageblock-one">
+        <div ref={(e) => { this.imageone = e; }} className={`${styles["image-block"]} ${styles["drumheller-imageblock-one"]}`}>
           <img src={ImageIntroOne} onLoad={validateImagesLoaded()} alt="Dinosaurs!" />
-          <div className="image-block-description">Dinosaurs Recreated for Today</div>
+          <div className={styles["image-block-description"]}>Dinosaurs Recreated for Today</div>
         </div>
       </div>
     );

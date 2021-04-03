@@ -6,9 +6,9 @@ import { Link } from 'react-router-dom';
 import Underline2 from '../Images/underline-2.png';
 import DinosaurBackground from '../Images/dinosaur-background.jpg';
 
-import './style.scss';
+import styles from './style.module.scss';
 
-class SectionFour extends PureComponent {
+class Footer extends PureComponent {
   constructor(props) {
     super(props);
     this.onHighlightLink = this.onHighlightLink.bind(this);
@@ -54,18 +54,18 @@ class SectionFour extends PureComponent {
   render() {
     const { validateImagesLoaded } = this.props;
     return (
-      <div className="drumheller-section footer">
-        <div className="drumheller-section-footer">
-          <div className="drumheller-fulltext-textblock">
-            <div className="footer-text">
+      <div className={`${styles["drumheller-section"]} ${styles["footer"]}`}>
+        <div className={styles["drumheller-section-footer"]}>
+          <div className={styles["drumheller-fulltext-textblock"]}>
+            <div className={styles["footer-text"]}>
               <InView as="div" delay={100} threshold={0.3} triggerOnce onChange={(inView, entry) => this.props.animateInDiv(inView, entry)}>
                 Get lost in
               </InView>
-              <InView as="div" delay={300} className="left-shifted" triggerOnce onChange={(inView, entry) => this.props.animateInDiv(inView, entry)}>
-                <span className="drumheller-italic" style={{ paddingRight: '35px' }}>the</span>
-                <span className="drumheller-outline">
+              <InView as="div" delay={300} className={styles["left-shifted"]} triggerOnce onChange={(inView, entry) => this.props.animateInDiv(inView, entry)}>
+                <span className={styles["drumheller-italic"]} style={{ paddingRight: '35px' }}>the</span>
+                <span className={styles["drumheller-outline"]}>
                   wonder
-                  <InView as="span" delay={600} className="custom-underline-2" triggerOnce onChange={(inView, entry) => this.slideInUnderline(inView, entry)}>
+                  <InView as="span" delay={600} className={styles["custom-underline-2"]} triggerOnce onChange={(inView, entry) => this.slideInUnderline(inView, entry)}>
                     <img src={Underline2} onLoad={validateImagesLoaded()} alt="Underline" />
                   </InView>
                 </span>
@@ -76,18 +76,18 @@ class SectionFour extends PureComponent {
               </InView>
             </div>
           </div>
-          <div className="drumheller-redirect">
-            <div className="sub-text">
+          <div className={styles["drumheller-redirect"]}>
+            <div className={styles["sub-text"]}>
               Discover more
             </div>
-            <Link to="/work" href="/work" onMouseEnter={this.onHighlightLink} className="main-text">
+            <Link to="/work" href="/work" onMouseEnter={this.onHighlightLink} className={styles["main-text"]}>
               Web Experiments
-              <span className="custom-underline-3">
+              <span className={styles["custom-underline-3"]}>
               <img onLoad={validateImagesLoaded()} src={Underline2} alt="Underline" />
               </span>
             </Link>
           </div>
-          <div className="drumheller-imagemask">
+          <div className={styles["drumheller-imagemask"]}>
             <img ref={(e) => { this.dinosaurmask = e; }} onLoad={validateImagesLoaded()} src={DinosaurBackground} alt="Badlands!" /> 
           </div>
         </div>
@@ -97,4 +97,4 @@ class SectionFour extends PureComponent {
 }
 
 
-export default SectionFour;
+export default Footer;

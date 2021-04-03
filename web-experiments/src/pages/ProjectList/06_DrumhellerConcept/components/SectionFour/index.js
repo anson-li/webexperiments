@@ -7,7 +7,7 @@ import ImageThreeOne from '../Images/section-3-1.jpg';
 import ImageThreeTwo from '../Images/section-3-2.jpg';
 import ImageThreeThree from '../Images/section-3-3.jpg';
 
-import './style.scss';
+import styles from './style.module.scss';
 
 class SectionFour extends PureComponent {
   componentDidUpdate() {
@@ -22,8 +22,8 @@ class SectionFour extends PureComponent {
   render() {
     const { validateImagesLoaded } = this.props;
     return (
-      <div className="drumheller-section four">
-        <div className="drumheller-section-four">
+      <div className={`${styles["drumheller-section"]} ${styles["four"]}`}>
+        <div className={styles["drumheller-section-four"]}>
           <MainBanner  
             id='03'
             title='Our Future'
@@ -34,33 +34,33 @@ class SectionFour extends PureComponent {
             animateInDiv={this.props.animateInDiv}
             validateImagesLoaded={validateImagesLoaded}
           />
-          <div className="top-image-title">
-            <div className="top-image" ref={(e) => { this.topone = e; }}>
+          <div className={styles["top-image-title"]}>
+            <div className={styles["top-image"]} ref={(e) => { this.topone = e; }}>
               <img src={ImageThreeTwo} onLoad={validateImagesLoaded()} alt="Dinosaur?" />
             </div>
             <div ref={(e) => { this.bottomone = e; }}>
-              <InView as="div" className="lower-text"  delay={100} triggerOnce onChange={(inView, entry) => this.props.animateInDiv(inView, entry)}>
+              <InView as="div" className={styles["lower-text"]} delay={100} triggerOnce onChange={(inView, entry) => this.props.animateInDiv(inView, entry)}>
                 New discoveries are made<br />everyday, thanks to the<br />great work at Tyrrell.
               </InView>
             </div>
           </div>
-          <div className="bottom-image-section">
-            <div className="upper-text" ref={(e) => { this.toptwo = e; }}>
-              <InView as="div" className="panel-left" delay={100} triggerOnce onChange={(inView, entry) => this.props.animateInDiv(inView, entry)}>
+          <div className={styles["bottom-image-section"]}>
+            <div className={styles["upper-text"]} ref={(e) => { this.toptwo = e; }}>
+              <InView as="div" className={styles["panel-left"]} delay={100} triggerOnce onChange={(inView, entry) => this.props.animateInDiv(inView, entry)}>
                 Every year, new discoveries are made at the<br />
                 Royal Tyrrell Museum that change the landscape of<br />
                 the world of Palaeontology. Most recently, researchers<br />
                 have discovered a brand new Tyrannosaurus species;<br />
                 the first in 50 years.
               </InView>
-              <InView as="div" className="panel-right" delay={100} triggerOnce onChange={(inView, entry) => this.props.animateInDiv(inView, entry)}>
+              <InView as="div" className={styles["panel-right"]} delay={100} triggerOnce onChange={(inView, entry) => this.props.animateInDiv(inView, entry)}>
                 Additionally, the Royal Tyrrell offers an interactive<br />
                 space, where people take part in interactive displays<br />
                 to learn about how the dinosaur ate, moved and<br />
                 interacted with other organisms in its environment.
               </InView>
             </div>
-            <div className="bottom-image" ref={(e) => { this.bottomtwo = e; }}>
+            <div className={styles["bottom-image"]} ref={(e) => { this.bottomtwo = e; }}>
               <img src={ImageThreeThree} onLoad={validateImagesLoaded()} alt="Dinosaur!" />
             </div>
           </div>

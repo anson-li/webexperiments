@@ -6,7 +6,7 @@ import ImageOneOne from '../Images/section-1-1.jpg';
 import VideoOneTwo from '../Images/section-1-2.mp4';
 import ImageOneThree from '../Images/section-1-3.jpg';
 
-import './style.scss';
+import styles from './style.module.scss';
 
 class SectionTwo extends PureComponent {
   componentDidUpdate() {
@@ -21,8 +21,8 @@ class SectionTwo extends PureComponent {
   render() {
     const { validateImagesLoaded } = this.props;
     return (
-      <div className="drumheller-section two">
-        <div className="drumheller-section-two">
+      <div className={`${styles["drumheller-section"]} ${styles["two"]}`}>
+        <div className={styles["drumheller-section-two"]}>
           <MainBanner  
             id='01'
             title='Our Vision'
@@ -33,34 +33,34 @@ class SectionTwo extends PureComponent {
             animateInDiv={this.props.animateInDiv}
             validateImagesLoaded={validateImagesLoaded}
           />
-          <div className="top-video-section">
-            <div className="upper-video" ref={(e) => { this.topone = e; }}>
+          <div className={styles["top-video-section"]}>
+            <div className={styles["upper-video"]} ref={(e) => { this.topone = e; }}>
               <video onLoad={validateImagesLoaded()} autoPlay="autoplay" muted={true} loop={true}>
                 <source src={VideoOneTwo} type="video/mp4" />
               </video>
             </div>
             <span ref={(e) => { this.bottomone = e; }}>
-              <InView as="div" className="lower-text" delay={100} triggerOnce onChange={(inView, entry) => this.props.animateInDiv(inView, entry)}>
+              <InView as="div" className={styles["lower-text"]} delay={100} triggerOnce onChange={(inView, entry) => this.props.animateInDiv(inView, entry)}>
                 The Tyrrell is Canada’s only<br />museum dedicated exclusively<br />to the science of palaeontology.
               </InView>
             </span>
           </div>
-          <div className="bottom-image-section">
-            <div className="upper-text" ref={(e) => { this.toptwo = e; }}>
-              <InView as="div" className="panel-left" delay={100} triggerOnce onChange={(inView, entry) => this.props.animateInDiv(inView, entry)}>
+          <div className={styles["bottom-image-section"]}>
+            <div className={styles["upper-text"]} ref={(e) => { this.toptwo = e; }}>
+              <InView as="div" className={styles["panel-left"]} delay={100} triggerOnce onChange={(inView, entry) => this.props.animateInDiv(inView, entry)}>
                 “Part of what’s special about the museum is it’s situated<br />
                 in the Badlands, so the surrounding landscape is very<br />
                 rich in Cretaceous Period fossils and a lot of the<br />
                 material that’s found in the museum are Alberta fossils.
               </InView>
-              <InView as="div" className="panel-right" delay={100} triggerOnce onChange={(inView, entry) => this.props.animateInDiv(inView, entry)}>
+              <InView as="div" className={styles["panel-right"]} delay={100} triggerOnce onChange={(inView, entry) => this.props.animateInDiv(inView, entry)}>
                 I think what’s special about coming here is the<br />
                 landscape, and knowing that what you’re looking<br />
                 at in the museum is so rooted in place and time and<br />
                 connected, and our scientists are doing research.”
               </InView>
             </div>
-            <div className="bottom-image" ref={(e) => { this.bottomtwo = e; }}>
+            <div className={styles["bottom-image"]} ref={(e) => { this.bottomtwo = e; }}>
               <img src={ImageOneThree} onLoad={validateImagesLoaded()} alt="Run!" />
             </div>
           </div>
