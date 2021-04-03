@@ -15,9 +15,9 @@ class DinosaurLoader extends PureComponent {
     anime.remove(this.el);
 
     return anime({
-      targets: this.el,
-      opacity: 0,
       duration: 0,
+      opacity: 0,
+      targets: this.el,
     }).finished;
   }
 
@@ -25,47 +25,47 @@ class DinosaurLoader extends PureComponent {
     anime.remove(this.el);
 
     return anime({
-      targets: this.el,
-      opacity: [0, 1],
-      duration: 1000,
       delay: 1000,
+      duration: 1000,
       easing: 'easeOutExpo',
+      opacity: [0, 1],
+      targets: this.el,
     }).finished;
   }
 
   animateOut () {
     anime.remove(this.el);
-    const { showLoader } = this.props;
+    const {showLoader} = this.props;
     showLoader();
 
     return anime({
-      targets: this.el,
-      opacity: 0,
       duration: 1000,
       easing: 'easeOutExpo',
+      opacity: 0,
+      targets: this.el,
     }).finished;
   }
 
   componentDidMount () {
     this.props.hideLoader();
     TweenLite.to(this.dinosaurGradientBase, 2, {
-      attr: { offset: '0%' },
-      repeat: -1,
-      yoyo: true,
-      repeatDelay: 0.5,
+      attr: {offset: '0%'},
       ease: 'none',
+      repeat: -1,
+      repeatDelay: 0.5,
+      yoyo: true,
     });
     TweenLite.to(this.dinosaurGradientHighlight, 2, {
-      attr: { offset: '0%' },
-      repeat: -1,
-      yoyo: true,
-      repeatDelay: 0.5,
+      attr: {offset: '0%'},
       ease: 'none',
+      repeat: -1,
+      repeatDelay: 0.5,
+      yoyo: true,
     });
   }
 
   render () {
-    const { cursorHover, cursorUnhover } = this.props;
+    const {cursorHover, cursorUnhover} = this.props;
 
     return (
       <div
@@ -131,10 +131,10 @@ class DinosaurLoader extends PureComponent {
 }
 
 DinosaurLoader.propTypes = {
-  showLoader: PropTypes.func.isRequired,
-  hideLoader: PropTypes.func.isRequired,
-  cursorUnhover: PropTypes.func.isRequired,
   cursorHover: PropTypes.func.isRequired,
+  cursorUnhover: PropTypes.func.isRequired,
+  hideLoader: PropTypes.func.isRequired,
+  showLoader: PropTypes.func.isRequired,
 };
 
 export default withTransition(DinosaurLoader);

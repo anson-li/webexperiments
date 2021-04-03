@@ -23,9 +23,9 @@ class Loader extends PureComponent {
 
   fadeOut () {
     TweenLite.to(this.loader, 1, {
+      delay: 1,
       opacity: 0,
       zIndex: -1,
-      delay: 1,
     });
   }
 

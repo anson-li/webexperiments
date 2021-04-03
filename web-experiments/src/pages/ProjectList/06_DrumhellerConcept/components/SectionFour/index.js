@@ -13,19 +13,19 @@ import styles from './style.module.scss';
 class SectionFour extends PureComponent {
   componentDidUpdate () {
     if (this.props.timeline) {
-      this.props.timeline.to(this.topone, { x: -this.props.scrollDistance * 0.03,
-        duration: 30 }, 70);
-      this.props.timeline.to(this.bottomone, { x: -this.props.scrollDistance * 0.02,
-        duration: 30 }, 70);
-      this.props.timeline.to(this.toptwo, { x: -this.props.scrollDistance * 0.03,
-        duration: 30 }, 70);
-      this.props.timeline.to(this.bottomtwo, { x: -this.props.scrollDistance * 0.02,
-        duration: 30 }, 70);
+      this.props.timeline.to(this.topone, {duration: 30,
+        x: -this.props.scrollDistance * 0.03}, 70);
+      this.props.timeline.to(this.bottomone, {duration: 30,
+        x: -this.props.scrollDistance * 0.02}, 70);
+      this.props.timeline.to(this.toptwo, {duration: 30,
+        x: -this.props.scrollDistance * 0.03}, 70);
+      this.props.timeline.to(this.bottomtwo, {duration: 30,
+        x: -this.props.scrollDistance * 0.02}, 70);
     }
   }
 
   render () {
-    const { validateImagesLoaded } = this.props;
+    const {validateImagesLoaded} = this.props;
 
     return (
       <div className={`${styles['drumheller-section']} ${styles.four}`}>

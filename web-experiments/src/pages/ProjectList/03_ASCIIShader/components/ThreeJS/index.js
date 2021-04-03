@@ -220,8 +220,8 @@ class ThreeSphere extends PureComponent {
     const charCountCeil = charCountPrecise.map(Math.ceil);
 
     return {
-      charCountPrecise,
       charCountCeil,
+      charCountPrecise,
     };
   }
 

@@ -73,8 +73,8 @@ class JellicentObject extends PureComponent {
     this.scene = new Scene();
 
     this.renderer = new WebGLRenderer({
-      antialias: true,
       alpha: true,
+      antialias: true,
     });
 
     this.renderer.setSize(window.innerWidth, window.innerHeight);
@@ -102,7 +102,7 @@ class JellicentObject extends PureComponent {
     window.addEventListener('resize', this.onWindowResize, false);
     window.addEventListener('mousemove', this.mousemove);
 
-    const { hideLoader } = this.props;
+    const {hideLoader} = this.props;
 
     this.camera.rotation.x = 0;
     this.camera.rotation.z = 0.5;

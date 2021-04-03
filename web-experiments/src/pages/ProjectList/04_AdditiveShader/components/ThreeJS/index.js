@@ -121,17 +121,6 @@ class ThreeJS extends PureComponent {
 
     // Add color pass to 'wash out' the image
     const colorShader = {
-      uniforms: {
-        tDiffuse: { value: null },
-        color: { value: new Color(0xb06fb2) },
-      },
-      vertexShader: `
-        varying vec2 vUv;
-        void main() {
-          vUv = uv;
-          gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1);
-        }
-      `,
       fragmentShader: `
         uniform vec3 color;
         uniform sampler2D tDiffuse;
@@ -141,6 +130,17 @@ class ThreeJS extends PureComponent {
           gl_FragColor = vec4(
               previousPassColor.rgb + color,
               previousPassColor.a);
+        }
+      `,
+      uniforms: {
+        color: {value: new Color(0xb06fb2)},
+        tDiffuse: {value: null},
+      },
+      vertexShader: `
+        varying vec2 vUv;
+        void main() {
+          vUv = uv;
+          gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1);
         }
       `,
     };
@@ -156,7 +156,7 @@ class ThreeJS extends PureComponent {
     this.modelContainer.rotation.y = 5.7;
 
     this.gui = new GUI();
-    const conf = { color: '#b06fb2' };
+    const conf = {color: '#b06fb2'};
     this.gui.addColor(conf, 'color').onChange((colorValue) => {
       colorPass.uniforms.color.value.set(colorValue);
     });

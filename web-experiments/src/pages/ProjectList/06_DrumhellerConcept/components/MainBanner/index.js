@@ -8,7 +8,7 @@ import styles from './style.module.scss';
 
 class MainBanner extends PureComponent {
   render () {
-    const { id, title, description, imageHint, image, animateInDiv, imageAlt, validateImagesLoaded } = this.props;
+    const {id, title, description, imageHint, image, animateInDiv, imageAlt, validateImagesLoaded} = this.props;
 
     return (
       <>

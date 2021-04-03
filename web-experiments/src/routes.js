@@ -10,67 +10,67 @@ import Work from './pages/Work';
 
 const Routes = [
   {
-    key: 'work',
     Component: Work,
+    key: 'work',
     path: {
       path: '/work',
     },
   },
   {
-    key: 'webglcurtains',
     Component: WebGLCurtains,
+    key: 'webglcurtains',
     path: {
       path: '/webglcurtains',
     },
   },
   {
-    key: 'drumheller',
     Component: DrumhellerConcept,
+    key: 'drumheller',
     path: {
       path: '/drumheller',
     },
   },
   {
-    key: 'dinosaurloader',
     Component: DinosaurLoader,
+    key: 'dinosaurloader',
     path: {
       path: '/dinosaurloader',
     },
   },
   {
-    key: 'asciishader',
     Component: ASCIIShader,
+    key: 'asciishader',
     path: {
       path: '/asciishader',
     },
   },
   {
-    key: 'additiveshader',
     Component: AdditiveShader,
+    key: 'additiveshader',
     path: {
       path: '/additiveshader',
     },
   },
   {
-    key: 'coffeecup',
     Component: CoffeeCup,
+    key: 'coffeecup',
     path: {
       path: '/coffeecup',
     },
   },
   {
-    key: 'jellicent',
     Component: Jellicent,
+    key: 'jellicent',
     path: {
       path: '/jellicent',
     },
   },
   {
-    key: 'home',
     Component: Home,
+    key: 'home',
     path: {
-      path: '/',
       exact: true,
+      path: '/',
     },
   },
 ];

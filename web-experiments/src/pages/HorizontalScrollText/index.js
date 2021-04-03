@@ -21,9 +21,9 @@ class Work extends PureComponent {
     anime.remove(this.el);
 
     return anime({
-      targets: this.el,
-      opacity: 0,
       duration: 0,
+      opacity: 0,
+      targets: this.el,
     }).finished;
   }
 
@@ -31,24 +31,24 @@ class Work extends PureComponent {
     anime.remove(this.el);
 
     return anime({
-      targets: this.el,
-      opacity: [0, 1],
-      duration: 1000,
       delay: 1000,
+      duration: 1000,
       easing: 'easeOutExpo',
+      opacity: [0, 1],
+      targets: this.el,
     }).finished;
   }
 
   animateOut () {
     anime.remove(this.el);
-    const { showLoader } = this.props;
+    const {showLoader} = this.props;
     showLoader();
 
     return anime({
-      targets: this.el,
-      opacity: 0,
       duration: 1000,
       easing: 'easeOutExpo',
+      opacity: 0,
+      targets: this.el,
     }).finished;
   }
 
@@ -59,26 +59,26 @@ class Work extends PureComponent {
 
     const trackWidth = track.clientWidth;
 
-    gsap.set('#hz-page', { height: trackWidth });
+    gsap.set('#hz-page', {height: trackWidth});
 
     const scrollDistance = trackWidth - innerWidth;
 
     const timeline = gsap.timeline({
-      smoothChildTiming: true,
       defaults: {
         ease: 'none',
       },
       scrollTrigger: {
-        horizontal: false,
-        trigger: '#track',
-        start: 0,
-        scrub: 1,
         end: () => {
           return `+=${scrollDistance}`;
         },
+        horizontal: false,
+        scrub: 1,
+        start: 0,
+        trigger: '#track',
 
         // onUpdate: (update) => console.log(update.progress)
       },
+      smoothChildTiming: true,
     }).to('#track', {
       duration: 100,
       x: -scrollDistance,
@@ -87,8 +87,8 @@ class Work extends PureComponent {
     /**
      * Timeline progress bar translates on X from -100% to 0% over the full duration (100)
      */
-    timeline.to('#progressBar', { xPercent: 100,
-      duration: 100 }, 0);
+    timeline.to('#progressBar', {duration: 100,
+      xPercent: 100}, 0);
 
     /**
      * Map tweens for each section
@@ -103,8 +103,8 @@ class Work extends PureComponent {
 
       // Move the text
       if (index + 1 !== sections.length) {
-        timeline.to(text, { xPercent: 'random(25,50,5)',
-          duration: tweenDuration}, sectionStart);
+        timeline.to(text, {duration: tweenDuration,
+          xPercent: 'random(25,50,5)'}, sectionStart);
       }
     });
 
@@ -147,9 +147,9 @@ class Work extends PureComponent {
 }
 
 Work.propTypes = {
-  showLoader: PropTypes.func.isRequired,
   hideLoader: PropTypes.func.isRequired,
   mainPageRedirect: PropTypes.func.isRequired,
+  showLoader: PropTypes.func.isRequired,
 };
 
 export default withTransition(Work);

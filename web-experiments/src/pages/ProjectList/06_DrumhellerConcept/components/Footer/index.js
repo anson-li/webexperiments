@@ -23,8 +23,8 @@ class Footer extends PureComponent {
 
   componentDidUpdate () {
     if (this.props.timeline) {
-      this.props.timeline.to(this.dinosaurmask, { height: '120vh',
-        duration: 20 }, 80);
+      this.props.timeline.to(this.dinosaurmask, {duration: 20,
+        height: '120vh'}, 80);
     }
   }
 
@@ -58,7 +58,7 @@ class Footer extends PureComponent {
   }
 
   render () {
-    const { validateImagesLoaded } = this.props;
+    const {validateImagesLoaded} = this.props;
 
     return (
       <div className={`${styles['drumheller-section']} ${styles.footer}`}>
@@ -77,7 +77,7 @@ class Footer extends PureComponent {
                 onChange={(inView, entry) => {
                   return this.props.animateInDiv(inView, entry);
                 }} triggerOnce>
-                <span className={styles['drumheller-italic']} style={{ paddingRight: '35px' }}>the</span>
+                <span className={styles['drumheller-italic']} style={{paddingRight: '35px'}}>the</span>
                 <span className={styles['drumheller-outline']}>
                   wonder
                   <InView
@@ -94,7 +94,7 @@ class Footer extends PureComponent {
                 as='div' delay={600} onChange={(inView, entry) => {
                   return this.props.animateInDiv(inView, entry);
                 }}
-                style={{ lineHeight: '1.3em' }} threshold={0.3} triggerOnce>
+                style={{lineHeight: '1.3em'}} threshold={0.3} triggerOnce>
                 of Tyrell
               </InView>
             </div>

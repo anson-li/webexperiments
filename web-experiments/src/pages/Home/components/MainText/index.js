@@ -7,11 +7,11 @@ import FadeText from '../../../../common/FadeText';
 class MainText extends PureComponent {
   componentDidMount () {
     new WOW.WOW({
-      boxClass: 'wow',
       animateClass: 'animated',
-      offset: 0,
-      mobile: true,
+      boxClass: 'wow',
       live: false,
+      mobile: true,
+      offset: 0,
     }).init();
   }
 

@@ -62,9 +62,9 @@ class DrumhellerConcept extends PureComponent {
     anime.remove(this.el);
 
     return anime({
-      targets: this.el,
-      opacity: 0,
       duration: 0,
+      opacity: 0,
+      targets: this.el,
     }).finished;
   }
 
@@ -72,24 +72,24 @@ class DrumhellerConcept extends PureComponent {
     anime.remove(this.el);
 
     return anime({
-      targets: this.el,
-      opacity: [0, 1],
-      duration: 1000,
       delay: 1000,
+      duration: 1000,
       easing: 'easeOutExpo',
+      opacity: [0, 1],
+      targets: this.el,
     }).finished;
   }
 
   animateOut () {
     anime.remove(this.el);
-    const { showLoader } = this.props;
+    const {showLoader} = this.props;
     showLoader();
 
     return anime({
-      targets: this.el,
-      opacity: 0,
       duration: 1000,
       easing: 'easeOutExpo',
+      opacity: 0,
+      targets: this.el,
     }).finished;
   }
 
@@ -103,33 +103,33 @@ class DrumhellerConcept extends PureComponent {
     const track = this.track;
     const trackWidth = track.clientWidth;
 
-    gsap.set(this.el, { height: trackWidth });
+    gsap.set(this.el, {height: trackWidth});
 
     this.scrollDistance = trackWidth - innerWidth;
 
-    gsap.set(this.trackWrapper, { width: trackWidth });
+    gsap.set(this.trackWrapper, {width: trackWidth});
 
     this.timeline = gsap.timeline({
-      smoothChildTiming: true,
       defaults: {
         ease: 'none',
       },
+      smoothChildTiming: true,
     }).to(this.track, {
       duration: 100,
       x: -this.scrollDistance,
     });
-    this.timeline.to(this.progressBar, { xPercent: 100,
-      duration: 100 }, 0);
+    this.timeline.to(this.progressBar, {duration: 100,
+      xPercent: 100}, 0);
 
     this.pageST = ScrollTrigger.create({
       animation: this.timeline,
-      horizontal: false,
-      trigger: this.track,
-      start: 0,
-      scrub: 1,
       end: () => {
         return `+=${this.scrollDistance}`;
       },
+      horizontal: false,
+      scrub: 1,
+      start: 0,
+      trigger: this.track,
     });
 
     ScrollTrigger.refresh();
@@ -153,21 +153,21 @@ class DrumhellerConcept extends PureComponent {
     // Slide up when in view
     if (inView) {
       const childSplit = new SplitText(entry.target, {
-        type: 'lines',
         linesClass: 'inview-split-child',
+        type: 'lines',
       });
       new SplitText(entry.target, {
-        type: 'lines',
         linesClass: 'inview-split-parent',
+        type: 'lines',
       });
       gsap.set(entry.target, {
         opacity: 1,
       });
       gsap.from(childSplit.lines, {
         duration: 1.5,
-        yPercent: 100,
         ease: 'power4',
         stagger: 0.1,
+        yPercent: 100,
       });
     } else {
       // Don't show when out of view
@@ -182,26 +182,29 @@ class DrumhellerConcept extends PureComponent {
     this.checkLoaderStatus();
 
     Draggable.create('#track', {
-      type: 'x',
-      bounds: {minX: -1 * this.scrollDistance,
-        maxX: 0}, // scroll X is done by offsetting to the right, so we move in negative values
-      dragClickables: true,
-      inertia: true,
       autoScroll: false,
+
+      bounds: {maxX: 0,
+        minX: -1 * this.scrollDistance},
+
+      // scroll X is done by offsetting to the right, so we move in negative values
+      dragClickables: true,
       dragResistance: 0.5,
-      throwResistance: 2000,
-      onThrowUpdate: (event) => { // Grabs the scroll value while being updated by Draggable and updates the GSAP timeline to match
-        const values = this.track.style.transform.split(/\w+\(|\);?/);
-        const transform = values[1].split(/,\s?/g).map(parseInt);
-        this.timeline.progress(-1 * transform[0] / this.scrollDistance);
-        this.pageST.scroll(-1 * transform[0]);
-      },
+      inertia: true,
       onDrag: (event) => { // Grabs the scroll value while being updated by Draggable and updates the GSAP timeline to match
         const values = this.track.style.transform.split(/\w+\(|\);?/);
         const transform = values[1].split(/,\s?/g).map(parseInt);
         this.timeline.progress(-1 * transform[0] / this.scrollDistance);
         this.pageST.scroll(-1 * transform[0]);
       },
+      onThrowUpdate: (event) => { // Grabs the scroll value while being updated by Draggable and updates the GSAP timeline to match
+        const values = this.track.style.transform.split(/\w+\(|\);?/);
+        const transform = values[1].split(/,\s?/g).map(parseInt);
+        this.timeline.progress(-1 * transform[0] / this.scrollDistance);
+        this.pageST.scroll(-1 * transform[0]);
+      },
+      throwResistance: 2000,
+      type: 'x',
     });
 
     // window.addEventListener('resize', this.onWindowResize);
@@ -212,7 +215,7 @@ class DrumhellerConcept extends PureComponent {
   }
 
   render () {
-    const { cursorHover, cursorUnhover } = this.props;
+    const {cursorHover, cursorUnhover} = this.props;
 
     return (
       <div
@@ -278,10 +281,10 @@ class DrumhellerConcept extends PureComponent {
 }
 
 DrumhellerConcept.propTypes = {
-  showLoader: PropTypes.func.isRequired,
-  hideLoader: PropTypes.func.isRequired,
   cursorHover: PropTypes.func.isRequired,
   cursorUnhover: PropTypes.func.isRequired,
+  hideLoader: PropTypes.func.isRequired,
+  showLoader: PropTypes.func.isRequired,
 };
 
 export default withTransition(DrumhellerConcept);

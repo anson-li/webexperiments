@@ -39,7 +39,7 @@ class Section extends PureComponent {
   }
 
   render () {
-    const { id, title, description, date, link, image } = this.props;
+    const {id, title, description, date, link, image} = this.props;
 
     return (
       <Link
@@ -69,7 +69,7 @@ class Section extends PureComponent {
             ref={(ref) => {
               this.image = ref;
             }}
-            style={{ backgroundImage: `url(${image})`}} />
+            style={{backgroundImage: `url(${image})`}} />
         </div>
       </Link>
     );
@@ -77,12 +77,12 @@ class Section extends PureComponent {
 }
 
 Section.propTypes = {
-  id: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
   date: PropTypes.string.isRequired,
-  link: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
   image: PropTypes.string.isRequired,
+  link: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
 };
 
 export default Section;

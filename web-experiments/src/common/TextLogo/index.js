@@ -31,20 +31,20 @@ class TextLogo extends PureComponent {
 
   componentDidMount () {
     this.childSplitTop = new SplitText(this.texttop, {
-      type: 'chars',
       charsClass: 'inview-split-child-1',
+      type: 'chars',
     });
     this.childSplitBottom = new SplitText(this.textbottom, {
-      type: 'chars',
       charsClass: 'inview-split-child-2',
+      type: 'chars',
     });
     this.parentSplitTop = new SplitText(this.texttop, {
-      type: 'lines',
       linesClass: 'inview-split-parent',
+      type: 'lines',
     });
     this.parentSplitBottom = new SplitText(this.textbottom, {
-      type: 'lines',
       linesClass: 'inview-split-parent',
+      type: 'lines',
     });
   }
 
@@ -52,18 +52,18 @@ class TextLogo extends PureComponent {
     if (!this.timelineOne || !this.timelineOne.isActive()) {
       this.timelineOne = gsap.timeline()
         .from(this.childSplitTop.chars, 0.5, {
-          yPercent: 100,
           ease: 'power4',
           stagger: 0.1,
+          yPercent: 100,
         })
         .set(this.childSplitTop.chars, {
           yPercent: 0,
         });
       this.timelineTwo = gsap.timeline()
         .to(this.childSplitBottom.chars, 0.5, {
-          yPercent: -100,
           ease: 'power4',
           stagger: 0.1,
+          yPercent: -100,
         })
         .set(this.childSplitBottom.chars, {
           yPercent: 0,

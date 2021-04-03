@@ -4,15 +4,33 @@ import {
 
 const VolumetricLightCylinder = () => {
   return {
+    depthWrite: false,
+    fragmentShader: `
+    varying vec3 vNormal;
+    varying vec3 vWorldPosition;
+    uniform vec3 spotPosition;
+    uniform float attenuation;
+    uniform float anglePower;
+    varying vec4 vColor;
+
+    void main() {
+      float intensity;
+      intensity	= distance(vWorldPosition, spotPosition)/attenuation;
+      intensity	= 1.0 - clamp(intensity, 0.0, 1.0);
+      vec3 normal	= vec3(vNormal.x, vNormal.y, abs(vNormal.z));
+      float angleIntensity	= pow(dot(normal, vec3(0.0, 0.0, 1.0)), anglePower);
+      intensity	= intensity * angleIntensity;
+      gl_FragColor = vec4(vColor.rgb, intensity);
+    }
+  `,
     lights: true,
     transparent: true,
-    depthWrite: false,
     uniforms: UniformsUtils.merge([
       UniformsLib.lights,
       {
-        attenuation: { value: 25.0 },
-        anglePower: { value: 10.0 },
-        spotPosition: { value: new Vector3(0, 0, 0) },
+        anglePower: {value: 10.0},
+        attenuation: {value: 25.0},
+        spotPosition: {value: new Vector3(0, 0, 0)},
       },
     ]),
     vertexShader: `
@@ -65,24 +83,6 @@ const VolumetricLightCylinder = () => {
 
       vWorldPosition = worldPosition.xyz;
       vColor = addedLights;
-    }
-  `,
-    fragmentShader: `
-    varying vec3 vNormal;
-    varying vec3 vWorldPosition;
-    uniform vec3 spotPosition;
-    uniform float attenuation;
-    uniform float anglePower;
-    varying vec4 vColor;
-
-    void main() {
-      float intensity;
-      intensity	= distance(vWorldPosition, spotPosition)/attenuation;
-      intensity	= 1.0 - clamp(intensity, 0.0, 1.0);
-      vec3 normal	= vec3(vNormal.x, vNormal.y, abs(vNormal.z));
-      float angleIntensity	= pow(dot(normal, vec3(0.0, 0.0, 1.0)), anglePower);
-      intensity	= intensity * angleIntensity;
-      gl_FragColor = vec4(vColor.rgb, intensity);
     }
   `,
   };

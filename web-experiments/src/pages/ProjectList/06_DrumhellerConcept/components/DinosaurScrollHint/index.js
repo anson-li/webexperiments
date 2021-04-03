@@ -11,15 +11,15 @@ import styles from './style.module.scss';
 class DinosaurScrollHint extends PureComponent {
   componentDidMount () {
     gsap.from(this.rotatinglogo, {
-      rotation: 360,
       duration: 10,
-      repeat: -1,
       ease: 'none',
+      repeat: -1,
+      rotation: 360,
     });
   }
 
   render () {
-    const { validateImagesLoaded } = this.props;
+    const {validateImagesLoaded} = this.props;
 
     return (
       <div className={styles['scroll-explore']}>

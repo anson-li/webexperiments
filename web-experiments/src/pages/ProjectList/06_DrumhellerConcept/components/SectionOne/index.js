@@ -18,12 +18,12 @@ class SectionOne extends PureComponent {
 
   componentDidUpdate () {
     if (this.props.timeline) {
-      this.props.timeline.to(this.imageone, { x: -this.props.scrollDistance * 0.12,
-        duration: 100 }, 0);
-      this.props.timeline.to(this.imagetwo, { x: -this.props.scrollDistance * 0.1,
-        duration: 100 }, 0);
-      this.props.timeline.to(this.titleitalic, { x: -this.props.scrollDistance * 0.15,
-        duration: 100 }, 0);
+      this.props.timeline.to(this.imageone, {duration: 100,
+        x: -this.props.scrollDistance * 0.12}, 0);
+      this.props.timeline.to(this.imagetwo, {duration: 100,
+        x: -this.props.scrollDistance * 0.1}, 0);
+      this.props.timeline.to(this.titleitalic, {duration: 100,
+        x: -this.props.scrollDistance * 0.15}, 0);
     }
   }
 
@@ -32,15 +32,15 @@ class SectionOne extends PureComponent {
       this.tl = gsap.timeline()
         .from(this.underline, 1.5, {
           clipPath: 'inset(0% 100% 0% 0%)',
-          ease: Power4,
           delay: 1,
+          ease: Power4,
         });
       this.tl.play();
     }
   }
 
   render () {
-    const { validateImagesLoaded } = this.props;
+    const {validateImagesLoaded} = this.props;
 
     return (
       <div className={styles['drumheller-section-one']}>

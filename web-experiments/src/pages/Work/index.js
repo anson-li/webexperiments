@@ -44,9 +44,9 @@ class Work extends PureComponent {
     anime.remove(this.el);
 
     return anime({
-      targets: this.el,
-      opacity: 0,
       duration: 0,
+      opacity: 0,
+      targets: this.el,
     }).finished;
   }
 
@@ -54,24 +54,24 @@ class Work extends PureComponent {
     anime.remove(this.el);
 
     return anime({
-      targets: this.el,
-      opacity: [0, 1],
-      duration: 1000,
       delay: 1000,
+      duration: 1000,
       easing: 'easeOutExpo',
+      opacity: [0, 1],
+      targets: this.el,
     }).finished;
   }
 
   animateOut () {
     anime.remove(this.el);
-    const { showLoader } = this.props;
+    const {showLoader} = this.props;
     showLoader();
 
     return anime({
-      targets: this.el,
-      opacity: 0,
       duration: 1000,
       easing: 'easeOutExpo',
+      opacity: 0,
+      targets: this.el,
     }).finished;
   }
 
@@ -85,36 +85,36 @@ class Work extends PureComponent {
     const track = this.track;
     const trackWidth = track.clientWidth;
 
-    gsap.set(this.el, { height: trackWidth });
-    gsap.set(this.trackWrapper, { width: trackWidth });
+    gsap.set(this.el, {height: trackWidth});
+    gsap.set(this.trackWrapper, {width: trackWidth});
 
     this.scrollDistance = trackWidth - innerWidth;
 
     this.timeline = gsap.timeline({
-      smoothChildTiming: true,
       defaults: {
         ease: 'none',
       },
+      smoothChildTiming: true,
     }).to(this.track, {
       duration: 100,
       x: -this.scrollDistance,
     });
-    this.timeline.to(this.progressBar, { xPercent: 100,
-      duration: 100 }, 0);
-    this.timeline.to(this.wall, { x: this.scrollDistance * 0.2,
-      duration: 100 }, 0);
-    this.timeline.to(this.scrollHint, { opacity: 0,
-      duration: 20 }, 0);
+    this.timeline.to(this.progressBar, {duration: 100,
+      xPercent: 100}, 0);
+    this.timeline.to(this.wall, {duration: 100,
+      x: this.scrollDistance * 0.2}, 0);
+    this.timeline.to(this.scrollHint, {duration: 20,
+      opacity: 0}, 0);
 
     this.pageST = ScrollTrigger.create({
       animation: this.timeline,
-      horizontal: false,
-      trigger: this.track,
-      start: 0,
-      scrub: 1,
       end: () => {
         return `+=${this.scrollDistance}`;
       },
+      horizontal: false,
+      scrub: 1,
+      start: 0,
+      trigger: this.track,
     });
 
     this.setupResizeAnimation();
@@ -136,13 +136,13 @@ class Work extends PureComponent {
 
   setupScrollHintAnimation () {
     const scrollHintTimeline = gsap.timeline();
-    scrollHintTimeline.to(this.hintArrow, 1, {paddingLeft: '5px',
-      onComplete () {
-        scrollHintTimeline.reverse();
-      },
-      onReverseComplete () {
-        scrollHintTimeline.play(0);
-      }}, 0);
+    scrollHintTimeline.to(this.hintArrow, 1, {onComplete () {
+      scrollHintTimeline.reverse();
+    },
+    onReverseComplete () {
+      scrollHintTimeline.play(0);
+    },
+    paddingLeft: '5px'}, 0);
   }
 
   componentDidMount () {
@@ -151,26 +151,29 @@ class Work extends PureComponent {
     this.setupScrollHintAnimation();
 
     Draggable.create(this.track, {
-      type: 'x',
-      bounds: {minX: -1 * this.scrollDistance,
-        maxX: 0}, // scroll X is done by offsetting to the right, so we move in negative values
-      dragClickables: true,
-      inertia: true,
       autoScroll: false,
+
+      bounds: {maxX: 0,
+        minX: -1 * this.scrollDistance},
+
+      // scroll X is done by offsetting to the right, so we move in negative values
+      dragClickables: true,
       dragResistance: 0.5,
-      throwResistance: 2000,
-      onThrowUpdate: (event) => { // Grabs the scroll value while being updated by Draggable and updates the GSAP timeline to match
-        const values = this.track.style.transform.split(/\w+\(|\);?/);
-        const transform = values[1].split(/,\s?/g).map(parseInt);
-        this.timeline.progress(-1 * transform[0] / this.scrollDistance);
-        this.pageST.scroll(-1 * transform[0]);
-      },
+      inertia: true,
       onDrag: (event) => { // Grabs the scroll value while being updated by Draggable and updates the GSAP timeline to match
         const values = this.track.style.transform.split(/\w+\(|\);?/);
         const transform = values[1].split(/,\s?/g).map(parseInt);
         this.timeline.progress(-1 * transform[0] / this.scrollDistance);
         this.pageST.scroll(-1 * transform[0]);
       },
+      onThrowUpdate: (event) => { // Grabs the scroll value while being updated by Draggable and updates the GSAP timeline to match
+        const values = this.track.style.transform.split(/\w+\(|\);?/);
+        const transform = values[1].split(/,\s?/g).map(parseInt);
+        this.timeline.progress(-1 * transform[0] / this.scrollDistance);
+        this.pageST.scroll(-1 * transform[0]);
+      },
+      throwResistance: 2000,
+      type: 'x',
     });
 
     // window.addEventListener('resize', this.onWindowResize);
@@ -181,7 +184,7 @@ class Work extends PureComponent {
   }
 
   render () {
-    const { cursorHover, cursorUnhover } = this.props;
+    const {cursorHover, cursorUnhover} = this.props;
 
     return (
       <div
@@ -295,10 +298,10 @@ class Work extends PureComponent {
 }
 
 Work.propTypes = {
-  showLoader: PropTypes.func.isRequired,
-  hideLoader: PropTypes.func.isRequired,
   cursorHover: PropTypes.func.isRequired,
   cursorUnhover: PropTypes.func.isRequired,
+  hideLoader: PropTypes.func.isRequired,
+  showLoader: PropTypes.func.isRequired,
 };
 
 export default withTransition(Work);

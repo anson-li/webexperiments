@@ -14,9 +14,9 @@ class CoffeeCup extends PureComponent {
     anime.remove(this.el);
 
     return anime({
-      targets: this.el,
-      opacity: 0,
       duration: 0,
+      opacity: 0,
+      targets: this.el,
     }).finished;
   }
 
@@ -24,25 +24,25 @@ class CoffeeCup extends PureComponent {
     anime.remove(this.el);
 
     return anime({
-      targets: this.el,
-      opacity: [0, 1],
-      duration: 1000,
       delay: 1000,
+      duration: 1000,
       easing: 'easeOutExpo',
+      opacity: [0, 1],
+      targets: this.el,
     }).finished;
   }
 
   animateOut () {
     anime.remove(this.el);
     this.props.showFollow();
-    const { showLoader } = this.props;
+    const {showLoader} = this.props;
     showLoader();
 
     return anime({
-      targets: this.el,
-      opacity: 0,
       duration: 1000,
       easing: 'easeOutExpo',
+      opacity: 0,
+      targets: this.el,
     }).finished;
   }
 
@@ -51,7 +51,7 @@ class CoffeeCup extends PureComponent {
   }
 
   render () {
-    const { hideLoader, cursorHover, cursorUnhover } = this.props;
+    const {hideLoader, cursorHover, cursorUnhover} = this.props;
 
     return (
       <div
@@ -72,12 +72,12 @@ class CoffeeCup extends PureComponent {
 }
 
 CoffeeCup.propTypes = {
-  showLoader: PropTypes.func.isRequired,
-  hideLoader: PropTypes.func.isRequired,
-  hideFollow: PropTypes.func.isRequired,
-  showFollow: PropTypes.func.isRequired,
-  cursorUnhover: PropTypes.func.isRequired,
   cursorHover: PropTypes.func.isRequired,
+  cursorUnhover: PropTypes.func.isRequired,
+  hideFollow: PropTypes.func.isRequired,
+  hideLoader: PropTypes.func.isRequired,
+  showFollow: PropTypes.func.isRequired,
+  showLoader: PropTypes.func.isRequired,
 };
 
 export default withTransition(CoffeeCup);

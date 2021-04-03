@@ -13,9 +13,9 @@ class Jellicent extends PureComponent {
     anime.remove(this.el);
 
     return anime({
-      targets: this.el,
-      opacity: 0,
       duration: 0,
+      opacity: 0,
+      targets: this.el,
     }).finished;
   }
 
@@ -23,29 +23,29 @@ class Jellicent extends PureComponent {
     anime.remove(this.el);
 
     return anime({
-      targets: this.el,
-      opacity: [0, 1],
-      duration: 1000,
       delay: 1000,
+      duration: 1000,
       easing: 'easeOutExpo',
+      opacity: [0, 1],
+      targets: this.el,
     }).finished;
   }
 
   animateOut () {
     anime.remove(this.el);
-    const { showLoader } = this.props;
+    const {showLoader} = this.props;
     showLoader();
 
     return anime({
-      targets: this.el,
-      opacity: 0,
       duration: 1000,
       easing: 'easeOutExpo',
+      opacity: 0,
+      targets: this.el,
     }).finished;
   }
 
   render () {
-    const { hideLoader, cursorHover, cursorUnhover } = this.props;
+    const {hideLoader, cursorHover, cursorUnhover} = this.props;
 
     return (
       <div
@@ -66,10 +66,10 @@ class Jellicent extends PureComponent {
 }
 
 Jellicent.propTypes = {
-  showLoader: PropTypes.func.isRequired,
-  hideLoader: PropTypes.func.isRequired,
-  cursorUnhover: PropTypes.func.isRequired,
   cursorHover: PropTypes.func.isRequired,
+  cursorUnhover: PropTypes.func.isRequired,
+  hideLoader: PropTypes.func.isRequired,
+  showLoader: PropTypes.func.isRequired,
 };
 
 export default withTransition(Jellicent);

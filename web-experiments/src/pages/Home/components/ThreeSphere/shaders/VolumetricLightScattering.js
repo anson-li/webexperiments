@@ -4,23 +4,6 @@ import {
 
 const VolumetricLightScattering = () => {
   return {
-    uniforms: {
-      tDiffuse: { value: null },
-      lightPosition: { value: new Vector2(0.5, 0.5) },
-      exposure: { value: 0.2 },
-      decay: { value: 0.96 },
-      density: { value: 0.6 },
-      weight: { value: 0.2 },
-      samples: { value: 80 },
-    },
-    vertexShader: `
-    varying vec2 vUv;
-
-    void main() {
-      vUv = uv;
-      gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
-    }
-  `,
     fragmentShader: `
     varying vec2 vUv;
     uniform sampler2D tDiffuse;
@@ -50,6 +33,23 @@ const VolumetricLightScattering = () => {
         illuminationDecay *= decay;
       }
       gl_FragColor = color * exposure;
+    }
+  `,
+    uniforms: {
+      decay: {value: 0.96},
+      density: {value: 0.6},
+      exposure: {value: 0.2},
+      lightPosition: {value: new Vector2(0.5, 0.5)},
+      samples: {value: 80},
+      tDiffuse: {value: null},
+      weight: {value: 0.2},
+    },
+    vertexShader: `
+    varying vec2 vUv;
+
+    void main() {
+      vUv = uv;
+      gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
     }
   `,
   };

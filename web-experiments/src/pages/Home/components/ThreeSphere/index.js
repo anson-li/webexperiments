@@ -234,17 +234,6 @@ class ThreeSphere extends PureComponent {
 
     // Add color pass to 'wash out' the image
     const colorShader = {
-      uniforms: {
-        tDiffuse: { value: null },
-        color: { value: new Color(0xcbc7d1) },
-      },
-      vertexShader: `
-        varying vec2 vUv;
-        void main() {
-          vUv = uv;
-          gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1);
-        }
-      `,
       fragmentShader: `
         uniform vec3 color;
         uniform sampler2D tDiffuse;
@@ -254,6 +243,17 @@ class ThreeSphere extends PureComponent {
           gl_FragColor = vec4(
               previousPassColor.rgb + color,
               previousPassColor.a);
+        }
+      `,
+      uniforms: {
+        color: {value: new Color(0xcbc7d1)},
+        tDiffuse: {value: null},
+      },
+      vertexShader: `
+        varying vec2 vUv;
+        void main() {
+          vUv = uv;
+          gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1);
         }
       `,
     };
@@ -313,8 +313,8 @@ class ThreeSphere extends PureComponent {
     const charCountCeil = charCountPrecise.map(Math.ceil);
 
     return {
-      charCountPrecise,
       charCountCeil,
+      charCountPrecise,
     };
   }
 

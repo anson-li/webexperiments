@@ -58,7 +58,7 @@ class App extends PureComponent {
   }
 
   render () {
-    const { routes } = this.props;
+    const {routes} = this.props;
 
     return (
       <div id='app'>
@@ -70,10 +70,10 @@ class App extends PureComponent {
         <Loader ref={this.loader} />
         <TransitionGroup id='content'>
           { routes
-            .filter(({ path }) => {
+            .filter(({path}) => {
               return this.matchPath(path);
             })
-            .map(({ Component, key }) => {
+            .map(({Component, key}) => {
               return <Component
                 cursorHover={this.onCursorHover}
                 cursorUnhover={this.onCursorUnhover}

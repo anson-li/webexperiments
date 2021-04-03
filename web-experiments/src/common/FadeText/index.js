@@ -11,20 +11,20 @@ class FadeText extends PureComponent {
     } = this.props;
     const targets = `#${id}.ml3 .letter`;
     anime
-      .timeline({ loop })
+      .timeline({loop})
       .add({
-        targets,
-        opacity: [0, 1],
-        easing: 'easeOutExpo',
-        duration: 2250,
         delay: (el, i) => {
           return base + iteration * i;
         },
+        duration: 2250,
+        easing: 'easeOutExpo',
+        opacity: [0, 1],
+        targets,
       });
   }
 
   render () {
-    const { className, id, text } = this.props;
+    const {className, id, text} = this.props;
 
     return (
       <this.props.type
@@ -44,18 +44,18 @@ class FadeText extends PureComponent {
 }
 
 FadeText.propTypes = {
+  base: PropTypes.number,
   className: PropTypes.string,
   id: PropTypes.string,
-  text: PropTypes.string.isRequired,
-  base: PropTypes.number,
   iteration: PropTypes.number,
   loop: PropTypes.bool,
+  text: PropTypes.string.isRequired,
 };
 
 FadeText.defaultProps = {
+  base: 500,
   className: '',
   id: '',
-  base: 500,
   iteration: 30,
   loop: false,
 };

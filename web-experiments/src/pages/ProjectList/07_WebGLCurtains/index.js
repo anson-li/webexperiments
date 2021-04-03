@@ -19,9 +19,9 @@ class WebGLCurtains extends PureComponent {
     super(props);
     this.state = {
       pattern: {
-        oscillate: true,
         disabled: false,
         draganimation: false,
+        oscillate: true,
       },
     };
 
@@ -165,9 +165,9 @@ class WebGLCurtains extends PureComponent {
     anime.remove(this.el);
 
     return anime({
-      targets: this.el,
-      opacity: 0,
       duration: 0,
+      opacity: 0,
+      targets: this.el,
     }).finished;
   }
 
@@ -175,24 +175,24 @@ class WebGLCurtains extends PureComponent {
     anime.remove(this.el);
 
     return anime({
-      targets: this.el,
-      opacity: [0, 1],
-      duration: 1000,
       delay: 1000,
+      duration: 1000,
       easing: 'easeOutExpo',
+      opacity: [0, 1],
+      targets: this.el,
     }).finished;
   }
 
   animateOut () {
     anime.remove(this.el);
-    const { showLoader } = this.props;
+    const {showLoader} = this.props;
     showLoader();
 
     return anime({
-      targets: this.el,
-      opacity: 0,
       duration: 1000,
       easing: 'easeOutExpo',
+      opacity: 0,
+      targets: this.el,
     }).finished;
   }
 
@@ -258,7 +258,7 @@ class WebGLCurtains extends PureComponent {
   }
 
   setChecked (prop) {
-    const { pattern } = this.state;
+    const {pattern} = this.state;
     for (const param in pattern) {
       if (prop !== param) {
         pattern[param] = false;
@@ -266,12 +266,12 @@ class WebGLCurtains extends PureComponent {
         pattern[param] = true;
       }
     }
-    this.setState({ pattern });
+    this.setState({pattern});
     this.forceUpdate();
   }
 
   getActivePattern () {
-    const { pattern } = this.state;
+    const {pattern} = this.state;
     for (const param in pattern) {
       if (pattern[param]) {
         return param;
@@ -286,7 +286,7 @@ class WebGLCurtains extends PureComponent {
   }
 
   render () {
-    const { cursorHover, cursorUnhover } = this.props;
+    const {cursorHover, cursorUnhover} = this.props;
     const pattern = this.getActivePattern();
     const basicUniforms = {
       time: {
@@ -296,11 +296,6 @@ class WebGLCurtains extends PureComponent {
       },
     };
     const dragUniforms = {
-      time: {
-        name: 'uTime', // uniform name that will be passed to our shaders
-        type: '1f', // this means our uniform is a float
-        value: 0,
-      },
       mousePosition: { // our mouse position
         name: 'uMousePosition',
         type: '2f', // notice this is a length 2 array of floats
@@ -308,6 +303,11 @@ class WebGLCurtains extends PureComponent {
       },
       mouseStrength: { // the strength of the effect (we will attenuate it if the mouse stops moving)
         name: 'uMouseStrength', // uniform name that will be passed to our shaders
+        type: '1f', // this means our uniform is a float
+        value: 0,
+      },
+      time: {
+        name: 'uTime', // uniform name that will be passed to our shaders
         type: '1f', // this means our uniform is a float
         value: 0,
       },
@@ -375,10 +375,10 @@ class WebGLCurtains extends PureComponent {
 }
 
 WebGLCurtains.propTypes = {
-  showLoader: PropTypes.func.isRequired,
-  hideLoader: PropTypes.func.isRequired,
-  cursorUnhover: PropTypes.func.isRequired,
   cursorHover: PropTypes.func.isRequired,
+  cursorUnhover: PropTypes.func.isRequired,
+  hideLoader: PropTypes.func.isRequired,
+  showLoader: PropTypes.func.isRequired,
 };
 
 export default withTransition(WebGLCurtains);
