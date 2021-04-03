@@ -313,50 +313,47 @@ class WebGLCurtains extends PureComponent {
         { (pattern === 'oscillate') &&
           <Curtains className={styles['curtains-canvas']}>
             <Plane
-                className={styles['curtains-plane']}
+              className={styles['curtains-plane']}
                 
                 // plane init parameters
-                vertexShader={this.basicVs}
-                fragmentShader={this.basicFs}
-                uniforms={basicUniforms}
+              fragmentShader={this.basicFs}
+              onRender={onRender}
+              uniforms={basicUniforms}
 
                 // plane events
-                onRender={onRender}
+              vertexShader={this.basicVs}
             >
-              <img src={TestImage} alt='Test for canvas' />
+              <img alt='Test for canvas' src={TestImage} />
             </Plane>
-          </Curtains>
-        }
+          </Curtains>}
         { (pattern === 'disabled') &&
           <div className={styles['curtains-canvas']}>
             <div className={styles['curtains-plane']}>
-              <img className={styles['disabled-image']} src={TestImage} alt='Test for canvas' />
+              <img alt='Test for canvas' className={styles['disabled-image']} src={TestImage} />
             </div>
-          </div>
-        }
+          </div>}
         { (pattern === 'draganimation') &&
           <>
             <Curtains className={styles['curtains-canvas']}>
               <Plane
-                  className={styles['curtains-plane']}
+                className={styles['curtains-plane']}
                   
                   // plane init parameters
-                  vertexShader={this.dragVs}
-                  fragmentShader={this.dragFs}
-                  uniforms={dragUniforms}
-                  widthSegments={20}
-                  heightSegments={20}
-                  fov={35}
-                  onReady={this.onPlaneReady}
+                fov={35}
+                fragmentShader={this.dragFs}
+                heightSegments={20}
+                onReady={this.onPlaneReady}
+                onRender={onRender}
+                uniforms={dragUniforms}
+                vertexShader={this.dragVs}
 
                   // plane events
-                  onRender={onRender}
+                widthSegments={20}
               >
-                <img src={TestImage} alt='Test for canvas' />
+                <img alt='Test for canvas' src={TestImage} />
               </Plane>
             </Curtains>
-          </>
-        }
+          </>}
       </div>
     );
   }

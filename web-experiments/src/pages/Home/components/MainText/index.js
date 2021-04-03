@@ -21,9 +21,9 @@ class MainText extends PureComponent {
           <div className="col-md-12 mid-center">
             <div className="spacer-sm d-lg-none" />
             <FadeText
-              type="h1"
               id="main-text"
               text="ANSON'S WEB EXPERIMENTS"
+              type="h1"
             />
           </div>
         </div>

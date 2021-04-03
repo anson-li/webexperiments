@@ -38,10 +38,10 @@ class Section extends PureComponent {
     return (
       <Link
         className={styles['section']}
-        to={link}
         href={link}
         onMouseEnter={this.hoverSection}
-        onMouseLeave={this.unhoverSection}  
+        onMouseLeave={this.unhoverSection}
+        to={link}  
       >
         <div
           className={styles["id"]}
@@ -56,10 +56,10 @@ class Section extends PureComponent {
         </div>
         <div className={styles["section-image"]}>
           <div
+            alt="Project banner"
             className={styles["image"]}
-            style={{ backgroundImage: `url(${image})`}}
             ref={(ref) => { this.image = ref; }}
-              alt="Project banner" />
+            style={{ backgroundImage: `url(${image})`}} />
         </div>
       </Link>
     );

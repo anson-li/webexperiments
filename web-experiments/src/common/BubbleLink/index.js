@@ -62,10 +62,10 @@ class BubbleLink extends PureComponent {
   render() {
     return (
       <Link
-        id="sub-link"
-        to="/work"
         href="work"
+        id="sub-link"
         ref={(ref) => { this.bubbleLink = ref; }}
+        to="/work"
       >
         <div id="sub-link-text">
           { this.props.text }

@@ -69,20 +69,21 @@ class DinosaurLoader extends PureComponent {
         />
         <div className={styles["dino-logo"]}>
           <svg
-            x="0px"
-            y="0px"
-            width="224px"
             height="172.029px"
             viewBox="0 0 224 172.029"
+            width="224px"
+            x="0px"
+            y="0px"
           >
             <defs>
-              <linearGradient id="dino-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                <stop ref={(e) => { this.dinosaurGradientBase = e; }} offset="100%" stopColor="#FFA548"/>
-                <stop ref={(e) => { this.dinosaurGradientHighlight = e; }} offset="100%" stopColor="#EEEEEE"/>
+              <linearGradient id="dino-gradient" x1="0%" x2="0%" y1="0%" y2="100%">
+                <stop offset="100%" ref={(e) => { this.dinosaurGradientBase = e; }} stopColor="#FFA548" />
+                <stop offset="100%" ref={(e) => { this.dinosaurGradientHighlight = e; }} stopColor="#EEEEEE" />
               </linearGradient>
             </defs>
             <g>
-              <path fill="url(#dino-gradient)" d="M140,124.01c0,2.33,0,4.67,0,7c1.67-1.67,3.33-3.33,5-5c0,2.33,0,4.67,0,7c1.33-1.67,2.67-3.33,4-5
+              <path
+                d="M140,124.01c0,2.33,0,4.67,0,7c1.67-1.67,3.33-3.33,5-5c0,2.33,0,4.67,0,7c1.33-1.67,2.67-3.33,4-5
                 c0.67,0.33,1.33,0.67,2,1c-0.11,4.59-1.71,7.92,1,9c2.84,2.12,3.72,2.53,7,2c1-2.33,2-4.67,3-7c0,0.67,0,1.33,0,2
                 c2.03,2.95,2.18,6.08,1,10c2.67-1,5.33-2,8-3c0,2,0,4,0,6c4.9-3.01,6.17-7.15,10-11c0,4.67,0,9.33,0,14c2.33-1.33,4.67-2.67,7-4
                 c0.33,1.67,0.67,3.33,1,5c1-0.67,2-1.33,3-2c0.67-1.33,1.33-2.67,2-4c0.33,0,0.67,0,1,0c0.33,2.33,0.67,4.67,1,7
@@ -104,11 +105,11 @@ class DinosaurLoader extends PureComponent {
                 C105.92,58.07,122.19,60.94,136,57.01z M93,56.01c-2.33-0.67-4.67-1.33-7-2c0-0.33,0-0.67,0-1c3.93-12.15,5.75-22.78,1-35
                 c-3-0.33-6-0.67-9-1c-5.23,5.72-7.81,25.77-8,31c8.81,2.28,11.42,6.97,18,11C91.65,57.95,90.94,58.2,93,56.01z M58,67.01
                 c5.16-10.32-2.55-40.75-8-49c-1,0-2,0-3,0c-5.33,4-10.67,8-16,12c0,0.67,0,1.33,0,2c1,0.33,2,0.67,3,1c8.57,2.99,13.19,0,17,8
-                c-4,8-8,16-12,24c1,1,2,2,3,3C48.29,68.48,54.76,70.04,58,67.01z"/>
+                c-4,8-8,16-12,24c1,1,2,2,3,3C48.29,68.48,54.76,70.04,58,67.01z" fill="url(#dino-gradient)" />
             </g>
           </svg>
         </div>
-        <div className={styles["loader-background"]}></div>
+        <div className={styles["loader-background"]} />
       </div>
     );
   }

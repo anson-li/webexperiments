@@ -25,35 +25,35 @@ class SectionFour extends PureComponent {
       <div className={`${styles["drumheller-section"]} ${styles["four"]}`}>
         <div className={styles["drumheller-section-four"]}>
           <MainBanner  
-            id='03'
-            title='Our Future'
+            animateInDiv={this.props.animateInDiv}
             description='We foster an environment of learning and development for future generations.'
-            imageHint='Inspiring creativity'
+            id='03'
             image={ImageThreeOne}
             imageAlt='Dinosaur!'
-            animateInDiv={this.props.animateInDiv}
+            imageHint='Inspiring creativity'
+            title='Our Future'
             validateImagesLoaded={validateImagesLoaded}
           />
           <div className={styles["top-image-title"]}>
             <div className={styles["top-image"]} ref={(e) => { this.topone = e; }}>
-              <img src={ImageThreeTwo} onLoad={validateImagesLoaded()} alt="Dinosaur?" />
+              <img alt="Dinosaur?" onLoad={validateImagesLoaded()} src={ImageThreeTwo} />
             </div>
             <div ref={(e) => { this.bottomone = e; }}>
-              <InView as="div" className={styles["lower-text"]} delay={100} triggerOnce onChange={(inView, entry) => this.props.animateInDiv(inView, entry)}>
+              <InView as="div" className={styles["lower-text"]} delay={100} onChange={(inView, entry) => this.props.animateInDiv(inView, entry)} triggerOnce>
                 New discoveries are made<br />everyday, thanks to the<br />great work at Tyrrell.
               </InView>
             </div>
           </div>
           <div className={styles["bottom-image-section"]}>
             <div className={styles["upper-text"]} ref={(e) => { this.toptwo = e; }}>
-              <InView as="div" className={styles["panel-left"]} delay={100} triggerOnce onChange={(inView, entry) => this.props.animateInDiv(inView, entry)}>
+              <InView as="div" className={styles["panel-left"]} delay={100} onChange={(inView, entry) => this.props.animateInDiv(inView, entry)} triggerOnce>
                 Every year, new discoveries are made at the<br />
                 Royal Tyrrell Museum that change the landscape of<br />
                 the world of Palaeontology. Most recently, researchers<br />
                 have discovered a brand new Tyrannosaurus species;<br />
                 the first in 50 years.
               </InView>
-              <InView as="div" className={styles["panel-right"]} delay={100} triggerOnce onChange={(inView, entry) => this.props.animateInDiv(inView, entry)}>
+              <InView as="div" className={styles["panel-right"]} delay={100} onChange={(inView, entry) => this.props.animateInDiv(inView, entry)} triggerOnce>
                 Additionally, the Royal Tyrrell offers an interactive<br />
                 space, where people take part in interactive displays<br />
                 to learn about how the dinosaur ate, moved and<br />
@@ -61,7 +61,7 @@ class SectionFour extends PureComponent {
               </InView>
             </div>
             <div className={styles["bottom-image"]} ref={(e) => { this.bottomtwo = e; }}>
-              <img src={ImageThreeThree} onLoad={validateImagesLoaded()} alt="Dinosaur!" />
+              <img alt="Dinosaur!" onLoad={validateImagesLoaded()} src={ImageThreeThree} />
             </div>
           </div>
         </div>

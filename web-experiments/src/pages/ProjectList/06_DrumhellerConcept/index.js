@@ -205,43 +205,43 @@ class DrumhellerConcept extends PureComponent {
             hover={cursorHover}
             unhover={cursorUnhover}
           />
-          <div id='track' className={styles['track']} ref={(e) => { this.track = e; }}>
+          <div className={styles['track']} id='track' ref={(e) => { this.track = e; }}>
             <DinosaurScrollHint
               validateImagesLoaded={this.validateImagesLoaded}
             />
             <SectionOne
-              timeline={this.timeline}
-              scrollDistance={this.scrollDistance}
-              validateImagesLoaded={this.validateImagesLoaded}
               ref={this.sectionOne}
+              scrollDistance={this.scrollDistance}
+              timeline={this.timeline}
+              validateImagesLoaded={this.validateImagesLoaded}
             />
             <SectionTwo
-              timeline={this.timeline}
-              scrollDistance={this.scrollDistance}
               animateInDiv={this.animateInDiv}
+              scrollDistance={this.scrollDistance}
+              timeline={this.timeline}
               validateImagesLoaded={this.validateImagesLoaded}
             />
             <SectionThree
-              timeline={this.timeline}
-              scrollDistance={this.scrollDistance}
               animateInDiv={this.animateInDiv}
+              scrollDistance={this.scrollDistance}
+              timeline={this.timeline}
               validateImagesLoaded={this.validateImagesLoaded}
             />
             <SectionFour
-              timeline={this.timeline}
-              scrollDistance={this.scrollDistance}
               animateInDiv={this.animateInDiv}
+              scrollDistance={this.scrollDistance}
+              timeline={this.timeline}
               validateImagesLoaded={this.validateImagesLoaded}
             />
             <Footer
-              timeline={this.timeline}
-              scrollDistance={this.scrollDistance}
               animateInDiv={this.animateInDiv}
+              scrollDistance={this.scrollDistance}
+              timeline={this.timeline}
               validateImagesLoaded={this.validateImagesLoaded}
             />
           </div>
           <div id={styles["drumheller-progress"]}>
-            <div id={styles["progressBar"]} ref={(e) => { this.progressBar = e; }}/>
+            <div id={styles["progressBar"]} ref={(e) => { this.progressBar = e; }} />
           </div>
         </div>
       </div>

@@ -19,8 +19,8 @@ class DinosaurScrollHint extends PureComponent {
     const { validateImagesLoaded } = this.props;
     return (
       <div className={styles["scroll-explore"]}>
-        <img className={styles["rotating-logo"]} onLoad={validateImagesLoaded()} ref={(e) => { this.rotatinglogo = e; }} src={ScrollToExplore} alt="Scroll to Explore" />
-        <img className={styles["skull-logo"]} onLoad={validateImagesLoaded()} src={DinosaurSkull} alt="Dino skull!" />
+        <img alt="Scroll to Explore" className={styles["rotating-logo"]} onLoad={validateImagesLoaded()} ref={(e) => { this.rotatinglogo = e; }} src={ScrollToExplore} />
+        <img alt="Dino skull!" className={styles["skull-logo"]} onLoad={validateImagesLoaded()} src={DinosaurSkull} />
       </div> 
     );
   }

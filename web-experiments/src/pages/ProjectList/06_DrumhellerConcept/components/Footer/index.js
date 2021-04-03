@@ -58,20 +58,20 @@ class Footer extends PureComponent {
         <div className={styles["drumheller-section-footer"]}>
           <div className={styles["drumheller-fulltext-textblock"]}>
             <div className={styles["footer-text"]}>
-              <InView as="div" delay={100} threshold={0.3} triggerOnce onChange={(inView, entry) => this.props.animateInDiv(inView, entry)}>
+              <InView as="div" delay={100} onChange={(inView, entry) => this.props.animateInDiv(inView, entry)} threshold={0.3} triggerOnce>
                 Get lost in
               </InView>
-              <InView as="div" delay={300} className={styles["left-shifted"]} triggerOnce onChange={(inView, entry) => this.props.animateInDiv(inView, entry)}>
+              <InView as="div" className={styles["left-shifted"]} delay={300} onChange={(inView, entry) => this.props.animateInDiv(inView, entry)} triggerOnce>
                 <span className={styles["drumheller-italic"]} style={{ paddingRight: '35px' }}>the</span>
                 <span className={styles["drumheller-outline"]}>
                   wonder
-                  <InView as="span" delay={600} className={styles["custom-underline-2"]} triggerOnce onChange={(inView, entry) => this.slideInUnderline(inView, entry)}>
-                    <img src={Underline2} onLoad={validateImagesLoaded()} alt="Underline" />
+                  <InView as="span" className={styles["custom-underline-2"]} delay={600} onChange={(inView, entry) => this.slideInUnderline(inView, entry)} triggerOnce>
+                    <img alt="Underline" onLoad={validateImagesLoaded()} src={Underline2} />
                   </InView>
                 </span>
                 <br />
               </InView>
-              <InView as="div" style={{ lineHeight: '1.3em' }} delay={600} threshold={0.3} triggerOnce onChange={(inView, entry) => this.props.animateInDiv(inView, entry)}>
+              <InView as="div" delay={600} onChange={(inView, entry) => this.props.animateInDiv(inView, entry)} style={{ lineHeight: '1.3em' }} threshold={0.3} triggerOnce>
                 of Tyrell
               </InView>
             </div>
@@ -80,15 +80,15 @@ class Footer extends PureComponent {
             <div className={styles["sub-text"]}>
               Discover more
             </div>
-            <Link to="/work" href="/work" onMouseEnter={this.onHighlightLink} className={styles["main-text"]}>
+            <Link className={styles["main-text"]} href="/work" onMouseEnter={this.onHighlightLink} to="/work">
               Web Experiments
               <span className={styles["custom-underline-3"]}>
-              <img onLoad={validateImagesLoaded()} src={Underline2} alt="Underline" />
+                <img alt="Underline" onLoad={validateImagesLoaded()} src={Underline2} />
               </span>
             </Link>
           </div>
           <div className={styles["drumheller-imagemask"]}>
-            <img ref={(e) => { this.dinosaurmask = e; }} onLoad={validateImagesLoaded()} src={DinosaurBackground} alt="Badlands!" /> 
+            <img alt="Badlands!" onLoad={validateImagesLoaded()} ref={(e) => { this.dinosaurmask = e; }} src={DinosaurBackground} /> 
           </div>
         </div>
       </div>

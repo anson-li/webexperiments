@@ -16,10 +16,10 @@ class Border extends PureComponent {
         <div id="bottom">
           <div className="col-md-12 top-center d-none d-sm-block">
             <h5 className="connect">
-              <Link to="/work" href="/work" className="menu-item strikethrough top-item">Experiments</Link>
-              <a href="http://anson.li/resume" className="menu-item strikethrough top-item">Resume</a>
-              <a href="https://github.com/anson-li" className="menu-item strikethrough top-item">Github</a>
-              <a href="https://www.linkedin.com/in/anson-ii" className="menu-item strikethrough top-item">LinkedIn</a>
+              <Link className="menu-item strikethrough top-item" href="/work" to="/work">Experiments</Link>
+              <a className="menu-item strikethrough top-item" href="http://anson.li/resume">Resume</a>
+              <a className="menu-item strikethrough top-item" href="https://github.com/anson-li">Github</a>
+              <a className="menu-item strikethrough top-item" href="https://www.linkedin.com/in/anson-ii">LinkedIn</a>
             </h5>
           </div>
         </div>

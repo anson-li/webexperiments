@@ -174,71 +174,71 @@ class Work extends PureComponent {
             unhover={cursorUnhover}
           />
           <div id={styles["track-wrapper"]} ref={(e) => { this.trackWrapper = e; }}>
-            <div id={styles['track']} className={styles['track']} ref={(e) => { this.track = e; }}>
+            <div className={styles['track']} id={styles['track']} ref={(e) => { this.track = e; }}>
               <Section
-                id="07"
-                title="WEBGL - Curtains"
+                date="MAR 2021"
                 description="Test implementation for WebGL, converting images into live canvas."
-                date="MAR 2021"
-                link="/webglcurtains"
+                id="07"
                 image={CanvasMountain}
+                link="/webglcurtains"
+                title="WEBGL - Curtains"
               />
               <Section
-                id="06"
-                title="Drumheller Concept"
+                date="MAR 2021"
                 description="Proof of concept for Drumheller's main page. Used advanced GSAP techniques &amp; video manipulation."
-                date="MAR 2021"
-                link="/drumheller"
+                id="06"
                 image={DrumhellerConcept}
+                link="/drumheller"
+                title="Drumheller Concept"
               />
               <Section
-                id="05"
-                title="Fill Loader"
+                date="MAR 2021"
                 description="Fill loader template built via SVG and GSAP. Replace with your logo!"
-                date="MAR 2021"
-                link="/dinosaurloader"
+                id="05"
                 image={DinosaurLoader}
+                link="/dinosaurloader"
+                title="Fill Loader"
               />
               <Section
-                id="04"
-                title="Color Shader"
-                description="Additive shader designed to 'wash' out the color in a three.js scene."
                 date="MAR 2021"
-                link="/additiveshader"
+                description="Additive shader designed to 'wash' out the color in a three.js scene."
+                id="04"
                 image={AdditiveShaderBanner}
+                link="/additiveshader"
+                title="Color Shader"
               />
               <Section
-                id="03"
-                title="ASCII Shader"
+                date="FEB 2021"
                 description="ASCII shader designed to render text and shapes via passthrough."
-                date="FEB 2021"
-                link="/asciishader"
+                id="03"
                 image={ASCIIShaderBanner}
+                link="/asciishader"
+                title="ASCII Shader"
               />
               <Section
-                id="02"
-                title="Coffee Cup"
-                description="Designed in Blender, completed the Blender tutorial and converted to three.js."
                 date="FEB 2021"
-                link="/coffeecup"
+                description="Designed in Blender, completed the Blender tutorial and converted to three.js."
+                id="02"
                 image={CoffeeCupBanner}
+                link="/coffeecup"
+                title="Coffee Cup"
               />
               <Section
-                id="01"
-                title="Jellicent"
-                description="First foray into three.js. Exploration of imported models &amp; camera movement."
                 date="DEC 2020"
-                link="/jellicent"
+                description="First foray into three.js. Exploration of imported models &amp; camera movement."
+                id="01"
                 image={JellicentBanner}
+                link="/jellicent"
+                title="Jellicent"
               />
               <div
                 className={styles["wall"]}
                 ref={(e) => { this.wall = e; }}
               >
                 <img
+                  alt="Skyline of Edmonton"
                   className={styles["img-wall"]}
                   src={EdmontonWall}
-                  alt="Skyline of Edmonton"
                 />
               </div>
             </div>
@@ -250,7 +250,7 @@ class Work extends PureComponent {
             Scroll to Explore <span className={styles["hint-arrow"]} ref={(e) => { this.hintArrow = e; }}>→</span>
           </div>
           <div id={styles['progress']}>
-            <div id={styles['progressBar']} ref={(e) => { this.progressBar = e; }}/>
+            <div id={styles['progressBar']} ref={(e) => { this.progressBar = e; }} />
           </div>
         </div>
       </div>

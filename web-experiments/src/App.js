@@ -65,13 +65,13 @@ class App extends PureComponent {
             .filter(({ path }) => this.matchPath(path))
             .map(({ Component, key }) => (
               <Component
-                key={key}
-                showLoader={this.showLoader}
+                cursorHover={this.onCursorHover}
+                cursorUnhover={this.onCursorUnhover}
+                hideFollow={this.hideFollow}
                 hideLoader={this.hideLoader}
-                cursorHover = {this.onCursorHover}
-                cursorUnhover = {this.onCursorUnhover}
-                hideFollow = {this.hideFollow}
-                showFollow = {this.showFollow}
+                key={key}
+                showFollow={this.showFollow}
+                showLoader={this.showLoader}
               />
             ))}
         </TransitionGroup>

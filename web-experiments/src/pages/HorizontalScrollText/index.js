@@ -104,7 +104,7 @@ class Work extends PureComponent {
     return (
       <div id="hz-page" ref={(e) => { this.el = e; }}>
         <TextLogo />
-        <div id='track' className='track' ref={(e) => { this.track = e; }}>
+        <div className='track' id='track' ref={(e) => { this.track = e; }}>
           <section className='section'>
             <h1>Moving sideways is fun</h1>
           </section>
@@ -120,7 +120,7 @@ class Work extends PureComponent {
         </div>
 
         <div id='progress'>
-          <div id='progressBar'/>
+          <div id='progressBar' />
         </div>
       </div>
     );

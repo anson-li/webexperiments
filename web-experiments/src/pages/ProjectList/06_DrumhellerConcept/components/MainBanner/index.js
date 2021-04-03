@@ -10,19 +10,19 @@ class MainBanner extends PureComponent {
       <>
         <div className={styles["main-banner"]}>
           <div className={styles["banner-index"]}>{id}</div>
-          <InView as="div" delay={100} triggerOnce className={styles["banner-title"]} onChange={(inView, entry) => animateInDiv(inView, entry)}>
+          <InView as="div" className={styles["banner-title"]} delay={100} onChange={(inView, entry) => animateInDiv(inView, entry)} triggerOnce>
             {title}
           </InView>
-          <InView as="div" delay={1000} triggerOnce className={styles["banner-description"]} onChange={(inView, entry) => animateInDiv(inView, entry)}>
+          <InView as="div" className={styles["banner-description"]} delay={1000} onChange={(inView, entry) => animateInDiv(inView, entry)} triggerOnce>
             {description}
           </InView>
-          <InView as="div" delay={1000} triggerOnce className={styles["banner-right-hint"]} onChange={(inView, entry) => animateInDiv(inView, entry)}>
+          <InView as="div" className={styles["banner-right-hint"]} delay={1000} onChange={(inView, entry) => animateInDiv(inView, entry)} triggerOnce>
             <div className={styles["banner-right-hint-title"]}>RIGHT</div>
             <div className={styles["banner-right-hint-description"]}>{imageHint}</div>
           </InView>
         </div>
         <div className={styles["fullscreen-image"]}>
-          <img src={image} onLoad={validateImagesLoaded()} alt={imageAlt} />
+          <img alt={imageAlt} onLoad={validateImagesLoaded()} src={image} />
         </div>
       </>
     );

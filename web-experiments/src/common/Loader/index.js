@@ -29,7 +29,7 @@ class Loader extends PureComponent {
     return (
       <div id="loader-wrapper" ref={(ref) => { this.loader = ref; }}>
         <div id="loader" />
-        <img className="loader-img" src={Logo} alt="Loader logo" />
+        <img alt="Loader logo" className="loader-img" src={Logo} />
         <div className="loader-section section-left" />
         <div className="loader-section section-right" />
         {/* <div id="bottom" className="loader-bottom" /> */}

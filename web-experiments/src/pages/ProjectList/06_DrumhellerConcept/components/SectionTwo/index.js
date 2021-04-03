@@ -24,36 +24,36 @@ class SectionTwo extends PureComponent {
       <div className={`${styles["drumheller-section"]} ${styles["two"]}`}>
         <div className={styles["drumheller-section-two"]}>
           <MainBanner  
-            id='01'
-            title='Our Vision'
+            animateInDiv={this.props.animateInDiv}
             description='We inspire a lifelong passion for science and foster a better understanding of the past, nurturing stewardship of our changing planet.'
-            imageHint='A ceratopsid skeleton'
+            id='01'
             image={ImageOneOne}
             imageAlt='Ceratopsid!'
-            animateInDiv={this.props.animateInDiv}
+            imageHint='A ceratopsid skeleton'
+            title='Our Vision'
             validateImagesLoaded={validateImagesLoaded}
           />
           <div className={styles["top-video-section"]}>
             <div className={styles["upper-video"]} ref={(e) => { this.topone = e; }}>
-              <video onLoad={validateImagesLoaded()} autoPlay="autoplay" muted={true} loop={true}>
+              <video autoPlay="autoplay" loop muted onLoad={validateImagesLoaded()}>
                 <source src={VideoOneTwo} type="video/mp4" />
               </video>
             </div>
             <span ref={(e) => { this.bottomone = e; }}>
-              <InView as="div" className={styles["lower-text"]} delay={100} triggerOnce onChange={(inView, entry) => this.props.animateInDiv(inView, entry)}>
+              <InView as="div" className={styles["lower-text"]} delay={100} onChange={(inView, entry) => this.props.animateInDiv(inView, entry)} triggerOnce>
                 The Tyrrell is Canada’s only<br />museum dedicated exclusively<br />to the science of palaeontology.
               </InView>
             </span>
           </div>
           <div className={styles["bottom-image-section"]}>
             <div className={styles["upper-text"]} ref={(e) => { this.toptwo = e; }}>
-              <InView as="div" className={styles["panel-left"]} delay={100} triggerOnce onChange={(inView, entry) => this.props.animateInDiv(inView, entry)}>
+              <InView as="div" className={styles["panel-left"]} delay={100} onChange={(inView, entry) => this.props.animateInDiv(inView, entry)} triggerOnce>
                 “Part of what’s special about the museum is it’s situated<br />
                 in the Badlands, so the surrounding landscape is very<br />
                 rich in Cretaceous Period fossils and a lot of the<br />
                 material that’s found in the museum are Alberta fossils.
               </InView>
-              <InView as="div" className={styles["panel-right"]} delay={100} triggerOnce onChange={(inView, entry) => this.props.animateInDiv(inView, entry)}>
+              <InView as="div" className={styles["panel-right"]} delay={100} onChange={(inView, entry) => this.props.animateInDiv(inView, entry)} triggerOnce>
                 I think what’s special about coming here is the<br />
                 landscape, and knowing that what you’re looking<br />
                 at in the museum is so rooted in place and time and<br />
@@ -61,7 +61,7 @@ class SectionTwo extends PureComponent {
               </InView>
             </div>
             <div className={styles["bottom-image"]} ref={(e) => { this.bottomtwo = e; }}>
-              <img src={ImageOneThree} onLoad={validateImagesLoaded()} alt="Run!" />
+              <img alt="Run!" onLoad={validateImagesLoaded()} src={ImageOneThree} />
             </div>
           </div>
         </div>

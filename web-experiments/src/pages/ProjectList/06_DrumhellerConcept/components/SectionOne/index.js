@@ -48,26 +48,26 @@ class SectionOne extends PureComponent {
               <span className={styles["drumheller-outline"]}>
                 Tyrrell
                 <span className={styles["custom-underline"]} ref={(e) => { this.underline = e; }}>
-                  <img src={Underline} alt="Underline" />
+                  <img alt="Underline" src={Underline} />
                 </span>
               </span>
             </div>
           </div>
           <div className={styles["description"]}>
-          Set in the rugged Alberta badlands, the Royal Tyrrell<br/>
-          Museum of Palaeontology displays one of the world's<br/>
-          largest collections of dinosaurs.<br/><br/>
+            Set in the rugged Alberta badlands, the Royal Tyrrell<br />
+            Museum of Palaeontology displays one of the world's<br />
+            largest collections of dinosaurs.<br /><br />
 
-          With ever-changing exhibits and self-guided experiences<br/>
-          year-round, there is always something new to discover.
+            With ever-changing exhibits and self-guided experiences<br />
+            year-round, there is always something new to discover.
           </div>
         </div>
-        <div ref={(e) => { this.imagetwo = e; }} className={`${styles["image-block"]} ${styles["drumheller-imageblock-two"]}`}>
-          <img src={ImageIntroTwo} onLoad={validateImagesLoaded()} alt="Skeleton!" />
+        <div className={`${styles["image-block"]} ${styles["drumheller-imageblock-two"]}`} ref={(e) => { this.imagetwo = e; }}>
+          <img alt="Skeleton!" onLoad={validateImagesLoaded()} src={ImageIntroTwo} />
           <div className={styles["image-block-description"]}>Tyrannosaurus Rex Skeleton</div>
         </div>
-        <div ref={(e) => { this.imageone = e; }} className={`${styles["image-block"]} ${styles["drumheller-imageblock-one"]}`}>
-          <img src={ImageIntroOne} onLoad={validateImagesLoaded()} alt="Dinosaurs!" />
+        <div className={`${styles["image-block"]} ${styles["drumheller-imageblock-one"]}`} ref={(e) => { this.imageone = e; }}>
+          <img alt="Dinosaurs!" onLoad={validateImagesLoaded()} src={ImageIntroOne} />
           <div className={styles["image-block-description"]}>Dinosaurs Recreated for Today</div>
         </div>
       </div>
