@@ -93,7 +93,7 @@ class DrumhellerConcept extends PureComponent {
     const track = this.track;
     const trackWidth = track.clientWidth;
 
-    gsap.set('#work-page', { height: trackWidth });
+    gsap.set('#drumheller-main-page', { height: trackWidth });
 
     this.scrollDistance = trackWidth - innerWidth;
 
@@ -199,7 +199,7 @@ class DrumhellerConcept extends PureComponent {
   render() {
     const { cursorHover, cursorUnhover } = this.props;
     return (
-      <div id="work-page" ref={(e) => { this.el = e; }}>
+      <div id="drumheller-main-page" ref={(e) => { this.el = e; }}>
         <div id="track-wrapper">
           <TextLogo
             hover={cursorHover}
