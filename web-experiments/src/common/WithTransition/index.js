@@ -3,11 +3,13 @@
 
 // Built from https://codesandbox.io/s/mz6rz6zw3x?file=/src/sections/About.js
 import React from 'react';
-import { Transition } from 'react-transition-group';
+import {
+  Transition,
+} from 'react-transition-group';
 
-export default function withTransition(WrappedComponent) {
+export default function withTransition (WrappedComponent) {
   return class extends React.Component {
-    handleAnimateIn(done) {
+    handleAnimateIn (done) {
       if (typeof this.wrappedComponent.animateIn === 'function') {
         const promise = this.wrappedComponent.animateIn();
         if (promise && typeof promise.then === 'function') {
@@ -18,9 +20,11 @@ export default function withTransition(WrappedComponent) {
       }
     }
 
-    handleAnimateOut(done) {
+    handleAnimateOut (done) {
       const next = () => {
-        if (done) done();
+        if (done) {
+          done();
+        }
       };
       if (typeof this.wrappedComponent.animateOut === 'function') {
         const promise = this.wrappedComponent.animateOut();
@@ -34,7 +38,7 @@ export default function withTransition(WrappedComponent) {
       }
     }
 
-    hidePage(done) {
+    hidePage (done) {
       if (typeof this.wrappedComponent.hidePage === 'function') {
         const promise = this.wrappedComponent.hidePage();
         if (promise && typeof promise.then === 'function') {
@@ -45,7 +49,7 @@ export default function withTransition(WrappedComponent) {
       }
     }
 
-    render() {
+    render () {
       return (
         <Transition
           {...this.props}
@@ -63,13 +67,15 @@ export default function withTransition(WrappedComponent) {
             }
           }}
         >
-          {(status) => (
-            <WrappedComponent
-              ref={(e) => { this.wrappedComponent = e; }}
+          {(status) => {
+            return <WrappedComponent
+              ref={(e) => {
+                this.wrappedComponent = e;
+              }}
               {...this.props}
               transitionStatus={status}
-            />
-          )}
+            />;
+          }}
         </Transition>
       );
     }

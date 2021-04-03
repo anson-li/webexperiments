@@ -1,64 +1,74 @@
 /* eslint-disable no-return-assign */
-import React, { PureComponent } from 'react';
+import {
+  TweenLite,
+} from 'gsap';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
-import { TweenLite } from 'gsap';
-
+import React, {
+  PureComponent,
+} from 'react';
+import {
+  Link,
+} from 'react-router-dom';
 import styles from './style.module.scss';
 
 class Section extends PureComponent {
-  constructor(props) {
+  constructor (props) {
     super(props);
     this.hoverSection = this.hoverSection.bind(this);
     this.unhoverSection = this.unhoverSection.bind(this);
   }
 
-  hoverSection() {
+  hoverSection () {
     TweenLite.to(this.id, 0.2, {
-      top: '19vh'
+      top: '19vh',
     });
     TweenLite.to(this.image, 0.2, {
       scaleX: 1.1,
-      scaleY: 1.1
+      scaleY: 1.1,
     });
   }
 
-  unhoverSection() {
+  unhoverSection () {
     TweenLite.to(this.id, 0.2, {
-      top: '18vh'
+      top: '18vh',
     });
     TweenLite.to(this.image, 0.2, {
       scaleX: 1,
-      scaleY: 1
+      scaleY: 1,
     });
   }
 
-  render() {
+  render () {
     const { id, title, description, date, link, image } = this.props;
+
     return (
       <Link
-        className={styles['section']}
+        className={styles.section}
         href={link}
         onMouseEnter={this.hoverSection}
         onMouseLeave={this.unhoverSection}
-        to={link}  
+        to={link}
       >
         <div
-          className={styles["id"]}
-          ref={(ref) => { this.id = ref; }}
+          className={styles.id}
+          ref={(ref) => {
+            this.id = ref;
+          }}
         >
           {id}
         </div>
-        <p className={styles["section-title"]}>{title} • <span className={styles["date"]}>{date}</span>
+        <p className={styles['section-title']}>{title} • <span className={styles.date}>{date}</span>
         </p>
-        <div className={styles["section-box"]}>
-          <p className={styles["description"]}>{description}</p>
+        <div className={styles['section-box']}>
+          <p className={styles.description}>{description}</p>
         </div>
-        <div className={styles["section-image"]}>
+        <div className={styles['section-image']}>
           <div
-            alt="Project banner"
-            className={styles["image"]}
-            ref={(ref) => { this.image = ref; }}
+            alt='Project banner'
+            className={styles.image}
+            ref={(ref) => {
+              this.image = ref;
+            }}
             style={{ backgroundImage: `url(${image})`}} />
         </div>
       </Link>

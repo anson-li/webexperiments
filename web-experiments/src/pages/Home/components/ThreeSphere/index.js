@@ -1,23 +1,30 @@
-import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import * as THREE from 'three';
-
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
-import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer';
-import { ShaderPass } from 'three/examples/jsm/postprocessing/ShaderPass';
-import { RenderPass } from "three/examples/jsm/postprocessing/RenderPass";
-
-import modelFile from '../../../../web/assets/objects/skullcrane.glb';
+import React, {
+  PureComponent,
+} from 'react';
+import {
+  Scene, PerspectiveCamera, Color, PointLight, WebGLRenderer, Group, MeshBasicMaterial, WebGLRenderTarget, CylinderGeometry, Matrix4, ShaderMaterial, Vector3, Mesh, TextureLoader, NearestFilter, Vector2, DepthTexture, UnsignedShortType, Clock,
+} from 'three';
+import {
+  GLTFLoader,
+} from 'three/examples/jsm/loaders/GLTFLoader';
+import {
+  EffectComposer,
+} from 'three/examples/jsm/postprocessing/EffectComposer';
+import {
+  RenderPass,
+} from 'three/examples/jsm/postprocessing/RenderPass';
+import {
+  ShaderPass,
+} from 'three/examples/jsm/postprocessing/ShaderPass';
 import fontFile from '../../../../web/assets/objects/font2.png';
-
+import modelFile from '../../../../web/assets/objects/skullcrane.glb';
 import ASCIIShader from './shaders/ASCII';
-import VolumetricLightScattering from "./shaders/VolumetricLightScattering";
-import VolumetricLightCylinder from "./shaders/VolumetricLightCylinder";
-
+import VolumetricLightCylinder from './shaders/VolumetricLightCylinder';
+import VolumetricLightScattering from './shaders/VolumetricLightScattering';
 
 class ThreeSphere extends PureComponent {
-
-  constructor(props) {
+  constructor (props) {
     super(props);
 
     this.init = this.init.bind(this);
@@ -55,16 +62,16 @@ class ThreeSphere extends PureComponent {
     this.occlusionComposer = null;
 
     this.DEFAULT_LAYER = 0;
-    this.OCCLUSION_LAYER = 1;  
+    this.OCCLUSION_LAYER = 1;
   }
 
-  componentDidMount() {
+  componentDidMount () {
     setTimeout(() => {
       this.init();
     }, 1000);
   }
 
-  componentWillUnmount() {
+  componentWillUnmount () {
     window.removeEventListener('resize', this.resizeRenderer);
     this.container.removeChild(this.renderer.domElement);
     this.stop();
@@ -77,63 +84,63 @@ class ThreeSphere extends PureComponent {
   }
 
   // Create Scene + Camera
-  init() {
-
+  init () {
     this.container = document.createElement('div');
     document.body.appendChild(this.container);
-    this.mainScene = new THREE.Scene()
+    this.mainScene = new Scene();
 
-    this.mainCamera = new THREE.PerspectiveCamera(
+    this.mainCamera = new PerspectiveCamera(
       20, // camera frustrum field of view
       window.innerWidth / window.innerHeight, // camera aspect ratio
       0.1, // near plane, or the minimum range to start rendering. If it's too high, stuff that's too close will be missed.
-      12 // far plane, or the maximum range to render. Important to note it's affecting your render quality too.
-    )
+      12, // far plane, or the maximum range to render. Important to note it's affecting your render quality too.
+    );
     this.mainCamera.position.z = 10; // zooms out to capture detail - everything is x10 size to capture detail
     this.mainCamera.position.x = 1.3; // shifts the camera more towards the middle of the frame
     this.mainCamera.position.y = 0.5; // moves the camera slightly higher
-    
+
     this.occlusionCamera = this.mainCamera.clone();
     this.occlusionCamera.layers.set(this.OCCLUSION_LAYER);
 
-    this.mainScene.background = new THREE.Color( 0xffc99b );
+    this.mainScene.background = new Color(0xffc99b);
 
     // Add Point Lights
-    this.backLight = new THREE.PointLight(0xdbc0b3, 3, 20);
+    this.backLight = new PointLight(0xdbc0b3, 3, 20);
     this.backLight.layers.enable(this.OCCLUSION_LAYER);
     this.backLight.position.set(-5, 5, 3);
     this.mainScene.add(this.backLight);
-  
-    this.fillLight = new THREE.PointLight(0xe0b8c7, 0.7, 20);
+
+    this.fillLight = new PointLight(0xe0b8c7, 0.7, 20);
     this.fillLight.layers.enable(this.OCCLUSION_LAYER);
     this.fillLight.position.set(5, 0, 5);
     this.mainScene.add(this.fillLight);
-  
-    this.keyLight = new THREE.PointLight(0xc29999, 2, 20);
+
+    this.keyLight = new PointLight(0xc29999, 2, 20);
     this.keyLight.layers.enable(this.OCCLUSION_LAYER);
     this.keyLight.position.set(5, 0, 0);
     this.mainScene.add(this.keyLight);
 
     // Create Renderer
-    this.renderer = new THREE.WebGLRenderer();
+    this.renderer = new WebGLRenderer();
     this.renderer.setSize(window.innerWidth, window.innerHeight);
     this.container.appendChild(this.renderer.domElement);
 
     // Load 3D Model
-    this.loader = new GLTFLoader();  
-    this.modelContainer = new THREE.Group();
+    this.loader = new GLTFLoader();
+    this.modelContainer = new Group();
     this.modelContainer.layers.enable(this.OCCLUSION_LAYER);
 
     this.mainScene.add(this.modelContainer);
-  
+
     this.loader.load(
       modelFile,
-      gltf => {
+      (gltf) => {
         this.modelContainer.add(gltf.scene);
+
         // Add black mesh set to occlusion Layer
         const occlusionScene = gltf.scene.clone();
-        const blackMaterial = new THREE.MeshBasicMaterial({
-          color: new THREE.Color(0x000000)
+        const blackMaterial = new MeshBasicMaterial({
+          color: new Color(0x000000),
         });
         occlusionScene.traverse((node) => {
           if (node.material) {
@@ -146,13 +153,13 @@ class ThreeSphere extends PureComponent {
         this.modelContainer.add(occlusionScene);
       },
       undefined,
-      console.error
+      console.error,
     );
 
     // Volumetric Lighting
-    this.occlusionRenderTarget = new THREE.WebGLRenderTarget(
+    this.occlusionRenderTarget = new WebGLRenderTarget(
       window.innerWidth * 0.5,
-      window.innerHeight * 0.5
+      window.innerHeight * 0.5,
     );
 
     this.occlusionComposer = new EffectComposer(this.renderer, this.occlusionRenderTarget);
@@ -163,49 +170,49 @@ class ThreeSphere extends PureComponent {
     this.lightScatteringPass.needsSwap = false;
     this.occlusionComposer.addPass(this.lightScatteringPass);
 
-    const lightGeometry = new THREE.CylinderGeometry(3, 6, 15, 32, 6, true);
+    const lightGeometry = new CylinderGeometry(3, 6, 15, 32, 6, true);
     lightGeometry.applyMatrix4(
-      new THREE.Matrix4().makeTranslation(
+      new Matrix4().makeTranslation(
         0,
         -lightGeometry.parameters.height / 2,
-        0
-      )
+        0,
+      ),
     );
-    lightGeometry.applyMatrix4(new THREE.Matrix4().makeRotationX(-Math.PI / 2));
+    lightGeometry.applyMatrix4(new Matrix4().makeRotationX(-Math.PI / 2));
 
-    this.lightCylinderMaterial = new THREE.ShaderMaterial(
-      VolumetricLightCylinder()
+    this.lightCylinderMaterial = new ShaderMaterial(
+      VolumetricLightCylinder(),
     );
-    this.lightConeTarget = new THREE.Vector3(0, 0, -8);
-    this.lightCone = new THREE.Mesh(lightGeometry, this.lightCylinderMaterial);
+    this.lightConeTarget = new Vector3(0, 0, -8);
+    this.lightCone = new Mesh(lightGeometry, this.lightCylinderMaterial);
     this.lightCone.position.set(-5, 5, -8);
     this.lightCone.layers.set(this.OCCLUSION_LAYER);
     this.lightCylinderMaterial.uniforms.spotPosition.value = this.lightCone.position;
     this.mainScene.add(this.lightCone);
 
     // Load font texture for render pass
-    const fontLoader = new THREE.TextureLoader()
+    const fontLoader = new TextureLoader();
     const tFont = fontLoader.load(fontFile);
-    tFont.minFilter = THREE.NearestFilter;
-    tFont.magFilter = THREE.NearestFilter;
- 
+    tFont.minFilter = NearestFilter;
+    tFont.magFilter = NearestFilter;
+
     // Calculate render target and setup first pass
-    this.fontMapSize = new THREE.Vector2(64, 64);
-    this.fontCharSize = new THREE.Vector2(8, 8);
+    this.fontMapSize = new Vector2(64, 64);
+    this.fontCharSize = new Vector2(8, 8);
     const startingSizeData = this.getLowResSize();
 
     // Should match whatever was set in updateAsciiRenderSize
-    this.lowResRenderTarget = new THREE.WebGLRenderTarget(
+    this.lowResRenderTarget = new WebGLRenderTarget(
       startingSizeData.charCountCeil[0] * 2,
-      startingSizeData.charCountCeil[1] * 2
+      startingSizeData.charCountCeil[1] * 2,
     );
-    
-    const lowResDepthTexture = new THREE.DepthTexture();
-    lowResDepthTexture.type = THREE.UnsignedShortType;
+
+    const lowResDepthTexture = new DepthTexture();
+    lowResDepthTexture.type = UnsignedShortType;
     this.lowResRenderTarget.depthTexture = lowResDepthTexture;
 
     this.finalComposer = new EffectComposer(this.renderer);
-    
+
     this.asciiPass = new ShaderPass(ASCIIShader());
     this.asciiPass.uniforms.tLowRes.value = this.lowResRenderTarget.texture;
     this.asciiPass.uniforms.tDepth.value = lowResDepthTexture;
@@ -219,8 +226,8 @@ class ThreeSphere extends PureComponent {
 
     this.asciiPass.uniforms.fontCharTotalCount.value =
       Math.floor(fontCountX) * Math.floor(fontCountY);
-      this.asciiPass.uniforms.fontCharSize.value.set(1 / fontCountX, 1 / fontCountY);
-      this.asciiPass.uniforms.fontCharCount.value.set(fontCountX, fontCountY);
+    this.asciiPass.uniforms.fontCharSize.value.set(1 / fontCountX, 1 / fontCountY);
+    this.asciiPass.uniforms.fontCharCount.value.set(fontCountX, fontCountY);
     this.updateAsciiRenderSize();
 
     this.finalComposer.addPass(this.asciiPass);
@@ -229,7 +236,7 @@ class ThreeSphere extends PureComponent {
     const colorShader = {
       uniforms: {
         tDiffuse: { value: null },
-        color:    { value: new THREE.Color(0xcbc7d1) },
+        color: { value: new Color(0xcbc7d1) },
       },
       vertexShader: `
         varying vec2 vUv;
@@ -250,83 +257,83 @@ class ThreeSphere extends PureComponent {
         }
       `,
     };
-  
+
     const colorPass = new ShaderPass(colorShader);
     colorPass.renderToScreen = true;
     this.finalComposer.addPass(colorPass);
 
-    this.clock = new THREE.Clock();
+    this.clock = new Clock();
     this.modelContainer.rotation.x = 0.5;
     this.modelContainer.rotation.y = 5.7;
 
-    window.addEventListener("mousemove", this.mousemove);
-    window.addEventListener("resize", this.resizeRenderer);
+    window.addEventListener('mousemove', this.mousemove);
+    window.addEventListener('resize', this.resizeRenderer);
 
     this.props.hideLoader();
     this.renderScene();
   }
 
-  mousemove(e) {
+  mousemove (e) {
     if (this.lightCone) {
-      this.lightCone.position.x = 5 * ((e.clientX / window.innerWidth) * 2 - 1);
+      this.lightCone.position.x = 5 * (e.clientX / window.innerWidth * 2 - 1);
       this.backLight.position.x = this.lightCone.position.x;
     }
     this.modelContainer.rotation.x = 0.5 + 0.0001 * e.clientX;
     this.modelContainer.rotation.y = 5.7 + 0.0001 * e.clientY;
   }
 
-  updateAsciiRenderSize() {
+  updateAsciiRenderSize () {
     const size = this.getLowResSize();
-  
+
     this.asciiPass.uniforms.renderCharSize.value.set(
       1 / size.charCountPrecise[0],
-      1 / size.charCountPrecise[1]
+      1 / size.charCountPrecise[1],
     );
-  
+
     this.asciiPass.uniforms.renderCharCount.value.set(
       size.charCountPrecise[0],
-      size.charCountPrecise[1]
+      size.charCountPrecise[1],
     );
-  
+
     // This affects the level of detail. The higher the ratio is
     // (times mutliplier) the bigger each render block will be, and
     // the sharper the shape / less detailed each block will be.
     this.lowResRenderTarget.setSize(
       size.charCountCeil[0] * 5,
-      size.charCountCeil[1] * 5
+      size.charCountCeil[1] * 5,
     );
   }
 
-  getLowResSize() {
+  getLowResSize () {
     const charCountPrecise = [
       window.innerWidth / this.fontCharSize.x,
       window.innerHeight / this.fontCharSize.y,
-    ]
-  
-    const charCountCeil = charCountPrecise.map(Math.ceil)
-  
+    ];
+
+    const charCountCeil = charCountPrecise.map(Math.ceil);
+
     return {
       charCountPrecise,
       charCountCeil,
-    }
+    };
   }
 
   // Handle Window Resize
-  resizeRenderer() {
+  resizeRenderer () {
     this.mainCamera.aspect = window.innerWidth / window.innerHeight;
     this.mainCamera.updateProjectionMatrix();
     this.renderer.setSize(window.innerWidth, window.innerHeight);
   }
 
   // Render Scene
-  renderScene() {
+  renderScene () {
     this.lightCone.lookAt(this.lightConeTarget);
     this.lightCylinderMaterial.uniforms.spotPosition.value = this.lightCone.position;
     const lightConePosition = this.lightCone.position.clone();
     const vector = lightConePosition.project(this.occlusionCamera);
     this.lightScatteringPass.uniforms.lightPosition.value.set(
       (vector.x + 1) / 2,
-      (vector.y + 1) / 2
+      (vector.y + 1) / 2,
     );
 
     this.renderer.setRenderTarget(this.occlusionRenderTarget);
@@ -339,15 +346,17 @@ class ThreeSphere extends PureComponent {
     this.finalComposer.render();
     this.requestId = requestAnimationFrame(this.renderScene);
   }
-  
-  stop() {
+
+  stop () {
     cancelAnimationFrame(this.requestId);
     this.requestId = undefined;
   }
 
-  render() {
+  render () {
     return (
-      <div ref={(ref) => { this.mount = ref; }} />
+      <div ref={(ref) => {
+        this.mount = ref;
+      }} />
     );
   }
 }

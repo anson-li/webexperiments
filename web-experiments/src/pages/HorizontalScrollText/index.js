@@ -1,19 +1,25 @@
 /* eslint-disable no-return-assign */
 import anime from 'animejs';
-import React, { PureComponent } from 'react';
+import {
+  gsap,
+} from 'gsap';
+import {
+  ScrollTrigger,
+} from 'gsap/ScrollTrigger';
 import PropTypes from 'prop-types';
+import React, {
+  PureComponent,
+} from 'react';
 import TextLogo from '../../common/TextLogo';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
 import withTransition from '../../common/WithTransition';
 import './style.scss';
 
 gsap.registerPlugin(ScrollTrigger);
 
 class Work extends PureComponent {
-  hidePage() {
+  hidePage () {
     anime.remove(this.el);
+
     return anime({
       targets: this.el,
       opacity: 0,
@@ -21,8 +27,9 @@ class Work extends PureComponent {
     }).finished;
   }
 
-  animateIn() {
+  animateIn () {
     anime.remove(this.el);
+
     return anime({
       targets: this.el,
       opacity: [0, 1],
@@ -32,10 +39,11 @@ class Work extends PureComponent {
     }).finished;
   }
 
-  animateOut() {
+  animateOut () {
     anime.remove(this.el);
     const { showLoader } = this.props;
     showLoader();
+
     return anime({
       targets: this.el,
       opacity: 0,
@@ -44,67 +52,78 @@ class Work extends PureComponent {
     }).finished;
   }
 
-  componentDidMount() {
+  componentDidMount () {
     this.props.hideLoader();
     const innerWidth = window.innerWidth;
     const track = this.track;
 
     const trackWidth = track.clientWidth;
 
-    gsap.set('#hz-page', { height: trackWidth })
+    gsap.set('#hz-page', { height: trackWidth });
 
     const scrollDistance = trackWidth - innerWidth;
 
     const timeline = gsap.timeline({
       smoothChildTiming: true,
       defaults: {
-        ease: 'none'
+        ease: 'none',
       },
       scrollTrigger: {
         horizontal: false,
         trigger: '#track',
         start: 0,
         scrub: 1,
-        end: () => `+=${scrollDistance}`,
-        // onUpdate: (update) => console.log(update.progress)
-      } 
-    }).to('#track', { 
-      duration: 100,
-      x: -scrollDistance
-    });
+        end: () => {
+          return `+=${scrollDistance}`;
+        },
 
+        // onUpdate: (update) => console.log(update.progress)
+      },
+    }).to('#track', {
+      duration: 100,
+      x: -scrollDistance,
+    });
 
     /**
      * Timeline progress bar translates on X from -100% to 0% over the full duration (100)
      */
-    timeline.to('#progressBar', { xPercent: 100, duration: 100 }, 0)
-    
+    timeline.to('#progressBar', { xPercent: 100,
+      duration: 100 }, 0);
+
     /**
      * Map tweens for each section
      */
     const sections = gsap.utils.toArray('.section');
-    const sectionDuration = Math.floor(100/(sections.length - 1)) 
+    const sectionDuration = Math.floor(100 / (sections.length - 1));
 
     sections.forEach((section, index) => {
-      const text = section.querySelector('h1')
-      const sectionStart = Math.max(sectionDuration * (index -1), 0)
+      const text = section.querySelector('h1');
+      const sectionStart = Math.max(sectionDuration * (index - 1), 0);
       const tweenDuration = 100 + sectionStart <= 100 ? 100 : 100 - sectionStart;
 
       // Move the text
       if (index + 1 !== sections.length) {
-        timeline.to(text, { xPercent:  'random(25,50,5)', duration: tweenDuration}, sectionStart)
+        timeline.to(text, { xPercent: 'random(25,50,5)',
+          duration: tweenDuration}, sectionStart);
       }
-    })
+    });
 
     ScrollTrigger.refresh();
+
     // timeline.play();
   }
 
-  render() {
+  render () {
     return (
-      <div id="hz-page" ref={(e) => { this.el = e; }}>
+      <div
+        id='hz-page' ref={(e) => {
+          this.el = e;
+        }}>
         <TextLogo />
-        <div className='track' id='track' ref={(e) => { this.track = e; }}>
+        <div
+          className='track' id='track' ref={(e) => {
+            this.track = e;
+          }}>
           <section className='section'>
             <h1>Moving sideways is fun</h1>
           </section>

@@ -1,10 +1,16 @@
-import React, { PureComponent } from 'react';
-import { TweenLite } from 'gsap';
-import { Link } from 'react-router-dom';
+import {
+  TweenLite,
+} from 'gsap';
+import React, {
+  PureComponent,
+} from 'react';
+import {
+  Link,
+} from 'react-router-dom';
 import './style.scss';
 
 class BubbleLink extends PureComponent {
-  constructor(props) {
+  constructor (props) {
     super(props);
     this.moveLink = this.moveLink.bind(this);
     this.windowHalfX = window.innerWidth / 2;
@@ -15,8 +21,7 @@ class BubbleLink extends PureComponent {
     this.onWindowResize = this.onWindowResize.bind(this);
   }
 
-
-  componentDidMount() {
+  componentDidMount () {
     window.addEventListener('resize', this.onWindowResize, false);
     window.addEventListener('mousemove', this.moveLink);
     this.bubbleLink.addEventListener('mouseenter', this.hoverLink);
@@ -27,30 +32,30 @@ class BubbleLink extends PureComponent {
     });
   }
 
-  hoverLink(e) {
+  hoverLink (e) {
     if (this.bubbleLink) {
       TweenLite.to(this.bubbleLink, 0.5, {
         background: '#333',
-        color: 'white'
+        color: 'white',
       });
     }
   }
 
-  stopHoverLink() {
+  stopHoverLink () {
     if (this.bubbleLink) {
       TweenLite.to(this.bubbleLink, 0.5, {
         background: 'transparent',
-        color: '#333'
+        color: '#333',
       });
     }
   }
 
-  onWindowResize() {
+  onWindowResize () {
     this.windowHalfX = window.innerWidth / 2;
     this.windowHalfY = window.innerHeight / 2;
   }
 
-  moveLink(e) {
+  moveLink (e) {
     if (this.bubbleLink) {
       TweenLite.to(this.bubbleLink, 0.7, {
         x: (e.x - this.windowHalfX) / 2 + this.windowHalfX,
@@ -59,15 +64,17 @@ class BubbleLink extends PureComponent {
     }
   }
 
-  render() {
+  render () {
     return (
       <Link
-        href="work"
-        id="sub-link"
-        ref={(ref) => { this.bubbleLink = ref; }}
-        to="/work"
+        href='work'
+        id='sub-link'
+        ref={(ref) => {
+          this.bubbleLink = ref;
+        }}
+        to='/work'
       >
-        <div id="sub-link-text">
+        <div id='sub-link-text'>
           { this.props.text }
         </div>
       </Link>

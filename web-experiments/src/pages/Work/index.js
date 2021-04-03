@@ -1,29 +1,35 @@
 /* eslint-disable no-return-assign */
 import anime from 'animejs';
-import React, { PureComponent } from 'react';
+import {
+  gsap,
+} from 'gsap';
+import {
+  ScrollTrigger,
+} from 'gsap/ScrollTrigger';
+import {
+  Draggable, InertiaPlugin,
+} from 'gsap/all';
 import PropTypes from 'prop-types';
+import React, {
+  PureComponent,
+} from 'react';
 import TextLogo from '../../common/TextLogo';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Draggable, InertiaPlugin } from 'gsap/all';
-import Section from './components/Section';
-
+import withTransition from '../../common/WithTransition';
 import EdmontonWall from '../../web/assets/edmonton-wall.jpg';
-import JellicentBanner from '../../web/assets/images/project-banner/jellicent.jpg';
 import AdditiveShaderBanner from '../../web/assets/images/project-banner/additiveshader.jpg';
 import ASCIIShaderBanner from '../../web/assets/images/project-banner/asciishader.PNG';
+import CanvasMountain from '../../web/assets/images/project-banner/canvasmountain.PNG';
 import CoffeeCupBanner from '../../web/assets/images/project-banner/coffeecup.jpg';
 import DinosaurLoader from '../../web/assets/images/project-banner/dinoloader.PNG';
 import DrumhellerConcept from '../../web/assets/images/project-banner/drumhellerconcept.jpg';
-import CanvasMountain from '../../web/assets/images/project-banner/canvasmountain.PNG';
-
-import withTransition from '../../common/WithTransition';
+import JellicentBanner from '../../web/assets/images/project-banner/jellicent.jpg';
+import Section from './components/Section';
 import styles from './style.module.scss';
 
 gsap.registerPlugin(ScrollTrigger, Draggable, InertiaPlugin);
 
 class Work extends PureComponent {
-  constructor(props) {
+  constructor (props) {
     super(props);
     this.onWindowResize = this.onWindowResize.bind(this);
     this.setupTrackAnimation = this.setupTrackAnimation.bind(this);
@@ -34,8 +40,9 @@ class Work extends PureComponent {
     this.pageST = null;
   }
 
-  hidePage() {
+  hidePage () {
     anime.remove(this.el);
+
     return anime({
       targets: this.el,
       opacity: 0,
@@ -43,8 +50,9 @@ class Work extends PureComponent {
     }).finished;
   }
 
-  animateIn() {
+  animateIn () {
     anime.remove(this.el);
+
     return anime({
       targets: this.el,
       opacity: [0, 1],
@@ -54,10 +62,11 @@ class Work extends PureComponent {
     }).finished;
   }
 
-  animateOut() {
+  animateOut () {
     anime.remove(this.el);
     const { showLoader } = this.props;
     showLoader();
+
     return anime({
       targets: this.el,
       opacity: 0,
@@ -66,12 +75,12 @@ class Work extends PureComponent {
     }).finished;
   }
 
-  onWindowResize() {
+  onWindowResize () {
     // this.timeline.invalidate().restart();
     // this.setupTrackAnimation();
   }
 
-  setupTrackAnimation() {
+  setupTrackAnimation () {
     const innerWidth = window.innerWidth;
     const track = this.track;
     const trackWidth = track.clientWidth;
@@ -84,15 +93,18 @@ class Work extends PureComponent {
     this.timeline = gsap.timeline({
       smoothChildTiming: true,
       defaults: {
-        ease: 'none'
+        ease: 'none',
       },
-    }).to(this.track, { 
+    }).to(this.track, {
       duration: 100,
-      x: -this.scrollDistance
+      x: -this.scrollDistance,
     });
-    this.timeline.to(this.progressBar, { xPercent: 100, duration: 100 }, 0);
-    this.timeline.to(this.wall, { x: this.scrollDistance * 0.2, duration: 100 }, 0);
-    this.timeline.to(this.scrollHint, { opacity: 0, duration: 20 }, 0);
+    this.timeline.to(this.progressBar, { xPercent: 100,
+      duration: 100 }, 0);
+    this.timeline.to(this.wall, { x: this.scrollDistance * 0.2,
+      duration: 100 }, 0);
+    this.timeline.to(this.scrollHint, { opacity: 0,
+      duration: 20 }, 0);
 
     this.pageST = ScrollTrigger.create({
       animation: this.timeline,
@@ -100,7 +112,9 @@ class Work extends PureComponent {
       trigger: this.track,
       start: 0,
       scrub: 1,
-      end: () => `+=${this.scrollDistance}`,
+      end: () => {
+        return `+=${this.scrollDistance}`;
+      },
     });
 
     this.setupResizeAnimation();
@@ -108,7 +122,7 @@ class Work extends PureComponent {
     ScrollTrigger.refresh();
   }
 
-  setupResizeAnimation() {
+  setupResizeAnimation () {
     // Scrolltrigger to resize on fixed points
     // var pageST = ScrollTrigger.create({});
     // var progress = 0;
@@ -120,25 +134,26 @@ class Work extends PureComponent {
     // });
   }
 
-  setupScrollHintAnimation() {
+  setupScrollHintAnimation () {
     const scrollHintTimeline = gsap.timeline();
-    scrollHintTimeline.to(this.hintArrow, 1, {
-      paddingLeft: '5px',
-      onComplete: function () {
+    scrollHintTimeline.to(this.hintArrow, 1, {paddingLeft: '5px',
+      onComplete () {
         scrollHintTimeline.reverse();
-     }, onReverseComplete: function () {
+      },
+      onReverseComplete () {
         scrollHintTimeline.play(0);
-     }}, 0)
+      }}, 0);
   }
 
-  componentDidMount() {
+  componentDidMount () {
     this.props.hideLoader();
     this.setupTrackAnimation();
     this.setupScrollHintAnimation();
 
     Draggable.create(this.track, {
       type: 'x',
-      bounds: {minX: -1 * this.scrollDistance, maxX: 0}, // scroll X is done by offsetting to the right, so we move in negative values
+      bounds: {minX: -1 * this.scrollDistance,
+        maxX: 0}, // scroll X is done by offsetting to the right, so we move in negative values
       dragClickables: true,
       inertia: true,
       autoScroll: false,
@@ -157,100 +172,121 @@ class Work extends PureComponent {
         this.pageST.scroll(-1 * transform[0]);
       },
     });
+
     // window.addEventListener('resize', this.onWindowResize);
   }
 
-  componentWillUnmount() {
+  componentWillUnmount () {
     // window.removeEventListener('resize', this.onWindowResize);
   }
 
-  render() {
+  render () {
     const { cursorHover, cursorUnhover } = this.props;
+
     return (
-      <div id={styles["work-page"]} ref={(e) => { this.el = e; }}>
-        <div id={styles["animation-wrapper"]}>
+      <div
+        id={styles['work-page']} ref={(e) => {
+          this.el = e;
+        }}>
+        <div id={styles['animation-wrapper']}>
           <TextLogo
             hover={cursorHover}
             unhover={cursorUnhover}
           />
-          <div id={styles["track-wrapper"]} ref={(e) => { this.trackWrapper = e; }}>
-            <div className={styles['track']} id={styles['track']} ref={(e) => { this.track = e; }}>
+          <div
+            id={styles['track-wrapper']} ref={(e) => {
+              this.trackWrapper = e;
+            }}>
+            <div
+              className={styles.track} id={styles.track} ref={(e) => {
+                this.track = e;
+              }}>
               <Section
-                date="MAR 2021"
-                description="Test implementation for WebGL, converting images into live canvas."
-                id="07"
+                date='MAR 2021'
+                description='Test implementation for WebGL, converting images into live canvas.'
+                id='07'
                 image={CanvasMountain}
-                link="/webglcurtains"
-                title="WEBGL - Curtains"
+                link='/webglcurtains'
+                title='WEBGL - Curtains'
               />
               <Section
-                date="MAR 2021"
+                date='MAR 2021'
                 description="Proof of concept for Drumheller's main page. Used advanced GSAP techniques &amp; video manipulation."
-                id="06"
+                id='06'
                 image={DrumhellerConcept}
-                link="/drumheller"
-                title="Drumheller Concept"
+                link='/drumheller'
+                title='Drumheller Concept'
               />
               <Section
-                date="MAR 2021"
-                description="Fill loader template built via SVG and GSAP. Replace with your logo!"
-                id="05"
+                date='MAR 2021'
+                description='Fill loader template built via SVG and GSAP. Replace with your logo!'
+                id='05'
                 image={DinosaurLoader}
-                link="/dinosaurloader"
-                title="Fill Loader"
+                link='/dinosaurloader'
+                title='Fill Loader'
               />
               <Section
-                date="MAR 2021"
+                date='MAR 2021'
                 description="Additive shader designed to 'wash' out the color in a three.js scene."
-                id="04"
+                id='04'
                 image={AdditiveShaderBanner}
-                link="/additiveshader"
-                title="Color Shader"
+                link='/additiveshader'
+                title='Color Shader'
               />
               <Section
-                date="FEB 2021"
-                description="ASCII shader designed to render text and shapes via passthrough."
-                id="03"
+                date='FEB 2021'
+                description='ASCII shader designed to render text and shapes via passthrough.'
+                id='03'
                 image={ASCIIShaderBanner}
-                link="/asciishader"
-                title="ASCII Shader"
+                link='/asciishader'
+                title='ASCII Shader'
               />
               <Section
-                date="FEB 2021"
-                description="Designed in Blender, completed the Blender tutorial and converted to three.js."
-                id="02"
+                date='FEB 2021'
+                description='Designed in Blender, completed the Blender tutorial and converted to three.js.'
+                id='02'
                 image={CoffeeCupBanner}
-                link="/coffeecup"
-                title="Coffee Cup"
+                link='/coffeecup'
+                title='Coffee Cup'
               />
               <Section
-                date="DEC 2020"
-                description="First foray into three.js. Exploration of imported models &amp; camera movement."
-                id="01"
+                date='DEC 2020'
+                description='First foray into three.js. Exploration of imported models &amp; camera movement.'
+                id='01'
                 image={JellicentBanner}
-                link="/jellicent"
-                title="Jellicent"
+                link='/jellicent'
+                title='Jellicent'
               />
               <div
-                className={styles["wall"]}
-                ref={(e) => { this.wall = e; }}
+                className={styles.wall}
+                ref={(e) => {
+                  this.wall = e;
+                }}
               >
                 <img
-                  alt="Skyline of Edmonton"
-                  className={styles["img-wall"]}
+                  alt='Skyline of Edmonton'
+                  className={styles['img-wall']}
                   src={EdmontonWall}
                 />
               </div>
             </div>
           </div>
           <div
-            className={styles["scroll-hint"]}
-            ref={(e) => { this.scrollHint = e; }}
+            className={styles['scroll-hint']}
+            ref={(e) => {
+              this.scrollHint = e;
+            }}
           >
-            Scroll to Explore <span className={styles["hint-arrow"]} ref={(e) => { this.hintArrow = e; }}>→</span>
+            Scroll to Explore <span
+              className={styles['hint-arrow']} ref={(e) => {
+                this.hintArrow = e;
+              }}>→</span>
           </div>
-          <div id={styles['progress']}>
-            <div id={styles['progressBar']} ref={(e) => { this.progressBar = e; }} />
+          <div id={styles.progress}>
+            <div
+              id={styles.progressBar} ref={(e) => {
+                this.progressBar = e;
+              }} />
           </div>
         </div>
       </div>

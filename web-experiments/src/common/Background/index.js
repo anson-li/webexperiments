@@ -1,9 +1,11 @@
-import React, { PureComponent } from 'react';
+import React, {
+  PureComponent,
+} from 'react';
 
 class Background extends PureComponent {
-  render() {
+  render () {
     return (
-      <div className="color-bg" />
+      <div className='color-bg' />
     );
   }
 }

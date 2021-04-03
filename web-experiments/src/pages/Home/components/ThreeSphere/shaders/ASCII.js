@@ -1,26 +1,29 @@
-import * as THREE from 'three'
+import {
+  Vector2,
+} from 'three';
 
-const ASCII = () => ({
-  uniforms: {
-    tLowRes: { value: null },
-    tFont: { value: null },
-    tDepth: { value: null },
-    fontCharTotalCount: { value: 0 },
-    fontCharCount: { value: new THREE.Vector2(1, 1) },
-    fontCharSize: { value: new THREE.Vector2(1, 1) },
-    renderCharCount: { value: new THREE.Vector2(1, 1) },
-    renderCharSize: { value: new THREE.Vector2(1, 1) },
-    cameraNear: { value: 0 },
-    cameraFar: { value: 1 },
-  },
-  vertexShader: `
+const ASCII = () => {
+  return {
+    uniforms: {
+      tLowRes: { value: null },
+      tFont: { value: null },
+      tDepth: { value: null },
+      fontCharTotalCount: { value: 0 },
+      fontCharCount: { value: new Vector2(1, 1) },
+      fontCharSize: { value: new Vector2(1, 1) },
+      renderCharCount: { value: new Vector2(1, 1) },
+      renderCharSize: { value: new Vector2(1, 1) },
+      cameraNear: { value: 0 },
+      cameraFar: { value: 1 },
+    },
+    vertexShader: `
     varying vec2 vUv;
     void main() {
       vUv = uv;
       gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
     }
   `,
-  fragmentShader: `
+    fragmentShader: `
    #include <packing>
 
     varying vec2 vUv;
@@ -67,6 +70,7 @@ const ASCII = () => ({
       gl_FragColor = texture2D(tFont, fontuv) * color;
     }
   `,
-});
+  };
+};
 
 export default ASCII;

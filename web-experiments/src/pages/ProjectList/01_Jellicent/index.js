@@ -1,15 +1,17 @@
-import React, { PureComponent } from 'react';
 import anime from 'animejs';
 import PropTypes from 'prop-types';
-
+import React, {
+  PureComponent,
+} from 'react';
 import Background from '../../../common/Background';
-import JellicentObject from './components/JellicentObject';
-import withTransition from '../../../common/WithTransition';
 import TextLogo from '../../../common/TextLogo';
+import withTransition from '../../../common/WithTransition';
+import JellicentObject from './components/JellicentObject';
 
 class Jellicent extends PureComponent {
-  hidePage() {
+  hidePage () {
     anime.remove(this.el);
+
     return anime({
       targets: this.el,
       opacity: 0,
@@ -17,8 +19,9 @@ class Jellicent extends PureComponent {
     }).finished;
   }
 
-  animateIn() {
+  animateIn () {
     anime.remove(this.el);
+
     return anime({
       targets: this.el,
       opacity: [0, 1],
@@ -28,10 +31,11 @@ class Jellicent extends PureComponent {
     }).finished;
   }
 
-  animateOut() {
+  animateOut () {
     anime.remove(this.el);
     const { showLoader } = this.props;
     showLoader();
+
     return anime({
       targets: this.el,
       opacity: 0,
@@ -40,10 +44,14 @@ class Jellicent extends PureComponent {
     }).finished;
   }
 
-  render() {
+  render () {
     const { hideLoader, cursorHover, cursorUnhover } = this.props;
+
     return (
-      <div id="main-page" ref={(e) => { this.el = e; }}>
+      <div
+        id='main-page' ref={(e) => {
+          this.el = e;
+        }}>
         <TextLogo
           hover={cursorHover}
           unhover={cursorUnhover}

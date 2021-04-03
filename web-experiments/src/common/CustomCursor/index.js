@@ -1,10 +1,14 @@
-import React, { PureComponent } from 'react';
-import { TweenLite } from 'gsap';
+import {
+  TweenLite,
+} from 'gsap';
+import React, {
+  PureComponent,
+} from 'react';
 
 import './style.scss';
 
 class CustomCursor extends PureComponent {
-  constructor(props) {
+  constructor (props) {
     super(props);
     this.moveCircle = this.moveCircle.bind(this);
     this.hoverFunc = this.hoverFunc.bind(this);
@@ -15,14 +19,14 @@ class CustomCursor extends PureComponent {
     this.followTween = null;
   }
 
-  componentDidMount() {
+  componentDidMount () {
     window.addEventListener('mousemove', this.moveCircle);
     window.addEventListener('scroll', this.onScroll);
     window.addEventListener('onmouseover', this.hoverFunc);
     window.addEventListener('onmouseout', this.unhoverFunc);
   }
 
-  moveCircle(e) {
+  moveCircle (e) {
     if (this.circle) {
       TweenLite.to(this.circle, 0.2, {
         x: e.x,
@@ -39,7 +43,7 @@ class CustomCursor extends PureComponent {
     }
   }
 
-  hoverFunc(e) {
+  hoverFunc (e) {
     if (this.circle) {
       TweenLite.to(this.circle, 0.3, {
         opacity: 1,
@@ -53,7 +57,7 @@ class CustomCursor extends PureComponent {
     }
   }
 
-  hideFollow() {
+  hideFollow () {
     if (this.circle) {
       TweenLite.to(this.circle, 0.3, {
         opacity: 1,
@@ -67,15 +71,15 @@ class CustomCursor extends PureComponent {
     }
   }
 
-  showFollow() {
+  showFollow () {
     if (this.follow) {
       TweenLite.to(this.follow, 0.3, {
         scale: 1,
-      })
+      });
     }
   }
 
-  unhoverFunc(e) {
+  unhoverFunc (e) {
     if (this.circle) {
       TweenLite.to(this.circle, 0.3, {
         opacity: 1,
@@ -89,7 +93,7 @@ class CustomCursor extends PureComponent {
     }
   }
 
-  onScroll(e) {
+  onScroll (e) {
     if (this.circle) {
       TweenLite.to(this.circle, 0.2, {
         x: e.x,
@@ -104,12 +108,21 @@ class CustomCursor extends PureComponent {
     }
   }
 
-  render() {
+  render () {
     return (
-      <div className="cursor">
-        <div className="cursor-circle" ref={(ref) => { this.circle = ref; }} />
-        <div className="cursor-circle-follow" ref={(ref) => { this.follow = ref; }} />
-        <div className="cursor-circle-name" ref={(ref) => { this.list = ref; }} />
+      <div className='cursor'>
+        <div
+          className='cursor-circle' ref={(ref) => {
+            this.circle = ref;
+          }} />
+        <div
+          className='cursor-circle-follow' ref={(ref) => {
+            this.follow = ref;
+          }} />
+        <div
+          className='cursor-circle-name' ref={(ref) => {
+            this.list = ref;
+          }} />
       </div>
     );
   }

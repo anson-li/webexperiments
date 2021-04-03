@@ -1,16 +1,19 @@
-import { Vector2 } from 'three'
+import {
+  Vector2,
+} from 'three';
 
-const VolumetricLightScattering = () => ({
-  uniforms: {
-    tDiffuse: { value: null },
-    lightPosition: { value: new Vector2(0.5, 0.5) },
-    exposure: { value: 0.2 },
-    decay: { value: 0.96 },
-    density: { value: 0.6 },
-    weight: { value: 0.2 },
-    samples: { value: 80 },
-  },
-  vertexShader: `
+const VolumetricLightScattering = () => {
+  return {
+    uniforms: {
+      tDiffuse: { value: null },
+      lightPosition: { value: new Vector2(0.5, 0.5) },
+      exposure: { value: 0.2 },
+      decay: { value: 0.96 },
+      density: { value: 0.6 },
+      weight: { value: 0.2 },
+      samples: { value: 80 },
+    },
+    vertexShader: `
     varying vec2 vUv;
 
     void main() {
@@ -18,7 +21,7 @@ const VolumetricLightScattering = () => ({
       gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
     }
   `,
-  fragmentShader: `
+    fragmentShader: `
     varying vec2 vUv;
     uniform sampler2D tDiffuse;
     uniform vec2 lightPosition;
@@ -49,6 +52,7 @@ const VolumetricLightScattering = () => ({
       gl_FragColor = color * exposure;
     }
   `,
-});
+  };
+};
 
 export default VolumetricLightScattering;

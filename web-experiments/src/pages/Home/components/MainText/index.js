@@ -1,10 +1,11 @@
-import React, { PureComponent } from 'react';
+import React, {
+  PureComponent,
+} from 'react';
 import WOW from 'wowjs';
-
 import FadeText from '../../../../common/FadeText';
 
 class MainText extends PureComponent {
-  componentDidMount() {
+  componentDidMount () {
     new WOW.WOW({
       boxClass: 'wow',
       animateClass: 'animated',
@@ -14,16 +15,16 @@ class MainText extends PureComponent {
     }).init();
   }
 
-  render() {
+  render () {
     return (
-      <div className="full-page">
-        <div className="flex-container container ">
-          <div className="col-md-12 mid-center">
-            <div className="spacer-sm d-lg-none" />
+      <div className='full-page'>
+        <div className='flex-container container '>
+          <div className='col-md-12 mid-center'>
+            <div className='spacer-sm d-lg-none' />
             <FadeText
-              id="main-text"
+              id='main-text'
               text="ANSON'S WEB EXPERIMENTS"
-              type="h1"
+              type='h1'
             />
           </div>
         </div>

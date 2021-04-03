@@ -1,17 +1,18 @@
 /* eslint-disable no-return-assign */
 import anime from 'animejs';
-import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-
+import React, {
+  PureComponent,
+} from 'react';
 import Background from '../../../common/Background';
 import TextLogo from '../../../common/TextLogo';
+import withTransition from '../../../common/WithTransition';
 import ThreeJS from './components/ThreeJS';
 
-import withTransition from '../../../common/WithTransition';
-
 class CoffeeCup extends PureComponent {
-  hidePage() {
+  hidePage () {
     anime.remove(this.el);
+
     return anime({
       targets: this.el,
       opacity: 0,
@@ -19,8 +20,9 @@ class CoffeeCup extends PureComponent {
     }).finished;
   }
 
-  animateIn() {
+  animateIn () {
     anime.remove(this.el);
+
     return anime({
       targets: this.el,
       opacity: [0, 1],
@@ -30,11 +32,12 @@ class CoffeeCup extends PureComponent {
     }).finished;
   }
 
-  animateOut() {
+  animateOut () {
     anime.remove(this.el);
     this.props.showFollow();
     const { showLoader } = this.props;
     showLoader();
+
     return anime({
       targets: this.el,
       opacity: 0,
@@ -43,14 +46,18 @@ class CoffeeCup extends PureComponent {
     }).finished;
   }
 
-  componentDidMount() {
+  componentDidMount () {
     this.props.hideFollow();
   }
 
-  render() {
+  render () {
     const { hideLoader, cursorHover, cursorUnhover } = this.props;
+
     return (
-      <div id="additiveshader-page" ref={(e) => { this.el = e; }}>
+      <div
+        id='additiveshader-page' ref={(e) => {
+          this.el = e;
+        }}>
         <TextLogo
           hover={cursorHover}
           unhover={cursorUnhover}

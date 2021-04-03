@@ -1,16 +1,23 @@
-import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import * as THREE from 'three';
-
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
-import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer';
-import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass';
-
+import React, {
+  PureComponent,
+} from 'react';
+import {
+  Scene, PerspectiveCamera, PointLight, WebGLRenderer, Group, AnimationMixer, Clock,
+} from 'three';
+import {
+  GLTFLoader,
+} from 'three/examples/jsm/loaders/GLTFLoader';
+import {
+  EffectComposer,
+} from 'three/examples/jsm/postprocessing/EffectComposer';
+import {
+  RenderPass,
+} from 'three/examples/jsm/postprocessing/RenderPass';
 import modelFile from '../../../../../web/assets/objects/donutthree.glb';
 
 class ThreeJS extends PureComponent {
-
-  constructor(props) {
+  constructor (props) {
     super(props);
 
     this.init = this.init.bind(this);
@@ -37,13 +44,13 @@ class ThreeJS extends PureComponent {
     this.action = null;
   }
 
-  componentDidMount() {
+  componentDidMount () {
     setTimeout(() => {
       this.init();
     }, 1000);
   }
 
-  componentWillUnmount() {
+  componentWillUnmount () {
     window.removeEventListener('resize', this.resizeRenderer);
     this.container.removeChild(this.renderer.domElement);
     this.stop();
@@ -58,109 +65,110 @@ class ThreeJS extends PureComponent {
   }
 
   // Create Scene + Camera
-  init() {
-
+  init () {
     this.container = document.createElement('div');
     document.body.appendChild(this.container);
-    this.mainScene = new THREE.Scene()
+    this.mainScene = new Scene();
 
-    this.mainCamera = new THREE.PerspectiveCamera(
+    this.mainCamera = new PerspectiveCamera(
       20, // camera frustrum field of view
       window.innerWidth / window.innerHeight, // camera aspect ratio
       0.1, // near plane, or the minimum range to start rendering. If it's too high, stuff that's too close will be missed.
-      12 // far plane, or the maximum range to render. Important to note it's affecting your render quality too.
-    )
+      12, // far plane, or the maximum range to render. Important to note it's affecting your render quality too.
+    );
     this.mainCamera.position.z = 1.1; // zooms out to capture detail - everything is x10 size to capture detail
     this.mainCamera.position.x = 0.1; // shifts the camera more towards the middle of the frame
     // this.mainCamera.position.y = 0.5; // moves the camera slightly higher
 
     // Add Point Lights
-    this.backLight = new THREE.PointLight(0xFFFFFF, 3, 20);
+    this.backLight = new PointLight(0xFFFFFF, 3, 20);
     this.backLight.position.set(-5, 5, 3);
     this.mainScene.add(this.backLight);
-  
-    this.fillLight = new THREE.PointLight(0xFFFFFF, 0.7, 20);
+
+    this.fillLight = new PointLight(0xFFFFFF, 0.7, 20);
     this.fillLight.position.set(5, 0, 5);
     this.mainScene.add(this.fillLight);
-  
-    this.keyLight = new THREE.PointLight(0xFFFFFF, 2, 20);
+
+    this.keyLight = new PointLight(0xFFFFFF, 2, 20);
     this.keyLight.position.set(5, 0, 0);
     this.mainScene.add(this.keyLight);
 
     // Create Renderer
-    this.renderer = new THREE.WebGLRenderer();
+    this.renderer = new WebGLRenderer();
     this.renderer.setSize(window.innerWidth, window.innerHeight);
     this.container.appendChild(this.renderer.domElement);
 
     // Load 3D Model
-    this.loader = new GLTFLoader();  
-    this.modelContainer = new THREE.Group();
+    this.loader = new GLTFLoader();
+    this.modelContainer = new Group();
 
     this.mainScene.add(this.modelContainer);
-  
+
     this.loader.load(
       modelFile,
-      gltf => {
+      (gltf) => {
         this.modelContainer.add(gltf.scene);
-        this.mixer = new THREE.AnimationMixer(gltf.scene);
-        this.action = this.mixer.clipAction( gltf.animations[ 0 ] );
+        this.mixer = new AnimationMixer(gltf.scene);
+        this.action = this.mixer.clipAction(gltf.animations[0]);
         this.props.hideLoader();
         this.action.play();
       },
       undefined,
-      console.error
+      console.error,
     );
 
     this.finalComposer = new EffectComposer(this.renderer);
     this.finalComposer.addPass(new RenderPass(this.mainScene, this.mainCamera));
 
-    this.clock = new THREE.Clock();
+    this.clock = new Clock();
     this.modelContainer.rotation.x = Math.PI / 16;
     this.modelContainer.rotation.y = -Math.PI / 2;
 
     // window.addEventListener("mousemove", this.mousemove);
-    window.addEventListener("resize", this.resizeRenderer);
+    window.addEventListener('resize', this.resizeRenderer);
 
     this.renderScene();
   }
 
-  mousemove(e) {
+  mousemove (e) {
     if (this.lightCone) {
-      this.lightCone.position.x = 5 * ((e.clientX / window.innerWidth) * 2 - 1);
+      this.lightCone.position.x = 5 * (e.clientX / window.innerWidth * 2 - 1);
       this.backLight.position.x = this.lightCone.position.x;
     }
     this.modelContainer.rotation.x = Math.PI / 16 + 0.0001 * e.clientX;
     this.modelContainer.rotation.y = -Math.PI / 2 + 0.0001 * e.clientY;
   }
 
-
   // Handle Window Resize
-  resizeRenderer() {
+  resizeRenderer () {
     this.mainCamera.aspect = window.innerWidth / window.innerHeight;
     this.mainCamera.updateProjectionMatrix();
     this.renderer.setSize(window.innerWidth, window.innerHeight);
-
   }
 
   // Render Scene
-  renderScene() {
-    var delta = this.clock.getDelta();
-    if ( this.mixer ) this.mixer.update( delta );
+  renderScene () {
+    const delta = this.clock.getDelta();
+    if (this.mixer) {
+      this.mixer.update(delta);
+    }
 
     this.renderer.render(this.mainScene, this.mainCamera);
     this.finalComposer.render();
     this.requestId = requestAnimationFrame(this.renderScene);
   }
-  
-  stop() {
+
+  stop () {
     this.action.stop();
     cancelAnimationFrame(this.requestId);
     this.requestId = undefined;
   }
 
-  render() {
+  render () {
     return (
-      <div ref={(ref) => { this.mount = ref; }} />
+      <div ref={(ref) => {
+        this.mount = ref;
+      }} />
     );
   }
 }

@@ -1,18 +1,21 @@
-import * as THREE from 'three'
+import {
+  UniformsUtils, UniformsLib, Vector3,
+} from 'three';
 
-const VolumetricLightCylinder = () => ({
-  lights: true,
-  transparent: true,
-  depthWrite: false,
-  uniforms: THREE.UniformsUtils.merge([
-    THREE.UniformsLib['lights'],
-    {
-      attenuation: { value: 25.0 },
-      anglePower: { value: 10.0 },
-      spotPosition: { value: new THREE.Vector3(0, 0, 0) },
-    },
-  ]),
-  vertexShader: `
+const VolumetricLightCylinder = () => {
+  return {
+    lights: true,
+    transparent: true,
+    depthWrite: false,
+    uniforms: UniformsUtils.merge([
+      UniformsLib.lights,
+      {
+        attenuation: { value: 25.0 },
+        anglePower: { value: 10.0 },
+        spotPosition: { value: new Vector3(0, 0, 0) },
+      },
+    ]),
+    vertexShader: `
     #include <common>
 
     struct PointLight {
@@ -64,7 +67,7 @@ const VolumetricLightCylinder = () => ({
       vColor = addedLights;
     }
   `,
-  fragmentShader: `
+    fragmentShader: `
     varying vec3 vNormal;
     varying vec3 vWorldPosition;
     uniform vec3 spotPosition;
@@ -82,6 +85,7 @@ const VolumetricLightCylinder = () => ({
       gl_FragColor = vec4(vColor.rgb, intensity);
     }
   `,
-});
+  };
+};
 
 export default VolumetricLightCylinder;

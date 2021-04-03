@@ -1,28 +1,35 @@
 /* eslint-disable no-return-assign */
 import anime from 'animejs';
-import React, { PureComponent } from 'react';
+import {
+  gsap,
+} from 'gsap';
+import {
+  ScrollTrigger,
+} from 'gsap/ScrollTrigger';
+import {
+  SplitText,
+} from 'gsap/SplitText';
+import {
+  Draggable, InertiaPlugin,
+} from 'gsap/all';
 import PropTypes from 'prop-types';
-
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { SplitText } from "gsap/SplitText";
-import { Draggable, InertiaPlugin } from 'gsap/all';
-
-import DinosaurScrollHint from './components/DinosaurScrollHint';
-import SectionOne from './components/SectionOne';
-import SectionTwo from './components/SectionTwo';
-import SectionThree from './components/SectionThree';
-import SectionFour from './components/SectionFour';
-import Footer from './components/Footer';
-
+import React, {
+  PureComponent,
+} from 'react';
 import TextLogo from '../../../common/TextLogo';
 import withTransition from '../../../common/WithTransition';
+import DinosaurScrollHint from './components/DinosaurScrollHint';
+import Footer from './components/Footer';
+import SectionFour from './components/SectionFour';
+import SectionOne from './components/SectionOne';
+import SectionThree from './components/SectionThree';
+import SectionTwo from './components/SectionTwo';
 import styles from './style.module.scss';
 
 gsap.registerPlugin(ScrollTrigger, Draggable, InertiaPlugin, SplitText);
 
 class DrumhellerConcept extends PureComponent {
-  constructor(props) {
+  constructor (props) {
     super(props);
     this.onWindowResize = this.onWindowResize.bind(this);
     this.setupTrackAnimation = this.setupTrackAnimation.bind(this);
@@ -38,12 +45,12 @@ class DrumhellerConcept extends PureComponent {
     this.sectionOne = React.createRef();
   }
 
-  validateImagesLoaded() {
+  validateImagesLoaded () {
     this.loadedImages -= 1;
     this.checkLoaderStatus();
   }
 
-  checkLoaderStatus() {
+  checkLoaderStatus () {
     console.log(`Loaded ${Math.round((27 - this.loadedImages) / 27 * 100)}%`);
     if (this.loadedImages <= 0) {
       this.props.hideLoader();
@@ -51,8 +58,9 @@ class DrumhellerConcept extends PureComponent {
     }
   }
 
-  hidePage() {
+  hidePage () {
     anime.remove(this.el);
+
     return anime({
       targets: this.el,
       opacity: 0,
@@ -60,8 +68,9 @@ class DrumhellerConcept extends PureComponent {
     }).finished;
   }
 
-  animateIn() {
+  animateIn () {
     anime.remove(this.el);
+
     return anime({
       targets: this.el,
       opacity: [0, 1],
@@ -71,10 +80,11 @@ class DrumhellerConcept extends PureComponent {
     }).finished;
   }
 
-  animateOut() {
+  animateOut () {
     anime.remove(this.el);
     const { showLoader } = this.props;
     showLoader();
+
     return anime({
       targets: this.el,
       opacity: 0,
@@ -83,12 +93,12 @@ class DrumhellerConcept extends PureComponent {
     }).finished;
   }
 
-  onWindowResize() {
+  onWindowResize () {
     // this.timeline.invalidate().restart();
     // this.setupTrackAnimation();
   }
 
-  setupTrackAnimation() {
+  setupTrackAnimation () {
     const innerWidth = window.innerWidth;
     const track = this.track;
     const trackWidth = track.clientWidth;
@@ -98,17 +108,18 @@ class DrumhellerConcept extends PureComponent {
     this.scrollDistance = trackWidth - innerWidth;
 
     gsap.set(this.trackWrapper, { width: trackWidth });
-    
+
     this.timeline = gsap.timeline({
       smoothChildTiming: true,
       defaults: {
-        ease: 'none'
+        ease: 'none',
       },
-    }).to(this.track, { 
+    }).to(this.track, {
       duration: 100,
-      x: -this.scrollDistance
+      x: -this.scrollDistance,
     });
-    this.timeline.to(this.progressBar, { xPercent: 100, duration: 100 }, 0);
+    this.timeline.to(this.progressBar, { xPercent: 100,
+      duration: 100 }, 0);
 
     this.pageST = ScrollTrigger.create({
       animation: this.timeline,
@@ -116,7 +127,9 @@ class DrumhellerConcept extends PureComponent {
       trigger: this.track,
       start: 0,
       scrub: 1,
-      end: () => `+=${this.scrollDistance}`,
+      end: () => {
+        return `+=${this.scrollDistance}`;
+      },
     });
 
     ScrollTrigger.refresh();
@@ -124,28 +137,28 @@ class DrumhellerConcept extends PureComponent {
     this.setupResizeAnimation();
   }
 
-  setupResizeAnimation() {
+  setupResizeAnimation () {
     // var progress = 0;
-    ScrollTrigger.addEventListener("refreshInit", function() {
+    ScrollTrigger.addEventListener('refreshInit', () => {
       // progress = this.pageST.scroll() / ScrollTrigger.maxScroll(window);
       // console.log(progress);
     });
-    ScrollTrigger.addEventListener("refresh", function() {
+    ScrollTrigger.addEventListener('refresh', () => {
       // this.pageST.scroll(progress * ScrollTrigger.maxScroll(window));
     });
     ScrollTrigger.refresh();
   }
 
-  animateInDiv(inView, entry) {
+  animateInDiv (inView, entry) {
     // Slide up when in view
     if (inView) {
       const childSplit = new SplitText(entry.target, {
-        type: "lines",
-        linesClass: "inview-split-child"
+        type: 'lines',
+        linesClass: 'inview-split-child',
       });
       new SplitText(entry.target, {
-        type: "lines",
-        linesClass: "inview-split-parent"
+        type: 'lines',
+        linesClass: 'inview-split-parent',
       });
       gsap.set(entry.target, {
         opacity: 1,
@@ -153,24 +166,25 @@ class DrumhellerConcept extends PureComponent {
       gsap.from(childSplit.lines, {
         duration: 1.5,
         yPercent: 100,
-        ease: "power4",
+        ease: 'power4',
         stagger: 0.1,
       });
     } else {
       // Don't show when out of view
       gsap.set(entry.target, {
-        opacity: 0
+        opacity: 0,
       });
     }
   }
 
-  componentDidMount() {
+  componentDidMount () {
     this.setupTrackAnimation();
     this.checkLoaderStatus();
 
     Draggable.create('#track', {
       type: 'x',
-      bounds: {minX: -1 * this.scrollDistance, maxX: 0}, // scroll X is done by offsetting to the right, so we move in negative values
+      bounds: {minX: -1 * this.scrollDistance,
+        maxX: 0}, // scroll X is done by offsetting to the right, so we move in negative values
       dragClickables: true,
       inertia: true,
       autoScroll: false,
@@ -189,23 +203,34 @@ class DrumhellerConcept extends PureComponent {
         this.pageST.scroll(-1 * transform[0]);
       },
     });
+
     // window.addEventListener('resize', this.onWindowResize);
   }
 
-  componentWillUnmount() {
+  componentWillUnmount () {
     // window.removeEventListener('resize', this.onWindowResize);
   }
 
-  render() {
+  render () {
     const { cursorHover, cursorUnhover } = this.props;
+
     return (
-      <div id={styles["drumheller-main-page"]} ref={(e) => { this.el = e; }}>
-        <div id={styles["track-wrapper"]} ref={(e) => { this.trackWrapper = e; }}>
+      <div
+        id={styles['drumheller-main-page']} ref={(e) => {
+          this.el = e;
+        }}>
+        <div
+          id={styles['track-wrapper']} ref={(e) => {
+            this.trackWrapper = e;
+          }}>
           <TextLogo
             hover={cursorHover}
             unhover={cursorUnhover}
           />
-          <div className={styles['track']} id='track' ref={(e) => { this.track = e; }}>
+          <div
+            className={styles.track} id='track' ref={(e) => {
+              this.track = e;
+            }}>
             <DinosaurScrollHint
               validateImagesLoaded={this.validateImagesLoaded}
             />
@@ -240,8 +265,11 @@ class DrumhellerConcept extends PureComponent {
               validateImagesLoaded={this.validateImagesLoaded}
             />
           </div>
-          <div id={styles["drumheller-progress"]}>
-            <div id={styles["progressBar"]} ref={(e) => { this.progressBar = e; }} />
+          <div id={styles['drumheller-progress']}>
+            <div
+              id={styles.progressBar} ref={(e) => {
+                this.progressBar = e;
+              }} />
           </div>
         </div>
       </div>

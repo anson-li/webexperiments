@@ -1,9 +1,11 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
 import anime from 'animejs';
+import PropTypes from 'prop-types';
+import React, {
+  PureComponent,
+} from 'react';
 
 class FadeText extends PureComponent {
-  componentDidMount() {
+  componentDidMount () {
     const {
       id, loop, base, iteration,
     } = this.props;
@@ -15,22 +17,27 @@ class FadeText extends PureComponent {
         opacity: [0, 1],
         easing: 'easeOutExpo',
         duration: 2250,
-        delay: (el, i) => base + iteration * i,
+        delay: (el, i) => {
+          return base + iteration * i;
+        },
       });
   }
 
-  render() {
+  render () {
     const { className, id, text } = this.props;
+
     return (
       <this.props.type
         className={`${className} ml3`}
         id={id}
       >
         {
-      text.split('').map((v, index) => (
-        <span className="letter" key={v.concat(index)}>{v}</span>
-      ))
-      }
+          text.split('').map((v, index) => {
+            return (
+              <span className='letter' key={v.concat(index)}>{v}</span>
+            );
+          })
+        }
       </this.props.type>
     );
   }

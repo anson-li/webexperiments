@@ -1,27 +1,30 @@
-import React, { PureComponent } from 'react';
 import anime from 'animejs';
+import {
+  GUI,
+} from 'dat.gui';
 import PropTypes from 'prop-types';
-import { Curtains, Plane } from 'react-curtains';
-import * as dat from 'dat.gui';
-
-import withTransition from '../../../common/WithTransition';
+import React, {
+  PureComponent,
+} from 'react';
+import {
+  Curtains, Plane,
+} from 'react-curtains';
 import TextLogo from '../../../common/TextLogo';
-
+import withTransition from '../../../common/WithTransition';
 import TestImage from './images/canvas-base.jpg';
-
 import styles from './style.module.scss';
 
 class WebGLCurtains extends PureComponent {
-  constructor(props) {
+  constructor (props) {
     super(props);
     this.state = {
       pattern: {
-          oscillate: true,
-          disabled: false,
-          draganimation: false
-      }
+        oscillate: true,
+        disabled: false,
+        draganimation: false,
+      },
     };
-    
+
     this.basicVs = `
       precision mediump float;
 
@@ -158,8 +161,9 @@ class WebGLCurtains extends PureComponent {
     };
   }
 
-  hidePage() {
+  hidePage () {
     anime.remove(this.el);
+
     return anime({
       targets: this.el,
       opacity: 0,
@@ -167,8 +171,9 @@ class WebGLCurtains extends PureComponent {
     }).finished;
   }
 
-  animateIn() {
+  animateIn () {
     anime.remove(this.el);
+
     return anime({
       targets: this.el,
       opacity: [0, 1],
@@ -178,10 +183,11 @@ class WebGLCurtains extends PureComponent {
     }).finished;
   }
 
-  animateOut() {
+  animateOut () {
     anime.remove(this.el);
     const { showLoader } = this.props;
     showLoader();
+
     return anime({
       targets: this.el,
       opacity: 0,
@@ -190,14 +196,20 @@ class WebGLCurtains extends PureComponent {
     }).finished;
   }
 
-  componentDidMount() {
+  componentDidMount () {
     this.props.hideLoader();
-    this.gui = new dat.GUI();
-    
-    var patterns = this.gui.addFolder("Patterns");
-    patterns.add(this.state.pattern, 'oscillate').name('Oscillate').listen().onChange(function(){ this.setChecked("oscillate"); }.bind(this));
-    patterns.add(this.state.pattern, 'disabled').name('Disabled').listen().onChange(function(){ this.setChecked("disabled"); }.bind(this));
-    patterns.add(this.state.pattern, 'draganimation').name('Drag Animation').listen().onChange(function(){ this.setChecked("draganimation"); }.bind(this));
+    this.gui = new GUI();
+
+    const patterns = this.gui.addFolder('Patterns');
+    patterns.add(this.state.pattern, 'oscillate').name('Oscillate').listen().onChange(() => {
+      this.setChecked('oscillate');
+    });
+    patterns.add(this.state.pattern, 'disabled').name('Disabled').listen().onChange(() => {
+      this.setChecked('disabled');
+    });
+    patterns.add(this.state.pattern, 'draganimation').name('Drag Animation').listen().onChange(() => {
+      this.setChecked('draganimation');
+    });
 
     this.mousePosition = {
       x: 0,
@@ -205,8 +217,7 @@ class WebGLCurtains extends PureComponent {
     };
   }
 
-  onPlaneReady(plane) {
-
+  onPlaneReady (plane) {
     // set a field of view of 35 to exagerate perspective
     // we could have done  it directly in the initial params
     // plane.setPerspective(35);
@@ -214,22 +225,22 @@ class WebGLCurtains extends PureComponent {
     // listen our mouse/touch events on the whole document
     // we will pass the plane as second argument of our function
     // we could be handling multiple planes that way
-    window.addEventListener("mousemove", function(e) {
+    window.addEventListener('mousemove', (e) => {
       this.handleMovement(e, plane);
-    }.bind(this));
+    });
 
-    window.addEventListener("touchmove", function(e) {
+    window.addEventListener('touchmove', (e) => {
       this.handleMovement(e, plane);
-    }.bind(this));
+    });
   }
 
-  handleMovement(e, plane) {    
-
+  handleMovement (e, plane) {
     // touch event
-    if(e.targetTouches) {
+    if (e.targetTouches) {
       this.mousePosition.x = e.targetTouches[0].clientX;
       this.mousePosition.y = e.targetTouches[0].clientY;
     }
+
     // mouse event
     else {
       this.mousePosition.x = e.clientX;
@@ -237,7 +248,7 @@ class WebGLCurtains extends PureComponent {
     }
 
     // convert our mouse/touch position to coordinates relative to the vertices of the plane
-    var mouseCoords = plane.mouseToPlaneCoords(this.mousePosition);
+    const mouseCoords = plane.mouseToPlaneCoords(this.mousePosition);
 
     // update our mouse position uniform
     plane.uniforms.mousePosition.value = [mouseCoords.x, mouseCoords.y];
@@ -246,9 +257,9 @@ class WebGLCurtains extends PureComponent {
     plane.uniforms.mouseStrength.value = 0.5;
   }
 
-  setChecked(prop) {
+  setChecked (prop) {
     const { pattern } = this.state;
-    for (let param in pattern) {
+    for (const param in pattern) {
       if (prop !== param) {
         pattern[param] = false;
       } else {
@@ -259,101 +270,105 @@ class WebGLCurtains extends PureComponent {
     this.forceUpdate();
   }
 
-  getActivePattern() {
+  getActivePattern () {
     const { pattern } = this.state;
-    for (let param in pattern) {
+    for (const param in pattern) {
       if (pattern[param]) {
         return param;
       }
     }
   }
 
-  componentWillUnmount() {
+  componentWillUnmount () {
     this.gui.destroy();
     window.removeEventListener('mousemove', this.handleMovement);
     window.removeEventListener('touchmove', this.handleMovement);
   }
 
-  render() {
+  render () {
     const { cursorHover, cursorUnhover } = this.props;
-    let pattern = this.getActivePattern();
+    const pattern = this.getActivePattern();
     const basicUniforms = {
       time: {
-        name: "uTime",
-        type: "1f",
-        value: 0
-      }
+        name: 'uTime',
+        type: '1f',
+        value: 0,
+      },
     };
     const dragUniforms = {
       time: {
-        name: "uTime", // uniform name that will be passed to our shaders
-        type: "1f", // this means our uniform is a float
+        name: 'uTime', // uniform name that will be passed to our shaders
+        type: '1f', // this means our uniform is a float
         value: 0,
       },
       mousePosition: { // our mouse position
-        name: "uMousePosition",
-        type: "2f", // notice this is a length 2 array of floats
+        name: 'uMousePosition',
+        type: '2f', // notice this is a length 2 array of floats
         value: [this.mousePosition.x, this.mousePosition.y],
       },
       mouseStrength: { // the strength of the effect (we will attenuate it if the mouse stops moving)
-        name: "uMouseStrength", // uniform name that will be passed to our shaders
-        type: "1f", // this means our uniform is a float
+        name: 'uMouseStrength', // uniform name that will be passed to our shaders
+        type: '1f', // this means our uniform is a float
         value: 0,
       },
-    }
+    };
     const onRender = (plane) => {
       plane.uniforms.time.value++;
     };
+
     return (
-      <div id="main-page" ref={(e) => { this.el = e; }}>
+      <div
+        id='main-page' ref={(e) => {
+          this.el = e;
+        }}>
         <TextLogo
           hover={cursorHover}
           unhover={cursorUnhover}
         />
-        { (pattern === 'oscillate') &&
+        { pattern === 'oscillate' &&
+        <Curtains className={styles['curtains-canvas']}>
+          <Plane
+            className={styles['curtains-plane']}
+
+            // plane init parameters
+            fragmentShader={this.basicFs}
+            onRender={onRender}
+            uniforms={basicUniforms}
+
+            // plane events
+            vertexShader={this.basicVs}
+          >
+            <img alt='Test for canvas' src={TestImage} />
+          </Plane>
+        </Curtains>}
+        { pattern === 'disabled' &&
+        <div className={styles['curtains-canvas']}>
+          <div className={styles['curtains-plane']}>
+            <img alt='Test for canvas' className={styles['disabled-image']} src={TestImage} />
+          </div>
+        </div>}
+        { pattern === 'draganimation' &&
+        <>
           <Curtains className={styles['curtains-canvas']}>
             <Plane
               className={styles['curtains-plane']}
-                
-                // plane init parameters
-              fragmentShader={this.basicFs}
-              onRender={onRender}
-              uniforms={basicUniforms}
 
-                // plane events
-              vertexShader={this.basicVs}
+              // plane init parameters
+              fov={35}
+              fragmentShader={this.dragFs}
+              heightSegments={20}
+              onReady={this.onPlaneReady}
+              onRender={onRender}
+              uniforms={dragUniforms}
+              vertexShader={this.dragVs}
+
+              // plane events
+              widthSegments={20}
             >
               <img alt='Test for canvas' src={TestImage} />
             </Plane>
-          </Curtains>}
-        { (pattern === 'disabled') &&
-          <div className={styles['curtains-canvas']}>
-            <div className={styles['curtains-plane']}>
-              <img alt='Test for canvas' className={styles['disabled-image']} src={TestImage} />
-            </div>
-          </div>}
-        { (pattern === 'draganimation') &&
-          <>
-            <Curtains className={styles['curtains-canvas']}>
-              <Plane
-                className={styles['curtains-plane']}
-                  
-                  // plane init parameters
-                fov={35}
-                fragmentShader={this.dragFs}
-                heightSegments={20}
-                onReady={this.onPlaneReady}
-                onRender={onRender}
-                uniforms={dragUniforms}
-                vertexShader={this.dragVs}
-
-                  // plane events
-                widthSegments={20}
-              >
-                <img alt='Test for canvas' src={TestImage} />
-              </Plane>
-            </Curtains>
-          </>}
+          </Curtains>
+        </>}
       </div>
     );
   }
