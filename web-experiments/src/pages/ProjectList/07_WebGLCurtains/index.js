@@ -9,7 +9,7 @@ import TextLogo from '../../../common/TextLogo';
 
 import TestImage from './images/canvas-base.jpg';
 
-import './style.scss';
+import styles from './style.module.scss';
 
 class WebGLCurtains extends PureComponent {
   constructor(props) {
@@ -225,8 +225,6 @@ class WebGLCurtains extends PureComponent {
 
   handleMovement(e, plane) {    
 
-    console.log('EeeEe');
-
     // touch event
     if(e.targetTouches) {
       this.mousePosition.x = e.targetTouches[0].clientX;
@@ -313,9 +311,9 @@ class WebGLCurtains extends PureComponent {
           unhover={cursorUnhover}
         />
         { (pattern === 'oscillate') &&
-          <Curtains>
+          <Curtains className={styles['curtains-canvas']}>
             <Plane
-                className="curtains-plane"
+                className={styles['curtains-plane']}
                 
                 // plane init parameters
                 vertexShader={this.basicVs}
@@ -330,17 +328,17 @@ class WebGLCurtains extends PureComponent {
           </Curtains>
         }
         { (pattern === 'disabled') &&
-          <div className='curtains-canvas'>
-            <div className='curtains-plane'>
+          <div className={styles['curtains-canvas']}>
+            <div className={styles['curtains-plane']}>
               <img className='disabled-image' src={TestImage} alt='Test for canvas' />
             </div>
           </div>
         }
         { (pattern === 'draganimation') &&
           <>
-            <Curtains>
+            <Curtains className={styles['curtains-canvas']}>
               <Plane
-                  className="curtains-plane"
+                  className={styles['curtains-plane']}
                   
                   // plane init parameters
                   vertexShader={this.dragVs}

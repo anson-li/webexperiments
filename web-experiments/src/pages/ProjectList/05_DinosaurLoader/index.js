@@ -6,7 +6,7 @@ import { TweenLite } from 'gsap';
 import withTransition from '../../../common/WithTransition';
 import TextLogo from '../../../common/TextLogo';
 
-import './style.scss';
+import styles from './style.module.scss';
 
 class DinosaurLoader extends PureComponent {
   hidePage() {
@@ -67,7 +67,7 @@ class DinosaurLoader extends PureComponent {
           hover={cursorHover}
           unhover={cursorUnhover}
         />
-        <div className="dino-logo">
+        <div className={styles["dino-logo"]}>
           <svg
             x="0px"
             y="0px"
@@ -108,7 +108,7 @@ class DinosaurLoader extends PureComponent {
             </g>
           </svg>
         </div>
-        <div class="loader-background"></div>
+        <div className={styles["loader-background"]}></div>
       </div>
     );
   }
