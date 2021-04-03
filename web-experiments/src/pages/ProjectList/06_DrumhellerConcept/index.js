@@ -17,7 +17,7 @@ import Footer from './components/Footer';
 
 import TextLogo from '../../../common/TextLogo';
 import withTransition from '../../../common/WithTransition';
-import './style.scss';
+import styles from './style.module.scss';
 
 gsap.registerPlugin(ScrollTrigger, Draggable, InertiaPlugin, SplitText);
 
@@ -93,27 +93,27 @@ class DrumhellerConcept extends PureComponent {
     const track = this.track;
     const trackWidth = track.clientWidth;
 
-    gsap.set('#drumheller-main-page', { height: trackWidth });
+    gsap.set(this.el, { height: trackWidth });
 
     this.scrollDistance = trackWidth - innerWidth;
 
-    gsap.set('#track-wrapper', { width: trackWidth });
+    gsap.set(this.trackWrapper, { width: trackWidth });
     
     this.timeline = gsap.timeline({
       smoothChildTiming: true,
       defaults: {
         ease: 'none'
       },
-    }).to('#track', { 
+    }).to(this.track, { 
       duration: 100,
       x: -this.scrollDistance
     });
-    this.timeline.to('#progressBar', { xPercent: 100, duration: 100 }, 0);
+    this.timeline.to(this.progressBar, { xPercent: 100, duration: 100 }, 0);
 
     this.pageST = ScrollTrigger.create({
       animation: this.timeline,
       horizontal: false,
-      trigger: '#track',
+      trigger: this.track,
       start: 0,
       scrub: 1,
       end: () => `+=${this.scrollDistance}`,
@@ -199,13 +199,13 @@ class DrumhellerConcept extends PureComponent {
   render() {
     const { cursorHover, cursorUnhover } = this.props;
     return (
-      <div id="drumheller-main-page" ref={(e) => { this.el = e; }}>
-        <div id="track-wrapper">
+      <div id={styles["drumheller-main-page"]} ref={(e) => { this.el = e; }}>
+        <div id={styles["track-wrapper"]} ref={(e) => { this.trackWrapper = e; }}>
           <TextLogo
             hover={cursorHover}
             unhover={cursorUnhover}
           />
-          <div id='track' className='track' ref={(e) => { this.track = e; }}>
+          <div id='track' className={styles['track']} ref={(e) => { this.track = e; }}>
             <DinosaurScrollHint
               validateImagesLoaded={this.validateImagesLoaded}
             />
@@ -240,8 +240,8 @@ class DrumhellerConcept extends PureComponent {
               validateImagesLoaded={this.validateImagesLoaded}
             />
           </div>
-          <div id='drumheller-progress'>
-            <div id='progressBar'/>
+          <div id={styles["drumheller-progress"]}>
+            <div id={styles["progressBar"]} ref={(e) => { this.progressBar = e; }}/>
           </div>
         </div>
       </div>
