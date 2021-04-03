@@ -330,7 +330,7 @@ class WebGLCurtains extends PureComponent {
         { (pattern === 'disabled') &&
           <div className={styles['curtains-canvas']}>
             <div className={styles['curtains-plane']}>
-              <img className='disabled-image' src={TestImage} alt='Test for canvas' />
+              <img className={styles['disabled-image']} src={TestImage} alt='Test for canvas' />
             </div>
           </div>
         }

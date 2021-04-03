@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { TweenLite } from 'gsap';
 
-import './style.scss';
+import styles from './style.module.scss';
 
 class Section extends PureComponent {
   constructor(props) {
@@ -37,26 +37,26 @@ class Section extends PureComponent {
     const { id, title, description, date, link, image } = this.props;
     return (
       <Link
-        className='section'
+        className={styles['section']}
         to={link}
         href={link}
         onMouseEnter={this.hoverSection}
         onMouseLeave={this.unhoverSection}  
       >
         <div
-          className="id"
+          className={styles["id"]}
           ref={(ref) => { this.id = ref; }}
         >
           {id}
         </div>
-        <p className="section-title">{title} • <span className="date">{date}</span>
+        <p className={styles["section-title"]}>{title} • <span className={styles["date"]}>{date}</span>
         </p>
-        <div className="section-box">
-          <p className="description">{description}</p>
+        <div className={styles["section-box"]}>
+          <p className={styles["description"]}>{description}</p>
         </div>
-        <div className="section-image">
+        <div className={styles["section-image"]}>
           <div
-            className="image"
+            className={styles["image"]}
             style={{ backgroundImage: `url(${image})`}}
             ref={(ref) => { this.image = ref; }}
               alt="Project banner" />

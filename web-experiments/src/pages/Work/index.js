@@ -18,7 +18,7 @@ import DrumhellerConcept from '../../web/assets/images/project-banner/drumheller
 import CanvasMountain from '../../web/assets/images/project-banner/canvasmountain.PNG';
 
 import withTransition from '../../common/WithTransition';
-import './style.scss';
+import styles from './style.module.scss';
 
 gsap.registerPlugin(ScrollTrigger, Draggable, InertiaPlugin);
 
@@ -76,8 +76,8 @@ class Work extends PureComponent {
     const track = this.track;
     const trackWidth = track.clientWidth;
 
-    gsap.set('#work-page', { height: trackWidth });
-    gsap.set('#track-wrapper', { width: trackWidth });
+    gsap.set(this.el, { height: trackWidth });
+    gsap.set(this.trackWrapper, { width: trackWidth });
 
     this.scrollDistance = trackWidth - innerWidth;
 
@@ -86,18 +86,18 @@ class Work extends PureComponent {
       defaults: {
         ease: 'none'
       },
-    }).to('#track', { 
+    }).to(this.track, { 
       duration: 100,
       x: -this.scrollDistance
     });
-    this.timeline.to('#progressBar', { xPercent: 100, duration: 100 }, 0);
+    this.timeline.to(this.progressBar, { xPercent: 100, duration: 100 }, 0);
     this.timeline.to(this.wall, { x: this.scrollDistance * 0.2, duration: 100 }, 0);
     this.timeline.to(this.scrollHint, { opacity: 0, duration: 20 }, 0);
 
     this.pageST = ScrollTrigger.create({
       animation: this.timeline,
       horizontal: false,
-      trigger: '#track',
+      trigger: this.track,
       start: 0,
       scrub: 1,
       end: () => `+=${this.scrollDistance}`,
@@ -136,7 +136,7 @@ class Work extends PureComponent {
     this.setupTrackAnimation();
     this.setupScrollHintAnimation();
 
-    Draggable.create('#track', {
+    Draggable.create(this.track, {
       type: 'x',
       bounds: {minX: -1 * this.scrollDistance, maxX: 0}, // scroll X is done by offsetting to the right, so we move in negative values
       dragClickables: true,
@@ -167,14 +167,14 @@ class Work extends PureComponent {
   render() {
     const { cursorHover, cursorUnhover } = this.props;
     return (
-      <div id="work-page" ref={(e) => { this.el = e; }}>
-        <div id="animation-wrapper">
+      <div id={styles["work-page"]} ref={(e) => { this.el = e; }}>
+        <div id={styles["animation-wrapper"]}>
           <TextLogo
             hover={cursorHover}
             unhover={cursorUnhover}
           />
-          <div id="track-wrapper">
-            <div id='track' className='track' ref={(e) => { this.track = e; }}>
+          <div id={styles["track-wrapper"]} ref={(e) => { this.trackWrapper = e; }}>
+            <div id={styles['track']} className={styles['track']} ref={(e) => { this.track = e; }}>
               <Section
                 id="07"
                 title="WEBGL - Curtains"
@@ -232,11 +232,11 @@ class Work extends PureComponent {
                 image={JellicentBanner}
               />
               <div
-                className="wall"
+                className={styles["wall"]}
                 ref={(e) => { this.wall = e; }}
               >
                 <img
-                  className="img-wall"
+                  className={styles["img-wall"]}
                   src={EdmontonWall}
                   alt="Skyline of Edmonton"
                 />
@@ -244,13 +244,13 @@ class Work extends PureComponent {
             </div>
           </div>
           <div
-            className="scroll-hint"
+            className={styles["scroll-hint"]}
             ref={(e) => { this.scrollHint = e; }}
           >
-            Scroll to Explore <span className="hint-arrow" ref={(e) => { this.hintArrow = e; }}>→</span>
+            Scroll to Explore <span className={styles["hint-arrow"]} ref={(e) => { this.hintArrow = e; }}>→</span>
           </div>
-          <div id='progress'>
-            <div id='progressBar'/>
+          <div id={styles['progress']}>
+            <div id={styles['progressBar']} ref={(e) => { this.progressBar = e; }}/>
           </div>
         </div>
       </div>
