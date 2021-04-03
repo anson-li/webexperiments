@@ -123,32 +123,32 @@ class WebGLCurtains extends PureComponent {
     `;
 
     this.dragFs = `
-			precision mediump float;
+      precision mediump float;
 
-			// get our varyings
-			varying vec3 vVertexPosition;
-			varying vec2 vTextureCoord;
+      // get our varyings
+      varying vec3 vVertexPosition;
+      varying vec2 vTextureCoord;
 
-			// our texture sampler (this is the lib default name, but it could be changed)
-			uniform sampler2D uSampler0;
+      // our texture sampler (this is the lib default name, but it could be changed)
+      uniform sampler2D uSampler0;
 
-			void main() {
-				// get our texture coords
-				vec2 textureCoords = vTextureCoord;
+      void main() {
+        // get our texture coords
+        vec2 textureCoords = vTextureCoord;
 
-				// apply our texture
-				vec4 finalColor = texture2D(uSampler0, textureCoords);
+        // apply our texture
+        vec4 finalColor = texture2D(uSampler0, textureCoords);
 
-				// fake shadows based on vertex position along Z axis
-				finalColor.rgb -= clamp(-vVertexPosition.z, 0.0, 1.0);
-				// fake lights based on vertex position along Z axis
-				finalColor.rgb += clamp(vVertexPosition.z, 0.0, 1.0);
+        // fake shadows based on vertex position along Z axis
+        finalColor.rgb -= clamp(-vVertexPosition.z, 0.0, 1.0);
+        // fake lights based on vertex position along Z axis
+        finalColor.rgb += clamp(vVertexPosition.z, 0.0, 1.0);
 
-				// handling premultiplied alpha (useful if we were using a png with transparency)
-				finalColor = vec4(finalColor.rgb * finalColor.a, finalColor.a);
+        // handling premultiplied alpha (useful if we were using a png with transparency)
+        finalColor = vec4(finalColor.rgb * finalColor.a, finalColor.a);
 
-				gl_FragColor = finalColor;
-			}
+        gl_FragColor = finalColor;
+      }
     `;
 
     this.setChecked = this.setChecked.bind(this);
@@ -159,6 +159,33 @@ class WebGLCurtains extends PureComponent {
       x: 0,
       y: 0,
     };
+  }
+
+  componentDidMount () {
+    this.props.hideLoader();
+    this.gui = new GUI();
+
+    const patterns = this.gui.addFolder('Patterns');
+    patterns.add(this.state.pattern, 'oscillate').name('Oscillate').listen().onChange(() => {
+      this.setChecked('oscillate');
+    });
+    patterns.add(this.state.pattern, 'disabled').name('Disabled').listen().onChange(() => {
+      this.setChecked('disabled');
+    });
+    patterns.add(this.state.pattern, 'draganimation').name('Drag Animation').listen().onChange(() => {
+      this.setChecked('draganimation');
+    });
+
+    this.mousePosition = {
+      x: 0,
+      y: 0,
+    };
+  }
+
+  componentWillUnmount () {
+    this.gui.destroy();
+    window.removeEventListener('mousemove', this.handleMovement);
+    window.removeEventListener('touchmove', this.handleMovement);
   }
 
   hidePage () {
@@ -194,27 +221,6 @@ class WebGLCurtains extends PureComponent {
       opacity: 0,
       targets: this.el,
     }).finished;
-  }
-
-  componentDidMount () {
-    this.props.hideLoader();
-    this.gui = new GUI();
-
-    const patterns = this.gui.addFolder('Patterns');
-    patterns.add(this.state.pattern, 'oscillate').name('Oscillate').listen().onChange(() => {
-      this.setChecked('oscillate');
-    });
-    patterns.add(this.state.pattern, 'disabled').name('Disabled').listen().onChange(() => {
-      this.setChecked('disabled');
-    });
-    patterns.add(this.state.pattern, 'draganimation').name('Drag Animation').listen().onChange(() => {
-      this.setChecked('draganimation');
-    });
-
-    this.mousePosition = {
-      x: 0,
-      y: 0,
-    };
   }
 
   onPlaneReady (plane) {
@@ -260,10 +266,8 @@ class WebGLCurtains extends PureComponent {
   setChecked (prop) {
     const {pattern} = this.state;
     for (const param in pattern) {
-      if (prop !== param) {
-        pattern[param] = false;
-      } else {
-        pattern[param] = true;
+      if (param) {
+        pattern[param] = prop === param;
       }
     }
     this.setState({pattern});
@@ -277,12 +281,8 @@ class WebGLCurtains extends PureComponent {
         return param;
       }
     }
-  }
 
-  componentWillUnmount () {
-    this.gui.destroy();
-    window.removeEventListener('mousemove', this.handleMovement);
-    window.removeEventListener('touchmove', this.handleMovement);
+    return '';
   }
 
   render () {
@@ -296,19 +296,19 @@ class WebGLCurtains extends PureComponent {
       },
     };
     const dragUniforms = {
-      mousePosition: { // our mouse position
+      mousePosition: {
         name: 'uMousePosition',
-        type: '2f', // notice this is a length 2 array of floats
+        type: '2f',
         value: [this.mousePosition.x, this.mousePosition.y],
       },
-      mouseStrength: { // the strength of the effect (we will attenuate it if the mouse stops moving)
-        name: 'uMouseStrength', // uniform name that will be passed to our shaders
-        type: '1f', // this means our uniform is a float
+      mouseStrength: {
+        name: 'uMouseStrength',
+        type: '1f',
         value: 0,
       },
       time: {
-        name: 'uTime', // uniform name that will be passed to our shaders
-        type: '1f', // this means our uniform is a float
+        name: 'uTime',
+        type: '1f',
         value: 0,
       },
     };

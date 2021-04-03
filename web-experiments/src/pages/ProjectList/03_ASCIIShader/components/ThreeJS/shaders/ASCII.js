@@ -52,16 +52,16 @@ const ASCII = () => {
     }
   `,
     uniforms: {
+      cameraFar: {value: 1},
       cameraNear: {value: 0},
       fontCharCount: {value: new Vector2(1, 1)},
-      cameraFar: {value: 1},
       fontCharSize: {value: new Vector2(1, 1)},
       fontCharTotalCount: {value: 0},
       renderCharCount: {value: new Vector2(1, 1)},
       renderCharSize: {value: new Vector2(1, 1)},
-      tFont: {value: null},
       tDepth: {value: null},
-      tLowRes: { value: null },
+      tFont: {value: null},
+      tLowRes: {value: null},
     },
     vertexShader: `
     varying vec2 vUv;

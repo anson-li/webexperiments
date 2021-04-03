@@ -152,7 +152,7 @@
     "react/no-is-mounted": 2,
     "react/no-multi-comp": 0,
     "react/no-redundant-should-component-update": 2,
-    "react/no-set-state": 2,
+    "react/no-set-state": 0,
     "react/no-string-refs": 2,
     "react/no-this-in-sfc": 2,
     "react/no-typos": 2,
@@ -181,7 +181,10 @@
       2,
       "always"
     ],
-    "react/static-property-placement": 2,
+    "react/static-property-placement": [
+      2,
+      "property assignment"
+    ],
     "react/style-prop-object": 2,
     "react/void-dom-elements-no-children": 2,
     "accessor-pairs": 2,
@@ -391,7 +394,12 @@
     "import/no-relative-parent-imports": 0,
     "import/no-restricted-paths": 0,
     "import/no-self-import": 2,
-    "import/no-unassigned-import": 2,
+    "import/no-unassigned-import": [
+      2,
+      {
+        "allow": ["**/*.css", "**/*.scss"]
+      }
+    ],
     "import/no-unresolved": 2,
     "import/no-useless-path-segments": 2,
     "import/no-webpack-loader-syntax": 2,

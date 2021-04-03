@@ -1,4 +1,3 @@
-/* eslint-disable no-return-assign */
 import anime from 'animejs';
 import {
   gsap,
@@ -38,6 +37,46 @@ class Work extends PureComponent {
     this.timeline = null;
     this.scrollDistance = null;
     this.pageST = null;
+  }
+
+  componentDidMount () {
+    this.props.hideLoader();
+    this.setupTrackAnimation();
+    this.setupScrollHintAnimation();
+
+    Draggable.create(this.track, {
+      autoScroll: false,
+
+      bounds: {maxX: 0,
+        minX: -1 * this.scrollDistance},
+
+      // scroll X is done by offsetting to the right, so we move in negative values
+      dragClickables: true,
+      dragResistance: 0.5,
+      inertia: true,
+      onDrag: (event) => {
+        // Grabs the scroll value while being updated by Draggable and updates the GSAP timeline to match
+        const values = this.track.style.transform.split(/\w+\(|\);?/);
+        const transform = values[1].split(/,\s?/g).map(parseInt);
+        this.timeline.progress(-1 * transform[0] / this.scrollDistance);
+        this.pageST.scroll(-1 * transform[0]);
+      },
+      onThrowUpdate: (event) => {
+        // Grabs the scroll value while being updated by Draggable and updates the GSAP timeline to match
+        const values = this.track.style.transform.split(/\w+\(|\);?/);
+        const transform = values[1].split(/,\s?/g).map(parseInt);
+        this.timeline.progress(-1 * transform[0] / this.scrollDistance);
+        this.pageST.scroll(-1 * transform[0]);
+      },
+      throwResistance: 2000,
+      type: 'x',
+    });
+
+    // window.addEventListener('resize', this.onWindowResize);
+  }
+
+  componentWillUnmount () {
+    // window.removeEventListener('resize', this.onWindowResize);
   }
 
   hidePage () {
@@ -143,44 +182,6 @@ class Work extends PureComponent {
       scrollHintTimeline.play(0);
     },
     paddingLeft: '5px'}, 0);
-  }
-
-  componentDidMount () {
-    this.props.hideLoader();
-    this.setupTrackAnimation();
-    this.setupScrollHintAnimation();
-
-    Draggable.create(this.track, {
-      autoScroll: false,
-
-      bounds: {maxX: 0,
-        minX: -1 * this.scrollDistance},
-
-      // scroll X is done by offsetting to the right, so we move in negative values
-      dragClickables: true,
-      dragResistance: 0.5,
-      inertia: true,
-      onDrag: (event) => { // Grabs the scroll value while being updated by Draggable and updates the GSAP timeline to match
-        const values = this.track.style.transform.split(/\w+\(|\);?/);
-        const transform = values[1].split(/,\s?/g).map(parseInt);
-        this.timeline.progress(-1 * transform[0] / this.scrollDistance);
-        this.pageST.scroll(-1 * transform[0]);
-      },
-      onThrowUpdate: (event) => { // Grabs the scroll value while being updated by Draggable and updates the GSAP timeline to match
-        const values = this.track.style.transform.split(/\w+\(|\);?/);
-        const transform = values[1].split(/,\s?/g).map(parseInt);
-        this.timeline.progress(-1 * transform[0] / this.scrollDistance);
-        this.pageST.scroll(-1 * transform[0]);
-      },
-      throwResistance: 2000,
-      type: 'x',
-    });
-
-    // window.addEventListener('resize', this.onWindowResize);
-  }
-
-  componentWillUnmount () {
-    // window.removeEventListener('resize', this.onWindowResize);
   }
 
   render () {
