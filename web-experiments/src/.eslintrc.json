@@ -13,6 +13,7 @@
     "promise",
     "sort-keys-fix"
   ],
+  "ignorePatterns": ["*.js"], // Disables tests run for emergency builds! 
   "rules": {
     "react-hooks/exhaustive-deps": 1,
     "react-hooks/rules-of-hooks": 2,
