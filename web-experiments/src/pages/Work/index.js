@@ -189,8 +189,8 @@ class Work extends PureComponent {
 
     return (
       <div
-        id={styles['work-page']} ref={(e) => {
-          this.el = e;
+        id={styles['work-page']} ref={(element) => {
+          this.el = element;
         }}>
         <div id={styles['animation-wrapper']}>
           <TextLogo
@@ -198,12 +198,12 @@ class Work extends PureComponent {
             unhover={cursorUnhover}
           />
           <div
-            id={styles['track-wrapper']} ref={(e) => {
-              this.trackWrapper = e;
+            id={styles['track-wrapper']} ref={(element) => {
+              this.trackWrapper = element;
             }}>
             <div
-              className={styles.track} id={styles.track} ref={(e) => {
-                this.track = e;
+              className={styles.track} id={styles.track} ref={(element) => {
+                this.track = element;
               }}>
               <Section
                 date='MAR 2021'
@@ -263,8 +263,8 @@ class Work extends PureComponent {
               />
               <div
                 className={styles.wall}
-                ref={(e) => {
-                  this.wall = e;
+                ref={(element) => {
+                  this.wall = element;
                 }}
               >
                 <img
@@ -277,19 +277,19 @@ class Work extends PureComponent {
           </div>
           <div
             className={styles['scroll-hint']}
-            ref={(e) => {
-              this.scrollHint = e;
+            ref={(element) => {
+              this.scrollHint = element;
             }}
           >
             Scroll to Explore <span
-              className={styles['hint-arrow']} ref={(e) => {
-                this.hintArrow = e;
+              className={styles['hint-arrow']} ref={(element) => {
+                this.hintArrow = element;
               }}>→</span>
           </div>
           <div id={styles.progress}>
             <div
-              id={styles.progressBar} ref={(e) => {
-                this.progressBar = e;
+              id={styles.progressBar} ref={(element) => {
+                this.progressBar = element;
               }} />
           </div>
         </div>
