@@ -1,4 +1,3 @@
-/* eslint-disable no-return-assign */
 import {
   TweenLite,
 } from 'gsap';
@@ -14,11 +13,11 @@ import styles from './style.module.scss';
 class Section extends PureComponent {
   constructor (props) {
     super(props);
-    this.hoverSection = this.hoverSection.bind(this);
-    this.unhoverSection = this.unhoverSection.bind(this);
+    this.handleLinkMouseEnter = this.handleLinkMouseEnter.bind(this);
+    this.handleLinkMouseLeave = this.handleLinkMouseLeave.bind(this);
   }
 
-  hoverSection () {
+  handleLinkMouseEnter () {
     TweenLite.to(this.id, 0.2, {
       top: '19vh',
     });
@@ -28,7 +27,7 @@ class Section extends PureComponent {
     });
   }
 
-  unhoverSection () {
+  handleLinkMouseLeave () {
     TweenLite.to(this.id, 0.2, {
       top: '18vh',
     });
@@ -45,8 +44,8 @@ class Section extends PureComponent {
       <Link
         className={styles.section}
         href={link}
-        onMouseEnter={this.hoverSection}
-        onMouseLeave={this.unhoverSection}
+        onMouseEnter={this.handleLinkMouseEnter}
+        onMouseLeave={this.handleLinkMouseLeave}
         to={link}
       >
         <div
