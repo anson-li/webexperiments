@@ -153,7 +153,7 @@ class WebGLCurtains extends PureComponent {
 
     this.setChecked = this.setChecked.bind(this);
     this.handleMovement = this.handleMovement.bind(this);
-    this.onPlaneReady = this.onPlaneReady.bind(this);
+    this.handlePlaneReady = this.handlePlaneReady.bind(this);
     this.gui = null;
     this.mousePosition = {
       x: 0,
@@ -223,7 +223,7 @@ class WebGLCurtains extends PureComponent {
     }).finished;
   }
 
-  onPlaneReady (plane) {
+  handlePlaneReady (plane) {
     // set a field of view of 35 to exagerate perspective
     // we could have done  it directly in the initial params
     // plane.setPerspective(35);
@@ -241,14 +241,12 @@ class WebGLCurtains extends PureComponent {
   }
 
   handleMovement (e, plane) {
-    // touch event
     if (e.targetTouches) {
+      // touch event
       this.mousePosition.x = e.targetTouches[0].clientX;
       this.mousePosition.y = e.targetTouches[0].clientY;
-    }
-
-    // mouse event
-    else {
+    } else {
+      // mouse event
       this.mousePosition.x = e.clientX;
       this.mousePosition.y = e.clientY;
     }
@@ -329,13 +327,9 @@ class WebGLCurtains extends PureComponent {
         <Curtains className={styles['curtains-canvas']}>
           <Plane
             className={styles['curtains-plane']}
-
-            // plane init parameters
             fragmentShader={this.basicFs}
             onRender={onRender}
             uniforms={basicUniforms}
-
-            // plane events
             vertexShader={this.basicVs}
           >
             <img alt='Test for canvas' src={TestImage} />
@@ -352,17 +346,13 @@ class WebGLCurtains extends PureComponent {
           <Curtains className={styles['curtains-canvas']}>
             <Plane
               className={styles['curtains-plane']}
-
-              // plane init parameters
               fov={35}
               fragmentShader={this.dragFs}
               heightSegments={20}
-              onReady={this.onPlaneReady}
+              onReady={this.handlePlaneReady}
               onRender={onRender}
               uniforms={dragUniforms}
               vertexShader={this.dragVs}
-
-              // plane events
               widthSegments={20}
             >
               <img alt='Test for canvas' src={TestImage} />
