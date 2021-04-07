@@ -127,6 +127,7 @@ class ThreeSphere extends PureComponent {
     // Create Renderer
     this.renderer = new WebGLRenderer();
     this.renderer.setSize(window.innerWidth, window.innerHeight);
+    this.renderer.setPixelRatio(window.devicePixelRatio);
     this.container.appendChild(this.renderer.domElement);
 
     // Load 3D Model

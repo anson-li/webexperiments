@@ -89,16 +89,16 @@ class Work extends PureComponent {
   }
 
   refreshAnimationBounds () {
-    const innerWidth = window.innerWidth;
     const track = this.track;
-    const trackWidth = track.clientWidth;
-
-    gsap.set(this.el, {height: trackWidth});
-    gsap.set(this.trackWrapper, {width: trackWidth});
-
-    this.scrollDistance = trackWidth - innerWidth;
-    if (this.draggable.bounds) {
-      this.draggable.bounds.minX = -1 * this.scrollDistance;
+    if (track) {
+      const innerWidth = window.innerWidth;
+      const trackWidth = track.clientWidth;
+      gsap.set(this.el, {height: trackWidth});
+      gsap.set(this.trackWrapper, {width: trackWidth});
+      this.scrollDistance = trackWidth - innerWidth;
+      if (this.draggable.bounds) {
+        this.draggable.bounds.minX = -1 * this.scrollDistance;
+      }
     }
   }
 
