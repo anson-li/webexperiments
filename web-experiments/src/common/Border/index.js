@@ -8,9 +8,6 @@ import {
 class Border extends PureComponent {
   constructor (props) {
     super(props);
-    this.state = {
-      visibleMenu: false,
-    };
     this.renderStandard = this.renderStandard.bind(this);
   }
 

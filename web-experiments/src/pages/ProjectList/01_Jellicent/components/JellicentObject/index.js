@@ -133,10 +133,10 @@ class JellicentObject extends PureComponent {
     }
   }
 
-  mousemove (e) {
+  mousemove (event) {
     if (this.camera) {
-      this.camera.rotation.z = 0.5 + 0.0001 * e.clientX;
-      this.camera.rotation.y = 6.1 + 0.0001 * e.clientY;
+      this.camera.rotation.z = 0.5 + 0.0001 * event.clientX;
+      this.camera.rotation.y = 6.1 + 0.0001 * event.clientY;
     }
   }
 

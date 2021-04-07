@@ -129,13 +129,13 @@ class ThreeJS extends PureComponent {
     this.renderScene();
   }
 
-  mousemove (e) {
+  mousemove (event) {
     if (this.lightCone) {
-      this.lightCone.position.x = 5 * (e.clientX / window.innerWidth * 2 - 1);
+      this.lightCone.position.x = 5 * (event.clientX / window.innerWidth * 2 - 1);
       this.backLight.position.x = this.lightCone.position.x;
     }
-    this.modelContainer.rotation.x = Math.PI / 16 + 0.0001 * e.clientX;
-    this.modelContainer.rotation.y = -Math.PI / 2 + 0.0001 * e.clientY;
+    this.modelContainer.rotation.x = Math.PI / 16 + 0.0001 * event.clientX;
+    this.modelContainer.rotation.y = -Math.PI / 2 + 0.0001 * event.clientY;
   }
 
   // Handle Window Resize

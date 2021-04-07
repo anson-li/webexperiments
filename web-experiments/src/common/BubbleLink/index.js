@@ -1,6 +1,7 @@
 import {
   TweenLite,
 } from 'gsap';
+import PropTypes from 'prop-types';
 import React, {
   PureComponent,
 } from 'react';
@@ -32,7 +33,7 @@ class BubbleLink extends PureComponent {
     });
   }
 
-  hoverLink (e) {
+  hoverLink () {
     if (this.bubbleLink) {
       TweenLite.to(this.bubbleLink, 0.5, {
         background: '#333',
@@ -55,16 +56,18 @@ class BubbleLink extends PureComponent {
     this.windowHalfY = window.innerHeight / 2;
   }
 
-  moveLink (e) {
+  moveLink (event) {
     if (this.bubbleLink) {
       TweenLite.to(this.bubbleLink, 0.7, {
-        x: (e.x - this.windowHalfX) / 2 + this.windowHalfX,
-        y: (e.y - this.windowHalfY) / 2 + this.windowHalfY,
+        x: (event.x - this.windowHalfX) / 2 + this.windowHalfX,
+        y: (event.y - this.windowHalfY) / 2 + this.windowHalfY,
       });
     }
   }
 
   render () {
+    const {text} = this.props;
+
     return (
       <Link
         href='work'
@@ -75,11 +78,15 @@ class BubbleLink extends PureComponent {
         to='/work'
       >
         <div id='sub-link-text'>
-          { this.props.text }
+          { text }
         </div>
       </Link>
     );
   }
 }
+
+BubbleLink.propTypes = {
+  text: PropTypes.string.isRequired,
+};
 
 export default BubbleLink;

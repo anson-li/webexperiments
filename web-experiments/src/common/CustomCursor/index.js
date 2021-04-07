@@ -26,24 +26,24 @@ class CustomCursor extends PureComponent {
     window.addEventListener('onmouseout', this.unhoverFunc);
   }
 
-  moveCircle (e) {
+  moveCircle (event) {
     if (this.circle) {
       TweenLite.to(this.circle, 0.2, {
-        x: e.x,
-        y: e.y,
+        x: event.x,
+        y: event.y,
         z: 0.1,
       });
     }
     if (this.follow) {
       TweenLite.to(this.follow, 0.7, {
-        x: e.x,
-        y: e.y,
+        x: event.x,
+        y: event.y,
         z: 0.1,
       });
     }
   }
 
-  hoverFunc (e) {
+  hoverFunc () {
     if (this.circle) {
       TweenLite.to(this.circle, 0.3, {
         opacity: 1,
@@ -79,7 +79,7 @@ class CustomCursor extends PureComponent {
     }
   }
 
-  unhoverFunc (e) {
+  unhoverFunc () {
     if (this.circle) {
       TweenLite.to(this.circle, 0.3, {
         opacity: 1,
@@ -93,17 +93,17 @@ class CustomCursor extends PureComponent {
     }
   }
 
-  onScroll (e) {
+  onScroll (event) {
     if (this.circle) {
       TweenLite.to(this.circle, 0.2, {
-        x: e.x,
-        y: e.y,
+        x: event.x,
+        y: event.y,
       });
     }
     if (this.follow) {
       TweenLite.to(this.follow, 0.7, {
-        x: e.x,
-        y: e.y,
+        x: event.x,
+        y: event.y,
       });
     }
   }

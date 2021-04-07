@@ -19,8 +19,8 @@ gsap.registerPlugin(SplitText);
 class TextLogo extends PureComponent {
   constructor (props) {
     super(props);
-    this.hoverLogo = this.hoverLogo.bind(this);
-    this.unhoverLogo = this.unhoverLogo.bind(this);
+    this.handleHoverLogo = this.handleHoverLogo.bind(this);
+    this.handleUnhoverLogo = this.handleUnhoverLogo.bind(this);
     this.childSplitTop = null;
     this.childSplitBottom = null;
     this.parentSplitTop = null;
@@ -48,7 +48,7 @@ class TextLogo extends PureComponent {
     });
   }
 
-  hoverLogo () {
+  handleHoverLogo () {
     if (!this.timelineOne || !this.timelineOne.isActive()) {
       this.timelineOne = gsap.timeline()
         .from(this.childSplitTop.chars, 0.5, {
@@ -75,7 +75,7 @@ class TextLogo extends PureComponent {
     this.props.hover();
   }
 
-  unhoverLogo () {
+  handleUnhoverLogo () {
     this.props.unhover();
   }
 
@@ -85,8 +85,8 @@ class TextLogo extends PureComponent {
         className='d-none d-md-block logo-main'
         href='/'
         id='logo-main'
-        onMouseEnter={this.hoverLogo}
-        onMouseLeave={this.unhoverLogo}
+        onMouseEnter={this.handleHoverLogo}
+        onMouseLeave={this.handleUnhoverLogo}
         to='/'
       >
         <h1
