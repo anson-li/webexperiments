@@ -1,4 +1,3 @@
-/* eslint-disable no-return-assign */
 import anime from 'animejs';
 import {
   gsap,
@@ -17,41 +16,6 @@ import './style.scss';
 gsap.registerPlugin(ScrollTrigger);
 
 class Work extends PureComponent {
-  hidePage () {
-    anime.remove(this.el);
-
-    return anime({
-      duration: 0,
-      opacity: 0,
-      targets: this.el,
-    }).finished;
-  }
-
-  animateIn () {
-    anime.remove(this.el);
-
-    return anime({
-      delay: 1000,
-      duration: 1000,
-      easing: 'easeOutExpo',
-      opacity: [0, 1],
-      targets: this.el,
-    }).finished;
-  }
-
-  animateOut () {
-    anime.remove(this.el);
-    const {showLoader} = this.props;
-    showLoader();
-
-    return anime({
-      duration: 1000,
-      easing: 'easeOutExpo',
-      opacity: 0,
-      targets: this.el,
-    }).finished;
-  }
-
   componentDidMount () {
     this.props.hideLoader();
     const innerWidth = window.innerWidth;
@@ -113,16 +77,51 @@ class Work extends PureComponent {
     // timeline.play();
   }
 
+  hidePage () {
+    anime.remove(this.el);
+
+    return anime({
+      duration: 0,
+      opacity: 0,
+      targets: this.el,
+    }).finished;
+  }
+
+  animateIn () {
+    anime.remove(this.el);
+
+    return anime({
+      delay: 1000,
+      duration: 1000,
+      easing: 'easeOutExpo',
+      opacity: [0, 1],
+      targets: this.el,
+    }).finished;
+  }
+
+  animateOut () {
+    anime.remove(this.el);
+    const {showLoader} = this.props;
+    showLoader();
+
+    return anime({
+      duration: 1000,
+      easing: 'easeOutExpo',
+      opacity: 0,
+      targets: this.el,
+    }).finished;
+  }
+
   render () {
     return (
       <div
-        id='hz-page' ref={(e) => {
-          this.el = e;
+        id='hz-page' ref={(element) => {
+          this.el = element;
         }}>
         <TextLogo />
         <div
-          className='track' id='track' ref={(e) => {
-            this.track = e;
+          className='track' id='track' ref={(element) => {
+            this.track = element;
           }}>
           <section className='section'>
             <h1>Moving sideways is fun</h1>
@@ -148,7 +147,6 @@ class Work extends PureComponent {
 
 Work.propTypes = {
   hideLoader: PropTypes.func.isRequired,
-  mainPageRedirect: PropTypes.func.isRequired,
   showLoader: PropTypes.func.isRequired,
 };
 

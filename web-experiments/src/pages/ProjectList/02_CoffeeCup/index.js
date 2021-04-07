@@ -1,4 +1,3 @@
-/* eslint-disable no-return-assign */
 import anime from 'animejs';
 import PropTypes from 'prop-types';
 import React, {
@@ -10,6 +9,10 @@ import withTransition from '../../../common/WithTransition';
 import ThreeJS from './components/ThreeJS';
 
 class CoffeeCup extends PureComponent {
+  componentDidMount () {
+    this.props.hideFollow();
+  }
+
   hidePage () {
     anime.remove(this.el);
 
@@ -46,17 +49,13 @@ class CoffeeCup extends PureComponent {
     }).finished;
   }
 
-  componentDidMount () {
-    this.props.hideFollow();
-  }
-
   render () {
     const {hideLoader, cursorHover, cursorUnhover} = this.props;
 
     return (
       <div
-        id='additiveshader-page' ref={(e) => {
-          this.el = e;
+        id='additiveshader-page' ref={(event) => {
+          this.el = event;
         }}>
         <TextLogo
           hover={cursorHover}

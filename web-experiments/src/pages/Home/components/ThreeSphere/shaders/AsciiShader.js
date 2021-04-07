@@ -2,7 +2,7 @@ import {
   Vector2,
 } from 'three';
 
-const ASCII = () => {
+const AsciiShader = () => {
   return {
     fragmentShader: `
    #include <packing>
@@ -73,4 +73,4 @@ const ASCII = () => {
   };
 };
 
-export default ASCII;
+export default AsciiShader;

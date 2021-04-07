@@ -71,14 +71,13 @@ class ThreeJS extends PureComponent {
     this.mainScene = new Scene();
 
     this.mainCamera = new PerspectiveCamera(
-      20, // camera frustrum field of view
-      window.innerWidth / window.innerHeight, // camera aspect ratio
-      0.1, // near plane, or the minimum range to start rendering. If it's too high, stuff that's too close will be missed.
-      12, // far plane, or the maximum range to render. Important to note it's affecting your render quality too.
+      20,
+      window.innerWidth / window.innerHeight,
+      0.1,
+      12,
     );
-    this.mainCamera.position.z = 1.1; // zooms out to capture detail - everything is x10 size to capture detail
-    this.mainCamera.position.x = 0.1; // shifts the camera more towards the middle of the frame
-    // this.mainCamera.position.y = 0.5; // moves the camera slightly higher
+    this.mainCamera.position.z = 1.1;
+    this.mainCamera.position.x = 0.1;
 
     // Add Point Lights
     this.backLight = new PointLight(0xFFFFFF, 3, 20);
@@ -114,7 +113,7 @@ class ThreeJS extends PureComponent {
         this.action.play();
       },
       undefined,
-      console.error,
+      () => {},
     );
 
     this.finalComposer = new EffectComposer(this.renderer);

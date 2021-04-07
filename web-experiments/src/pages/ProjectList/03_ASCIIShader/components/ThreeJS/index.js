@@ -18,7 +18,7 @@ import {
 } from 'three/examples/jsm/postprocessing/ShaderPass';
 import fontFile from '../../../../../web/assets/objects/font2.png';
 import modelFile from '../../../../../web/assets/objects/skullcrane.glb';
-import ASCIIShader from './shaders/ASCII';
+import AsciiShader from './shaders/AsciiShader';
 
 class ThreeJS extends PureComponent {
   constructor (props) {
@@ -157,7 +157,7 @@ class ThreeJS extends PureComponent {
 
     this.finalComposer = new EffectComposer(this.renderer);
 
-    this.asciiPass = new ShaderPass(ASCIIShader());
+    this.asciiPass = new ShaderPass(AsciiShader());
     this.asciiPass.uniforms.tLowRes.value = this.lowResRenderTarget.texture;
     this.asciiPass.uniforms.tDepth.value = lowResDepthTexture;
     this.asciiPass.uniforms.cameraNear.value = this.mainCamera.near;
@@ -186,9 +186,9 @@ class ThreeJS extends PureComponent {
     this.renderScene();
   }
 
-  mousemove (e) {
-    this.modelContainer.rotation.x = 0.5 + 0.0001 * e.clientX;
-    this.modelContainer.rotation.y = 5.7 + 0.0001 * e.clientY;
+  mousemove (event) {
+    this.modelContainer.rotation.x = 0.5 + 0.0001 * event.clientX;
+    this.modelContainer.rotation.y = 5.7 + 0.0001 * event.clientY;
   }
 
   updateAsciiRenderSize () {

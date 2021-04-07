@@ -8,8 +8,8 @@ class MobilePageOverlay extends PureComponent {
     return (
       <div className='mobile-overlay'>
         <p>
-          Hey! Sorry, but you're viewing this from
-          a view that's a bit too small for our web experiments.
+          Hey! Sorry, but you&rsquo;re viewing this from
+          a view that&rsquo;s a bit too small for our web experiments.
           In the meantime, please check out these links for more
           from me: <br /><br />
           <a href='http://anson.li/resume'>Resume</a><br /><br />

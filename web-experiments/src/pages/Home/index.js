@@ -1,4 +1,3 @@
-/* eslint-disable no-return-assign */
 import anime from 'animejs';
 import PropTypes from 'prop-types';
 import React, {
@@ -11,6 +10,10 @@ import withTransition from '../../common/WithTransition';
 import ThreeSphere from './components/ThreeSphere';
 
 class Home extends PureComponent {
+  componentDidMount () {
+    this.props.hideFollow();
+  }
+
   hidePage () {
     anime.remove(this.el);
 
@@ -45,10 +48,6 @@ class Home extends PureComponent {
       opacity: 0,
       targets: this.el,
     }).finished;
-  }
-
-  componentDidMount () {
-    this.props.hideFollow();
   }
 
   render () {

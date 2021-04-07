@@ -3,7 +3,11 @@ import React, {
   PureComponent,
 } from 'react';
 import {
-  Scene, PerspectiveCamera, Color, PointLight, WebGLRenderer, Group, MeshBasicMaterial, WebGLRenderTarget, CylinderGeometry, Matrix4, ShaderMaterial, Vector3, Mesh, TextureLoader, NearestFilter, Vector2, DepthTexture, UnsignedShortType, Clock,
+  Scene, PerspectiveCamera, Color, PointLight,
+  WebGLRenderer, Group, MeshBasicMaterial, WebGLRenderTarget,
+  CylinderGeometry, Matrix4, ShaderMaterial, Vector3, Mesh,
+  TextureLoader, NearestFilter, Vector2, DepthTexture,
+  UnsignedShortType, Clock,
 } from 'three';
 import {
   GLTFLoader,
@@ -19,7 +23,7 @@ import {
 } from 'three/examples/jsm/postprocessing/ShaderPass';
 import fontFile from '../../../../web/assets/objects/font2.png';
 import modelFile from '../../../../web/assets/objects/skullcrane.glb';
-import ASCIIShader from './shaders/ASCII';
+import AsciiShader from './shaders/AsciiShader';
 import VolumetricLightCylinder from './shaders/VolumetricLightCylinder';
 import VolumetricLightScattering from './shaders/VolumetricLightScattering';
 
@@ -90,14 +94,14 @@ class ThreeSphere extends PureComponent {
     this.mainScene = new Scene();
 
     this.mainCamera = new PerspectiveCamera(
-      20, // camera frustrum field of view
-      window.innerWidth / window.innerHeight, // camera aspect ratio
-      0.1, // near plane, or the minimum range to start rendering. If it's too high, stuff that's too close will be missed.
-      12, // far plane, or the maximum range to render. Important to note it's affecting your render quality too.
+      20,
+      window.innerWidth / window.innerHeight,
+      0.1,
+      12,
     );
-    this.mainCamera.position.z = 10; // zooms out to capture detail - everything is x10 size to capture detail
-    this.mainCamera.position.x = 1.3; // shifts the camera more towards the middle of the frame
-    this.mainCamera.position.y = 0.5; // moves the camera slightly higher
+    this.mainCamera.position.z = 10;
+    this.mainCamera.position.x = 1.3;
+    this.mainCamera.position.y = 0.5;
 
     this.occlusionCamera = this.mainCamera.clone();
     this.occlusionCamera.layers.set(this.OCCLUSION_LAYER);
@@ -153,7 +157,7 @@ class ThreeSphere extends PureComponent {
         this.modelContainer.add(occlusionScene);
       },
       undefined,
-      console.error,
+      () => {},
     );
 
     // Volumetric Lighting
@@ -213,7 +217,7 @@ class ThreeSphere extends PureComponent {
 
     this.finalComposer = new EffectComposer(this.renderer);
 
-    this.asciiPass = new ShaderPass(ASCIIShader());
+    this.asciiPass = new ShaderPass(AsciiShader());
     this.asciiPass.uniforms.tLowRes.value = this.lowResRenderTarget.texture;
     this.asciiPass.uniforms.tDepth.value = lowResDepthTexture;
     this.asciiPass.uniforms.cameraNear.value = this.mainCamera.near;
@@ -273,13 +277,13 @@ class ThreeSphere extends PureComponent {
     this.renderScene();
   }
 
-  mousemove (e) {
+  mousemove (event) {
     if (this.lightCone) {
-      this.lightCone.position.x = 5 * (e.clientX / window.innerWidth * 2 - 1);
+      this.lightCone.position.x = 5 * (event.clientX / window.innerWidth * 2 - 1);
       this.backLight.position.x = this.lightCone.position.x;
     }
-    this.modelContainer.rotation.x = 0.5 + 0.0001 * e.clientX;
-    this.modelContainer.rotation.y = 5.7 + 0.0001 * e.clientY;
+    this.modelContainer.rotation.x = 0.5 + 0.0001 * event.clientX;
+    this.modelContainer.rotation.y = 5.7 + 0.0001 * event.clientY;
   }
 
   updateAsciiRenderSize () {

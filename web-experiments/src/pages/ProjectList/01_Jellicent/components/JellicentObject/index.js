@@ -87,7 +87,6 @@ class JellicentObject extends PureComponent {
     this.renderer.setSize(window.innerWidth, window.innerHeight);
     this.container.appendChild(this.renderer.domElement);
 
-    // eslint-disable-next-line global-require
     const jsonObject = require('../../../../../web/assets/scene/jellicent.json');
     this.scene = new ObjectLoader().parse(jsonObject);
     this.scene.background = new Color(0x111111);

@@ -49,8 +49,8 @@ class Jellicent extends PureComponent {
 
     return (
       <div
-        id='main-page' ref={(e) => {
-          this.el = e;
+        id='main-page' ref={(element) => {
+          this.el = element;
         }}>
         <TextLogo
           hover={cursorHover}

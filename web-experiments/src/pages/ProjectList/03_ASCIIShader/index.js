@@ -55,8 +55,8 @@ class AdditiveShader extends PureComponent {
 
     return (
       <div
-        id='additiveshader-page' ref={(e) => {
-          this.el = e;
+        id='additiveshader-page' ref={(event) => {
+          this.el = event;
         }}>
         <TextLogo
           hover={cursorHover}

@@ -114,8 +114,8 @@ class Footer extends PureComponent {
           </div>
           <div className={styles['drumheller-imagemask']}>
             <img
-              alt='Badlands!' onLoad={validateImagesLoaded()} ref={(e) => {
-                this.dinosaurmask = e;
+              alt='Badlands!' onLoad={validateImagesLoaded()} ref={(event) => {
+                this.dinosaurmask = event;
               }}
               src={DinosaurBackground} />
           </div>
