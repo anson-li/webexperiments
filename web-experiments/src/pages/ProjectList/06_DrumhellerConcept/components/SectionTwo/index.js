@@ -104,7 +104,7 @@ class SectionTwo extends PureComponent {
 
 SectionTwo.propTypes = {
   animateInDiv: PropTypes.func,
-  scrollDistance: PropTypes.number.isRequired,
+  scrollDistance: PropTypes.number,
   timeline: PropTypes.shape({
     to: PropTypes.func.isRequired,
   }),
@@ -112,6 +112,7 @@ SectionTwo.propTypes = {
 };
 
 SectionTwo.defaultProps = {
+  scrollDistance: null,
   timeline: null,
 };
 

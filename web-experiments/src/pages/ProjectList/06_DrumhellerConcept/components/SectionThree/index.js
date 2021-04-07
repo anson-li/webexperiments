@@ -109,7 +109,7 @@ class SectionThree extends PureComponent {
 
 SectionThree.propTypes = {
   animateInDiv: PropTypes.func,
-  scrollDistance: PropTypes.number.isRequired,
+  scrollDistance: PropTypes.number,
   timeline: PropTypes.shape({
     to: PropTypes.func.isRequired,
   }),
@@ -117,6 +117,7 @@ SectionThree.propTypes = {
 };
 
 SectionThree.defaultProps = {
+  scrollDistance: null,
   timeline: null,
 };
 

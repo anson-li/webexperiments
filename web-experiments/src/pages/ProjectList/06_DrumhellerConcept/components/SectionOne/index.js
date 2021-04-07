@@ -96,7 +96,7 @@ class SectionOne extends PureComponent {
 }
 
 SectionOne.propTypes = {
-  scrollDistance: PropTypes.number.isRequired,
+  scrollDistance: PropTypes.number,
   timeline: PropTypes.shape({
     to: PropTypes.func.isRequired,
   }),
@@ -104,6 +104,7 @@ SectionOne.propTypes = {
 };
 
 SectionOne.defaultProps = {
+  scrollDistance: null,
   timeline: null,
 };
 

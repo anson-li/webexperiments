@@ -30,8 +30,9 @@ gsap.registerPlugin(ScrollTrigger, Draggable, InertiaPlugin);
 class Work extends PureComponent {
   constructor (props) {
     super(props);
-    this.onWindowResize = this.onWindowResize.bind(this);
+    this.setupDraggableTrack = this.setupDraggableTrack.bind(this);
     this.setupTrackAnimation = this.setupTrackAnimation.bind(this);
+    this.setupScrollTrigger = this.setupScrollTrigger.bind(this);
     this.setupScrollHintAnimation = this.setupScrollHintAnimation.bind(this);
     this.setupResizeAnimation = this.setupResizeAnimation.bind(this);
     this.timeline = null;
@@ -43,40 +44,10 @@ class Work extends PureComponent {
     this.props.hideLoader();
     this.setupTrackAnimation();
     this.setupScrollHintAnimation();
-
-    Draggable.create(this.track, {
-      autoScroll: false,
-
-      bounds: {maxX: 0,
-        minX: -1 * this.scrollDistance},
-
-      // scroll X is done by offsetting to the right, so we move in negative values
-      dragClickables: true,
-      dragResistance: 0.5,
-      inertia: true,
-      onDrag: (event) => {
-        // Grabs the scroll value while being updated by Draggable and updates the GSAP timeline to match
-        const values = this.track.style.transform.split(/\w+\(|\);?/);
-        const transform = values[1].split(/,\s?/g).map(parseInt);
-        this.timeline.progress(-1 * transform[0] / this.scrollDistance);
-        this.pageST.scroll(-1 * transform[0]);
-      },
-      onThrowUpdate: (event) => {
-        // Grabs the scroll value while being updated by Draggable and updates the GSAP timeline to match
-        const values = this.track.style.transform.split(/\w+\(|\);?/);
-        const transform = values[1].split(/,\s?/g).map(parseInt);
-        this.timeline.progress(-1 * transform[0] / this.scrollDistance);
-        this.pageST.scroll(-1 * transform[0]);
-      },
-      throwResistance: 2000,
-      type: 'x',
-    });
-
-    // window.addEventListener('resize', this.onWindowResize);
-  }
-
-  componentWillUnmount () {
-    // window.removeEventListener('resize', this.onWindowResize);
+    this.setupScrollTrigger();
+    this.setupResizeAnimation();
+    this.setupDraggableTrack();
+    ScrollTrigger.refresh();
   }
 
   hidePage () {
@@ -114,11 +85,6 @@ class Work extends PureComponent {
     }).finished;
   }
 
-  onWindowResize () {
-    // this.timeline.invalidate().restart();
-    // this.setupTrackAnimation();
-  }
-
   setupTrackAnimation () {
     const innerWidth = window.innerWidth;
     const track = this.track;
@@ -144,7 +110,39 @@ class Work extends PureComponent {
       x: this.scrollDistance * 0.2}, 0);
     this.timeline.to(this.scrollHint, {duration: 20,
       opacity: 0}, 0);
+  }
 
+  setupDraggableTrack () {
+    Draggable.create(this.track, {
+      autoScroll: false,
+
+      bounds: {maxX: 0,
+        minX: -1 * this.scrollDistance},
+
+      // scroll X is done by offsetting to the right, so we move in negative values
+      dragClickables: true,
+      dragResistance: 0.5,
+      inertia: true,
+      onDrag: (event) => {
+        // Grabs the scroll value while being updated by Draggable and updates the GSAP timeline to match
+        const values = this.track.style.transform.split(/\w+\(|\);?/);
+        const transform = values[1].split(/,\s?/g).map(parseInt);
+        this.timeline.progress(-1 * transform[0] / this.scrollDistance);
+        this.pageST.scroll(-1 * transform[0]);
+      },
+      onThrowUpdate: (event) => {
+        // Grabs the scroll value while being updated by Draggable and updates the GSAP timeline to match
+        const values = this.track.style.transform.split(/\w+\(|\);?/);
+        const transform = values[1].split(/,\s?/g).map(parseInt);
+        this.timeline.progress(-1 * transform[0] / this.scrollDistance);
+        this.pageST.scroll(-1 * transform[0]);
+      },
+      throwResistance: 2000,
+      type: 'x',
+    });
+  }
+
+  setupScrollTrigger () {
     this.pageST = ScrollTrigger.create({
       animation: this.timeline,
       end: () => {
@@ -155,22 +153,17 @@ class Work extends PureComponent {
       start: 0,
       trigger: this.track,
     });
-
-    this.setupResizeAnimation();
-
-    ScrollTrigger.refresh();
   }
 
   setupResizeAnimation () {
-    // Scrolltrigger to resize on fixed points
-    // var pageST = ScrollTrigger.create({});
-    // var progress = 0;
-    // ScrollTrigger.addEventListener("refreshInit", function() {
-    //   progress = pageST.scroll() / ScrollTrigger.maxScroll(window);
-    // });
-    // ScrollTrigger.addEventListener("refresh", function() {
-    //   pageST.scroll(progress * ScrollTrigger.maxScroll(window));
-    // });
+    // ScrollTrigger to resize on fixed points
+    let progress = 0;
+    ScrollTrigger.addEventListener('refreshInit', () => {
+      progress = this.pageST.scroll() / ScrollTrigger.maxScroll(window);
+    });
+    ScrollTrigger.addEventListener('refresh', () => {
+      this.pageST.scroll(progress * ScrollTrigger.maxScroll(window));
+    });
   }
 
   setupScrollHintAnimation () {
