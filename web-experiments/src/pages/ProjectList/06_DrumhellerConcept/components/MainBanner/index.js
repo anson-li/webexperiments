@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React, {
   PureComponent,
 } from 'react';
@@ -44,5 +45,16 @@ class MainBanner extends PureComponent {
     );
   }
 }
+
+MainBanner.propTypes = {
+  animateInDiv: PropTypes.func.isRequired,
+  description: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
+  image: PropTypes.string.isRequired,
+  imageAlt: PropTypes.string.isRequired,
+  imageHint: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  validateImagesLoaded: PropTypes.func.isRequired,
+};
 
 export default MainBanner;

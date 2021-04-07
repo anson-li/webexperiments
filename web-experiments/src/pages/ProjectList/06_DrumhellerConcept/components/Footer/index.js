@@ -1,6 +1,7 @@
 import {
   gsap, Power4,
 } from 'gsap';
+import PropTypes from 'prop-types';
 import React, {
   PureComponent,
 } from 'react';
@@ -17,18 +18,19 @@ import styles from './style.module.scss';
 class Footer extends PureComponent {
   constructor (props) {
     super(props);
-    this.onHighlightLink = this.onHighlightLink.bind(this);
+    this.handleHighlightLink = this.handleHighlightLink.bind(this);
     this.slideInUnderline = this.slideInUnderline.bind(this);
   }
 
   componentDidUpdate () {
-    if (this.props.timeline) {
-      this.props.timeline.to(this.dinosaurmask, {duration: 20,
+    const {timeline} = this.props;
+    if (timeline) {
+      timeline.to(this.dinosaurmask, {duration: 20,
         height: '120vh'}, 80);
     }
   }
 
-  onHighlightLink (event) {
+  handleHighlightLink (event) {
     const timeline =
       gsap.timeline()
         .to(event.target.firstElementChild, 0.3, {
@@ -58,7 +60,7 @@ class Footer extends PureComponent {
   }
 
   render () {
-    const {validateImagesLoaded} = this.props;
+    const {animateInDiv, validateImagesLoaded} = this.props;
 
     return (
       <div className={`${styles['drumheller-section']} ${styles.footer}`}>
@@ -67,7 +69,7 @@ class Footer extends PureComponent {
             <div className={styles['footer-text']}>
               <InView
                 as='div' delay={100} onChange={(inView, entry) => {
-                  return this.props.animateInDiv(inView, entry);
+                  return animateInDiv(inView, entry);
                 }}
                 threshold={0.3} triggerOnce>
                 Get lost in
@@ -75,7 +77,7 @@ class Footer extends PureComponent {
               <InView
                 as='div' className={styles['left-shifted']} delay={300}
                 onChange={(inView, entry) => {
-                  return this.props.animateInDiv(inView, entry);
+                  return animateInDiv(inView, entry);
                 }} triggerOnce>
                 <span className={styles['drumheller-italic']} style={{paddingRight: '35px'}}>the</span>
                 <span className={styles['drumheller-outline']}>
@@ -92,7 +94,7 @@ class Footer extends PureComponent {
               </InView>
               <InView
                 as='div' delay={600} onChange={(inView, entry) => {
-                  return this.props.animateInDiv(inView, entry);
+                  return animateInDiv(inView, entry);
                 }}
                 style={{lineHeight: '1.3em'}} threshold={0.3} triggerOnce>
                 of Tyrell
@@ -103,7 +105,7 @@ class Footer extends PureComponent {
             <div className={styles['sub-text']}>
               Discover more
             </div>
-            <Link className={styles['main-text']} href='/work' onMouseEnter={this.onHighlightLink} to='/work'>
+            <Link className={styles['main-text']} href='/work' onMouseEnter={this.handleHighlightLink} to='/work'>
               Web Experiments
               <span className={styles['custom-underline-3']}>
                 <img alt='Underline' onLoad={validateImagesLoaded()} src={Underline2} />
@@ -122,5 +124,17 @@ class Footer extends PureComponent {
     );
   }
 }
+
+Footer.propTypes = {
+  animateInDiv: PropTypes.func,
+  timeline: PropTypes.shape({
+    to: PropTypes.func.isRequired,
+  }),
+  validateImagesLoaded: PropTypes.func,
+};
+
+Footer.defaultProps = {
+  timeline: null,
+};
 
 export default Footer;

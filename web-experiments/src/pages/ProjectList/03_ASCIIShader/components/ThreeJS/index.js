@@ -1,9 +1,11 @@
-import PropTypes from 'prop-types';
 import React, {
   PureComponent,
 } from 'react';
 import {
-  Scene, PerspectiveCamera, Color, PointLight, WebGLRenderer, Group, TextureLoader, NearestFilter, Vector2, WebGLRenderTarget, DepthTexture, UnsignedShortType, Clock,
+  Scene, PerspectiveCamera, Color, PointLight,
+  WebGLRenderer, Group, TextureLoader, NearestFilter,
+  Vector2, WebGLRenderTarget, DepthTexture,
+  UnsignedShortType, Clock,
 } from 'three';
 import {
   GLTFLoader,
@@ -18,7 +20,7 @@ import fontFile from '../../../../../web/assets/objects/font2.png';
 import modelFile from '../../../../../web/assets/objects/skullcrane.glb';
 import ASCIIShader from './shaders/ASCII';
 
-class ThreeSphere extends PureComponent {
+class ThreeJS extends PureComponent {
   constructor (props) {
     super(props);
 
@@ -85,14 +87,14 @@ class ThreeSphere extends PureComponent {
     this.mainScene = new Scene();
 
     this.mainCamera = new PerspectiveCamera(
-      20, // camera frustrum field of view
-      window.innerWidth / window.innerHeight, // camera aspect ratio
-      0.1, // near plane, or the minimum range to start rendering. If it's too high, stuff that's too close will be missed.
-      12, // far plane, or the maximum range to render. Important to note it's affecting your render quality too.
+      20,
+      window.innerWidth / window.innerHeight,
+      0.1,
+      12,
     );
-    this.mainCamera.position.z = 10; // zooms out to capture detail - everything is x10 size to capture detail
-    this.mainCamera.position.x = 1.3; // shifts the camera more towards the middle of the frame
-    this.mainCamera.position.y = 0.5; // moves the camera slightly higher
+    this.mainCamera.position.z = 10;
+    this.mainCamera.position.x = 1.3;
+    this.mainCamera.position.y = 0.5;
 
     this.mainScene.background = new Color(0xffffff);
 
@@ -129,7 +131,7 @@ class ThreeSphere extends PureComponent {
         // Add black mesh set to occlusion Layer
       },
       undefined,
-      console.error,
+      () => {},
     );
 
     // Load font texture for render pass
@@ -260,8 +262,4 @@ class ThreeSphere extends PureComponent {
   }
 }
 
-ThreeSphere.propTypes = {
-  hideLoader: PropTypes.func.isRequired,
-};
-
-export default ThreeSphere;
+export default ThreeJS;

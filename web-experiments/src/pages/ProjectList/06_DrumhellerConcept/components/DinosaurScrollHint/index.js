@@ -1,6 +1,7 @@
 import {
   gsap,
 } from 'gsap';
+import PropTypes from 'prop-types';
 import React, {
   PureComponent,
 } from 'react';
@@ -25,13 +26,17 @@ class DinosaurScrollHint extends PureComponent {
       <div className={styles['scroll-explore']}>
         <img
           alt='Scroll to Explore' className={styles['rotating-logo']} onLoad={validateImagesLoaded()}
-          ref={(e) => {
-            this.rotatinglogo = e;
+          ref={(element) => {
+            this.rotatinglogo = element;
           }} src={ScrollToExplore} />
         <img alt='Dino skull!' className={styles['skull-logo']} onLoad={validateImagesLoaded()} src={DinosaurSkull} />
       </div>
     );
   }
 }
+
+DinosaurScrollHint.propTypes = {
+  validateImagesLoaded: PropTypes.func.isRequired,
+};
 
 export default DinosaurScrollHint;

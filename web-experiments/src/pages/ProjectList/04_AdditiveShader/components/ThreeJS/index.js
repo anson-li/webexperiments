@@ -1,7 +1,6 @@
 import {
   GUI,
 } from 'dat.gui';
-import PropTypes from 'prop-types';
 import React, {
   PureComponent,
 } from 'react';
@@ -74,15 +73,27 @@ class ThreeJS extends PureComponent {
     document.body.appendChild(this.container);
     this.mainScene = new Scene();
 
+    // PerspectiveCamera documentation:
+    // camera frustrum field of view
+    // camera aspect ratio
+    // near plane, or the minimum range to start rendering. If it's too high, stuff that's too close will be missed.
+    // far plane, or the maximum range to render. Important to note it's affecting your render quality too.
+
     this.mainCamera = new PerspectiveCamera(
-      20, // camera frustrum field of view
-      window.innerWidth / window.innerHeight, // camera aspect ratio
-      0.1, // near plane, or the minimum range to start rendering. If it's too high, stuff that's too close will be missed.
-      12, // far plane, or the maximum range to render. Important to note it's affecting your render quality too.
+      20,
+      window.innerWidth / window.innerHeight,
+      0.1,
+      12,
     );
-    this.mainCamera.position.z = 10; // zooms out to capture detail - everything is x10 size to capture detail
-    this.mainCamera.position.x = 1.3; // shifts the camera more towards the middle of the frame
-    this.mainCamera.position.y = 0.5; // moves the camera slightly higher
+
+    // MainCamera Position documentation:
+    // z: zooms out to capture detail - everything is x10 size to capture detail
+    // x: shifts the camera more towards the middle of the frame
+    // y: moves the camera slightly higher
+
+    this.mainCamera.position.z = 10;
+    this.mainCamera.position.x = 1.3;
+    this.mainCamera.position.y = 0.5;
 
     // Add Point Lights
     this.backLight = new PointLight(0xdbc0b3, 3, 20);
@@ -114,7 +125,7 @@ class ThreeJS extends PureComponent {
         this.modelContainer.add(gltf.scene);
       },
       undefined,
-      console.error,
+      () => {},
     );
 
     this.finalComposer = new EffectComposer(this.renderer);
@@ -167,13 +178,13 @@ class ThreeJS extends PureComponent {
     this.renderScene();
   }
 
-  mousemove (e) {
+  mousemove (event) {
     if (this.lightCone) {
-      this.lightCone.position.x = 5 * (e.clientX / window.innerWidth * 2 - 1);
+      this.lightCone.position.x = 5 * (event.clientX / window.innerWidth * 2 - 1);
       this.backLight.position.x = this.lightCone.position.x;
     }
-    this.modelContainer.rotation.x = 0.5 + 0.0001 * e.clientX;
-    this.modelContainer.rotation.y = 5.7 + 0.0001 * e.clientY;
+    this.modelContainer.rotation.x = 0.5 + 0.0001 * event.clientX;
+    this.modelContainer.rotation.y = 5.7 + 0.0001 * event.clientY;
   }
 
   // Handle Window Resize
@@ -203,9 +214,5 @@ class ThreeJS extends PureComponent {
     );
   }
 }
-
-ThreeJS.propTypes = {
-  hideLoader: PropTypes.func.isRequired,
-};
 
 export default ThreeJS;

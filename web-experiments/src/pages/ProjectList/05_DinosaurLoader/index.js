@@ -11,6 +11,24 @@ import withTransition from '../../../common/WithTransition';
 import styles from './style.module.scss';
 
 class DinosaurLoader extends PureComponent {
+  componentDidMount () {
+    this.props.hideLoader();
+    TweenLite.to(this.dinosaurGradientBase, 2, {
+      attr: {offset: '0%'},
+      ease: 'none',
+      repeat: -1,
+      repeatDelay: 0.5,
+      yoyo: true,
+    });
+    TweenLite.to(this.dinosaurGradientHighlight, 2, {
+      attr: {offset: '0%'},
+      ease: 'none',
+      repeat: -1,
+      repeatDelay: 0.5,
+      yoyo: true,
+    });
+  }
+
   hidePage () {
     anime.remove(this.el);
 
@@ -46,31 +64,13 @@ class DinosaurLoader extends PureComponent {
     }).finished;
   }
 
-  componentDidMount () {
-    this.props.hideLoader();
-    TweenLite.to(this.dinosaurGradientBase, 2, {
-      attr: {offset: '0%'},
-      ease: 'none',
-      repeat: -1,
-      repeatDelay: 0.5,
-      yoyo: true,
-    });
-    TweenLite.to(this.dinosaurGradientHighlight, 2, {
-      attr: {offset: '0%'},
-      ease: 'none',
-      repeat: -1,
-      repeatDelay: 0.5,
-      yoyo: true,
-    });
-  }
-
   render () {
     const {cursorHover, cursorUnhover} = this.props;
 
     return (
       <div
-        id='main-page' ref={(e) => {
-          this.el = e;
+        id='main-page' ref={(element) => {
+          this.el = element;
         }}>
         <TextLogo
           hover={cursorHover}
@@ -87,12 +87,12 @@ class DinosaurLoader extends PureComponent {
             <defs>
               <linearGradient id='dino-gradient' x1='0%' x2='0%' y1='0%' y2='100%'>
                 <stop
-                  offset='100%' ref={(e) => {
-                    this.dinosaurGradientBase = e;
+                  offset='100%' ref={(element) => {
+                    this.dinosaurGradientBase = element;
                   }} stopColor='#FFA548' />
                 <stop
-                  offset='100%' ref={(e) => {
-                    this.dinosaurGradientHighlight = e;
+                  offset='100%' ref={(element) => {
+                    this.dinosaurGradientHighlight = element;
                   }} stopColor='#EEEEEE' />
               </linearGradient>
             </defs>

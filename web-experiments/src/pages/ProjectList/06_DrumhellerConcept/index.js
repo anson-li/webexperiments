@@ -220,20 +220,20 @@ class DrumhellerConcept extends PureComponent {
 
     return (
       <div
-        id={styles['drumheller-main-page']} ref={(e) => {
-          this.el = e;
+        id={styles['drumheller-main-page']} ref={(element) => {
+          this.el = element;
         }}>
         <div
-          id={styles['track-wrapper']} ref={(e) => {
-            this.trackWrapper = e;
+          id={styles['track-wrapper']} ref={(element) => {
+            this.trackWrapper = element;
           }}>
           <TextLogo
             hover={cursorHover}
             unhover={cursorUnhover}
           />
           <div
-            className={styles.track} id='track' ref={(e) => {
-              this.track = e;
+            className={styles.track} id='track' ref={(element) => {
+              this.track = element;
             }}>
             <DinosaurScrollHint
               validateImagesLoaded={this.validateImagesLoaded}
@@ -271,8 +271,8 @@ class DrumhellerConcept extends PureComponent {
           </div>
           <div id={styles['drumheller-progress']}>
             <div
-              id={styles.progressBar} ref={(e) => {
-                this.progressBar = e;
+              id={styles.progressBar} ref={(element) => {
+                this.progressBar = element;
               }} />
           </div>
         </div>

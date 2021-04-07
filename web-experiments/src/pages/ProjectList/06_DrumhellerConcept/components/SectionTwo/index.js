@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React, {
   PureComponent,
 } from 'react';
@@ -12,26 +13,27 @@ import styles from './style.module.scss';
 
 class SectionTwo extends PureComponent {
   componentDidUpdate () {
-    if (this.props.timeline) {
-      this.props.timeline.to(this.topone, {duration: 30,
-        x: -this.props.scrollDistance * 0.03 + 300}, 18);
-      this.props.timeline.to(this.bottomone, {duration: 30,
-        x: -this.props.scrollDistance * 0.02 + 300}, 18);
-      this.props.timeline.to(this.toptwo, {duration: 30,
-        x: -this.props.scrollDistance * 0.01 + 300}, 18);
-      this.props.timeline.to(this.bottomtwo, {duration: 30,
-        x: -this.props.scrollDistance * 0.02 + 300}, 18);
+    const {timeline, scrollDistance} = this.props;
+    if (timeline) {
+      timeline.to(this.topone, {duration: 30,
+        x: -scrollDistance * 0.03 + 300}, 18);
+      timeline.to(this.bottomone, {duration: 30,
+        x: -scrollDistance * 0.02 + 300}, 18);
+      timeline.to(this.toptwo, {duration: 30,
+        x: -scrollDistance * 0.01 + 300}, 18);
+      timeline.to(this.bottomtwo, {duration: 30,
+        x: -scrollDistance * 0.02 + 300}, 18);
     }
   }
 
   render () {
-    const {validateImagesLoaded} = this.props;
+    const {validateImagesLoaded, animateInDiv} = this.props;
 
     return (
       <div className={`${styles['drumheller-section']} ${styles.two}`}>
         <div className={styles['drumheller-section-two']}>
           <MainBanner
-            animateInDiv={this.props.animateInDiv}
+            animateInDiv={animateInDiv}
             description='We inspire a lifelong passion for science and foster a better understanding of the past, nurturing stewardship of our changing planet.'
             id='01'
             image={ImageOneOne}
@@ -42,20 +44,20 @@ class SectionTwo extends PureComponent {
           />
           <div className={styles['top-video-section']}>
             <div
-              className={styles['upper-video']} ref={(e) => {
-                this.topone = e;
+              className={styles['upper-video']} ref={(element) => {
+                this.topone = element;
               }}>
               <video autoPlay='autoplay' loop muted onLoad={validateImagesLoaded()}>
                 <source src={VideoOneTwo} type='video/mp4' />
               </video>
             </div>
-            <span ref={(e) => {
-              this.bottomone = e;
+            <span ref={(element) => {
+              this.bottomone = element;
             }}>
               <InView
                 as='div' className={styles['lower-text']} delay={100}
                 onChange={(inView, entry) => {
-                  return this.props.animateInDiv(inView, entry);
+                  return animateInDiv(inView, entry);
                 }} triggerOnce>
                 The Tyrrell is Canada’s only<br />museum dedicated exclusively<br />to the science of palaeontology.
               </InView>
@@ -63,8 +65,8 @@ class SectionTwo extends PureComponent {
           </div>
           <div className={styles['bottom-image-section']}>
             <div
-              className={styles['upper-text']} ref={(e) => {
-                this.toptwo = e;
+              className={styles['upper-text']} ref={(element) => {
+                this.toptwo = element;
               }}>
               <InView
                 as='div' className={styles['panel-left']} delay={100}
@@ -79,7 +81,7 @@ class SectionTwo extends PureComponent {
               <InView
                 as='div' className={styles['panel-right']} delay={100}
                 onChange={(inView, entry) => {
-                  return this.props.animateInDiv(inView, entry);
+                  return animateInDiv(inView, entry);
                 }} triggerOnce>
                 I think what’s special about coming here is the<br />
                 landscape, and knowing that what you’re looking<br />
@@ -88,8 +90,8 @@ class SectionTwo extends PureComponent {
               </InView>
             </div>
             <div
-              className={styles['bottom-image']} ref={(e) => {
-                this.bottomtwo = e;
+              className={styles['bottom-image']} ref={(element) => {
+                this.bottomtwo = element;
               }}>
               <img alt='Run!' onLoad={validateImagesLoaded()} src={ImageOneThree} />
             </div>
@@ -99,5 +101,18 @@ class SectionTwo extends PureComponent {
     );
   }
 }
+
+SectionTwo.propTypes = {
+  animateInDiv: PropTypes.func,
+  scrollDistance: PropTypes.number.isRequired,
+  timeline: PropTypes.shape({
+    to: PropTypes.func.isRequired,
+  }),
+  validateImagesLoaded: PropTypes.func,
+};
+
+SectionTwo.defaultProps = {
+  timeline: null,
+};
 
 export default SectionTwo;

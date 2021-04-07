@@ -1,6 +1,7 @@
 import {
   gsap, Power4,
 } from 'gsap';
+import PropTypes from 'prop-types';
 import React, {
   PureComponent,
 } from 'react';
@@ -17,13 +18,14 @@ class SectionOne extends PureComponent {
   }
 
   componentDidUpdate () {
-    if (this.props.timeline) {
-      this.props.timeline.to(this.imageone, {duration: 100,
-        x: -this.props.scrollDistance * 0.12}, 0);
-      this.props.timeline.to(this.imagetwo, {duration: 100,
-        x: -this.props.scrollDistance * 0.1}, 0);
-      this.props.timeline.to(this.titleitalic, {duration: 100,
-        x: -this.props.scrollDistance * 0.15}, 0);
+    const {timeline, scrollDistance} = this.props;
+    if (timeline) {
+      timeline.to(this.imageone, {duration: 100,
+        x: -scrollDistance * 0.12}, 0);
+      timeline.to(this.imagetwo, {duration: 100,
+        x: -scrollDistance * 0.1}, 0);
+      timeline.to(this.titleitalic, {duration: 100,
+        x: -scrollDistance * 0.15}, 0);
     }
   }
 
@@ -50,15 +52,15 @@ class SectionOne extends PureComponent {
               Our Story
             </div>
             <div
-              className={styles.secondary} ref={(e) => {
-                this.titleitalic = e;
+              className={styles.secondary} ref={(element) => {
+                this.titleitalic = element;
               }}>
               <span className={styles['drumheller-italic']}>at</span>&nbsp;
               <span className={styles['drumheller-outline']}>
                 Tyrrell
                 <span
-                  className={styles['custom-underline']} ref={(e) => {
-                    this.underline = e;
+                  className={styles['custom-underline']} ref={(element) => {
+                    this.underline = element;
                   }}>
                   <img alt='Underline' src={Underline} />
                 </span>
@@ -67,7 +69,7 @@ class SectionOne extends PureComponent {
           </div>
           <div className={styles.description}>
             Set in the rugged Alberta badlands, the Royal Tyrrell<br />
-            Museum of Palaeontology displays one of the world's<br />
+            Museum of Palaeontology displays one of the world&rsquo;s<br />
             largest collections of dinosaurs.<br /><br />
 
             With ever-changing exhibits and self-guided experiences<br />
@@ -75,15 +77,15 @@ class SectionOne extends PureComponent {
           </div>
         </div>
         <div
-          className={`${styles['image-block']} ${styles['drumheller-imageblock-two']}`} ref={(e) => {
-            this.imagetwo = e;
+          className={`${styles['image-block']} ${styles['drumheller-imageblock-two']}`} ref={(element) => {
+            this.imagetwo = element;
           }}>
           <img alt='Skeleton!' onLoad={validateImagesLoaded()} src={ImageIntroTwo} />
           <div className={styles['image-block-description']}>Tyrannosaurus Rex Skeleton</div>
         </div>
         <div
-          className={`${styles['image-block']} ${styles['drumheller-imageblock-one']}`} ref={(e) => {
-            this.imageone = e;
+          className={`${styles['image-block']} ${styles['drumheller-imageblock-one']}`} ref={(element) => {
+            this.imageone = element;
           }}>
           <img alt='Dinosaurs!' onLoad={validateImagesLoaded()} src={ImageIntroOne} />
           <div className={styles['image-block-description']}>Dinosaurs Recreated for Today</div>
@@ -92,5 +94,17 @@ class SectionOne extends PureComponent {
     );
   }
 }
+
+SectionOne.propTypes = {
+  scrollDistance: PropTypes.number.isRequired,
+  timeline: PropTypes.shape({
+    to: PropTypes.func.isRequired,
+  }),
+  validateImagesLoaded: PropTypes.func,
+};
+
+SectionOne.defaultProps = {
+  timeline: null,
+};
 
 export default SectionOne;
