@@ -10,7 +10,7 @@ import React, {
   PureComponent,
 } from 'react';
 import TextLogo from '../../common/TextLogo';
-import withTransition from '../../common/WithTransition';
+import WithTransition from '../../common/WithTransition';
 import './style.scss';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -150,4 +150,4 @@ Work.propTypes = {
   showLoader: PropTypes.func.isRequired,
 };
 
-export default withTransition(Work);
+export default WithTransition(Work);

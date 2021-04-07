@@ -5,7 +5,7 @@ import React, {
 } from 'react';
 import Background from '../../../common/Background';
 import TextLogo from '../../../common/TextLogo';
-import withTransition from '../../../common/WithTransition';
+import WithTransition from '../../../common/WithTransition';
 import JellicentObject from './components/JellicentObject';
 
 class Jellicent extends PureComponent {
@@ -72,4 +72,4 @@ Jellicent.propTypes = {
   showLoader: PropTypes.func.isRequired,
 };
 
-export default withTransition(Jellicent);
+export default WithTransition(Jellicent);

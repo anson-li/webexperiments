@@ -1,13 +1,11 @@
-/* eslint-disable react/destructuring-assignment */
-/* eslint-disable react/jsx-props-no-spreading */
-
-// Built from https://codesandbox.io/s/mz6rz6zw3x?file=/src/sections/About.js
+/* eslint-disable promise/catch-or-return */
+/* eslint-disable promise/prefer-await-to-then */
 import React from 'react';
 import {
   Transition,
 } from 'react-transition-group';
 
-export default function withTransition (WrappedComponent) {
+export default function WithTransition (WrappedComponent) {
   return class extends React.Component {
     handleAnimateIn (done) {
       if (typeof this.wrappedComponent.animateIn === 'function') {
@@ -69,8 +67,8 @@ export default function withTransition (WrappedComponent) {
         >
           {(status) => {
             return <WrappedComponent
-              ref={(e) => {
-                this.wrappedComponent = e;
+              ref={(element) => {
+                this.wrappedComponent = element;
               }}
               {...this.props}
               transitionStatus={status}

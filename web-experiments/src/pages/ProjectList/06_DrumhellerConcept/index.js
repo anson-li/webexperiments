@@ -16,7 +16,7 @@ import React, {
   PureComponent,
 } from 'react';
 import TextLogo from '../../../common/TextLogo';
-import withTransition from '../../../common/WithTransition';
+import WithTransition from '../../../common/WithTransition';
 import DinosaurScrollHint from './components/DinosaurScrollHint';
 import Footer from './components/Footer';
 import SectionFour from './components/SectionFour';
@@ -288,4 +288,4 @@ DrumhellerConcept.propTypes = {
   showLoader: PropTypes.func.isRequired,
 };
 
-export default withTransition(DrumhellerConcept);
+export default WithTransition(DrumhellerConcept);

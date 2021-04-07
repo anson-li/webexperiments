@@ -13,7 +13,7 @@ import React, {
   PureComponent,
 } from 'react';
 import TextLogo from '../../common/TextLogo';
-import withTransition from '../../common/WithTransition';
+import WithTransition from '../../common/WithTransition';
 import EdmontonWall from '../../web/assets/edmonton-wall.jpg';
 import AdditiveShaderBanner from '../../web/assets/images/project-banner/additiveshader.jpg';
 import ASCIIShaderBanner from '../../web/assets/images/project-banner/asciishader.PNG';
@@ -305,4 +305,4 @@ Work.propTypes = {
   showLoader: PropTypes.func.isRequired,
 };
 
-export default withTransition(Work);
+export default WithTransition(Work);

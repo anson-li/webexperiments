@@ -10,7 +10,7 @@ import {
   Curtains, Plane,
 } from 'react-curtains';
 import TextLogo from '../../../common/TextLogo';
-import withTransition from '../../../common/WithTransition';
+import WithTransition from '../../../common/WithTransition';
 import TestImage from './images/canvas-base.jpg';
 import styles from './style.module.scss';
 
@@ -371,4 +371,4 @@ WebGLCurtains.propTypes = {
   showLoader: PropTypes.func.isRequired,
 };
 
-export default withTransition(WebGLCurtains);
+export default WithTransition(WebGLCurtains);

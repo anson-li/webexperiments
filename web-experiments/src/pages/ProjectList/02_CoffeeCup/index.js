@@ -5,7 +5,7 @@ import React, {
 } from 'react';
 import Background from '../../../common/Background';
 import TextLogo from '../../../common/TextLogo';
-import withTransition from '../../../common/WithTransition';
+import WithTransition from '../../../common/WithTransition';
 import ThreeJS from './components/ThreeJS';
 
 class CoffeeCup extends PureComponent {
@@ -79,4 +79,4 @@ CoffeeCup.propTypes = {
   showLoader: PropTypes.func.isRequired,
 };
 
-export default withTransition(CoffeeCup);
+export default WithTransition(CoffeeCup);

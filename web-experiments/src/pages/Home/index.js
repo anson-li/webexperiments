@@ -6,7 +6,7 @@ import React, {
 import Background from '../../common/Background';
 import BubbleLink from '../../common/BubbleLink';
 import TextLogo from '../../common/TextLogo';
-import withTransition from '../../common/WithTransition';
+import WithTransition from '../../common/WithTransition';
 import ThreeSphere from './components/ThreeSphere';
 
 class Home extends PureComponent {
@@ -82,4 +82,4 @@ Home.propTypes = {
   showLoader: PropTypes.func.isRequired,
 };
 
-export default withTransition(Home);
+export default WithTransition(Home);

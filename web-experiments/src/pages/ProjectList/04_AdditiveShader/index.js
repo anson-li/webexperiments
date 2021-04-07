@@ -5,7 +5,7 @@ import React, {
 } from 'react';
 import Background from '../../../common/Background';
 import TextLogo from '../../../common/TextLogo';
-import withTransition from '../../../common/WithTransition';
+import WithTransition from '../../../common/WithTransition';
 import ThreeJS from './components/ThreeJS';
 
 class AdditiveShader extends PureComponent {
@@ -80,4 +80,4 @@ AdditiveShader.propTypes = {
   showLoader: PropTypes.func.isRequired,
 };
 
-export default withTransition(AdditiveShader);
+export default WithTransition(AdditiveShader);
