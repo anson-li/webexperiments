@@ -30,11 +30,14 @@ gsap.registerPlugin(ScrollTrigger, Draggable, InertiaPlugin);
 class Work extends PureComponent {
   constructor (props) {
     super(props);
+    this.refreshAnimationBounds = this.refreshAnimationBounds.bind(this);
     this.setupDraggableTrack = this.setupDraggableTrack.bind(this);
     this.setupTrackAnimation = this.setupTrackAnimation.bind(this);
     this.setupScrollTrigger = this.setupScrollTrigger.bind(this);
     this.setupScrollHintAnimation = this.setupScrollHintAnimation.bind(this);
     this.setupResizeAnimation = this.setupResizeAnimation.bind(this);
+
+    this.draggable = null;
     this.timeline = null;
     this.scrollDistance = null;
     this.pageST = null;
@@ -85,6 +88,20 @@ class Work extends PureComponent {
     }).finished;
   }
 
+  refreshAnimationBounds () {
+    const innerWidth = window.innerWidth;
+    const track = this.track;
+    const trackWidth = track.clientWidth;
+
+    gsap.set(this.el, {height: trackWidth});
+    gsap.set(this.trackWrapper, {width: trackWidth});
+
+    this.scrollDistance = trackWidth - innerWidth;
+    if (this.draggable.bounds) {
+      this.draggable.bounds.minX = -1 * this.scrollDistance;
+    }
+  }
+
   setupTrackAnimation () {
     const innerWidth = window.innerWidth;
     const track = this.track;
@@ -113,7 +130,7 @@ class Work extends PureComponent {
   }
 
   setupDraggableTrack () {
-    Draggable.create(this.track, {
+    this.draggable = Draggable.create(this.track, {
       autoScroll: false,
 
       bounds: {maxX: 0,
@@ -123,14 +140,14 @@ class Work extends PureComponent {
       dragClickables: true,
       dragResistance: 0.5,
       inertia: true,
-      onDrag: (event) => {
+      onDrag: () => {
         // Grabs the scroll value while being updated by Draggable and updates the GSAP timeline to match
         const values = this.track.style.transform.split(/\w+\(|\);?/);
         const transform = values[1].split(/,\s?/g).map(parseInt);
         this.timeline.progress(-1 * transform[0] / this.scrollDistance);
         this.pageST.scroll(-1 * transform[0]);
       },
-      onThrowUpdate: (event) => {
+      onThrowUpdate: () => {
         // Grabs the scroll value while being updated by Draggable and updates the GSAP timeline to match
         const values = this.track.style.transform.split(/\w+\(|\);?/);
         const transform = values[1].split(/,\s?/g).map(parseInt);
@@ -160,6 +177,7 @@ class Work extends PureComponent {
     let progress = 0;
     ScrollTrigger.addEventListener('refreshInit', () => {
       progress = this.pageST.scroll() / ScrollTrigger.maxScroll(window);
+      this.refreshAnimationBounds();
     });
     ScrollTrigger.addEventListener('refresh', () => {
       this.pageST.scroll(progress * ScrollTrigger.maxScroll(window));
