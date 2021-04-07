@@ -1,4 +1,3 @@
-/* eslint-disable no-return-assign */
 import anime from 'animejs';
 import {
   gsap,
@@ -45,13 +44,51 @@ class DrumhellerConcept extends PureComponent {
     this.sectionOne = React.createRef();
   }
 
+  componentDidMount () {
+    this.setupTrackAnimation();
+    this.checkLoaderStatus();
+
+    Draggable.create('#track', {
+      autoScroll: false,
+
+      bounds: {maxX: 0,
+        minX: -1 * this.scrollDistance},
+
+      // scroll X is done by offsetting to the right, so we move in negative values
+      dragClickables: true,
+      dragResistance: 0.5,
+      inertia: true,
+      onDrag: (event) => {
+        // Grabs the scroll value while being updated by Draggable and updates the GSAP timeline to match
+        const values = this.track.style.transform.split(/\w+\(|\);?/);
+        const transform = values[1].split(/,\s?/g).map(parseInt);
+        this.timeline.progress(-1 * transform[0] / this.scrollDistance);
+        this.pageST.scroll(-1 * transform[0]);
+      },
+      onThrowUpdate: (event) => {
+        // Grabs the scroll value while being updated by Draggable and updates the GSAP timeline to match
+        const values = this.track.style.transform.split(/\w+\(|\);?/);
+        const transform = values[1].split(/,\s?/g).map(parseInt);
+        this.timeline.progress(-1 * transform[0] / this.scrollDistance);
+        this.pageST.scroll(-1 * transform[0]);
+      },
+      throwResistance: 2000,
+      type: 'x',
+    });
+
+    // window.addEventListener('resize', this.onWindowResize);
+  }
+
+  componentWillUnmount () {
+    // window.removeEventListener('resize', this.onWindowResize);
+  }
+
   validateImagesLoaded () {
     this.loadedImages -= 1;
     this.checkLoaderStatus();
   }
 
   checkLoaderStatus () {
-    console.log(`Loaded ${Math.round((27 - this.loadedImages) / 27 * 100)}%`);
     if (this.loadedImages <= 0) {
       this.props.hideLoader();
       this.sectionOne.current.drawUnderline();
@@ -156,6 +193,7 @@ class DrumhellerConcept extends PureComponent {
         linesClass: 'inview-split-child',
         type: 'lines',
       });
+      // eslint-disable-next-line no-new
       new SplitText(entry.target, {
         linesClass: 'inview-split-parent',
         type: 'lines',
@@ -175,43 +213,6 @@ class DrumhellerConcept extends PureComponent {
         opacity: 0,
       });
     }
-  }
-
-  componentDidMount () {
-    this.setupTrackAnimation();
-    this.checkLoaderStatus();
-
-    Draggable.create('#track', {
-      autoScroll: false,
-
-      bounds: {maxX: 0,
-        minX: -1 * this.scrollDistance},
-
-      // scroll X is done by offsetting to the right, so we move in negative values
-      dragClickables: true,
-      dragResistance: 0.5,
-      inertia: true,
-      onDrag: (event) => { // Grabs the scroll value while being updated by Draggable and updates the GSAP timeline to match
-        const values = this.track.style.transform.split(/\w+\(|\);?/);
-        const transform = values[1].split(/,\s?/g).map(parseInt);
-        this.timeline.progress(-1 * transform[0] / this.scrollDistance);
-        this.pageST.scroll(-1 * transform[0]);
-      },
-      onThrowUpdate: (event) => { // Grabs the scroll value while being updated by Draggable and updates the GSAP timeline to match
-        const values = this.track.style.transform.split(/\w+\(|\);?/);
-        const transform = values[1].split(/,\s?/g).map(parseInt);
-        this.timeline.progress(-1 * transform[0] / this.scrollDistance);
-        this.pageST.scroll(-1 * transform[0]);
-      },
-      throwResistance: 2000,
-      type: 'x',
-    });
-
-    // window.addEventListener('resize', this.onWindowResize);
-  }
-
-  componentWillUnmount () {
-    // window.removeEventListener('resize', this.onWindowResize);
   }
 
   render () {

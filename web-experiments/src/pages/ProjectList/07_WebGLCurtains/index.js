@@ -231,24 +231,24 @@ class WebGLCurtains extends PureComponent {
     // listen our mouse/touch events on the whole document
     // we will pass the plane as second argument of our function
     // we could be handling multiple planes that way
-    window.addEventListener('mousemove', (e) => {
-      this.handleMovement(e, plane);
+    window.addEventListener('mousemove', (event) => {
+      this.handleMovement(event, plane);
     });
 
-    window.addEventListener('touchmove', (e) => {
-      this.handleMovement(e, plane);
+    window.addEventListener('touchmove', (event) => {
+      this.handleMovement(event, plane);
     });
   }
 
-  handleMovement (e, plane) {
-    if (e.targetTouches) {
+  handleMovement (event, plane) {
+    if (event.targetTouches) {
       // touch event
-      this.mousePosition.x = e.targetTouches[0].clientX;
-      this.mousePosition.y = e.targetTouches[0].clientY;
+      this.mousePosition.x = event.targetTouches[0].clientX;
+      this.mousePosition.y = event.targetTouches[0].clientY;
     } else {
       // mouse event
-      this.mousePosition.x = e.clientX;
-      this.mousePosition.y = e.clientY;
+      this.mousePosition.x = event.clientX;
+      this.mousePosition.y = event.clientY;
     }
 
     // convert our mouse/touch position to coordinates relative to the vertices of the plane
@@ -316,8 +316,8 @@ class WebGLCurtains extends PureComponent {
 
     return (
       <div
-        id='main-page' ref={(e) => {
-          this.el = e;
+        id='main-page' ref={(element) => {
+          this.el = element;
         }}>
         <TextLogo
           hover={cursorHover}
