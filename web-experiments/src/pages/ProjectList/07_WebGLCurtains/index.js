@@ -11,6 +11,11 @@ import {
 } from 'react-curtains';
 import TextLogo from '../../../common/TextLogo';
 import WithTransition from '../../../common/WithTransition';
+import BasicFs from './Shaders/BasicFs';
+import BasicVs from './Shaders/BasicVs';
+import ColorFs from './Shaders/ColorFs';
+import DragFs from './Shaders/DragFs';
+import DragVs from './Shaders/DragVs';
 import TestImage from './images/canvas-base.jpg';
 import styles from './style.module.scss';
 
@@ -19,137 +24,12 @@ class WebGLCurtains extends PureComponent {
     super(props);
     this.state = {
       pattern: {
+        color: false,
         disabled: false,
         draganimation: false,
         oscillate: true,
       },
     };
-
-    this.basicVs = `
-      precision mediump float;
-
-      attribute vec3 aVertexPosition;
-      attribute vec2 aTextureCoord;
-
-      uniform mat4 uMVMatrix;
-      uniform mat4 uPMatrix;
-
-      uniform mat4 uTextureMatrix0;
-
-      varying vec3 vVertexPosition;
-      varying vec2 vTextureCoord;
-
-      void main() {
-          gl_Position = uPMatrix * uMVMatrix * vec4(aVertexPosition, 1.0);
-          
-          // varyings
-          vVertexPosition = aVertexPosition;
-          vTextureCoord = (uTextureMatrix0 * vec4(aTextureCoord, 0.0, 1.0)).xy;
-      }
-    `;
-
-    this.basicFs = `
-      precision mediump float;
-
-      varying vec3 vVertexPosition;
-      varying vec2 vTextureCoord;
-      
-      uniform sampler2D uSampler0;
-      
-      uniform float uTime;
-      
-      void main() {
-          vec2 textureCoord = vTextureCoord;
-          // displace our pixels along the X axis based on our time uniform
-          // textures coords are ranging from 0.0 to 1.0 on both axis
-          textureCoord.x += sin(textureCoord.y * 25.0) * cos(textureCoord.x * 25.0) * (cos(uTime / 50.0)) / 25.0;
-          
-          gl_FragColor = texture2D(uSampler0, textureCoord);
-      }
-    `;
-
-    this.dragVs = `
-      precision mediump float;
-
-      // those are the mandatory attributes that the lib sets
-      attribute vec3 aVertexPosition;
-      attribute vec2 aTextureCoord;
-
-      // those are mandatory uniforms that the lib sets and that contain our model view and projection matrix
-      uniform mat4 uMVMatrix;
-      uniform mat4 uPMatrix;
-          
-      // our texture matrix uniform (this is the lib default name, but it could be changed)
-      uniform mat4 uTextureMatrix0;
-
-      // our time uniform
-      uniform float uTime;
-
-      // our mouse position uniform
-      uniform vec2 uMousePosition;
-
-      // our mouse strength
-      uniform float uMouseStrength;
-
-      // if you want to pass your vertex and texture coords to the fragment shader
-      varying vec3 vVertexPosition;
-      varying vec2 vTextureCoord;
-
-      void main() {
-        vec3 vertexPosition = aVertexPosition;
-
-        // get the distance between our vertex and the mouse position
-        float distanceFromMouse = distance(uMousePosition, vec2(vertexPosition.x, vertexPosition.y));
-
-        // this will define how close the ripples will be from each other. The bigger the number, the more ripples you'll get
-        float rippleFactor = 1.0;
-        // calculate our ripple effect
-        float rippleEffect = cos(rippleFactor * (distanceFromMouse));
-
-        // calculate our distortion effect
-        float distortionEffect = rippleEffect * uMouseStrength;
-
-        // apply it to our vertex position
-        vertexPosition += distortionEffect / 30.0;
-
-        gl_Position = uPMatrix * uMVMatrix * vec4(vertexPosition, 1.0);
-
-        // varyings
-        // thanks to the texture matrix we will be able to calculate accurate texture coords
-        // so that our texture will always fit our plane without being distorted
-          vTextureCoord = (uTextureMatrix0 * vec4(aTextureCoord, 0.0, 1.0)).xy;
-          vVertexPosition = vertexPosition;
-      }
-    `;
-
-    this.dragFs = `
-      precision mediump float;
-
-      // get our varyings
-      varying vec3 vVertexPosition;
-      varying vec2 vTextureCoord;
-
-      // our texture sampler (this is the lib default name, but it could be changed)
-      uniform sampler2D uSampler0;
-
-      void main() {
-        // get our texture coords
-        vec2 textureCoords = vTextureCoord;
-
-        // apply our texture
-        vec4 finalColor = texture2D(uSampler0, textureCoords);
-
-        // fake shadows based on vertex position along Z axis
-        finalColor.rgb -= clamp(-vVertexPosition.z, 0.0, 1.0);
-        // fake lights based on vertex position along Z axis
-        finalColor.rgb += clamp(vVertexPosition.z, 0.0, 1.0);
-
-        // handling premultiplied alpha (useful if we were using a png with transparency)
-        finalColor = vec4(finalColor.rgb * finalColor.a, finalColor.a);
-
-        gl_FragColor = finalColor;
-      }
-    `;
 
     this.setChecked = this.setChecked.bind(this);
     this.handleMovement = this.handleMovement.bind(this);
@@ -174,6 +54,11 @@ class WebGLCurtains extends PureComponent {
     });
     patterns.add(this.state.pattern, 'draganimation').name('Drag Animation').listen().onChange(() => {
       this.setChecked('draganimation');
+    });
+
+    const bookOfShaders = this.gui.addFolder('Book of Shaders');
+    bookOfShaders.add(this.state.pattern, 'color').name('Basic Color').listen().onChange(() => {
+      this.setChecked('color');
     });
 
     this.mousePosition = {
@@ -312,6 +197,7 @@ class WebGLCurtains extends PureComponent {
     };
     const onRender = (plane) => {
       plane.uniforms.time.value++;
+      console.log(Math.abs(Math.sin(plane.uniforms.time.value)));
     };
 
     return (
@@ -327,10 +213,10 @@ class WebGLCurtains extends PureComponent {
         <Curtains className={styles['curtains-canvas']}>
           <Plane
             className={styles['curtains-plane']}
-            fragmentShader={this.basicFs}
+            fragmentShader={BasicFs}
             onRender={onRender}
             uniforms={basicUniforms}
-            vertexShader={this.basicVs}
+            vertexShader={BasicVs}
           >
             <img alt='Test for canvas' src={TestImage} />
           </Plane>
@@ -347,12 +233,30 @@ class WebGLCurtains extends PureComponent {
             <Plane
               className={styles['curtains-plane']}
               fov={35}
-              fragmentShader={this.dragFs}
+              fragmentShader={DragFs}
               heightSegments={20}
               onReady={this.handlePlaneReady}
               onRender={onRender}
               uniforms={dragUniforms}
-              vertexShader={this.dragVs}
+              vertexShader={DragVs}
+              widthSegments={20}
+            >
+              <img alt='Test for canvas' src={TestImage} />
+            </Plane>
+          </Curtains>
+        </>}
+        { pattern === 'color' &&
+        <>
+          <Curtains className={styles['curtains-canvas']}>
+            <Plane
+              className={styles['curtains-plane']}
+              fov={35}
+              fragmentShader={ColorFs}
+              heightSegments={20}
+              onReady={this.handlePlaneReady}
+              onRender={onRender}
+              uniforms={dragUniforms}
+              vertexShader={BasicVs}
               widthSegments={20}
             >
               <img alt='Test for canvas' src={TestImage} />
