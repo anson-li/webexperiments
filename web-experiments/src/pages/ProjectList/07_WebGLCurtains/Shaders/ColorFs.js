@@ -6,10 +6,11 @@ const ColorFs = `
   uniform float uTime;
   uniform sampler2D uSampler0;
 
+  // Reference: https://thebookofshaders.com/03/
   void main() {
     vec2 textureCoord = vTextureCoord; // Get the base texture out to manipulate
     vec4 finalColor = texture2D(uSampler0, textureCoord); // Get the base texture to apply colorshifting to
-    finalColor.rgba += vec4(abs(sin(uTime / 100.0)) / 3.0, abs(cos(uTime / 100.0)) / 3.0, 0.0, 0.0);
+    finalColor.rgba += vec4(abs(sin(uTime / 100.0)) / 5.0, abs(cos(uTime / 100.0)) / 5.0, abs(tan(uTime / 100.0)) / 5.0, 0.0);
     finalColor = vec4(finalColor.rgb * finalColor.a, finalColor.a);
     gl_FragColor = finalColor;
   }
