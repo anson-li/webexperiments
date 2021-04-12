@@ -22,7 +22,8 @@ const MouseOpacityFs = `
     vec2 textureCoord = vTextureCoord; // Get the base texture out to manipulate
     float distance = distance(vec2(vVertexPosition.x, vVertexPosition.y), uMousePosition);
     vec4 finalColor = texture2D(uSampler0, textureCoord); // Get the base texture to apply colorshifting to
-    finalColor.a -= distance / 1.15 - 0.1;
+    finalColor.a -= distance / 1.5 - 0.1;
+    finalColor.rgba += vec4(0.25, 0, 0, 0.0);
     gl_FragColor = finalColor;
   }
 `;

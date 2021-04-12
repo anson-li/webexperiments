@@ -30,8 +30,9 @@ class WebGLCurtains extends PureComponent {
         disabled: false,
         draganimation: false,
         mousecolor: false,
-        mouseopacity: true,
-        oscillate: true,
+        mouseopacity: false,
+        mouselayer: true,
+        oscillate: false,
       },
     };
 
@@ -48,6 +49,8 @@ class WebGLCurtains extends PureComponent {
   componentDidMount () {
     this.props.hideLoader();
     this.gui = new GUI();
+    this.gui.width = 500;
+    this.gui.closed = false;
 
     const patterns = this.gui.addFolder('Patterns');
     patterns.add(this.state.pattern, 'oscillate').name('Oscillate').listen().onChange(() => {
@@ -64,11 +67,14 @@ class WebGLCurtains extends PureComponent {
     bookOfShaders.add(this.state.pattern, 'color').name('Basic Color').listen().onChange(() => {
       this.setChecked('color');
     });
-    bookOfShaders.add(this.state.pattern, 'mousecolor').name('Mouseover Color').listen().onChange(() => {
+    bookOfShaders.add(this.state.pattern, 'mousecolor').name('Color Mouse').listen().onChange(() => {
       this.setChecked('mousecolor');
     });
-    bookOfShaders.add(this.state.pattern, 'mouseopacity').name('Mouseover Opacity').listen().onChange(() => {
+    bookOfShaders.add(this.state.pattern, 'mouseopacity').name('Opacity Mouse').listen().onChange(() => {
       this.setChecked('mouseopacity');
+    });
+    bookOfShaders.add(this.state.pattern, 'mouselayer').name('Opacity Layered Mouse').listen().onChange(() => {
+      this.setChecked('mouselayer');
     });
 
     this.mousePosition = {
@@ -307,6 +313,29 @@ class WebGLCurtains extends PureComponent {
               <img alt='Test for canvas' src={TestImage} />
             </Plane>
           </Curtains>
+        </>}
+        { pattern === 'mouselayer' &&
+        <>
+          <Curtains className={styles['curtains-canvas']}>
+            <Plane
+              className={styles['curtains-plane']}
+              fov={35}
+              fragmentShader={MouseOpacityFs}
+              heightSegments={20}
+              onReady={this.handlePlaneReady}
+              onRender={onRender}
+              uniforms={dragUniforms}
+              vertexShader={BasicVs}
+              widthSegments={20}
+            >
+              <img alt='Test for canvas' src={TestImage} />
+            </Plane>
+          </Curtains>
+          <div className={styles['curtains-canvas']} style={{zIndex: -1}}>
+            <div className={styles['curtains-plane']}>
+              <img alt='Test for canvas' className={styles['mouse-opacity-image']} src={TestImage} />
+            </div>
+          </div>
         </>}
       </div>
     );
