@@ -17,6 +17,7 @@ import ColorFs from './Shaders/ColorFs';
 import DragFs from './Shaders/DragFs';
 import DragVs from './Shaders/DragVs';
 import MouseColorFs from './Shaders/MouseColorFs';
+import MouseOpacityFs from './Shaders/MouseOpacityFs';
 import TestImage from './images/canvas-base.jpg';
 import styles from './style.module.scss';
 
@@ -28,7 +29,8 @@ class WebGLCurtains extends PureComponent {
         color: false,
         disabled: false,
         draganimation: false,
-        mousecolor: true,
+        mousecolor: false,
+        mouseopacity: true,
         oscillate: true,
       },
     };
@@ -64,6 +66,9 @@ class WebGLCurtains extends PureComponent {
     });
     bookOfShaders.add(this.state.pattern, 'mousecolor').name('Mouseover Color').listen().onChange(() => {
       this.setChecked('mousecolor');
+    });
+    bookOfShaders.add(this.state.pattern, 'mouseopacity').name('Mouseover Opacity').listen().onChange(() => {
+      this.setChecked('mouseopacity');
     });
 
     this.mousePosition = {
@@ -275,6 +280,24 @@ class WebGLCurtains extends PureComponent {
               className={styles['curtains-plane']}
               fov={35}
               fragmentShader={MouseColorFs}
+              heightSegments={20}
+              onReady={this.handlePlaneReady}
+              onRender={onRender}
+              uniforms={dragUniforms}
+              vertexShader={BasicVs}
+              widthSegments={20}
+            >
+              <img alt='Test for canvas' src={TestImage} />
+            </Plane>
+          </Curtains>
+        </>}
+        { pattern === 'mouseopacity' &&
+        <>
+          <Curtains className={styles['curtains-canvas']}>
+            <Plane
+              className={styles['curtains-plane']}
+              fov={35}
+              fragmentShader={MouseOpacityFs}
               heightSegments={20}
               onReady={this.handlePlaneReady}
               onRender={onRender}
