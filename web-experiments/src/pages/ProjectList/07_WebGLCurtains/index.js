@@ -207,7 +207,6 @@ class WebGLCurtains extends PureComponent {
     };
     const onRender = (plane) => {
       plane.uniforms.time.value++;
-      console.log(Math.abs(Math.sin(plane.uniforms.time.value)));
     };
 
     return (

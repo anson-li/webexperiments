@@ -83,7 +83,9 @@ class JellicentObject extends PureComponent {
     this.renderer.shadowMap.type = PCFShadowMap;
     this.renderer.shadowMapSoft = true;
 
-    this.renderer.setPixelRatio(window.devicePixelRatio);
+    if (window.devicePixelRatio > 1) {
+      this.renderer.setPixelRatio(window.devicePixelRatio);
+    }
     this.renderer.setSize(window.innerWidth, window.innerHeight);
     this.container.appendChild(this.renderer.domElement);
 
