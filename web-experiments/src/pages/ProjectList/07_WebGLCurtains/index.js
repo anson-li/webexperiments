@@ -14,9 +14,9 @@ import WithTransition from '../../../common/WithTransition';
 import BasicFs from './Shaders/BasicFs';
 import BasicVs from './Shaders/BasicVs';
 import ColorFs from './Shaders/ColorFs';
-import MouseColorFs from './Shaders/MouseColorFs';
 import DragFs from './Shaders/DragFs';
 import DragVs from './Shaders/DragVs';
+import MouseColorFs from './Shaders/MouseColorFs';
 import TestImage from './images/canvas-base.jpg';
 import styles from './style.module.scss';
 
