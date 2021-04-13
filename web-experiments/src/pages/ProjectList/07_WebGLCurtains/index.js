@@ -19,9 +19,11 @@ import BasicVs from './Shaders/BasicVs';
 import ColorFs from './Shaders/ColorFs';
 import DragFs from './Shaders/DragFs';
 import DragVs from './Shaders/DragVs';
+import HorizontalDragVs from './Shaders/HorizontalDragVs';
 import MouseColorFs from './Shaders/MouseColorFs';
 import MouseOpacityFs from './Shaders/MouseOpacityFs';
 import MouseOverFs from './Shaders/MouseOverFs';
+import VerticalDragVs from './Shaders/VerticalDragVs';
 import ZoomMouseFs from './Shaders/ZoomMouseFs';
 import TestAlternate from './images/canvas-alternate.jpg';
 import TestImage from './images/canvas-base.jpg';
@@ -35,11 +37,13 @@ class WebGLCurtains extends PureComponent {
         color: false,
         disabled: false,
         draganimation: false,
+        horizontaldrag: true,
         mousecolor: false,
         mouselayer: false,
         mouseopacity: false,
-        mouseover: true,
+        mouseover: false,
         oscillate: false,
+        verticaldrag: false,
         zoomdrag: false,
         zoommouse: false,
       },
@@ -74,6 +78,13 @@ class WebGLCurtains extends PureComponent {
     patterns.add(this.state.pattern, 'draganimation').name('Drag Animation').listen().onChange(() => {
       this.setChecked('draganimation');
     });
+    patterns.add(this.state.pattern, 'horizontaldrag').name('Horizontal Drag Animation').listen().onChange(() => {
+      this.setChecked('horizontaldrag');
+    });
+    patterns.add(this.state.pattern, 'verticaldrag').name('Vertical Drag Animation').listen().onChange(() => {
+      this.setChecked('verticaldrag');
+    });
+    patterns.open();
 
     const bookOfShaders = this.gui.addFolder('Book of Shaders');
     bookOfShaders.add(this.state.pattern, 'color').name('Basic Color').listen().onChange(() => {
@@ -97,6 +108,7 @@ class WebGLCurtains extends PureComponent {
     bookOfShaders.add(this.state.pattern, 'mouseover').name('Hover Interaction').listen().onChange(() => {
       this.setChecked('mouseover');
     });
+    bookOfShaders.open();
 
     this.mousePosition = {
       x: 0,
@@ -424,6 +436,42 @@ class WebGLCurtains extends PureComponent {
               onRender={onRenderMouseOver}
               uniforms={dragUniforms}
               vertexShader={DragVs}
+              widthSegments={20}
+            >
+              <img alt='Test for canvas' src={TestImage} />
+            </Plane>
+          </Curtains>
+        </>}
+        { pattern === 'horizontaldrag' &&
+        <>
+          <Curtains className={styles['curtains-canvas']}>
+            <Plane
+              className={styles['curtains-plane']}
+              fov={35}
+              fragmentShader={DragFs}
+              heightSegments={20}
+              onReady={this.handlePlaneReady}
+              onRender={onRender}
+              uniforms={dragUniforms}
+              vertexShader={HorizontalDragVs}
+              widthSegments={20}
+            >
+              <img alt='Test for canvas' src={TestImage} />
+            </Plane>
+          </Curtains>
+        </>}
+        { pattern === 'verticaldrag' &&
+        <>
+          <Curtains className={styles['curtains-canvas']}>
+            <Plane
+              className={styles['curtains-plane']}
+              fov={35}
+              fragmentShader={DragFs}
+              heightSegments={20}
+              onReady={this.handlePlaneReady}
+              onRender={onRender}
+              uniforms={dragUniforms}
+              vertexShader={VerticalDragVs}
               widthSegments={20}
             >
               <img alt='Test for canvas' src={TestImage} />
