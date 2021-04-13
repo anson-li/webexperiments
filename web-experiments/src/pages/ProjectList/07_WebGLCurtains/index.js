@@ -2,6 +2,9 @@ import anime from 'animejs';
 import {
   GUI,
 } from 'dat.gui';
+import {
+  gsap,
+} from 'gsap';
 import PropTypes from 'prop-types';
 import React, {
   PureComponent,
@@ -18,6 +21,9 @@ import DragFs from './Shaders/DragFs';
 import DragVs from './Shaders/DragVs';
 import MouseColorFs from './Shaders/MouseColorFs';
 import MouseOpacityFs from './Shaders/MouseOpacityFs';
+import MouseOverFs from './Shaders/MouseOverFs';
+import ZoomMouseFs from './Shaders/ZoomMouseFs';
+import TestAlternate from './images/canvas-alternate.jpg';
 import TestImage from './images/canvas-base.jpg';
 import styles from './style.module.scss';
 
@@ -30,12 +36,17 @@ class WebGLCurtains extends PureComponent {
         disabled: false,
         draganimation: false,
         mousecolor: false,
+        mouselayer: false,
         mouseopacity: false,
-        mouselayer: true,
+        mouseover: true,
         oscillate: false,
+        zoomdrag: false,
+        zoommouse: false,
       },
     };
 
+    this.handleInteractCanvasEnd = this.handleInteractCanvasEnd.bind(this);
+    this.handleInteractCanvasStart = this.handleInteractCanvasStart.bind(this);
     this.setChecked = this.setChecked.bind(this);
     this.handleMovement = this.handleMovement.bind(this);
     this.handlePlaneReady = this.handlePlaneReady.bind(this);
@@ -44,6 +55,7 @@ class WebGLCurtains extends PureComponent {
       x: 0,
       y: 0,
     };
+    this.progress = 0;
   }
 
   componentDidMount () {
@@ -76,11 +88,21 @@ class WebGLCurtains extends PureComponent {
     bookOfShaders.add(this.state.pattern, 'mouselayer').name('Opacity Layered Mouse').listen().onChange(() => {
       this.setChecked('mouselayer');
     });
+    bookOfShaders.add(this.state.pattern, 'zoommouse').name('Zoom Mouse').listen().onChange(() => {
+      this.setChecked('zoommouse');
+    });
+    bookOfShaders.add(this.state.pattern, 'zoomdrag').name('Zoom Drag').listen().onChange(() => {
+      this.setChecked('zoomdrag');
+    });
+    bookOfShaders.add(this.state.pattern, 'mouseover').name('Hover Interaction').listen().onChange(() => {
+      this.setChecked('mouseover');
+    });
 
     this.mousePosition = {
       x: 0,
       y: 0,
     };
+    this.progress = 0;
   }
 
   componentWillUnmount () {
@@ -124,14 +146,21 @@ class WebGLCurtains extends PureComponent {
     }).finished;
   }
 
-  handlePlaneReady (plane) {
-    // set a field of view of 35 to exagerate perspective
-    // we could have done  it directly in the initial params
-    // plane.setPerspective(35);
+  handleInteractCanvasStart () {
+    gsap.to(this, 0.5, {
+      ease: 'expo.inOut',
+      progress: 1,
+    });
+  }
 
-    // listen our mouse/touch events on the whole document
-    // we will pass the plane as second argument of our function
-    // we could be handling multiple planes that way
+  handleInteractCanvasEnd () {
+    gsap.to(this, 0.5, {
+      ease: 'expo.inOut',
+      progress: 0,
+    });
+  }
+
+  handlePlaneReady (plane) {
     window.addEventListener('mousemove', (event) => {
       this.handleMovement(event, plane);
     });
@@ -205,6 +234,11 @@ class WebGLCurtains extends PureComponent {
         type: '1f',
         value: 0,
       },
+      progress: {
+        name: 'uProgress',
+        type: '1f',
+        value: 0,
+      },
       time: {
         name: 'uTime',
         type: '1f',
@@ -213,6 +247,10 @@ class WebGLCurtains extends PureComponent {
     };
     const onRender = (plane) => {
       plane.uniforms.time.value++;
+    };
+    const onRenderMouseOver = (plane) => {
+      plane.uniforms.time.value++;
+      plane.uniforms.progress.value = this.progress;
     };
 
     return (
@@ -333,9 +371,64 @@ class WebGLCurtains extends PureComponent {
           </Curtains>
           <div className={styles['curtains-canvas']} style={{zIndex: -1}}>
             <div className={styles['curtains-plane']}>
-              <img alt='Test for canvas' className={styles['mouse-opacity-image']} src={TestImage} />
+              <img alt='Test for canvas' className={styles['mouse-opacity-image']} src={TestAlternate} />
             </div>
           </div>
+        </>}
+        { pattern === 'zoommouse' &&
+        <>
+          <Curtains className={styles['curtains-canvas']}>
+            <Plane
+              className={styles['curtains-plane']}
+              fov={35}
+              fragmentShader={ZoomMouseFs}
+              heightSegments={20}
+              onReady={this.handlePlaneReady}
+              onRender={onRender}
+              uniforms={dragUniforms}
+              vertexShader={BasicVs}
+              widthSegments={20}
+            >
+              <img alt='Test for canvas' src={TestImage} />
+            </Plane>
+          </Curtains>
+        </>}
+        { pattern === 'zoomdrag' &&
+        <>
+          <Curtains className={styles['curtains-canvas']}>
+            <Plane
+              className={styles['curtains-plane']}
+              fov={35}
+              fragmentShader={ZoomMouseFs}
+              heightSegments={20}
+              onReady={this.handlePlaneReady}
+              onRender={onRender}
+              uniforms={dragUniforms}
+              vertexShader={DragVs}
+              widthSegments={20}
+            >
+              <img alt='Test for canvas' src={TestImage} />
+            </Plane>
+          </Curtains>
+        </>}
+        { pattern === 'mouseover' &&
+        <>
+          <Curtains className={styles['curtains-canvas']} style={{zIndex: -1}}>
+            <Plane
+              className={styles['curtains-plane']}
+              fov={35}
+              fragmentShader={MouseOverFs}
+              heightSegments={20}
+              onMouseOut={this.handleInteractCanvasEnd}
+              onMouseOver={this.handleInteractCanvasStart}
+              onRender={onRenderMouseOver}
+              uniforms={dragUniforms}
+              vertexShader={DragVs}
+              widthSegments={20}
+            >
+              <img alt='Test for canvas' src={TestImage} />
+            </Plane>
+          </Curtains>
         </>}
       </div>
     );

@@ -27,10 +27,10 @@
     &.disabled-image {
       display: block;
     }
-    
+
     &.mouse-opacity-image {
       display: block;
-      filter: invert(100%);
+      object-fit: cover;
     }
   }
 }

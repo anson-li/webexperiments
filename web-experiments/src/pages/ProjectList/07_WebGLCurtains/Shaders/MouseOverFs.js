@@ -1,4 +1,4 @@
-const MouseOpacityFs = `
+const MouseOverFs = `
   precision mediump float;
 
   varying vec2 vTextureCoord;
@@ -12,19 +12,26 @@ const MouseOpacityFs = `
   // our mouse position uniform
   uniform vec2 uMousePosition;
 
+  uniform float uProgress;
+
   // our mouse strength
   uniform float uMouseStrength;
 
   // Reference: https://thebookofshaders.com/03/
   // https://github.com/martinlaxenaire/curtainsjs/blob/master/examples/vertex-coords-helper/js/coord.helper.setup.js
   void main() {
-    // vec4 finalColor = vec4(0.0, 0.0, 0.0, 1.0);
     vec2 textureCoord = vTextureCoord; // Get the base texture out to manipulate
-    float distance = distance(vec2(vVertexPosition.x, vVertexPosition.y), uMousePosition);
-    vec4 finalColor = texture2D(uSampler0, textureCoord); // Get the base texture to apply colorshifting to
-    finalColor.a -= distance / 1.5 - 0.2;
+    float progress = uProgress;
+    float d = -progress * 0.5;
+    vec2 centerInterp = (textureCoord - 0.5) * d;
+  
+    vec2 r = centerInterp * (progress * 0.6 + 0.4) + textureCoord;
+    vec2 g = centerInterp * (progress * 0.9 + 0.1) + textureCoord;
+    vec2 b = centerInterp * (progress * 0.9 + 0.1) + textureCoord;
+
+    vec4 finalColor = vec4( texture2D( uSampler0, r).r , texture2D( uSampler0, g).g, texture2D( uSampler0, b).b , 1.); 
     gl_FragColor = finalColor;
   }
 `;
 
-export default MouseOpacityFs;
+export default MouseOverFs;
