@@ -25,7 +25,6 @@ import MouseOpacityFs from './Shaders/MouseOpacityFs';
 import MouseOverFs from './Shaders/MouseOverFs';
 import VerticalDragVs from './Shaders/VerticalDragVs';
 import ZoomMouseFs from './Shaders/ZoomMouseFs';
-import TestAlternate from './images/canvas-alternate.jpg';
 import TestImage from './images/canvas-base.jpg';
 import styles from './style.module.scss';
 
@@ -33,27 +32,66 @@ class WebGLCurtains extends PureComponent {
   constructor (props) {
     super(props);
     this.state = {
-      pattern: {
-        color: false,
-        disabled: false,
-        draganimation: false,
-        horizontaldrag: true,
-        mousecolor: false,
-        mouselayer: false,
-        mouseopacity: false,
-        mouseover: false,
-        oscillate: false,
-        verticaldrag: false,
-        zoomdrag: false,
-        zoommouse: false,
+      fragmentshader: {
+        color: {
+          ref: ColorFs,
+          status: false,
+        },
+        mousecolor: {
+          ref: MouseColorFs,
+          status: false,
+        },
+        mouseopacity: {
+          ref: MouseOpacityFs,
+          status: false,
+        },
+        none: {
+          ref: DragFs,
+          status: false,
+        },
+        oscillate: {
+          ref: BasicFs,
+          status: true,
+        },
+        zoommouse: {
+          ref: ZoomMouseFs,
+          status: false,
+        },
+      },
+      hoveranimations: {
+        none: true,
+        zoom: false,
+      },
+      vertexshader: {
+        draganimation: {
+          ref: DragVs,
+          status: true,
+        },
+        horizontaldrag: {
+          ref: HorizontalDragVs,
+          status: false,
+        },
+        none: {
+          ref: BasicVs,
+          status: false,
+        },
+        verticaldrag: {
+          ref: VerticalDragVs,
+          status: false,
+        },
       },
     };
 
     this.handleInteractCanvasEnd = this.handleInteractCanvasEnd.bind(this);
     this.handleInteractCanvasStart = this.handleInteractCanvasStart.bind(this);
-    this.setChecked = this.setChecked.bind(this);
+    this.setFragmentChecked = this.setFragmentChecked.bind(this);
+    this.setVertexChecked = this.setVertexChecked.bind(this);
+    this.setHoverChecked = this.setHoverChecked.bind(this);
     this.handleMovement = this.handleMovement.bind(this);
     this.handlePlaneReady = this.handlePlaneReady.bind(this);
+    this.getActiveFragment = this.getActiveFragment.bind(this);
+    this.getActiveHover = this.getActiveHover.bind(this);
+    this.getActiveVertex = this.getActiveVertex.bind(this);
     this.gui = null;
     this.mousePosition = {
       x: 0,
@@ -68,47 +106,52 @@ class WebGLCurtains extends PureComponent {
     this.gui.width = 500;
     this.gui.closed = false;
 
-    const patterns = this.gui.addFolder('Patterns');
-    patterns.add(this.state.pattern, 'oscillate').name('Oscillate').listen().onChange(() => {
-      this.setChecked('oscillate');
+    const fragmentShader = this.gui.addFolder('Fragment Shaders');
+    console.log(fragmentShader);
+    console.log(this.state.fragmentshader);
+    fragmentShader.add(this.state.fragmentshader.none, 'status').name('None').listen().onChange(() => {
+      this.setFragmentChecked('none');
     });
-    patterns.add(this.state.pattern, 'disabled').name('Disabled').listen().onChange(() => {
-      this.setChecked('disabled');
+    fragmentShader.add(this.state.fragmentshader.oscillate, 'status').name('Automatically oscillate').listen().onChange(() => {
+      this.setFragmentChecked('oscillate');
     });
-    patterns.add(this.state.pattern, 'draganimation').name('Drag Animation').listen().onChange(() => {
-      this.setChecked('draganimation');
+    fragmentShader.add(this.state.fragmentshader.color, 'status').name('Automatically change colors').listen().onChange(() => {
+      this.setFragmentChecked('color');
     });
-    patterns.add(this.state.pattern, 'horizontaldrag').name('Horizontal Drag Animation').listen().onChange(() => {
-      this.setChecked('horizontaldrag');
+    fragmentShader.add(this.state.fragmentshader.mousecolor, 'status').name('Color shifting via mouse position').listen().onChange(() => {
+      this.setFragmentChecked('mousecolor');
     });
-    patterns.add(this.state.pattern, 'verticaldrag').name('Vertical Drag Animation').listen().onChange(() => {
-      this.setChecked('verticaldrag');
+    fragmentShader.add(this.state.fragmentshader.mouseopacity, 'status').name('Opacity shifting via mouse position').listen().onChange(() => {
+      this.setFragmentChecked('mouseopacity');
     });
-    patterns.open();
+    fragmentShader.add(this.state.fragmentshader.zoommouse, 'status').name('Zoom into picture via mouse position').listen().onChange(() => {
+      this.setFragmentChecked('zoommouse');
+    });
+    fragmentShader.open();
 
-    const bookOfShaders = this.gui.addFolder('Book of Shaders');
-    bookOfShaders.add(this.state.pattern, 'color').name('Basic Color').listen().onChange(() => {
-      this.setChecked('color');
+    const vertexShader = this.gui.addFolder('Vertex Shaders');
+    vertexShader.add(this.state.vertexshader.none, 'status').name('None').listen().onChange(() => {
+      this.setVertexChecked('none');
     });
-    bookOfShaders.add(this.state.pattern, 'mousecolor').name('Color Mouse').listen().onChange(() => {
-      this.setChecked('mousecolor');
+    vertexShader.add(this.state.vertexshader.draganimation, 'status').name('Paper simulated X/Y axis').listen().onChange(() => {
+      this.setVertexChecked('draganimation');
     });
-    bookOfShaders.add(this.state.pattern, 'mouseopacity').name('Opacity Mouse').listen().onChange(() => {
-      this.setChecked('mouseopacity');
+    vertexShader.add(this.state.vertexshader.horizontaldrag, 'status').name('Paper simulated X only').listen().onChange(() => {
+      this.setVertexChecked('horizontaldrag');
     });
-    bookOfShaders.add(this.state.pattern, 'mouselayer').name('Opacity Layered Mouse').listen().onChange(() => {
-      this.setChecked('mouselayer');
+    vertexShader.add(this.state.vertexshader.verticaldrag, 'status').name('Paper simulated Y only').listen().onChange(() => {
+      this.setVertexChecked('verticaldrag');
     });
-    bookOfShaders.add(this.state.pattern, 'zoommouse').name('Zoom Mouse').listen().onChange(() => {
-      this.setChecked('zoommouse');
+    vertexShader.open();
+
+    const hoverAnimations = this.gui.addFolder('Hover Animations (overwrites previous settings)');
+    hoverAnimations.add(this.state.hoveranimations, 'none').name('None').listen().onChange(() => {
+      this.setHoverChecked('none');
     });
-    bookOfShaders.add(this.state.pattern, 'zoomdrag').name('Zoom Drag').listen().onChange(() => {
-      this.setChecked('zoomdrag');
+    hoverAnimations.add(this.state.hoveranimations, 'zoom').name('Zoom on mouseover').listen().onChange(() => {
+      this.setHoverChecked('zoom');
     });
-    bookOfShaders.add(this.state.pattern, 'mouseover').name('Hover Interaction').listen().onChange(() => {
-      this.setChecked('mouseover');
-    });
-    bookOfShaders.open();
+    hoverAnimations.open();
 
     this.mousePosition = {
       x: 0,
@@ -203,21 +246,65 @@ class WebGLCurtains extends PureComponent {
     plane.uniforms.mouseStrength.value = 0.5;
   }
 
-  setChecked (prop) {
-    const {pattern} = this.state;
-    for (const param in pattern) {
+  setFragmentChecked (prop) {
+    const {fragmentshader} = this.state;
+    for (const param in fragmentshader) {
       if (param) {
-        pattern[param] = prop === param;
+        fragmentshader[param].status = prop === param;
       }
     }
-    this.setState({pattern});
+    this.setState({fragmentshader});
     this.forceUpdate();
   }
 
-  getActivePattern () {
-    const {pattern} = this.state;
-    for (const param in pattern) {
-      if (pattern[param]) {
+  setVertexChecked (prop) {
+    const {vertexshader} = this.state;
+    for (const param in vertexshader) {
+      if (param) {
+        vertexshader[param].status = prop === param;
+      }
+    }
+    this.setState({vertexshader});
+    this.forceUpdate();
+  }
+
+  setHoverChecked (prop) {
+    const {hoveranimations} = this.state;
+    for (const param in hoveranimations) {
+      if (param) {
+        hoveranimations[param] = prop === param;
+      }
+    }
+    this.setState({hoveranimations});
+    this.forceUpdate();
+  }
+
+  getActiveFragment () {
+    const {fragmentshader} = this.state;
+    for (const param in fragmentshader) {
+      if (fragmentshader[param].status) {
+        return fragmentshader[param].ref;
+      }
+    }
+
+    return '';
+  }
+
+  getActiveVertex () {
+    const {vertexshader} = this.state;
+    for (const param in vertexshader) {
+      if (vertexshader[param].status) {
+        return vertexshader[param].ref;
+      }
+    }
+
+    return '';
+  }
+
+  getActiveHover () {
+    const {hoveranimations} = this.state;
+    for (const param in hoveranimations) {
+      if (hoveranimations[param]) {
         return param;
       }
     }
@@ -227,14 +314,9 @@ class WebGLCurtains extends PureComponent {
 
   render () {
     const {cursorHover, cursorUnhover} = this.props;
-    const pattern = this.getActivePattern();
-    const basicUniforms = {
-      time: {
-        name: 'uTime',
-        type: '1f',
-        value: 0,
-      },
-    };
+    const fragmentShader = this.getActiveFragment();
+    const vertexShader = this.getActiveVertex();
+    const hoverAnimations = this.getActiveHover();
     const dragUniforms = {
       mousePosition: {
         name: 'uMousePosition',
@@ -267,6 +349,7 @@ class WebGLCurtains extends PureComponent {
 
     return (
       <div
+        key={`${fragmentShader}-${vertexShader}`}
         id='main-page' ref={(element) => {
           this.el = element;
         }}>
@@ -274,156 +357,7 @@ class WebGLCurtains extends PureComponent {
           hover={cursorHover}
           unhover={cursorUnhover}
         />
-        { pattern === 'oscillate' &&
-        <Curtains className={styles['curtains-canvas']}>
-          <Plane
-            className={styles['curtains-plane']}
-            fragmentShader={BasicFs}
-            onRender={onRender}
-            uniforms={basicUniforms}
-            vertexShader={BasicVs}
-          >
-            <img alt='Test for canvas' src={TestImage} />
-          </Plane>
-        </Curtains>}
-        { pattern === 'disabled' &&
-        <div className={styles['curtains-canvas']}>
-          <div className={styles['curtains-plane']}>
-            <img alt='Test for canvas' className={styles['disabled-image']} src={TestImage} />
-          </div>
-        </div>}
-        { pattern === 'draganimation' &&
-        <>
-          <Curtains className={styles['curtains-canvas']}>
-            <Plane
-              className={styles['curtains-plane']}
-              fov={35}
-              fragmentShader={DragFs}
-              heightSegments={20}
-              onReady={this.handlePlaneReady}
-              onRender={onRender}
-              uniforms={dragUniforms}
-              vertexShader={DragVs}
-              widthSegments={20}
-            >
-              <img alt='Test for canvas' src={TestImage} />
-            </Plane>
-          </Curtains>
-        </>}
-        { pattern === 'color' &&
-        <>
-          <Curtains className={styles['curtains-canvas']}>
-            <Plane
-              className={styles['curtains-plane']}
-              fov={35}
-              fragmentShader={ColorFs}
-              heightSegments={20}
-              onReady={this.handlePlaneReady}
-              onRender={onRender}
-              uniforms={dragUniforms}
-              vertexShader={BasicVs}
-              widthSegments={20}
-            >
-              <img alt='Test for canvas' src={TestImage} />
-            </Plane>
-          </Curtains>
-        </>}
-        { pattern === 'mousecolor' &&
-        <>
-          <Curtains className={styles['curtains-canvas']}>
-            <Plane
-              className={styles['curtains-plane']}
-              fov={35}
-              fragmentShader={MouseColorFs}
-              heightSegments={20}
-              onReady={this.handlePlaneReady}
-              onRender={onRender}
-              uniforms={dragUniforms}
-              vertexShader={BasicVs}
-              widthSegments={20}
-            >
-              <img alt='Test for canvas' src={TestImage} />
-            </Plane>
-          </Curtains>
-        </>}
-        { pattern === 'mouseopacity' &&
-        <>
-          <Curtains className={styles['curtains-canvas']}>
-            <Plane
-              className={styles['curtains-plane']}
-              fov={35}
-              fragmentShader={MouseOpacityFs}
-              heightSegments={20}
-              onReady={this.handlePlaneReady}
-              onRender={onRender}
-              uniforms={dragUniforms}
-              vertexShader={BasicVs}
-              widthSegments={20}
-            >
-              <img alt='Test for canvas' src={TestImage} />
-            </Plane>
-          </Curtains>
-        </>}
-        { pattern === 'mouselayer' &&
-        <>
-          <Curtains className={styles['curtains-canvas']}>
-            <Plane
-              className={styles['curtains-plane']}
-              fov={35}
-              fragmentShader={MouseOpacityFs}
-              heightSegments={20}
-              onReady={this.handlePlaneReady}
-              onRender={onRender}
-              uniforms={dragUniforms}
-              vertexShader={BasicVs}
-              widthSegments={20}
-            >
-              <img alt='Test for canvas' src={TestImage} />
-            </Plane>
-          </Curtains>
-          <div className={styles['curtains-canvas']} style={{zIndex: -1}}>
-            <div className={styles['curtains-plane']}>
-              <img alt='Test for canvas' className={styles['mouse-opacity-image']} src={TestAlternate} />
-            </div>
-          </div>
-        </>}
-        { pattern === 'zoommouse' &&
-        <>
-          <Curtains className={styles['curtains-canvas']}>
-            <Plane
-              className={styles['curtains-plane']}
-              fov={35}
-              fragmentShader={ZoomMouseFs}
-              heightSegments={20}
-              onReady={this.handlePlaneReady}
-              onRender={onRender}
-              uniforms={dragUniforms}
-              vertexShader={BasicVs}
-              widthSegments={20}
-            >
-              <img alt='Test for canvas' src={TestImage} />
-            </Plane>
-          </Curtains>
-        </>}
-        { pattern === 'zoomdrag' &&
-        <>
-          <Curtains className={styles['curtains-canvas']}>
-            <Plane
-              className={styles['curtains-plane']}
-              fov={35}
-              fragmentShader={ZoomMouseFs}
-              heightSegments={20}
-              onReady={this.handlePlaneReady}
-              onRender={onRender}
-              uniforms={dragUniforms}
-              vertexShader={DragVs}
-              widthSegments={20}
-            >
-              <img alt='Test for canvas' src={TestImage} />
-            </Plane>
-          </Curtains>
-        </>}
-        { pattern === 'mouseover' &&
+        { hoverAnimations === 'zoom' &&
         <>
           <Curtains className={styles['curtains-canvas']} style={{zIndex: -1}}>
             <Plane
@@ -435,49 +369,31 @@ class WebGLCurtains extends PureComponent {
               onMouseOver={this.handleInteractCanvasStart}
               onRender={onRenderMouseOver}
               uniforms={dragUniforms}
-              vertexShader={DragVs}
+              vertexShader={vertexShader}
               widthSegments={20}
             >
               <img alt='Test for canvas' src={TestImage} />
             </Plane>
           </Curtains>
         </>}
-        { pattern === 'horizontaldrag' &&
-        <>
-          <Curtains className={styles['curtains-canvas']}>
-            <Plane
-              className={styles['curtains-plane']}
-              fov={35}
-              fragmentShader={DragFs}
-              heightSegments={20}
-              onReady={this.handlePlaneReady}
-              onRender={onRender}
-              uniforms={dragUniforms}
-              vertexShader={HorizontalDragVs}
-              widthSegments={20}
-            >
-              <img alt='Test for canvas' src={TestImage} />
-            </Plane>
-          </Curtains>
-        </>}
-        { pattern === 'verticaldrag' &&
-        <>
-          <Curtains className={styles['curtains-canvas']}>
-            <Plane
-              className={styles['curtains-plane']}
-              fov={35}
-              fragmentShader={DragFs}
-              heightSegments={20}
-              onReady={this.handlePlaneReady}
-              onRender={onRender}
-              uniforms={dragUniforms}
-              vertexShader={VerticalDragVs}
-              widthSegments={20}
-            >
-              <img alt='Test for canvas' src={TestImage} />
-            </Plane>
-          </Curtains>
-        </>}
+        { hoverAnimations === 'none' &&
+          <>
+            <Curtains className={styles['curtains-canvas']}>
+              <Plane
+                className={styles['curtains-plane']}
+                fov={35}
+                fragmentShader={fragmentShader}
+                heightSegments={20}
+                onReady={this.handlePlaneReady}
+                onRender={onRender}
+                uniforms={dragUniforms}
+                vertexShader={vertexShader}
+                widthSegments={20}
+              >
+                <img alt='Test for canvas' src={TestImage} />
+              </Plane>
+            </Curtains>
+          </>}
       </div>
     );
   }
