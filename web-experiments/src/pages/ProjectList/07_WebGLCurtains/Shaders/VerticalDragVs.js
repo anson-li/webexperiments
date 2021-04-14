@@ -42,7 +42,7 @@ const VerticalDragVs = `
     float distortionEffect = rippleEffect * uMouseStrength;
 
     // apply it to our vertex position
-    vertexPosition.z += distortionEffect / 30.0;
+    vertexPosition.z += distortionEffect / 20.0;
 
     gl_Position = uPMatrix * uMVMatrix * vec4(vertexPosition, 1.0);
 
