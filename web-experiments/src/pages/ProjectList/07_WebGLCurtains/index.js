@@ -52,11 +52,11 @@ class WebGLCurtains extends PureComponent {
         },
         oscillate: {
           ref: BasicFs,
-          status: true,
+          status: false,
         },
         zoommouse: {
           ref: ZoomMouseFs,
-          status: false,
+          status: true,
         },
       },
       hoveranimations: {
@@ -66,11 +66,11 @@ class WebGLCurtains extends PureComponent {
       vertexshader: {
         draganimation: {
           ref: DragVs,
-          status: false,
+          status: true,
         },
         dragwater: {
           ref: DragWaterVs,
-          status: true,
+          status: false,
         },
         horizontaldrag: {
           ref: HorizontalDragVs,
