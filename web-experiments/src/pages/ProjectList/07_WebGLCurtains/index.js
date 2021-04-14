@@ -107,8 +107,6 @@ class WebGLCurtains extends PureComponent {
     this.gui.closed = false;
 
     const fragmentShader = this.gui.addFolder('Fragment Shaders');
-    console.log(fragmentShader);
-    console.log(this.state.fragmentshader);
     fragmentShader.add(this.state.fragmentshader.none, 'status').name('None').listen().onChange(() => {
       this.setFragmentChecked('none');
     });
@@ -349,8 +347,9 @@ class WebGLCurtains extends PureComponent {
 
     return (
       <div
+        id='main-page'
         key={`${fragmentShader}-${vertexShader}`}
-        id='main-page' ref={(element) => {
+        ref={(element) => {
           this.el = element;
         }}>
         <TextLogo
