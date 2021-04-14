@@ -1,4 +1,4 @@
-const VerticalDragVs = `
+const DragVs = `
   precision mediump float;
 
   // those are the mandatory attributes that the lib sets
@@ -27,14 +27,12 @@ const VerticalDragVs = `
 
   void main() {
     vec3 vertexPosition = aVertexPosition;
-    vec2 mousePos = uMousePosition;
-    mousePos.x = vertexPosition.x; // Lockout vertical position and use horizontal position only
 
     // get the distance between our vertex and the mouse position
-    float distanceFromMouse = distance(mousePos, vec2(vertexPosition.x, vertexPosition.y));
+    float distanceFromMouse = distance(uMousePosition, vec2(vertexPosition.x, vertexPosition.y));
 
     // this will define how close the ripples will be from each other. The bigger the number, the more ripples you'll get
-    float rippleFactor = 1.0;
+    float rippleFactor = 5.0;
     // calculate our ripple effect
     float rippleEffect = cos(rippleFactor * (distanceFromMouse));
 
@@ -43,6 +41,8 @@ const VerticalDragVs = `
 
     // apply it to our vertex position
     vertexPosition.z += distortionEffect / 30.0;
+    vertexPosition.x += (distortionEffect / 30.0 * (uMousePosition.x - vertexPosition.x));
+    vertexPosition.y += distortionEffect / 30.0 * (uMousePosition.y - vertexPosition.y);
 
     gl_Position = uPMatrix * uMVMatrix * vec4(vertexPosition, 1.0);
 
@@ -54,4 +54,4 @@ const VerticalDragVs = `
   }
 `;
 
-export default VerticalDragVs;
+export default DragVs;

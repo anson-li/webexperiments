@@ -19,6 +19,7 @@ import BasicVs from './Shaders/BasicVs';
 import ColorFs from './Shaders/ColorFs';
 import DragFs from './Shaders/DragFs';
 import DragVs from './Shaders/DragVs';
+import DragWaterVs from './Shaders/DragWaterVs';
 import HorizontalDragVs from './Shaders/HorizontalDragVs';
 import MouseColorFs from './Shaders/MouseColorFs';
 import MouseOpacityFs from './Shaders/MouseOpacityFs';
@@ -65,6 +66,10 @@ class WebGLCurtains extends PureComponent {
       vertexshader: {
         draganimation: {
           ref: DragVs,
+          status: false,
+        },
+        dragwater: {
+          ref: DragWaterVs,
           status: true,
         },
         horizontaldrag: {
@@ -140,9 +145,12 @@ class WebGLCurtains extends PureComponent {
     vertexShader.add(this.state.vertexshader.verticaldrag, 'status').name('Paper simulated Y only').listen().onChange(() => {
       this.setVertexChecked('verticaldrag');
     });
+    vertexShader.add(this.state.vertexshader.dragwater, 'status').name('Liquid simulated X/Y axis').listen().onChange(() => {
+      this.setVertexChecked('dragwater');
+    });
     vertexShader.open();
 
-    const hoverAnimations = this.gui.addFolder('Hover Animations (overwrites previous settings)');
+    const hoverAnimations = this.gui.addFolder('Special Animations (overwrites previous settings)');
     hoverAnimations.add(this.state.hoveranimations, 'none').name('None').listen().onChange(() => {
       this.setHoverChecked('none');
     });
