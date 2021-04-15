@@ -30,11 +30,8 @@ class SinglePlane extends PureComponent {
   }
 
   render () {
-    const {index} = this.props;
-
     return (
       <div className='MultiplePlanes-element'>
-        <div className='MultiplePlanes-title'>{'Title ' + (index + 1)}</div>
         <div className='MultiplePlanes-element-inner'>
           <div className='MultiplePlanes-landscape'>
             <div className='MultiplePlanes-landscape-inner'>

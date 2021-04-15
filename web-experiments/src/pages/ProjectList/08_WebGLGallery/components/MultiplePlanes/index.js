@@ -19,7 +19,6 @@ class MultiplePlanes extends PureComponent {
     this.allPlanes = [];
     this.planesDeformations = 0;
 
-    this.handleAddPlanes = this.handleAddPlanes.bind(this);
     this.handlePlaneReady = this.handlePlaneReady.bind(this);
     this.handleRenderCurtain = this.handleRenderCurtain.bind(this);
     this.setupPlanes = this.setupPlanes.bind(this);
@@ -75,12 +74,6 @@ class MultiplePlanes extends PureComponent {
     }
   }
 
-  handleAddPlanes () {
-    // eslint-disable-next-line arrow-body-style
-    this.setState((prevState) => ({nbPlanes: prevState.nbPlanes + 4}));
-    this.setupPlanes();
-  }
-
   handlePlaneReady (plane) {
     this.planes.push(plane);
   }
@@ -104,13 +97,6 @@ class MultiplePlanes extends PureComponent {
               return planeEl;
             })}
           </div>
-          <button
-            className='MultiplePlanes-add-planes'
-            onClick={this.handleAddPlanes}
-            type='button'
-          >
-            Add more planes
-          </button>
         </div>
       </Curtains>
     );

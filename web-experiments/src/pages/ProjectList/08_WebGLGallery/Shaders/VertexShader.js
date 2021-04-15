@@ -17,8 +17,11 @@ const VertexShader = `
   void main() {
     vec3 vertexPosition = aVertexPosition;
 
-    // cool effect on scroll
-    vertexPosition.y += sin(((vertexPosition.x + 1.0) / 2.0) * 3.141592) * (sin(uPlaneDeformation / 90.0));
+    float rippleFactor = 0.05;
+    float offsetPosition = vertexPosition.y;
+    float rippleEffect = cos(rippleFactor * (uPlaneDeformation)) * offsetPosition;
+    float distortionEffect = rippleEffect * uPlaneDeformation;
+    vertexPosition.z += distortionEffect / 500.0;
 
     gl_Position = uPMatrix * uMVMatrix * vec4(vertexPosition, 1.0);
     
