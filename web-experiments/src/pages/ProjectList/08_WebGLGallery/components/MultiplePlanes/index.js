@@ -30,6 +30,7 @@ class MultiplePlanes extends PureComponent {
     this.setupPlanes = this.setupPlanes.bind(this);
     this.handleSetupCurtain = this.handleSetupCurtain.bind(this);
     this.handleScroll = this.handleScroll.bind(this);
+    this.handlePlaneClick = this.handlePlaneClick.bind(this);
   }
 
   componentDidMount () {
@@ -42,6 +43,9 @@ class MultiplePlanes extends PureComponent {
     // this.updateScroll(event.target.scrollLeft, event.target.scrollTop);
     TweenLite.to(this, 1, {
       ease: Power0,
+      onComplete: () => {
+        this.updateScroll(0, this.scroll);
+      },
       onUpdate: () => {
         this.updateScroll(0, this.scroll);
       },
@@ -71,7 +75,7 @@ class MultiplePlanes extends PureComponent {
       delta.y = -10;
     }
 
-    this.planesDeformations = curtains.lerp(Math.abs(this.planesDeformations), Math.abs(delta.y) * 1.5, 1);
+    this.planesDeformations = curtains.lerp(Math.abs(this.planesDeformations), delta.y * 1.5, 1);
 
     this.planes.forEach((plane) => {
       plane.uniforms.planeDeformation.value =
@@ -84,7 +88,14 @@ class MultiplePlanes extends PureComponent {
     });
   }
 
+  handlePlaneClick (plane) {
+    console.log(plane);
+  }
+
   handlePlaneReady (plane) {
+    plane.htmlElement.addEventListener('click', (e) => {
+      this.handlePlaneClick(e, plane);
+    });
     this.planes.push(plane);
   }
 
