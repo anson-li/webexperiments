@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-bind */
 import React, {
   PureComponent,
 } from 'react';
@@ -94,7 +95,8 @@ class MultiplePlanes extends PureComponent {
     return (
       <Curtains
         onRender={this.handleRenderCurtain}
-        // pixelRatio={Math.min(1.5, window.devicePixelRatio)}
+        onScroll={this.scrollCurtain.bind(this)}
+        pixelRatio={Math.min(1.5, window.devicePixelRatio)}
       >
         <div className='MultiplePlanes'>
           <div className='MultiplePlanes-wrapper'>
