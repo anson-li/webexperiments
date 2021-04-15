@@ -1,4 +1,8 @@
+/* eslint-disable radix */
 /* eslint-disable react/jsx-no-bind */
+import {
+  TweenLite, Power0, Power4, gsap,
+} from 'gsap';
 import React, {
   PureComponent,
 } from 'react';
@@ -13,20 +17,40 @@ class MultiplePlanes extends PureComponent {
     super(props);
     this.state = {
       allPlanes: [],
-      nbPlanes: 14,
+      nbPlanes: 48,
     };
     this.planes = [];
     this.allPlanes = [];
+    this.curtain = null;
     this.planesDeformations = 0;
+    this.previousY = 0;
 
     this.handlePlaneReady = this.handlePlaneReady.bind(this);
-    this.handleRenderCurtain = this.handleRenderCurtain.bind(this);
     this.setupPlanes = this.setupPlanes.bind(this);
+    this.handleSetupCurtain = this.handleSetupCurtain.bind(this);
+    this.handleScroll = this.handleScroll.bind(this);
   }
 
   componentDidMount () {
     this.setupPlanes();
   }
+
+  handleScroll () {
+    TweenLite.to(this.planesref, 1, {
+      ease: Power0,
+      force3D: true,
+      onUpdate: () => {
+        if (this.planesref) {
+          const values = this.planesref.style.transform.split(/\w+\(|\);?/);
+          this.updateScroll(0, values[1].split(/,\s?/g).map((numStr) => {
+            return parseFloat(numStr);
+          })[1]);
+        }
+      },
+      rotationY: 0.01,
+      y: window.pageYOffset,
+    });
+  };
 
   setupPlanes () {
     const allPlanes = [];
@@ -34,21 +58,6 @@ class MultiplePlanes extends PureComponent {
       allPlanes.push(this.buildPlane(index));
     }
     this.setState({allPlanes});
-  }
-
-  handleRenderCurtain (curtains) {
-    // update our planes deformation
-    // increase/decrease the effect
-    this.planesDeformations = curtains.lerp(
-      this.planesDeformations,
-      0,
-      0.075,
-    );
-
-    // update planes deformations
-    this.planes.forEach((plane) => {
-      plane.uniforms.planeDeformation.value = this.planesDeformations;
-    });
   }
 
   scrollCurtain (curtains) {
@@ -59,19 +68,23 @@ class MultiplePlanes extends PureComponent {
     delta.y = -delta.y;
 
     // threshold
-    if (delta.y > 60) {
-      delta.y = 60;
-    } else if (delta.y < -60) {
-      delta.y = -60;
+    if (delta.y > 10) {
+      delta.y = 10;
+    } else if (delta.y < -10) {
+      delta.y = -10;
     }
 
-    if (Math.abs(delta.y) > Math.abs(this.planesDeformations)) {
-      this.planesDeformations = curtains.lerp(
-        this.planesDeformations,
-        delta.y,
-        0.5,
-      );
-    }
+    this.planesDeformations = curtains.lerp(Math.abs(this.planesDeformations), Math.abs(delta.y) * 1.5, 0.5);
+
+    this.planes.forEach((plane) => {
+      plane.uniforms.planeDeformation.value =
+      Math.abs(this.planesDeformations) * (plane._boundingRect.document.top - window.innerHeight / 2) / (window.innerHeight / 2);
+
+      plane.uniforms.planePosition.value =
+        1 - Math.abs(Math.min(Math.max(plane._boundingRect.document.top, 0), window.innerHeight) - window.innerHeight / 2) / (window.innerHeight / 2);
+
+      plane.uniforms.planeVelocity.value = Math.min(Math.max(Math.abs(this.planesDeformations), 0), 10);
+    });
   }
 
   handlePlaneReady (plane) {
@@ -84,21 +97,49 @@ class MultiplePlanes extends PureComponent {
     );
   }
 
+  updateScroll (xOffset, yOffset) {
+    // update our scroll manager values
+    if (this.curtain) {
+      this.curtain.updateScrollValues(xOffset, yOffset);
+      this.scrollCurtain(this.curtain);
+      this.curtain.needRender();
+    }
+  }
+
+  handleSetupCurtain (curtain) {
+    curtain.disableDrawing();
+    this.curtain = curtain;
+  }
+
   render () {
     return (
-      <Curtains
-        onRender={this.handleRenderCurtain}
-        onScroll={this.scrollCurtain.bind(this)}
-        pixelRatio={Math.min(1.5, window.devicePixelRatio)}
+      <div
+        className='viewport'
+        ref={(e) => {
+          this.curtainsref = e;
+        }}
+        style={{height: window.innerHeight}}
       >
-        <div className='MultiplePlanes'>
-          <div className='MultiplePlanes-wrapper'>
-            {this.state.allPlanes.map((planeEl) => {
-              return planeEl;
-            })}
+        <Curtains
+          onScroll={this.scrollCurtain.bind(this)}
+          onSuccess={this.handleSetupCurtain}
+          pixelRatio={Math.min(1.5, window.devicePixelRatio)}
+        >
+          <div
+            className='MultiplePlanes'
+            onScroll={this.handleScroll}
+            ref={(e) => {
+              this.planesref = e;
+            }}
+          >
+            <div className='MultiplePlanes-wrapper'>
+              {this.state.allPlanes.map((planeEl) => {
+                return planeEl;
+              })}
+            </div>
           </div>
-        </div>
-      </Curtains>
+        </Curtains>
+      </div>
     );
   }
 }

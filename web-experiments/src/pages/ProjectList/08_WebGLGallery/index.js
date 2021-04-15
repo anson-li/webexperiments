@@ -11,6 +11,7 @@ import './style.scss';
 class WebGLGallery extends PureComponent {
   componentDidMount () {
     this.props.hideLoader();
+    this.el = null;
   }
 
   hidePage () {

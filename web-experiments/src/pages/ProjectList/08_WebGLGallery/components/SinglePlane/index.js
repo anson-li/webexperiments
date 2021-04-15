@@ -19,6 +19,16 @@ class SinglePlane extends PureComponent {
         type: '1f',
         value: 0,
       },
+      planePosition: {
+        name: 'uPlanePosition',
+        type: '1f',
+        value: 0,
+      },
+      planeVelocity: {
+        name: 'uPlaneVelocity',
+        type: '1f',
+        value: 0,
+      },
     };
     this.drawCheckMargins = {
       bottom: 100,

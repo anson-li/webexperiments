@@ -13,16 +13,22 @@ const VertexShader = `
   varying vec2 vTextureCoord;
 
   uniform float uPlaneDeformation;
+  uniform float uPlanePosition;
+  uniform float uPlaneVelocity;
 
   void main() {
     vec3 vertexPosition = aVertexPosition;
-
-    float rippleFactor = 0.05;
+    
+    float rippleFactor = 1.0;
     float offsetPosition = vertexPosition.y;
-    float rippleEffect = cos(rippleFactor * (uPlaneDeformation)) * offsetPosition;
-    float distortionEffect = rippleEffect * uPlaneDeformation;
-    vertexPosition.z += distortionEffect / 500.0;
+    float rippleEffect = cos(rippleFactor * uPlanePosition) * vertexPosition.y;
+    float distortionEffect = rippleEffect * uPlaneDeformation * pow(uPlanePosition, 3.0);
+    vertexPosition.z += distortionEffect / 50.0;
+    
+    float relativeOffset = vertexPosition.y / 80.0;
+    vertexPosition.z += uPlanePosition / 40.0 * uPlaneVelocity;
 
+    // TODO: Update the second value (lower = larger) so that it goes in when in the middle of the page
     gl_Position = uPMatrix * uMVMatrix * vec4(vertexPosition, 1.0);
     
     // varyings
