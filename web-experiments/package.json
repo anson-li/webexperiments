@@ -9,6 +9,7 @@
     "animejs": "^3.2.1",
     "bootstrap": "^4.5.3",
     "concurrently": "^5.3.0",
+    "curtainsjs": "^8.1.2",
     "dat.gui": "^0.7.7",
     "gsap": "file:gsap-bonus.tgz",
     "lodash.debounce": "^4.0.8",

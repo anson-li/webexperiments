@@ -1,0 +1,29 @@
+.MultiplePlanes {
+  width: 80vw;
+  margin: 0 auto;
+  padding: 40px 0;
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  overflow-anchor: none;
+}
+
+.MultiplePlanes-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.MultiplePlanes-add-planes {
+  -webkit-appearance: none;
+  border: 0;
+  font: inherit;
+  cursor: pointer;
+  background: #ee6557;
+  color: white;
+  display: inline-block;
+  padding: 0.25em 0.5em;
+}
+
+.MultiplePlanes-add-planes:hover {
+  background: black;
+}

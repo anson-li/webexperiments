@@ -1,0 +1,55 @@
+.MultiplePlanes-landscape {
+  position: relative;
+  height: 0;
+  width: 100%;
+  overflow: hidden;
+  padding-bottom: 66.6%;
+}
+
+.MultiplePlanes-landscape-inner {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.MultiplePlanes-element {
+  flex-basis: 50%;
+  position: relative;
+}
+
+.MultiplePlanes-element-inner {
+  box-sizing: border-box;
+  padding: 40px;
+}
+
+.MultiplePlanes-title {
+  background: #ee6557;
+  color: white;
+  position: absolute;
+  top: 0.25em;
+  left: 0;
+  font-size: 2em;
+  font-weight: bold;
+  display: inline-block;
+  padding: 0.125em 0.25em;
+}
+
+.MultiplePlanes-plane {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.MultiplePlanes-plane img {
+  display: none;
+}
+
+@media screen and (max-width: 980px) {
+  .MultiplePlanes-element {
+    flex-basis: 100%;
+  }
+}

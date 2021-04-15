@@ -217,7 +217,15 @@ class Work extends PureComponent {
                 this.track = element;
               }}>
               <Section
-                date='MAR 2021'
+                date='APR 2021'
+                description='Horizontal gallery designed with for images first, built in WebGL &amp; GSAP.'
+                id='08'
+                image={CanvasMountain}
+                link='/webglgallery'
+                title='WEBGL Gallery'
+              />
+              <Section
+                date='APR 2021'
                 description='Test implementation for WebGL, converting images into live canvas.'
                 id='07'
                 image={CanvasMountain}

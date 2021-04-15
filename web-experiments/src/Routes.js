@@ -6,6 +6,7 @@ import AdditiveShader from './pages/ProjectList/04_AdditiveShader';
 import DinosaurLoader from './pages/ProjectList/05_DinosaurLoader';
 import DrumhellerConcept from './pages/ProjectList/06_DrumhellerConcept';
 import WebGLCurtains from './pages/ProjectList/07_WebGLCurtains';
+import WebGLGallery from './pages/ProjectList/08_WebGLGallery';
 import Work from './pages/Work';
 
 const Routes = [
@@ -21,6 +22,13 @@ const Routes = [
     key: 'webglcurtains',
     path: {
       path: '/webglcurtains',
+    },
+  },
+  {
+    Component: WebGLGallery,
+    key: 'webglgallery',
+    path: {
+      path: '/webglgallery',
     },
   },
   {

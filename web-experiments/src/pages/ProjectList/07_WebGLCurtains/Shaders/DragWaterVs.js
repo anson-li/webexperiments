@@ -1,4 +1,4 @@
-const DragVs = `
+const DragWaterVs = `
   precision mediump float;
 
   // those are the mandatory attributes that the lib sets
@@ -54,4 +54,4 @@ const DragVs = `
   }
 `;
 
-export default DragVs;
+export default DragWaterVs;
