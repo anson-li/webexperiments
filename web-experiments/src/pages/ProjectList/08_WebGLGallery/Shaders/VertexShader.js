@@ -22,7 +22,7 @@ const VertexShader = `
     float rippleFactor = 1.0;
     float offsetPosition = vertexPosition.y;
     float rippleEffect = cos(rippleFactor * uPlanePosition) * vertexPosition.y;
-    float distortionEffect = rippleEffect * uPlaneDeformation * pow(uPlanePosition, 3.0);
+    float distortionEffect = rippleEffect * uPlaneDeformation * pow(uPlanePosition, 1.0);
     vertexPosition.z += distortionEffect / 50.0;
     
     float relativeOffset = vertexPosition.y / 80.0;

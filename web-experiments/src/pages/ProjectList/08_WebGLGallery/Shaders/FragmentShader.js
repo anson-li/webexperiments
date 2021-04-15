@@ -19,7 +19,7 @@ const FragmentShader = `
     finalColor.g = g + f * (L - g) - 0.1;
     finalColor.b = b + f * (L - b) - 0.1;
 
-    float variableOpacity =  1.0 - abs((gl_FragCoord.y - 500.0) / 500.0) * 0.05 * (10.0 - uPlaneVelocity);
+    float variableOpacity =  1.0 - abs((gl_FragCoord.y - 500.0) / 500.0) * 0.05 * (10.0 - uPlaneVelocity / 2.0);
     finalColor.a = variableOpacity;
     gl_FragColor = finalColor;
   }

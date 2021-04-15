@@ -24,6 +24,7 @@ class MultiplePlanes extends PureComponent {
     this.curtain = null;
     this.planesDeformations = 0;
     this.previousY = 0;
+    this.scroll = 0;
 
     this.handlePlaneReady = this.handlePlaneReady.bind(this);
     this.setupPlanes = this.setupPlanes.bind(this);
@@ -35,22 +36,18 @@ class MultiplePlanes extends PureComponent {
     this.setupPlanes();
   }
 
-  handleScroll () {
-    TweenLite.to(this.planesref, 1, {
+  handleScroll (event) {
+    // console.log(event.target.scrollLeft);
+    // console.log(event.target.scrollTop);
+    // this.updateScroll(event.target.scrollLeft, event.target.scrollTop);
+    TweenLite.to(this, 1, {
       ease: Power0,
-      force3D: true,
       onUpdate: () => {
-        if (this.planesref) {
-          const values = this.planesref.style.transform.split(/\w+\(|\);?/);
-          this.updateScroll(0, values[1].split(/,\s?/g).map((numStr) => {
-            return parseFloat(numStr);
-          })[1]);
-        }
+        this.updateScroll(0, this.scroll);
       },
-      rotationY: 0.01,
-      y: window.pageYOffset,
+      scroll: event.target.scrollTop,
     });
-  };
+  }
 
   setupPlanes () {
     const allPlanes = [];
@@ -74,7 +71,7 @@ class MultiplePlanes extends PureComponent {
       delta.y = -10;
     }
 
-    this.planesDeformations = curtains.lerp(Math.abs(this.planesDeformations), Math.abs(delta.y) * 1.5, 0.5);
+    this.planesDeformations = curtains.lerp(Math.abs(this.planesDeformations), Math.abs(delta.y) * 1.5, 1);
 
     this.planes.forEach((plane) => {
       plane.uniforms.planeDeformation.value =
@@ -101,7 +98,6 @@ class MultiplePlanes extends PureComponent {
     // update our scroll manager values
     if (this.curtain) {
       this.curtain.updateScrollValues(xOffset, yOffset);
-      this.scrollCurtain(this.curtain);
       this.curtain.needRender();
     }
   }
@@ -132,7 +128,9 @@ class MultiplePlanes extends PureComponent {
               this.planesref = e;
             }}
           >
-            <div className='MultiplePlanes-wrapper'>
+            <div
+              className='MultiplePlanes-wrapper'
+            >
               {this.state.allPlanes.map((planeEl) => {
                 return planeEl;
               })}

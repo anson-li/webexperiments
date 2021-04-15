@@ -6,7 +6,19 @@
   position: relative;
   z-index: 2;
   text-align: center;
+  overflow: auto;
   overflow-anchor: none;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.MultiplePlanes::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.MultiplePlanes {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
 }
 
 .MultiplePlanes-wrapper {
