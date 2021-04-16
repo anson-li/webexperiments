@@ -14,6 +14,16 @@ class SinglePlane extends PureComponent {
   constructor (props) {
     super(props);
     this.uniforms = {
+      fullscreenTransition: {
+        name: 'uTransition',
+        type: '1f',
+        value: 0,
+      },
+      mousePosition: {
+        name: 'uMousePosition',
+        type: '2f',
+        value: [0, 0],
+      },
       planeDeformation: {
         name: 'uPlaneDeformation',
         type: '1f',
@@ -26,6 +36,11 @@ class SinglePlane extends PureComponent {
       },
       planeVelocity: {
         name: 'uPlaneVelocity',
+        type: '1f',
+        value: 0,
+      },
+      time: {
+        name: 'uTime',
         type: '1f',
         value: 0,
       },
