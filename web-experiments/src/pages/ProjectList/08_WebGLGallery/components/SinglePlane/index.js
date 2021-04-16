@@ -5,7 +5,6 @@ import React, {
 import {
   Plane,
 } from 'react-curtains';
-import TestImage from '../../Images/canvas-base.jpg';
 import FragmentShader from '../../Shaders/FragmentShader';
 import VertexShader from '../../Shaders/VertexShader';
 import './style.scss';
@@ -26,6 +25,11 @@ class SinglePlane extends PureComponent {
       },
       planeDeformation: {
         name: 'uPlaneDeformation',
+        type: '1f',
+        value: 0,
+      },
+      planeLostFocusDepth: {
+        name: 'uPlaneLostFocusDepth',
         type: '1f',
         value: 0,
       },

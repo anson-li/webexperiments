@@ -16,6 +16,9 @@ const VertexShader = `
   uniform float uPlanePosition;
   uniform float uPlaneVelocity;
 
+  uniform bool uPlaneLostFocus;
+  uniform float uPlaneLostFocusDepth;
+
   void main() {
     vec3 vertexPosition = aVertexPosition;
     
@@ -28,7 +31,8 @@ const VertexShader = `
     float relativeOffset = vertexPosition.y / 80.0;
     vertexPosition.z += uPlanePosition / 40.0 * uPlaneVelocity;
 
-    // TODO: Update the second value (lower = larger) so that it goes in when in the middle of the page
+    vertexPosition.z += uPlaneLostFocusDepth;
+
     gl_Position = uPMatrix * uMVMatrix * vec4(vertexPosition, 1.0);
     
     // varyings

@@ -34,7 +34,32 @@
   top: 5vh;
   font-size: 5rem;
   color: white;
-  mix-blend-mode: exclusion;
+  padding: 0px 20px;
+  background-color: #111111;
   z-index: 500;
   display: none;
+}
+
+.fullscreen-text {
+  position: absolute;
+  left: 10vw;
+  top: 12vh;
+  font-size: 5rem;
+  color: white;
+  z-index: 500;
+  font-family: 'ivymode';
+  font-weight: 800;
+  font-size: 20em;
+  letter-spacing: 0.25em;
+  line-height: 0.8em;
+  opacity: 0;
+  z-index: -1;
+}
+
+.inview-split-parent {
+  overflow: hidden;
+}
+
+.inview-split-child {
+  display: inline-block;
 }

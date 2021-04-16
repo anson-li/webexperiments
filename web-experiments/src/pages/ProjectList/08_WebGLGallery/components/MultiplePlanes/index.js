@@ -6,15 +6,15 @@ import {
 import {
   TweenLite, Power0, Power4, gsap,
 } from 'gsap';
+import {
+  SplitText,
+} from 'gsap/SplitText';
 import React, {
   PureComponent,
 } from 'react';
 import {
   Curtains,
 } from 'react-curtains';
-import {
-  animateScroll as scroll,
-} from 'react-scroll';
 import SinglePlane from '../SinglePlane';
 import './style.scss';
 
@@ -31,6 +31,10 @@ class MultiplePlanes extends PureComponent {
     this.planesDeformations = 0;
     this.previousY = 0;
     this.scroll = 0;
+    this.selectDeformations = 0;
+
+    this.childSplit = null;
+    this.parentSplit = null;
 
     this.galleryState = {
       closeTween: null,
@@ -49,6 +53,15 @@ class MultiplePlanes extends PureComponent {
   componentDidMount () {
     this.setupPlanes();
     this.setupCloseButton();
+    this.childSplit = new SplitText(this.fullscreentext, {
+      linesClass: 'inview-split-child',
+      type: 'lines',
+    });
+    // eslint-disable-next-line no-new
+    new SplitText(this.fullscreentext, {
+      linesClass: 'inview-split-parent',
+      type: 'lines',
+    });
   }
 
   setupCloseButton () {
@@ -75,6 +88,24 @@ class MultiplePlanes extends PureComponent {
           translationY: fullScreenPlane.relativeTranslation.y,
         };
 
+        const allOtherPlanes = this.planes.filter((el) => {
+          return el.uuid !== fullScreenPlane.uuid;
+        });
+        gsap.to(this, 1, {
+          ease: Power4,
+          onUpdate: () => {
+            allOtherPlanes.forEach((el) => {
+              el.uniforms.planeLostFocusDepth.value = this.selectDeformations;
+            });
+          },
+          selectDeformations: 0,
+        });
+        gsap.to(this.childSplit.lines, {
+          duration: 1,
+          ease: 'power4',
+          yPercent: -100,
+        });
+
         // create vectors only once and use them later on during tween onUpdate callback
         const newScale = new Vec2();
         const newTranslation = new Vec3();
@@ -87,9 +118,16 @@ class MultiplePlanes extends PureComponent {
         this.galleryState.closeTween = gsap.to(animation, 1, {
           ease: Power4.easeInOut,
           onComplete: () => {
-            console.log(this.galleryState);
             fullScreenPlane.setRenderOrder(0);
             this.galleryState.closeTween = null;
+            this.curtain.needRender();
+            gsap.set(this.fullscreentext, {
+              opacity: 0,
+              zIndex: -1,
+            });
+            gsap.set(this.childSplit.lines, {
+              yPercent: 0,
+            });
           },
           onUpdate: () => {
             // plane scale
@@ -162,14 +200,18 @@ class MultiplePlanes extends PureComponent {
     }
 
     this.planes.forEach((plane) => {
-      plane.uniforms.planeDeformation.value =
+      this.calculatePlaneUniforms(plane);
+    });
+  }
+
+  calculatePlaneUniforms (plane) {
+    plane.uniforms.planeDeformation.value =
       Math.abs(this.planesDeformations) * (plane._boundingRect.document.top - window.innerHeight / 2) / (window.innerHeight / 2);
 
-      plane.uniforms.planePosition.value =
-        1 - Math.abs(Math.min(Math.max(plane._boundingRect.document.top, 0), window.innerHeight) - window.innerHeight / 2) / (window.innerHeight / 2);
+    plane.uniforms.planePosition.value =
+      1 - Math.abs(Math.min(Math.max(plane._boundingRect.document.top, 0), window.innerHeight) - window.innerHeight / 2) / (window.innerHeight / 2);
 
-      plane.uniforms.planeVelocity.value = Math.min(Math.max(Math.abs(this.planesDeformations), 0), 10);
-    });
+    plane.uniforms.planeVelocity.value = Math.min(Math.max(Math.abs(this.planesDeformations), 0), 10);
   }
 
   handlePlaneClick (event, plane) {
@@ -180,9 +222,6 @@ class MultiplePlanes extends PureComponent {
       plane.uniforms.time.value = 0;
       const planeBoundingRect = plane.getBoundingRect();
       const curtainBoundingRect = this.curtain.getBoundingRect();
-
-      console.log(scroll);
-      scroll.scrollTo(100);
 
       const animation = {
         mouseX: 0.5,
@@ -202,6 +241,31 @@ class MultiplePlanes extends PureComponent {
         this.galleryState.openTween.kill();
       }
 
+      const nonClickedPlanes = this.planes.filter((el) => {
+        return el.uuid !== plane.uuid;
+      });
+      gsap.to(this, 1, {
+        ease: Power4,
+        onUpdate: () => {
+          nonClickedPlanes.forEach((el) => {
+            el.uniforms.planeLostFocusDepth.value = this.selectDeformations;
+          });
+        },
+        selectDeformations: -1,
+      });
+
+      gsap.set(this.fullscreentext, {
+        opacity: 1,
+      });
+      gsap.set(this.fullscreentext, {
+        zIndex: 10,
+      });
+      gsap.from(this.childSplit.lines, {
+        duration: 1.5,
+        ease: 'power4',
+        yPercent: 100,
+      });
+
       plane.setTransformOrigin(newTranslation);
       this.galleryState.openTween = gsap.to(animation, 1, {
         ease: Power4.easeInOut,
@@ -211,6 +275,7 @@ class MultiplePlanes extends PureComponent {
           // clear tween
           this.galleryState.openTween = null;
           this.closebutton.style.display = 'block';
+          this.curtain.needRender();
         },
         onUpdate: () => {
           // plane scale
@@ -230,12 +295,12 @@ class MultiplePlanes extends PureComponent {
 
           this.curtain.needRender();
         },
-        scaleX: 1240 / planeBoundingRect.width,
-        scaleY: 700 / planeBoundingRect.height,
+        scaleX: curtainBoundingRect.width / planeBoundingRect.width,
+        scaleY: curtainBoundingRect.height / planeBoundingRect.height,
         textureScale: 1,
         transition: 1,
-        translationX: -350, // / this.curtain.pixelRatio,
-        translationY: -350, // / this.curtain.pixelRatio,
+        translationX: -1 * planeBoundingRect.left / this.curtain.pixelRatio,
+        translationY: -1 * planeBoundingRect.top / this.curtain.pixelRatio,
       });
     }
   }
@@ -264,6 +329,7 @@ class MultiplePlanes extends PureComponent {
   handleSetupCurtain (curtain) {
     curtain.disableDrawing();
     this.curtain = curtain;
+    this.curtain.needRender();
   }
 
   render () {
@@ -275,6 +341,15 @@ class MultiplePlanes extends PureComponent {
         }}
         style={{height: window.innerHeight}}
       >
+        <div
+          className='fullscreen-text'
+          ref={(e) => {
+            this.fullscreentext = e;
+          }}
+        >
+          WA  KAT AKA
+          TI
+        </div>
         <div
           className='close-button'
           ref={(e) => {
