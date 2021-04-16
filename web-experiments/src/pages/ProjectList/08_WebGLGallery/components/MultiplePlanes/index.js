@@ -75,7 +75,9 @@ class MultiplePlanes extends PureComponent {
       delta.y = -10;
     }
 
-    this.planesDeformations = curtains.lerp(Math.abs(this.planesDeformations), delta.y * 1.5, 1);
+    if (Math.abs(delta.y) > Math.abs(this.planesDeformations)) {
+      this.planesDeformations = curtains.lerp(Math.abs(this.planesDeformations), delta.y * 1.5, 1);
+    }
 
     this.planes.forEach((plane) => {
       plane.uniforms.planeDeformation.value =
@@ -88,13 +90,13 @@ class MultiplePlanes extends PureComponent {
     });
   }
 
-  handlePlaneClick (plane) {
+  handlePlaneClick (event, plane) {
     console.log(plane);
   }
 
   handlePlaneReady (plane) {
-    plane.htmlElement.addEventListener('click', (e) => {
-      this.handlePlaneClick(e, plane);
+    plane.htmlElement.addEventListener('click', (event) => {
+      this.handlePlaneClick(event, plane);
     });
     this.planes.push(plane);
   }
