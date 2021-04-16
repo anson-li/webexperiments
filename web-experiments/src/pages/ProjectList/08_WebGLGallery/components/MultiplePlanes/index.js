@@ -34,7 +34,7 @@ class MultiplePlanes extends PureComponent {
     this.selectDeformations = 0;
 
     this.childSplit = null;
-    this.parentSplit = null;
+    this.childButton = null;
 
     this.galleryState = {
       closeTween: null,
@@ -62,6 +62,15 @@ class MultiplePlanes extends PureComponent {
       linesClass: 'inview-split-parent',
       type: 'lines',
     });
+    this.childButton = new SplitText(this.closebutton, {
+      linesClass: 'inview-split-child',
+      type: 'lines',
+    });
+    // eslint-disable-next-line no-new
+    new SplitText(this.closebutton, {
+      linesClass: 'inview-split-parent',
+      type: 'lines',
+    });
   }
 
   setupCloseButton () {
@@ -74,7 +83,6 @@ class MultiplePlanes extends PureComponent {
       if (fullScreenPlane && this.galleryState.fullscreen) {
         this.galleryState.fullscreen = false;
         fullScreenPlane.userData.isFullscreen = false;
-        this.closebutton.style.display = 'none';
         fullScreenPlane.uniforms.time.value = 0;
 
         // object that will be tweened
@@ -105,6 +113,11 @@ class MultiplePlanes extends PureComponent {
           ease: 'power4',
           yPercent: -100,
         });
+        gsap.to(this.childButton.lines, {
+          duration: 1,
+          ease: 'power4',
+          yPercent: -100,
+        });
 
         // create vectors only once and use them later on during tween onUpdate callback
         const newScale = new Vec2();
@@ -126,6 +139,13 @@ class MultiplePlanes extends PureComponent {
               zIndex: -1,
             });
             gsap.set(this.childSplit.lines, {
+              yPercent: 0,
+            });
+            gsap.set(this.closebutton, {
+              opacity: 0,
+              zIndex: -1,
+            });
+            gsap.set(this.childButton.lines, {
               yPercent: 0,
             });
           },
@@ -256,11 +276,18 @@ class MultiplePlanes extends PureComponent {
 
       gsap.set(this.fullscreentext, {
         opacity: 1,
-      });
-      gsap.set(this.fullscreentext, {
         zIndex: 10,
       });
       gsap.from(this.childSplit.lines, {
+        duration: 1.5,
+        ease: 'power4',
+        yPercent: 100,
+      });
+      gsap.set(this.closebutton, {
+        opacity: 1,
+        zIndex: 10,
+      });
+      gsap.from(this.closebutton, {
         duration: 1.5,
         ease: 'power4',
         yPercent: 100,
@@ -274,7 +301,6 @@ class MultiplePlanes extends PureComponent {
         onComplete: () => {
           // clear tween
           this.galleryState.openTween = null;
-          this.closebutton.style.display = 'block';
           this.curtain.needRender();
         },
         onUpdate: () => {
@@ -347,8 +373,8 @@ class MultiplePlanes extends PureComponent {
             this.fullscreentext = e;
           }}
         >
-          WA  KAT AKA
-          TI
+          PROJ ECT<br />
+          NAM E
         </div>
         <div
           className='close-button'

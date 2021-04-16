@@ -22,6 +22,7 @@ import CoffeeCupBanner from '../../web/assets/images/project-banner/coffeecup.jp
 import DinosaurLoader from '../../web/assets/images/project-banner/dinoloader.PNG';
 import DrumhellerConcept from '../../web/assets/images/project-banner/drumhellerconcept.jpg';
 import JellicentBanner from '../../web/assets/images/project-banner/jellicent.jpg';
+import WebGLGallery from '../../web/assets/images/project-banner/webglgallery.JPG';
 import Section from './components/Section';
 import styles from './style.module.scss';
 
@@ -220,7 +221,7 @@ class Work extends PureComponent {
                 date='APR 2021'
                 description='Horizontal gallery designed with for images first, built in WebGL &amp; GSAP.'
                 id='08'
-                image={CanvasMountain}
+                image={WebGLGallery}
                 link='/webglgallery'
                 title='WEBGL Gallery'
               />

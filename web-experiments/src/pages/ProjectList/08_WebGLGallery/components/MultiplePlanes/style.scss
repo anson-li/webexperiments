@@ -32,12 +32,17 @@
   position: absolute;
   left: 90vw;
   top: 5vh;
+  font-family: sans-serif;
+  font-weight: 800;
   font-size: 5rem;
   color: white;
-  padding: 0px 20px;
-  background-color: #111111;
-  z-index: 500;
-  display: none;
+  opacity: 0;
+  z-index: -1;
+
+  .inview-split-parent .inview-split-child {
+    padding: 0px 20px;
+    background-color: #111111;
+  }
 }
 
 .fullscreen-text {
@@ -47,7 +52,7 @@
   font-size: 5rem;
   color: white;
   z-index: 500;
-  font-family: 'ivymode';
+  font-family: condor-compressed, sans-serif;
   font-weight: 800;
   font-size: 20em;
   letter-spacing: 0.25em;
