@@ -7,7 +7,7 @@ import {
 } from 'react-curtains';
 import FragmentShader from '../../Shaders/FragmentShader';
 import VertexShader from '../../Shaders/VertexShader';
-import './style.scss';
+import styles from './style.module.scss';
 
 class SinglePlane extends PureComponent {
   constructor (props) {
@@ -65,12 +65,12 @@ class SinglePlane extends PureComponent {
 
   render () {
     return (
-      <div className='multiple-planes-element'>
-        <div className='multiple-planes-element-inner'>
-          <div className='multiple-planes-landscape'>
-            <div className='multiple-planes-landscape-inner'>
+      <div className={styles['multiple-planes-element']}>
+        <div className={styles['multiple-planes-element-inner']}>
+          <div className={styles['multiple-planes-landscape']}>
+            <div className={styles['multiple-planes-landscape-inner']}>
               <Plane
-                className='multiple-planes-plane'
+                className={styles['multiple-planes-plane']}
                 drawCheckMargins={this.drawCheckMargins}
                 fragmentShader={FragmentShader}
                 heightSegments={10}

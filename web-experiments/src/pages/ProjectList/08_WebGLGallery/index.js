@@ -6,7 +6,6 @@ import React, {
 import TextLogo from '../../../common/TextLogo';
 import WithTransition from '../../../common/WithTransition';
 import MultiplePlanes from './components/MultiplePlanes';
-import './style.scss';
 
 class WebGLGallery extends PureComponent {
   componentDidMount () {

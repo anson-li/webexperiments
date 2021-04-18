@@ -18,7 +18,7 @@ import {
   Curtains,
 } from 'react-curtains';
 import SinglePlane from '../SinglePlane';
-import './style.scss';
+import styles from './style.module.scss';
 
 class MultiplePlanes extends PureComponent {
   constructor (props) {
@@ -426,24 +426,24 @@ class MultiplePlanes extends PureComponent {
   render () {
     return (
       <div
-        className='viewport'
+        className={styles.viewport}
         ref={(element) => {
           this.curtainsref = element;
         }}
         style={{height: window.innerHeight}}
       >
         <div
-          className='hint-text'
+          className={styles['hint-text']}
         >
-          <div className='primary'>
+          <div className={styles.primary}>
             Scroll &amp; Click to Navigate<br />
           </div>
-          <div className='secondary'>
+          <div className={styles.secondary}>
             assets from unsplash
           </div>
         </div>
         <div
-          className='fullscreen-text'
+          className={styles['fullscreen-text']}
           ref={(element) => {
             this.fullscreentext = element;
           }}
@@ -452,25 +452,26 @@ class MultiplePlanes extends PureComponent {
           NAM E
         </div>
         <div
-          className='close-button'
+          className={styles['close-button']}
           ref={(element) => {
             this.closebutton = element;
           }}
         >X</div>
         <Curtains
+          className={styles['curtains-canvas']}
           onScroll={this.scrollCurtain.bind(this)}
           onSuccess={this.handleSetupCurtain}
           pixelRatio={Math.min(1.5, window.devicePixelRatio)}
         >
           <div
-            className='multiple-planes'
+            className={styles['multiple-planes']}
             onScroll={this.handleScroll}
             ref={(element) => {
               this.planesref = element;
             }}
           >
             <div
-              className='multiple-planes-wrapper'
+              className={styles['multiple-planes-wrapper']}
             >
               {this.state.allPlanes.map((planeEl) => {
                 return planeEl;
