@@ -1,4 +1,3 @@
-/* eslint-disable radix */
 /* eslint-disable react/jsx-no-bind */
 import {
   Vec2, Vec3,
@@ -428,15 +427,15 @@ class MultiplePlanes extends PureComponent {
     return (
       <div
         className='viewport'
-        ref={(e) => {
-          this.curtainsref = e;
+        ref={(element) => {
+          this.curtainsref = element;
         }}
         style={{height: window.innerHeight}}
       >
         <div
           className='fullscreen-text'
-          ref={(e) => {
-            this.fullscreentext = e;
+          ref={(element) => {
+            this.fullscreentext = element;
           }}
         >
           PROJ ECT<br />
@@ -444,8 +443,8 @@ class MultiplePlanes extends PureComponent {
         </div>
         <div
           className='close-button'
-          ref={(e) => {
-            this.closebutton = e;
+          ref={(element) => {
+            this.closebutton = element;
           }}
         >X</div>
         <Curtains
@@ -456,8 +455,8 @@ class MultiplePlanes extends PureComponent {
           <div
             className='MultiplePlanes'
             onScroll={this.handleScroll}
-            ref={(e) => {
-              this.planesref = e;
+            ref={(element) => {
+              this.planesref = element;
             }}
           >
             <div
