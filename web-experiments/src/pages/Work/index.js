@@ -227,11 +227,11 @@ class Work extends PureComponent {
               />
               <Section
                 date='APR 2021'
-                description='Test implementation for WebGL, converting images into live canvas.'
+                description='Collection of various shaders and WebGL examples for future reference.'
                 id='07'
                 image={CanvasMountain}
                 link='/webglcurtains'
-                title='WEBGL - Curtains'
+                title='WEBGL Shader Library'
               />
               <Section
                 date='MAR 2021'
