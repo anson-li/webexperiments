@@ -44,7 +44,13 @@ const NoiseFs = `
     float n = noise(pos);
     vec4 noiseVec = vec4(vec3(n), 1.0);
     
-    texture.a -= (noiseVec.r + 0.5) * 2.0 * cos(uTime / 100.0);
+    // Documenting fadeout effect:
+    // floor + 0.5: sets step between 0 and 1 for vectorized effect (no blurring). Same as round() but they don't have that in webgl...
+    // noiseVec.r + 0.5: noiseVec.r is one of the noise vectors, +0.5 means that we round up the value so that we will eventually show the full image
+    // 1.5: multiplier for adjusting show speed
+    // abs(cos(X)): depending on time, we run a circular loop to display. Can change to progress when we use an onHover effect
+    
+    texture.a -= 1.0 - floor((noiseVec.r + 0.5) * 1.5 * abs(cos(uTime / 300.0)) + 0.5);
 
     gl_FragColor = texture;
   }
