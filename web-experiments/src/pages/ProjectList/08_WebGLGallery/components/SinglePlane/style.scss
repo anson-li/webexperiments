@@ -1,11 +1,11 @@
-.MultiplePlanes-landscape {
+.multiple-planes-landscape {
   position: relative;
   height: 100%;
   width: 100%;
   overflow: hidden;
 }
 
-.MultiplePlanes-landscape-inner {
+.multiple-planes-landscape-inner {
   position: absolute;
   top: 0;
   right: 0;
@@ -13,7 +13,7 @@
   left: 0;
 }
 
-.MultiplePlanes-element {
+.multiple-planes-element {
   width: 100%;
   height: 140px;
   position: relative;
@@ -21,7 +21,7 @@
   padding-bottom: 40px;
 }
 
-.MultiplePlanes-element-inner {
+.multiple-planes-element-inner {
   box-sizing: border-box;
   height: 100px;
   width: 400px;
@@ -30,7 +30,7 @@
   transform: translate(-50%, 0%);
 }
 
-.MultiplePlanes-plane {
+.multiple-planes-plane {
   position: absolute;
   top: 0;
   right: 0;
@@ -38,12 +38,12 @@
   left: 0;
 }
 
-.MultiplePlanes-plane img {
+.multiple-planes-plane img {
   display: none;
 }
 
 @media screen and (max-width: 980px) {
-  .MultiplePlanes-element {
+  .multiple-planes-element {
     flex-basis: 100%;
   }
 }

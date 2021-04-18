@@ -461,7 +461,7 @@ class MultiplePlanes extends PureComponent {
             }}
           >
             <div
-              className='MultiplePlanes-wrapper'
+              className='multiple-planes-wrapper'
             >
               {this.state.allPlanes.map((planeEl) => {
                 return planeEl;

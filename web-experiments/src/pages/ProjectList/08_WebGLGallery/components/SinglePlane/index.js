@@ -65,12 +65,12 @@ class SinglePlane extends PureComponent {
 
   render () {
     return (
-      <div className='MultiplePlanes-element'>
-        <div className='MultiplePlanes-element-inner'>
-          <div className='MultiplePlanes-landscape'>
-            <div className='MultiplePlanes-landscape-inner'>
+      <div className='multiple-planes-element'>
+        <div className='multiple-planes-element-inner'>
+          <div className='multiple-planes-landscape'>
+            <div className='multiple-planes-landscape-inner'>
               <Plane
-                className='MultiplePlanes-plane'
+                className='multiple-planes-plane'
                 drawCheckMargins={this.drawCheckMargins}
                 fragmentShader={FragmentShader}
                 heightSegments={10}
