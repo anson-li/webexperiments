@@ -36,7 +36,7 @@ class MultiplePlanes extends PureComponent {
     this.selectDeformations = 0;
 
     this.childSplit = null;
-    this.childButton = null;
+    this.childCloseButton = null;
 
     this.galleryState = {
       closeTween: null,
@@ -67,7 +67,7 @@ class MultiplePlanes extends PureComponent {
       linesClass: 'inview-split-parent',
       type: 'lines',
     });
-    this.childButton = new SplitText(this.closebutton, {
+    this.childCloseButton = new SplitText(this.closebutton, {
       linesClass: 'inview-split-child',
       type: 'lines',
     });
@@ -130,7 +130,7 @@ class MultiplePlanes extends PureComponent {
           ease: 'power4',
           yPercent: -100,
         });
-        gsap.to(this.childButton.lines, {
+        gsap.to(this.childCloseButton.lines, {
           duration: 1,
           ease: 'power4',
           yPercent: -100,
@@ -162,7 +162,7 @@ class MultiplePlanes extends PureComponent {
               opacity: 0,
               zIndex: -1,
             });
-            gsap.set(this.childButton.lines, {
+            gsap.set(this.childCloseButton.lines, {
               yPercent: 0,
             });
           },
@@ -432,6 +432,16 @@ class MultiplePlanes extends PureComponent {
         }}
         style={{height: window.innerHeight}}
       >
+        <div
+          className='hint-text'
+        >
+          <div className='primary'>
+            Scroll &amp; Click to Navigate<br />
+          </div>
+          <div className='secondary'>
+            assets from unsplash
+          </div>
+        </div>
         <div
           className='fullscreen-text'
           ref={(element) => {
