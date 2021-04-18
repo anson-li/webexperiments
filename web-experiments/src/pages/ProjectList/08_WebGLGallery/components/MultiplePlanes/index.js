@@ -358,23 +358,27 @@ class MultiplePlanes extends PureComponent {
   }
 
   handlePlaneMouseOver (event, plane) {
-    gsap.to(plane.uniforms.hoverProgress, 0.25, {
-      ease: 'expo.inOut',
-      onUpdate: () => {
-        this.curtain.needRender();
-      },
-      value: 1,
-    });
+    if (!this.galleryState.fullscreen) {
+      gsap.to(plane.uniforms.hoverProgress, 0.25, {
+        ease: 'expo.inOut',
+        onUpdate: () => {
+          this.curtain.needRender();
+        },
+        value: 1,
+      });
+    }
   }
 
   handlePlaneMouseOut (event, plane) {
-    gsap.to(plane.uniforms.hoverProgress, 0.5, {
-      ease: 'expo.inOut',
-      onUpdate: () => {
-        this.curtain.needRender();
-      },
-      value: 0,
-    });
+    if (!this.galleryState.fullscreen) {
+      gsap.to(plane.uniforms.hoverProgress, 0.5, {
+        ease: 'expo.inOut',
+        onUpdate: () => {
+          this.curtain.needRender();
+        },
+        value: 0,
+      });
+    }
   }
 
   handlePlaneReady (plane) {
