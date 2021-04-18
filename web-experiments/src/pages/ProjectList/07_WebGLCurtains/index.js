@@ -216,7 +216,6 @@ class WebGLCurtains extends PureComponent {
   }
 
   handleInteractCanvasStart () {
-    console.log('hit');
     gsap.to(this, 0.5, {
       ease: 'expo.inOut',
       progress: 1,
@@ -224,7 +223,6 @@ class WebGLCurtains extends PureComponent {
   }
 
   handleInteractCanvasEnd () {
-    console.log('bit');
     gsap.to(this, 0.5, {
       ease: 'expo.inOut',
       progress: 0,
