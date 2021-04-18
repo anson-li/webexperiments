@@ -40,7 +40,7 @@
   z-index: -1;
 
   .inview-split-parent .inview-split-child {
-    padding: 0px 20px;
+    padding: 0 20px;
     background-color: #111111;
   }
 }
@@ -50,7 +50,6 @@
   left: 10vw;
   top: 12vh;
   color: white;
-  z-index: 500;
   font-family: condor-compressed, sans-serif;
   font-weight: 800;
   font-size: 20em;
