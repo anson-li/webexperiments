@@ -453,7 +453,7 @@ class MultiplePlanes extends PureComponent {
           pixelRatio={Math.min(1.5, window.devicePixelRatio)}
         >
           <div
-            className='MultiplePlanes'
+            className='multiple-planes'
             onScroll={this.handleScroll}
             ref={(element) => {
               this.planesref = element;

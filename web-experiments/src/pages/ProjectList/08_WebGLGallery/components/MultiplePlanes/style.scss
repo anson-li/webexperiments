@@ -1,4 +1,4 @@
-.MultiplePlanes {
+.multiple-planes {
   width: 80vw;
   height: 100vh;
   margin: 0 auto;
@@ -11,12 +11,12 @@
 }
 
 /* Hide scrollbar for Chrome, Safari and Opera */
-.MultiplePlanes::-webkit-scrollbar {
+.multiple-planes::-webkit-scrollbar {
   display: none;
 }
 
 /* Hide scrollbar for IE, Edge and Firefox */
-.MultiplePlanes {
+.multiple-planes {
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
 }
