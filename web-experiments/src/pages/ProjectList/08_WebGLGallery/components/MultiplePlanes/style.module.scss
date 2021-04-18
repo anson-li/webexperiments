@@ -67,6 +67,10 @@
   line-height: 0.8em;
   opacity: 0;
   z-index: -1;
+
+  @media (max-height: 900px) {
+    font-size: 12em;
+  }
 }
 
 .inview-split-parent {

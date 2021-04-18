@@ -44,7 +44,7 @@ const NoiseFs = `
     float n = noise(pos);
     vec4 noiseVec = vec4(vec3(n), 1.0);
     
-    texture.a -= (noiseVec.r + 0.5) * 2.0 * sin(uTime / 100.0);
+    texture.a -= (noiseVec.r + 0.5) * 2.0 * cos(uTime / 100.0);
 
     gl_FragColor = texture;
   }
