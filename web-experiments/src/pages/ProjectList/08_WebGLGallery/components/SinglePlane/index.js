@@ -18,6 +18,11 @@ class SinglePlane extends PureComponent {
         type: '1f',
         value: 0,
       },
+      hoverProgress: {
+        name: 'uHoverProgress',
+        type: '1f',
+        value: 0,
+      },
       mousePosition: {
         name: 'uMousePosition',
         type: '2f',

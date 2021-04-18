@@ -9,6 +9,9 @@ import {
 import {
   SplitText,
 } from 'gsap/SplitText';
+import {
+  PropTypes,
+} from 'prop-types';
 import React, {
   PureComponent,
 } from 'react';
@@ -47,7 +50,10 @@ class MultiplePlanes extends PureComponent {
     this.handleSetupCurtain = this.handleSetupCurtain.bind(this);
     this.handleScroll = this.handleScroll.bind(this);
     this.handlePlaneClick = this.handlePlaneClick.bind(this);
+    this.handlePlaneMouseOut = this.handlePlaneMouseOut.bind(this);
+    this.handlePlaneMouseOver = this.handlePlaneMouseOver.bind(this);
     this.setupCloseButton = this.setupCloseButton.bind(this);
+    this.setupInitialScrollAnimation = this.setupInitialScrollAnimation.bind(this);
   }
 
   componentDidMount () {
@@ -71,6 +77,18 @@ class MultiplePlanes extends PureComponent {
       linesClass: 'inview-split-parent',
       type: 'lines',
     });
+  }
+
+  setupInitialScrollAnimation () {
+    this.planesref.scrollTop = 2500;
+    this.props.hideLoader();
+    setTimeout(() => {
+      this.planesref.scrollTo({
+        behavior: 'smooth',
+        left: 0,
+        top: 0,
+      });
+    }, 1000);
   }
 
   setupCloseButton () {
@@ -273,21 +291,29 @@ class MultiplePlanes extends PureComponent {
         },
         selectDeformations: -1,
       });
+      gsap.to(plane.uniforms.hoverProgress, 0.5, {
+        ease: 'expo.inOut',
+        value: 0,
+      });
 
       gsap.set(this.fullscreentext, {
+        delay: 0.5,
         opacity: 1,
         zIndex: 10,
       });
       gsap.from(this.childSplit.lines, {
+        delay: 0.5,
         duration: 1.5,
         ease: 'power4',
         yPercent: 100,
       });
       gsap.set(this.closebutton, {
+        delay: 0.5,
         opacity: 1,
         zIndex: 10,
       });
       gsap.from(this.closebutton, {
+        delay: 0.5,
         duration: 1.5,
         ease: 'power4',
         yPercent: 100,
@@ -331,16 +357,52 @@ class MultiplePlanes extends PureComponent {
     }
   }
 
+  handlePlaneMouseOver (event, plane) {
+    gsap.to(plane.uniforms.hoverProgress, 0.25, {
+      ease: 'expo.inOut',
+      onUpdate: () => {
+        this.curtain.needRender();
+      },
+      value: 1,
+    });
+  }
+
+  handlePlaneMouseOut (event, plane) {
+    gsap.to(plane.uniforms.hoverProgress, 0.5, {
+      ease: 'expo.inOut',
+      onUpdate: () => {
+        this.curtain.needRender();
+      },
+      value: 0,
+    });
+  }
+
   handlePlaneReady (plane) {
+    plane.htmlElement.addEventListener('mouseover', (event) => {
+      this.handlePlaneMouseOver(event, plane);
+    });
+    plane.htmlElement.addEventListener('mouseout', (event) => {
+      this.handlePlaneMouseOut(event, plane);
+    });
     plane.htmlElement.addEventListener('click', (event) => {
       this.handlePlaneClick(event, plane);
     });
     this.planes.push(plane);
+
+    // Check when all planes have loaded
+    if (this.planes.length === this.state.nbPlanes) {
+      this.curtain.needRender();
+      this.setupInitialScrollAnimation();
+    }
   }
 
   buildPlane (index) {
     return (
-      <SinglePlane index={index} key={index} onPlaneReady={this.handlePlaneReady} />
+      <SinglePlane
+        index={index}
+        key={index}
+        onPlaneReady={this.handlePlaneReady}
+      />
     );
   }
 
@@ -407,5 +469,9 @@ class MultiplePlanes extends PureComponent {
     );
   }
 }
+
+MultiplePlanes.propTypes = {
+  hideLoader: PropTypes.func.isRequired,
+};
 
 export default MultiplePlanes;

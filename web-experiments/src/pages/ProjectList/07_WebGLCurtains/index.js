@@ -350,7 +350,6 @@ class WebGLCurtains extends PureComponent {
     };
     const onRenderMouseOver = (plane) => {
       plane.uniforms.time.value++;
-      plane.uniforms.progress.value = this.progress;
     };
 
     return (

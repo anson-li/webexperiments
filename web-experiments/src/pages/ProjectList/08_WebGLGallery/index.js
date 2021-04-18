@@ -10,7 +10,6 @@ import './style.scss';
 
 class WebGLGallery extends PureComponent {
   componentDidMount () {
-    this.props.hideLoader();
     this.el = null;
   }
 
@@ -50,7 +49,7 @@ class WebGLGallery extends PureComponent {
   }
 
   render () {
-    const {cursorHover, cursorUnhover} = this.props;
+    const {cursorHover, cursorUnhover, hideLoader} = this.props;
 
     return (
       <div
@@ -62,7 +61,9 @@ class WebGLGallery extends PureComponent {
           hover={cursorHover}
           unhover={cursorUnhover}
         />
-        <MultiplePlanes />
+        <MultiplePlanes
+          hideLoader={hideLoader}
+        />
       </div>
     );
   }
