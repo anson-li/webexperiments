@@ -24,6 +24,7 @@ import HorizontalDragVs from './Shaders/HorizontalDragVs';
 import MouseColorFs from './Shaders/MouseColorFs';
 import MouseOpacityFs from './Shaders/MouseOpacityFs';
 import MouseOverFs from './Shaders/MouseOverFs';
+import NoiseFs from './Shaders/NoiseFs';
 import VerticalDragVs from './Shaders/VerticalDragVs';
 import ZoomMouseFs from './Shaders/ZoomMouseFs';
 import TestImage from './images/canvas-base.jpg';
@@ -44,6 +45,10 @@ class WebGLCurtains extends PureComponent {
         },
         mouseopacity: {
           ref: MouseOpacityFs,
+          status: false,
+        },
+        noise: {
+          ref: NoiseFs,
           status: false,
         },
         none: {
@@ -127,6 +132,9 @@ class WebGLCurtains extends PureComponent {
     fragmentShader.add(this.state.fragmentshader.mouseopacity, 'status').name('Opacity shifting via mouse position').listen().onChange(() => {
       this.setFragmentChecked('mouseopacity');
     });
+    fragmentShader.add(this.state.fragmentshader.noise, 'status').name('Fade in image using noise').listen().onChange(() => {
+      this.setFragmentChecked('noise');
+    });
     fragmentShader.add(this.state.fragmentshader.zoommouse, 'status').name('Zoom into picture via mouse position').listen().onChange(() => {
       this.setFragmentChecked('zoommouse');
     });
@@ -208,6 +216,7 @@ class WebGLCurtains extends PureComponent {
   }
 
   handleInteractCanvasStart () {
+    console.log('hit');
     gsap.to(this, 0.5, {
       ease: 'expo.inOut',
       progress: 1,
@@ -215,6 +224,7 @@ class WebGLCurtains extends PureComponent {
   }
 
   handleInteractCanvasEnd () {
+    console.log('bit');
     gsap.to(this, 0.5, {
       ease: 'expo.inOut',
       progress: 0,
@@ -350,6 +360,7 @@ class WebGLCurtains extends PureComponent {
     };
     const onRenderMouseOver = (plane) => {
       plane.uniforms.time.value++;
+      plane.uniforms.progress.value = this.progress;
     };
 
     return (
