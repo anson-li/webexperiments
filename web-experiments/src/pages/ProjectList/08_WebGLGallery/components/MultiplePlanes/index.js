@@ -9,6 +9,9 @@ import {
   SplitText,
 } from 'gsap/SplitText';
 import {
+  Draggable, InertiaPlugin,
+} from 'gsap/all';
+import {
   PropTypes,
 } from 'prop-types';
 import React, {
@@ -19,6 +22,8 @@ import {
 } from 'react-curtains';
 import SinglePlane from '../SinglePlane';
 import styles from './style.module.scss';
+
+gsap.registerPlugin(Draggable, InertiaPlugin, SplitText);
 
 class MultiplePlanes extends PureComponent {
   constructor (props) {
@@ -75,6 +80,13 @@ class MultiplePlanes extends PureComponent {
     new SplitText(this.closebutton, {
       linesClass: 'inview-split-parent',
       type: 'lines',
+    });
+
+    Draggable.create(this.planesref, {
+      autoScroll: false,
+      dragClickables: true,
+      inertia: true,
+      type: 'scroll',
     });
   }
 
