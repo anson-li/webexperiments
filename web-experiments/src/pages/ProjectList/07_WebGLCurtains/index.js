@@ -55,7 +55,7 @@ class WebGLCurtains extends PureComponent {
         },
         noisypage: {
           ref: NoisyPageFs,
-          status: false,
+          status: true,
         },
         none: {
           ref: DragFs,
@@ -67,7 +67,7 @@ class WebGLCurtains extends PureComponent {
         },
         perlinmouse: {
           ref: PerlinMouseFs,
-          status: true,
+          status: false,
         },
         zoommouse: {
           ref: ZoomMouseFs,
