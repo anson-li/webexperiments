@@ -25,6 +25,8 @@ import MouseColorFs from './Shaders/MouseColorFs';
 import MouseOpacityFs from './Shaders/MouseOpacityFs';
 import MouseOverFs from './Shaders/MouseOverFs';
 import NoiseFs from './Shaders/NoiseFs';
+import NoisyPageFs from './Shaders/NoisyPageFs';
+import PerlinMouseFs from './Shaders/PerlinMouseFs';
 import VerticalDragVs from './Shaders/VerticalDragVs';
 import ZoomMouseFs from './Shaders/ZoomMouseFs';
 import TestImage from './images/canvas-base.jpg';
@@ -47,8 +49,12 @@ class WebGLCurtains extends PureComponent {
           ref: MouseOpacityFs,
           status: false,
         },
-        noise: {
+        noisefade: {
           ref: NoiseFs,
+          status: false,
+        },
+        noisypage: {
+          ref: NoisyPageFs,
           status: false,
         },
         none: {
@@ -59,9 +65,13 @@ class WebGLCurtains extends PureComponent {
           ref: BasicFs,
           status: false,
         },
+        perlinmouse: {
+          ref: PerlinMouseFs,
+          status: true,
+        },
         zoommouse: {
           ref: ZoomMouseFs,
-          status: true,
+          status: false,
         },
       },
       hoveranimations: {
@@ -132,8 +142,14 @@ class WebGLCurtains extends PureComponent {
     fragmentShader.add(this.state.fragmentshader.mouseopacity, 'status').name('Opacity shifting via mouse position').listen().onChange(() => {
       this.setFragmentChecked('mouseopacity');
     });
-    fragmentShader.add(this.state.fragmentshader.noise, 'status').name('Fade in image using noise').listen().onChange(() => {
-      this.setFragmentChecked('noise');
+    fragmentShader.add(this.state.fragmentshader.noisefade, 'status').name('Fade in image using noise').listen().onChange(() => {
+      this.setFragmentChecked('noisefade');
+    });
+    fragmentShader.add(this.state.fragmentshader.noisypage, 'status').name('Perlin generated noise').listen().onChange(() => {
+      this.setFragmentChecked('noisypage');
+    });
+    fragmentShader.add(this.state.fragmentshader.perlinmouse, 'status').name('Perlin noise mouseover').listen().onChange(() => {
+      this.setFragmentChecked('perlinmouse');
     });
     fragmentShader.add(this.state.fragmentshader.zoommouse, 'status').name('Zoom into picture via mouse position').listen().onChange(() => {
       this.setFragmentChecked('zoommouse');

@@ -29,7 +29,7 @@ const NoiseFs = `
     vec2 u = f*f*(3.0-2.0*f);
     // u = smoothstep(0.,1.,f);
 
-    // Mix 4 coorners percentages
+    // Mix 4 corners' percentages
     return mix(a, b, u.x) +
       (c - a)* u.y * (1.0 - u.x) +
       (d - b) * u.x * u.y;

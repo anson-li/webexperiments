@@ -219,7 +219,7 @@ class Work extends PureComponent {
               }}>
               <Section
                 date='APR 2021'
-                description='Horizontal gallery designed with for images first, built in WebGL &amp; GSAP.'
+                description='Horizontal gallery designed for image-first navigation, built in WebGL &amp; GSAP.'
                 id='08'
                 image={WebGLGallery}
                 link='/webglgallery'
