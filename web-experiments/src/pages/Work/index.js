@@ -22,8 +22,8 @@ import CoffeeCupBanner from '../../web/assets/images/project-banner/coffeecup.jp
 import DinosaurLoader from '../../web/assets/images/project-banner/dinoloader.PNG';
 import DrumhellerConcept from '../../web/assets/images/project-banner/drumhellerconcept.jpg';
 import JellicentBanner from '../../web/assets/images/project-banner/jellicent.jpg';
-import WebGLGallery from '../../web/assets/images/project-banner/webglgallery.JPG';
 import Polaroidia from '../../web/assets/images/project-banner/polaroid.JPG';
+import WebGLGallery from '../../web/assets/images/project-banner/webglgallery.JPG';
 import Section from './components/Section';
 import styles from './style.module.scss';
 

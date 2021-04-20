@@ -1,7 +1,7 @@
 /* eslint-disable no-new */
 import anime from 'animejs';
 import {
-  TweenLite, gsap,
+  gsap,
 } from 'gsap';
 import {
   SplitText,
