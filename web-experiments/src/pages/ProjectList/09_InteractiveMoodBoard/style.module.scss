@@ -1,0 +1,52 @@
+.page-background {
+  background-color: #fffdf0;
+  height: 100%;
+  width: 100vw;
+  padding: 18vh 20vw;
+}
+
+.page-content {
+  min-height: 80vh;
+  padding: 50px;
+}
+
+.page-title {
+  font-family: ivymode, serif;
+  font-weight: 800;
+  font-size: 12em;
+  line-height: 1em;
+  color: black;
+}
+
+.page-description {
+  display: flex;
+  width: 100%;
+  padding: 100px;
+  flex-direction: row;
+  font-family: forma-djr-text, sans-serif;
+  font-weight: 400;
+
+  .title {
+    width: 20%;
+    font-size: 0.8em;
+  }
+  .description {
+    width: 60%;
+    font-size: 1.2em;
+  }
+}
+
+#container {
+  height: 120vh; 
+  overflow: visible; 
+  padding: 0; 
+  position: relative;
+}
+
+.inview-split-parent {
+  overflow: hidden;
+}
+
+.inview-split-child {
+  display: inline-block;
+}

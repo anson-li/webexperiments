@@ -23,6 +23,7 @@ import DinosaurLoader from '../../web/assets/images/project-banner/dinoloader.PN
 import DrumhellerConcept from '../../web/assets/images/project-banner/drumhellerconcept.jpg';
 import JellicentBanner from '../../web/assets/images/project-banner/jellicent.jpg';
 import WebGLGallery from '../../web/assets/images/project-banner/webglgallery.JPG';
+import Polaroidia from '../../web/assets/images/project-banner/polaroid.JPG';
 import Section from './components/Section';
 import styles from './style.module.scss';
 
@@ -217,6 +218,14 @@ class Work extends PureComponent {
               className={styles.track} id={styles.track} ref={(element) => {
                 this.track = element;
               }}>
+              <Section
+                date='MAY 2021'
+                description='Interactive mood board, with draggable elements built in WebGL.'
+                id='09'
+                image={Polaroidia}
+                link='/moodboard'
+                title='Interactive Mood Board'
+              />
               <Section
                 date='APR 2021'
                 description='Horizontal gallery designed for image-first navigation, built in WebGL &amp; GSAP.'

@@ -1,0 +1,23 @@
+.box {
+	background-color: white;
+	text-align: center;
+	font-family:  sans-serif;
+	width: 550px;
+	height: 650px;
+	line-height: 100px;
+	color: black;
+	position: absolute;
+  font-family: ivymode, serif;
+  font-size: 1.2em;
+  font-weight: 500;
+  -webkit-box-shadow: 3px 3px 2px 1px rgba(0,0,0,0.7); 
+  box-shadow: 3px 3px 2px 1px rgba(0,0,0,0.7);
+
+  img {
+    filter: grayscale(50%);
+    height: 500px;
+    width: 500px;
+    object-fit: cover;
+    margin-top: 25px;
+  }
+}
