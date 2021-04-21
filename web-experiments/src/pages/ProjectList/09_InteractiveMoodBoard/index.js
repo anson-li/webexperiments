@@ -33,11 +33,25 @@ class InteractiveMoodBoard extends PureComponent {
     this.card3 = createRef();
     this.card4 = createRef();
     this.card5 = createRef();
+
+    this.onWindowResize = this.onWindowResize.bind(this);
+    this.draggables = [];
   }
 
   componentDidMount () {
     this.animateFadeIn();
     this.setupDraggable();
+    window.addEventListener('resize', this.onWindowResize, false);
+  }
+
+  componentWillUnmount () {
+    window.removeEventListener('resize', this.onWindowResize);
+  }
+
+  onWindowResize () {
+    this.draggables.forEach((element) => {
+      element[0].update(true, false);
+    });
   }
 
   animateFadeIn () {
@@ -146,7 +160,7 @@ class InteractiveMoodBoard extends PureComponent {
   setupDraggable () {
     const cardElements = [this.card1.current, this.card2.current, this.card3.current, this.card4.current, this.card5.current];
     cardElements.forEach((card) => {
-      Draggable.create(card, {
+      const element = Draggable.create(card, {
         autoScroll: true,
         bounds: this.dragcontainer,
         dragClickables: true,
@@ -154,6 +168,7 @@ class InteractiveMoodBoard extends PureComponent {
         inertia: true,
         type: 'x,y',
       });
+      this.draggables.push(element);
     });
   }
 

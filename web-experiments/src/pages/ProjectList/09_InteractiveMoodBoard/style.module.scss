@@ -20,19 +20,6 @@
   color: black;
 }
 
-@media (min-width: 2560px) {
-  .page-content {
-    width: 60vw;
-    margin: 18vh 20vw;
-  }
-}
-
-@media (max-width: 1440px) {
-  .page-title {
-    font-size: 8em;
-  }
-}
-
 .page-description {
   display: flex;
   width: 100%;
@@ -53,11 +40,31 @@
 }
 
 #container {
-  height: 120vh;
+  height: 180vh;
   overflow: visible;
   padding: 0;
   position: relative;
 }
+
+@media (min-width: 2560px) {
+  .page-content {
+    width: 60vw;
+    margin: 18vh 20vw;
+  }
+}
+
+@media (max-width: 1440px) {
+  .page-title {
+    font-size: 8em;
+  }
+}
+
+@media (max-height: 900px) {
+  .page-description {
+    padding: 50px 100px;
+  }
+}
+
 
 .inview-split-parent {
   overflow: hidden;
