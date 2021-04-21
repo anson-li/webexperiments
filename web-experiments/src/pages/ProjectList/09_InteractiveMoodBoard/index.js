@@ -32,6 +32,7 @@ class InteractiveMoodBoard extends PureComponent {
     this.card2 = createRef();
     this.card3 = createRef();
     this.card4 = createRef();
+    this.card5 = createRef();
   }
 
   componentDidMount () {
@@ -102,6 +103,7 @@ class InteractiveMoodBoard extends PureComponent {
       delay: 1.5,
       duration: 2.5,
       ease: 'power4',
+      opacity: 0,
       yPercent: 100,
     });
   }
@@ -142,7 +144,7 @@ class InteractiveMoodBoard extends PureComponent {
   }
 
   setupDraggable () {
-    const cardElements = [this.card1.current, this.card2.current, this.card3.current, this.card4.current];
+    const cardElements = [this.card1.current, this.card2.current, this.card3.current, this.card4.current, this.card5.current];
     cardElements.forEach((card) => {
       Draggable.create(card, {
         autoScroll: true,
@@ -226,17 +228,24 @@ class InteractiveMoodBoard extends PureComponent {
               top='50px'
             />
             <Card
-              description='2018, best year of our lives.'
-              image={'https://unsplash.it/1920/1080?random=4'}
+              description='2021, best year of our lives.'
+              image={'https://unsplash.it/1920/1080?random=3'}
               left='650px'
-              ref={this.card4}
+              ref={this.card3}
               top='900px'
             />
             <Card
+              description='Always having lots of fun!'
+              image={'https://unsplash.it/1920/1080?random=4'}
+              left='0px'
+              ref={this.card4}
+              top='850px'
+            />
+            <Card
               description='Never forget.'
-              image={'https://unsplash.it/1920/1080?random=3'}
+              image={'https://unsplash.it/1920/1080?random=5'}
               left='350px'
-              ref={this.card3}
+              ref={this.card5}
               top='450px'
             />
           </div>

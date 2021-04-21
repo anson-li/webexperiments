@@ -1,13 +1,15 @@
 .page-background {
   background-color: #fffdf0;
-  height: 100%;
   width: 100vw;
-  padding: 18vh 20vw;
+  height: fit-content;
+  position: absolute;
 }
 
 .page-content {
   min-height: 80vh;
+  width: 80vw;
   padding: 50px;
+  margin: 15vh 10vw;
 }
 
 .page-title {
@@ -16,6 +18,19 @@
   font-size: 12em;
   line-height: 1em;
   color: black;
+}
+
+@media (min-width: 2560px) {
+  .page-content {
+    width: 60vw;
+    margin: 18vh 20vw;
+  }
+}
+
+@media (max-width: 1440px) {
+  .page-title {
+    font-size: 8em;
+  }
 }
 
 .page-description {
@@ -32,8 +47,8 @@
   }
 
   .description {
-    width: 60%;
-    font-size: 1.2em;
+    width: 80%;
+    font-size: 1em;
   }
 }
 
