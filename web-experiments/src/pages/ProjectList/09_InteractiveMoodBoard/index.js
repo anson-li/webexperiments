@@ -163,9 +163,13 @@ class InteractiveMoodBoard extends PureComponent {
       const element = Draggable.create(card, {
         autoScroll: true,
         bounds: this.dragcontainer,
+        cursor: 'none',
         dragClickables: true,
         dragResistance: 0.5,
         inertia: true,
+        onDrag: (event) => {
+          this.props.moveCursor(event);
+        },
         type: 'x,y',
       });
       this.draggables.push(element);
@@ -274,6 +278,7 @@ InteractiveMoodBoard.propTypes = {
   cursorHover: PropTypes.func.isRequired,
   cursorUnhover: PropTypes.func.isRequired,
   hideLoader: PropTypes.func.isRequired,
+  moveCursor: PropTypes.func.isRequired,
   showLoader: PropTypes.func.isRequired,
 };
 

@@ -27,19 +27,21 @@ class CustomCursor extends PureComponent {
   }
 
   moveCircle (event) {
-    if (this.circle) {
-      TweenLite.to(this.circle, 0.2, {
-        x: event.x,
-        y: event.y,
-        z: 0.1,
-      });
-    }
-    if (this.follow) {
-      TweenLite.to(this.follow, 0.7, {
-        x: event.x,
-        y: event.y,
-        z: 0.1,
-      });
+    if (event) {
+      if (this.circle) {
+        TweenLite.to(this.circle, 0.2, {
+          x: event.x,
+          y: event.y,
+          z: 0.1,
+        });
+      }
+      if (this.follow) {
+        TweenLite.to(this.follow, 0.7, {
+          x: event.x,
+          y: event.y,
+          z: 0.1,
+        });
+      }
     }
   }
 

@@ -24,6 +24,7 @@ class App extends PureComponent {
     this.cursor = React.createRef();
     this.hideFollow = this.hideFollow.bind(this);
     this.showFollow = this.showFollow.bind(this);
+    this.moveCursor = this.moveCursor.bind(this);
   }
 
   onCursorHover () {
@@ -56,6 +57,10 @@ class App extends PureComponent {
     this.cursor.current.showFollow();
   }
 
+  moveCursor (event) {
+    this.cursor.current.moveCircle(event);
+  }
+
   render () {
     const {routes} = this.props;
 
@@ -79,6 +84,7 @@ class App extends PureComponent {
                 hideFollow={this.hideFollow}
                 hideLoader={this.hideLoader}
                 key={key}
+                moveCursor={this.moveCursor}
                 showFollow={this.showFollow}
                 showLoader={this.showLoader}
               />;
