@@ -15,6 +15,7 @@ class Section extends PureComponent {
     super(props);
     this.handleLinkMouseEnter = this.handleLinkMouseEnter.bind(this);
     this.handleLinkMouseLeave = this.handleLinkMouseLeave.bind(this);
+    this.handleLinkClick = this.handleLinkClick.bind(this);
   }
 
   handleLinkMouseEnter () {
@@ -51,6 +52,10 @@ class Section extends PureComponent {
     this.props.unhover();
   }
 
+  handleLinkClick () {
+    this.props.unhover();
+  }
+
   render () {
     const {id, title, link} = this.props;
     const formattedId = id < 10 ? `0${id}` : id;
@@ -61,6 +66,7 @@ class Section extends PureComponent {
         href={link}
         onMouseEnter={this.handleLinkMouseEnter}
         onMouseLeave={this.handleLinkMouseLeave}
+        onClick={this.handleLinkClick}
         to={link}
       >
         <div
