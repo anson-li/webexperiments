@@ -64,9 +64,9 @@ class Section extends PureComponent {
       <Link
         className={styles.section}
         href={link}
+        onClick={this.handleLinkClick}
         onMouseEnter={this.handleLinkMouseEnter}
         onMouseLeave={this.handleLinkMouseLeave}
-        onClick={this.handleLinkClick}
         to={link}
       >
         <div
