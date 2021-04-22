@@ -36,6 +36,8 @@ class Work extends PureComponent {
     super(props);
 
     this.showDescription = this.showDescription.bind(this);
+    this.handleEnterWorkContent = this.handleEnterWorkContent.bind(this);
+    this.handleLeaveWorkContent = this.handleLeaveWorkContent.bind(this);
 
     this.prevRef = null;
 
@@ -168,6 +170,7 @@ class Work extends PureComponent {
     TweenLite.to(this.description, 0, {
       text: description,
     });
+
     // TweenLite.to(ref.current, 1, {
     //   // zIndex: 1,
     //   opacity: 1,
@@ -179,6 +182,24 @@ class Work extends PureComponent {
     //   });
     // }
     // this.prevRef = ref.current;
+  }
+
+  handleEnterWorkContent () {
+    TweenLite.to(this.el, 0.5, {
+      backgroundColor: '#111111',
+    });
+    TweenLite.to(this.description, 0.5, {
+      color: 'white',
+    });
+  }
+
+  handleLeaveWorkContent () {
+    TweenLite.to(this.el, 0.5, {
+      backgroundColor: '#EDECED',
+    });
+    TweenLite.to(this.description, 0.5, {
+      color: 'black',
+    });
   }
 
   render () {
@@ -197,15 +218,15 @@ class Work extends PureComponent {
     const renderText = this.projects.map((project) => {
       return <Section
         description={project.description}
+        hover={cursorHover}
         id={project.id}
         image={project.image}
         imageref={project.ref}
         key={project.id}
-        hover={cursorHover}
-        unhover={cursorUnhover}
         link={project.link}
         showDescription={this.showDescription}
         title={project.title}
+        unhover={cursorUnhover}
       />;
     });
 
@@ -225,10 +246,14 @@ class Work extends PureComponent {
               className={styles['work-description']} ref={(e) => {
                 this.description = e;
               }}>
-                ANSON LI WEB EXPERIMENTS THREEJS GREENSOCK CURTAINSJS BLENDER VIDEOEDITING SVG
-              </div>
+              ANSON LI WEB EXPERIMENTS THREEJS GREENSOCK CURTAINSJS BLENDER VIDEOEDITING SVG
+            </div>
           </div>
-          <div className={styles['work-content']}>
+          <div
+            className={styles['work-content']}
+            onMouseEnter={this.handleEnterWorkContent}
+            onMouseLeave={this.handleLeaveWorkContent}
+          >
             <div
               className={styles.track} id={styles.track} ref={(element) => {
                 this.track = element;

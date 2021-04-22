@@ -19,10 +19,10 @@ class Section extends PureComponent {
 
   handleLinkMouseEnter () {
     TweenLite.to(this.title, 0.2, {
-      color: 'black',
+      color: '#ffcc5e',
     });
     TweenLite.to(this.id, 0.2, {
-      color: 'black',
+      color: '#ffcc5e',
       top: '19vh',
     });
     TweenLite.to(this.image, 0.2, {
