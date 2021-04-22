@@ -17,15 +17,6 @@ import React, {
 } from 'react';
 import TextLogo from '../../common/TextLogo';
 import WithTransition from '../../common/WithTransition';
-import AdditiveShaderBanner from '../../web/assets/images/project-banner/additiveshader.jpg';
-import ASCIIShaderBanner from '../../web/assets/images/project-banner/asciishader.PNG';
-import CanvasMountain from '../../web/assets/images/project-banner/canvasmountain.PNG';
-import CoffeeCupBanner from '../../web/assets/images/project-banner/coffeecup.jpg';
-import DinosaurLoader from '../../web/assets/images/project-banner/dinoloader.PNG';
-import DrumhellerConcept from '../../web/assets/images/project-banner/drumhellerconcept.jpg';
-import JellicentBanner from '../../web/assets/images/project-banner/jellicent.jpg';
-import Polaroidia from '../../web/assets/images/project-banner/polaroid.JPG';
-import WebGLGallery from '../../web/assets/images/project-banner/webglgallery.JPG';
 import Section from './components/Section';
 import styles from './style.module.scss';
 
@@ -55,7 +46,6 @@ class Work extends PureComponent {
       {
         description: 'Interactive mood board, with draggable elements built with GSAP and new page structure',
         id: 9,
-        image: Polaroidia,
         link: '/moodboard',
         ref: this.moodboard,
         title: 'Moodboard',
@@ -63,7 +53,6 @@ class Work extends PureComponent {
       {
         description: 'Horizontal gallery designed for image-first navigation, built in WebGL & GSAP.',
         id: 8,
-        image: WebGLGallery,
         link: '/webglgallery',
         ref: this.webglgallery,
         title: 'WebGL Gallery',
@@ -71,7 +60,6 @@ class Work extends PureComponent {
       {
         description: 'Collection of various shaders and WebGL examples for reference from book of shaders',
         id: 7,
-        image: CanvasMountain,
         link: '/webglcurtains',
         ref: this.webglcurtains,
         title: 'WEBGL Shader Library',
@@ -79,7 +67,6 @@ class Work extends PureComponent {
       {
         description: 'Proof of concept for Drumheller\'s main page advanced GSAP techniques & video manipulation.',
         id: 6,
-        image: DrumhellerConcept,
         link: '/drumheller',
         ref: this.drumhellerconcept,
         title: 'Drumheller Concept',
@@ -87,7 +74,6 @@ class Work extends PureComponent {
       {
         description: 'Fill loader template built via SVG and GSAP built with offset svg exclusive trans-formations',
         id: 5,
-        image: DinosaurLoader,
         link: '/dinosaurloader',
         ref: this.dinosaurloader,
         title: 'SVG Loader',
@@ -95,7 +81,6 @@ class Work extends PureComponent {
       {
         description: 'Additive shader designed to wash out the color & interactive color shifting with dat.gui',
         id: 4,
-        image: AdditiveShaderBanner,
         link: '/additiveshader',
         ref: this.colorshader,
         title: 'Color Shader',
@@ -103,7 +88,6 @@ class Work extends PureComponent {
       {
         description: 'Bitmap shader for threejs to render scene through custom 2d pixel art filter',
         id: 3,
-        image: ASCIIShaderBanner,
         link: '/asciishader',
         ref: this.asciishader,
         title: 'ASCII Shader',
@@ -111,7 +95,6 @@ class Work extends PureComponent {
       {
         description: 'threejs blender tutorial guru hand-made models imported gltf and animated',
         id: 2,
-        image: CoffeeCupBanner,
         link: '/coffeecup',
         ref: this.coffeecup,
         title: 'Coffee Cup',
@@ -119,7 +102,6 @@ class Work extends PureComponent {
       {
         description: 'threejs experimentation imported model camera post-processing mouse interactions',
         id: 1,
-        image: JellicentBanner,
         link: '/jellicent',
         ref: this.jellicent,
         title: 'Jellicent',
@@ -170,18 +152,6 @@ class Work extends PureComponent {
     TweenLite.to(this.description, 0, {
       text: description,
     });
-
-    // TweenLite.to(ref.current, 1, {
-    //   // zIndex: 1,
-    //   opacity: 1,
-    // });
-    // if (this.prevRef && this.prevRef !== ref.current) {
-    //   TweenLite.to(this.prevRef, 1, {
-    //     // zIndex: 0,
-    //     opacity: 0,
-    //   });
-    // }
-    // this.prevRef = ref.current;
   }
 
   handleEnterWorkContent () {
@@ -199,6 +169,9 @@ class Work extends PureComponent {
     });
     TweenLite.to(this.description, 0.5, {
       color: 'black',
+    });
+    TweenLite.to(this.description, 0, {
+      text: 'ANSON LI WEB EXPERIMENTS THREEJS GREENSOCK CURTAINSJS BLENDER VIDEOEDITING SVG',
     });
   }
 
@@ -220,7 +193,6 @@ class Work extends PureComponent {
         description={project.description}
         hover={cursorHover}
         id={project.id}
-        image={project.image}
         imageref={project.ref}
         key={project.id}
         link={project.link}

@@ -32,7 +32,7 @@ class Section extends PureComponent {
     TweenLite.to(this.bannerlink, 0.1, {
       color: '#ffd5a8',
     });
-    this.props.showDescription(this.props.description, this.props.image, this.props.imageref);
+    this.props.showDescription(this.props.description);
     this.props.hover();
   }
 
@@ -84,13 +84,13 @@ class Section extends PureComponent {
 }
 
 Section.propTypes = {
-  date: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
+  hover: PropTypes.func.isRequired,
   id: PropTypes.string.isRequired,
   link: PropTypes.string.isRequired,
   showDescription: PropTypes.func.isRequired,
-  ref: PropTypes.func.isRequired,
   title: PropTypes.string.isRequired,
+  unhover: PropTypes.func.isRequired,
 };
 
 export default Section;
