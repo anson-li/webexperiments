@@ -83,11 +83,11 @@ class TextLogo extends PureComponent {
     return (
       <Link
         className='d-none d-md-block logo-main'
-        href='/'
+        href='/work'
         id='logo-main'
         onMouseEnter={this.handleHoverLogo}
         onMouseLeave={this.handleUnhoverLogo}
-        to='/'
+        to='/work'
       >
         <h1
           className='text-logo'

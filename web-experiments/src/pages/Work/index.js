@@ -62,7 +62,7 @@ class Work extends PureComponent {
         id: 7,
         link: '/webglcurtains',
         ref: this.webglcurtains,
-        title: 'WEBGL Shader Library',
+        title: 'WebGL Shader Library',
       },
       {
         description: 'Proof of concept for Drumheller\'s main page advanced GSAP techniques & video manipulation.',
