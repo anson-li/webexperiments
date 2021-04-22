@@ -1,10 +1,13 @@
 import anime from 'animejs';
 import {
-  gsap,
+  TweenLite, gsap,
 } from 'gsap';
 import {
   ScrollTrigger,
 } from 'gsap/ScrollTrigger';
+import {
+  TextPlugin,
+} from 'gsap/TextPlugin';
 import {
   Draggable, InertiaPlugin,
 } from 'gsap/all';
@@ -14,7 +17,6 @@ import React, {
 } from 'react';
 import TextLogo from '../../common/TextLogo';
 import WithTransition from '../../common/WithTransition';
-import EdmontonWall from '../../web/assets/edmonton-wall.jpg';
 import AdditiveShaderBanner from '../../web/assets/images/project-banner/additiveshader.jpg';
 import ASCIIShaderBanner from '../../web/assets/images/project-banner/asciishader.PNG';
 import CanvasMountain from '../../web/assets/images/project-banner/canvasmountain.PNG';
@@ -27,32 +29,104 @@ import WebGLGallery from '../../web/assets/images/project-banner/webglgallery.JP
 import Section from './components/Section';
 import styles from './style.module.scss';
 
-gsap.registerPlugin(ScrollTrigger, Draggable, InertiaPlugin);
+gsap.registerPlugin(ScrollTrigger, TextPlugin, Draggable, InertiaPlugin);
 
 class Work extends PureComponent {
   constructor (props) {
     super(props);
-    this.refreshAnimationBounds = this.refreshAnimationBounds.bind(this);
-    this.setupDraggableTrack = this.setupDraggableTrack.bind(this);
-    this.setupTrackAnimation = this.setupTrackAnimation.bind(this);
-    this.setupScrollTrigger = this.setupScrollTrigger.bind(this);
-    this.setupScrollHintAnimation = this.setupScrollHintAnimation.bind(this);
-    this.setupResizeAnimation = this.setupResizeAnimation.bind(this);
 
-    this.draggable = null;
-    this.timeline = null;
-    this.scrollDistance = null;
-    this.pageST = null;
+    this.showDescription = this.showDescription.bind(this);
+
+    this.prevRef = null;
+
+    this.moodboard = React.createRef();
+    this.webglgallery = React.createRef();
+    this.webglcurtains = React.createRef();
+    this.drumhellerconcept = React.createRef();
+    this.dinosaurloader = React.createRef();
+    this.colorshader = React.createRef();
+    this.asciishader = React.createRef();
+    this.coffeecup = React.createRef();
+    this.jellicent = React.createRef();
+
+    this.projects = [
+      {
+        description: 'Interactive mood board, with draggable elements built with GSAP and new page structure',
+        id: 9,
+        image: Polaroidia,
+        link: '/moodboard',
+        ref: this.moodboard,
+        title: 'Moodboard',
+      },
+      {
+        description: 'Horizontal gallery designed for image-first navigation, built in WebGL & GSAP.',
+        id: 8,
+        image: WebGLGallery,
+        link: '/webglgallery',
+        ref: this.webglgallery,
+        title: 'WebGL Gallery',
+      },
+      {
+        description: 'Collection of various shaders and WebGL examples for reference from book of shaders',
+        id: 7,
+        image: CanvasMountain,
+        link: '/webglcurtains',
+        ref: this.webglcurtains,
+        title: 'WEBGL Shader Library',
+      },
+      {
+        description: 'Proof of concept for Drumheller\'s main page advanced GSAP techniques & video manipulation.',
+        id: 6,
+        image: DrumhellerConcept,
+        link: '/drumheller',
+        ref: this.drumhellerconcept,
+        title: 'Drumheller Concept',
+      },
+      {
+        description: 'Fill loader template built via SVG and GSAP built with offset svg exclusive trans-formations',
+        id: 5,
+        image: DinosaurLoader,
+        link: '/dinosaurloader',
+        ref: this.dinosaurloader,
+        title: 'SVG Loader',
+      },
+      {
+        description: 'Additive shader designed to wash out the color & interactive color shifting with dat.gui',
+        id: 4,
+        image: AdditiveShaderBanner,
+        link: '/additiveshader',
+        ref: this.colorshader,
+        title: 'Color Shader',
+      },
+      {
+        description: 'Bitmap shader for threejs to render scene through custom 2d pixel art filter',
+        id: 3,
+        image: ASCIIShaderBanner,
+        link: '/asciishader',
+        ref: this.asciishader,
+        title: 'ASCII Shader',
+      },
+      {
+        description: 'threejs blender tutorial guru hand-made models imported gltf and animated',
+        id: 2,
+        image: CoffeeCupBanner,
+        link: '/coffeecup',
+        ref: this.coffeecup,
+        title: 'Coffee Cup',
+      },
+      {
+        description: 'threejs experimentation imported model camera post-processing mouse interactions',
+        id: 1,
+        image: JellicentBanner,
+        link: '/jellicent',
+        ref: this.jellicent,
+        title: 'Jellicent',
+      },
+    ];
   }
 
   componentDidMount () {
     this.props.hideLoader();
-    this.setupTrackAnimation();
-    this.setupScrollHintAnimation();
-    this.setupScrollTrigger();
-    this.setupResizeAnimation();
-    this.setupDraggableTrack();
-    ScrollTrigger.refresh();
   }
 
   hidePage () {
@@ -90,115 +164,50 @@ class Work extends PureComponent {
     }).finished;
   }
 
-  refreshAnimationBounds () {
-    const track = this.track;
-    if (track) {
-      const innerWidth = window.innerWidth;
-      const trackWidth = track.clientWidth;
-      gsap.set(this.el, {height: trackWidth});
-      gsap.set(this.trackWrapper, {width: trackWidth});
-      this.scrollDistance = trackWidth - innerWidth;
-      if (this.draggable.bounds) {
-        this.draggable.bounds.minX = -1 * this.scrollDistance;
-      }
-    }
-  }
-
-  setupTrackAnimation () {
-    const innerWidth = window.innerWidth;
-    const track = this.track;
-    const trackWidth = track.clientWidth;
-
-    gsap.set(this.el, {height: trackWidth});
-    gsap.set(this.trackWrapper, {width: trackWidth});
-
-    this.scrollDistance = trackWidth - innerWidth;
-
-    this.timeline = gsap.timeline({
-      defaults: {
-        ease: 'none',
-      },
-      smoothChildTiming: true,
-    }).to(this.track, {
-      duration: 100,
-      x: -this.scrollDistance,
+  showDescription (description, background, ref) {
+    TweenLite.to(this.description, 0, {
+      text: description,
     });
-    this.timeline.to(this.progressBar, {duration: 100,
-      xPercent: 100}, 0);
-    this.timeline.to(this.wall, {duration: 100,
-      x: this.scrollDistance * 0.2}, 0);
-    this.timeline.to(this.scrollHint, {duration: 20,
-      opacity: 0}, 0);
-  }
-
-  setupDraggableTrack () {
-    this.draggable = Draggable.create(this.track, {
-      autoScroll: false,
-
-      bounds: {maxX: 0,
-        minX: -1 * this.scrollDistance},
-
-      // scroll X is done by offsetting to the right, so we move in negative values
-      dragClickables: true,
-      dragResistance: 0.5,
-      inertia: true,
-      onDrag: () => {
-        // Grabs the scroll value while being updated by Draggable and updates the GSAP timeline to match
-        const values = this.track.style.transform.split(/\w+\(|\);?/);
-        const transform = values[1].split(/,\s?/g).map(parseInt);
-        this.timeline.progress(-1 * transform[0] / this.scrollDistance);
-        this.pageST.scroll(-1 * transform[0]);
-      },
-      onThrowUpdate: () => {
-        // Grabs the scroll value while being updated by Draggable and updates the GSAP timeline to match
-        const values = this.track.style.transform.split(/\w+\(|\);?/);
-        const transform = values[1].split(/,\s?/g).map(parseInt);
-        this.timeline.progress(-1 * transform[0] / this.scrollDistance);
-        this.pageST.scroll(-1 * transform[0]);
-      },
-      throwResistance: 2000,
-      type: 'x',
-    });
-  }
-
-  setupScrollTrigger () {
-    this.pageST = ScrollTrigger.create({
-      animation: this.timeline,
-      end: () => {
-        return `+=${this.scrollDistance}`;
-      },
-      horizontal: false,
-      scrub: 1,
-      start: 0,
-      trigger: this.track,
-    });
-  }
-
-  setupResizeAnimation () {
-    // ScrollTrigger to resize on fixed points
-    let progress = 0;
-    ScrollTrigger.addEventListener('refreshInit', () => {
-      progress = this.pageST.scroll() / ScrollTrigger.maxScroll(window);
-      this.refreshAnimationBounds();
-    });
-    ScrollTrigger.addEventListener('refresh', () => {
-      this.pageST.scroll(progress * ScrollTrigger.maxScroll(window));
-    });
-  }
-
-  setupScrollHintAnimation () {
-    const scrollHintTimeline = gsap.timeline();
-    scrollHintTimeline.to(this.hintArrow, 1, {onComplete () {
-      scrollHintTimeline.reverse();
-    },
-    onReverseComplete () {
-      scrollHintTimeline.play(0);
-    },
-    paddingLeft: '5px'}, 0);
+    // TweenLite.to(ref.current, 1, {
+    //   // zIndex: 1,
+    //   opacity: 1,
+    // });
+    // if (this.prevRef && this.prevRef !== ref.current) {
+    //   TweenLite.to(this.prevRef, 1, {
+    //     // zIndex: 0,
+    //     opacity: 0,
+    //   });
+    // }
+    // this.prevRef = ref.current;
   }
 
   render () {
     const {cursorHover, cursorUnhover} = this.props;
+
+    const renderImages = this.projects.map((project) => {
+      return <img
+        alt='Project background'
+        className={styles['box-image-background']}
+        key={project.id}
+        ref={project.ref}
+        src={project.image}
+      />;
+    });
+
+    const renderText = this.projects.map((project) => {
+      return <Section
+        description={project.description}
+        id={project.id}
+        image={project.image}
+        imageref={project.ref}
+        key={project.id}
+        hover={cursorHover}
+        unhover={cursorUnhover}
+        link={project.link}
+        showDescription={this.showDescription}
+        title={project.title}
+      />;
+    });
 
     return (
       <div
@@ -210,116 +219,22 @@ class Work extends PureComponent {
             hover={cursorHover}
             unhover={cursorUnhover}
           />
-          <div
-            id={styles['track-wrapper']} ref={(element) => {
-              this.trackWrapper = element;
-            }}>
+          <div className={styles['work-image']}>
+            {renderImages}
+            <div
+              className={styles['work-description']} ref={(e) => {
+                this.description = e;
+              }}>
+                ANSON LI WEB EXPERIMENTS THREEJS GREENSOCK CURTAINSJS BLENDER VIDEOEDITING SVG
+              </div>
+          </div>
+          <div className={styles['work-content']}>
             <div
               className={styles.track} id={styles.track} ref={(element) => {
                 this.track = element;
               }}>
-              <Section
-                date='MAY 2021'
-                description='Interactive mood board, with draggable elements built in WebGL.'
-                id='09'
-                image={Polaroidia}
-                link='/moodboard'
-                title='Interactive Mood Board'
-              />
-              <Section
-                date='APR 2021'
-                description='Horizontal gallery designed for image-first navigation, built in WebGL &amp; GSAP.'
-                id='08'
-                image={WebGLGallery}
-                link='/webglgallery'
-                title='WEBGL Gallery'
-              />
-              <Section
-                date='APR 2021'
-                description='Collection of various shaders and WebGL examples for future reference.'
-                id='07'
-                image={CanvasMountain}
-                link='/webglcurtains'
-                title='WEBGL Shader Library'
-              />
-              <Section
-                date='MAR 2021'
-                description="Proof of concept for Drumheller's main page. Used advanced GSAP techniques &amp; video manipulation."
-                id='06'
-                image={DrumhellerConcept}
-                link='/drumheller'
-                title='Drumheller Concept'
-              />
-              <Section
-                date='MAR 2021'
-                description='Fill loader template built via SVG and GSAP. Replace with your logo!'
-                id='05'
-                image={DinosaurLoader}
-                link='/dinosaurloader'
-                title='Fill Loader'
-              />
-              <Section
-                date='MAR 2021'
-                description="Additive shader designed to 'wash' out the color in a three.js scene."
-                id='04'
-                image={AdditiveShaderBanner}
-                link='/additiveshader'
-                title='Color Shader'
-              />
-              <Section
-                date='FEB 2021'
-                description='ASCII shader designed to render text and shapes via passthrough.'
-                id='03'
-                image={ASCIIShaderBanner}
-                link='/asciishader'
-                title='ASCII Shader'
-              />
-              <Section
-                date='FEB 2021'
-                description='Designed in Blender, completed the Blender tutorial and converted to three.js.'
-                id='02'
-                image={CoffeeCupBanner}
-                link='/coffeecup'
-                title='Coffee Cup'
-              />
-              <Section
-                date='DEC 2020'
-                description='First foray into three.js. Exploration of imported models &amp; camera movement.'
-                id='01'
-                image={JellicentBanner}
-                link='/jellicent'
-                title='Jellicent'
-              />
-              <div
-                className={styles.wall}
-                ref={(element) => {
-                  this.wall = element;
-                }}
-              >
-                <img
-                  alt='Skyline of Edmonton'
-                  className={styles['img-wall']}
-                  src={EdmontonWall}
-                />
-              </div>
+              {renderText}
             </div>
-          </div>
-          <div
-            className={styles['scroll-hint']}
-            ref={(element) => {
-              this.scrollHint = element;
-            }}
-          >
-            Scroll to Explore <span
-              className={styles['hint-arrow']} ref={(element) => {
-                this.hintArrow = element;
-              }}>→</span>
-          </div>
-          <div id={styles.progress}>
-            <div
-              id={styles.progressBar} ref={(element) => {
-                this.progressBar = element;
-              }} />
           </div>
         </div>
       </div>

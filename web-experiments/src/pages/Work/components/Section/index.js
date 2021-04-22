@@ -18,27 +18,42 @@ class Section extends PureComponent {
   }
 
   handleLinkMouseEnter () {
+    TweenLite.to(this.title, 0.2, {
+      color: 'black',
+    });
     TweenLite.to(this.id, 0.2, {
+      color: 'black',
       top: '19vh',
     });
     TweenLite.to(this.image, 0.2, {
       scaleX: 1.1,
       scaleY: 1.1,
     });
+    TweenLite.to(this.bannerlink, 0.1, {
+      color: '#ffd5a8',
+    });
+    this.props.showDescription(this.props.description, this.props.image, this.props.imageref);
+    this.props.hover();
   }
 
   handleLinkMouseLeave () {
+    TweenLite.to(this.title, 0.2, {
+      color: '#999999',
+    });
     TweenLite.to(this.id, 0.2, {
+      color: '#999999',
       top: '18vh',
     });
     TweenLite.to(this.image, 0.2, {
       scaleX: 1,
       scaleY: 1,
     });
+    this.props.unhover();
   }
 
   render () {
-    const {id, title, description, date, link, image} = this.props;
+    const {id, title, link} = this.props;
+    const formattedId = id < 10 ? `0${id}` : id;
 
     return (
       <Link
@@ -54,22 +69,15 @@ class Section extends PureComponent {
             this.id = ref;
           }}
         >
-          {id}
+          {formattedId}
         </div>
-        <p className={styles['section-title']}>{title} • <span className={styles.date}>{date}</span>
+        <p
+          className={styles['section-title']}
+          ref={(ref) => {
+            this.title = ref;
+          }}>
+          {title}
         </p>
-        <div className={styles['section-box']}>
-          <p className={styles.description}>{description}</p>
-        </div>
-        <div className={styles['section-image']}>
-          <div
-            alt='Project banner'
-            className={styles.image}
-            ref={(ref) => {
-              this.image = ref;
-            }}
-            style={{backgroundImage: `url(${image})`}} />
-        </div>
       </Link>
     );
   }
@@ -79,8 +87,9 @@ Section.propTypes = {
   date: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
-  image: PropTypes.string.isRequired,
   link: PropTypes.string.isRequired,
+  showDescription: PropTypes.func.isRequired,
+  ref: PropTypes.func.isRequired,
   title: PropTypes.string.isRequired,
 };
 
