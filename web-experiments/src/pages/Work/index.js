@@ -48,7 +48,7 @@ class Work extends PureComponent {
         id: 9,
         link: '/moodboard',
         ref: this.moodboard,
-        title: 'Moodboard',
+        title: 'Polaroid Wall',
       },
       {
         description: 'Horizontal gallery designed for image-first navigation, built in WebGL & GSAP.',

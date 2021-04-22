@@ -39,10 +39,10 @@ class Section extends PureComponent {
 
   handleLinkMouseLeave () {
     TweenLite.to(this.title, 0.2, {
-      color: '#999999',
+      color: '#666666',
     });
     TweenLite.to(this.id, 0.2, {
-      color: '#999999',
+      color: '#666666',
       top: '18vh',
     });
     TweenLite.to(this.image, 0.2, {
