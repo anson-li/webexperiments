@@ -20,8 +20,15 @@ class Section extends PureComponent {
     super(props);
     this.handleLinkMouseEnter = this.handleLinkMouseEnter.bind(this);
     this.handleLinkMouseLeave = this.handleLinkMouseLeave.bind(this);
+    this.handleEnterWorkContent = this.handleEnterWorkContent.bind(this);
+    this.handleLeaveWorkContent = this.handleLeaveWorkContent.bind(this);
+    this.handleFadeIn = this.handleFadeIn.bind(this);
 
     this.childSplit = null;
+    this.idSplit = null;
+
+    this.tweenText = null;
+    this.tweenId = null;
   }
 
   componentDidMount () {
@@ -34,52 +41,88 @@ class Section extends PureComponent {
       charsClass: 'inview-split-child',
       type: 'words,chars',
     });
+    // eslint-disable-next-line no-new
+    new SplitText(this.id, {
+      charsClass: 'inview-split-parent',
+      type: 'words,chars',
+    });
+    this.idSplit = new SplitText(this.id, {
+      charsClass: 'inview-split-child',
+      type: 'words,chars',
+    });
   }
 
   handleFadeIn () {
-    gsap.set(this.childSplit.chars, {
-      perspective: 400,
-    });
     gsap.from(this.childSplit.chars, {
       delay: 0.5 + this.props.delay / 5,
-      duration: 1.5,
+      duration: 1,
       ease: 'power4',
-      stagger: 0.05,
+      stagger: 0.02,
+      yPercent: 100,
+    });
+    gsap.from(this.idSplit.chars, {
+      delay: 0.5 + this.props.delay / 5,
+      duration: 1,
+      ease: 'power4',
+      stagger: 0.02,
       yPercent: 100,
     });
   }
 
   handleLinkMouseEnter () {
-    TweenLite.to(this.childSplit.chars, 0.2, {
+    if (this.tweenText) {
+      this.tweenText.kill();
+      this.tweenId.kill();
+    }
+    this.tweenText = TweenLite.to(this.childSplit.chars, 0.2, {
       color: '#ffcc5e',
       stagger: 0.01,
     });
-    TweenLite.to(this.id, 0.2, {
+    this.tweenId = TweenLite.to(this.idSplit.chars, 0.2, {
       color: '#ffcc5e',
-      top: '19vh',
-    });
-    TweenLite.to(this.image, 0.2, {
-      scaleX: 1.1,
-      scaleY: 1.1,
-    });
-    TweenLite.to(this.bannerlink, 0.1, {
-      color: '#ffd5a8',
+      stagger: 0.01,
     });
     this.props.showDescription(this.props.description);
   }
 
   handleLinkMouseLeave () {
-    TweenLite.to(this.childSplit.chars, 0.2, {
-      color: '#666666',
+    if (this.tweenText) {
+      this.tweenText.kill();
+      this.tweenId.kill();
+    }
+    this.tweenText = TweenLite.to(this.childSplit.chars, 0.2, {
+      color: '#FFFFFF',
       stagger: 0.01,
     });
-    TweenLite.to(this.id, 0.2, {
-      color: '#666666',
-      top: '18vh',
+    this.tweenId = TweenLite.to(this.idSplit.chars, 0.2, {
+      color: '#FFFFFF',
+      stagger: 0.01,
     });
-    TweenLite.to(this.image, 0.2, {
-      scaleX: 1,
-      scaleY: 1,
+  }
+
+  handleEnterWorkContent () {
+    if (this.tweenText) {
+      this.tweenText.kill();
+      this.tweenId.kill();
+    }
+    this.tweenText = TweenLite.to(this.childSplit.chars, 0.2, {
+      color: '#FFFFFF',
+    });
+    this.tweenId = TweenLite.to(this.idSplit.chars, 0.2, {
+      color: '#FFFFFF',
+    });
+  }
+
+  handleLeaveWorkContent () {
+    if (this.tweenText) {
+      this.tweenText.kill();
+      this.tweenId.kill();
+    }
+    this.tweenText = TweenLite.to(this.childSplit.chars, 0.2, {
+      color: '#111111',
+    });
+    this.tweenId = TweenLite.to(this.idSplit.chars, 0.2, {
+      color: '#111111',
     });
   }
 

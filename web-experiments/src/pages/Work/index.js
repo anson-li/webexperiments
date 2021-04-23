@@ -174,32 +174,35 @@ class Work extends PureComponent {
     TweenLite.to(this.description, 0.5, {
       color: 'white',
     });
+    this.projects.forEach((project) => {
+      project.ref.current.handleEnterWorkContent();
+    });
   }
 
-  handleLeaveWorkContent () {
-    TweenLite.to(this.el, 0.5, {
-      backgroundColor: '#EDECED',
-    });
-    TweenLite.to(this.description, 0.5, {
-      color: 'black',
-    });
-    TweenLite.to(this.description, 0, {
-      text: 'ANSON LI WEB EXPERIMENTS THREEJS GREENSOCK CURTAINSJS BLENDER VIDEOEDITING SVG',
-    });
+  handleLeaveWorkContent (event) {
+    console.log(event);
+    console.log(this.workcontent);
+    console.log(event.target === this.workcontent);
+
+    // Remove random bubbling by Section component
+    if (event.target === this.workcontent) {
+      TweenLite.to(this.el, 0.5, {
+        backgroundColor: '#EDECED',
+      });
+      TweenLite.to(this.description, 0.5, {
+        color: 'black',
+      });
+      TweenLite.to(this.description, 0, {
+        text: 'ANSON LI WEB EXPERIMENTS THREEJS GREENSOCK CURTAINSJS BLENDER VIDEOEDITING SVG',
+      });
+      this.projects.forEach((project) => {
+        project.ref.current.handleLeaveWorkContent();
+      });
+    }
   }
 
   render () {
     const {cursorHover, cursorUnhover} = this.props;
-
-    const renderImages = this.projects.map((project) => {
-      return <img
-        alt='Project background'
-        className={styles['box-image-background']}
-        key={project.id}
-        ref={project.ref}
-        src={project.image}
-      />;
-    });
 
     const renderText = this.projects.map((project) => {
       return <Section
@@ -246,7 +249,6 @@ class Work extends PureComponent {
             unhover={cursorUnhover}
           />
           <div className={styles['work-image']}>
-            {renderImages}
             <div
               className={styles['work-description']} ref={(element) => {
                 this.description = element;
@@ -258,13 +260,11 @@ class Work extends PureComponent {
             className={styles['work-content']}
             onMouseEnter={this.handleEnterWorkContent}
             onMouseLeave={this.handleLeaveWorkContent}
+            ref={(element) => {
+              this.workcontent = element;
+            }}
           >
-            <div
-              className={styles.track} id={styles.track} ref={(element) => {
-                this.track = element;
-              }}>
-              {renderText}
-            </div>
+            {renderText}
           </div>
         </div>
       </div>
