@@ -23,12 +23,14 @@ class Section extends PureComponent {
     this.handleEnterWorkContent = this.handleEnterWorkContent.bind(this);
     this.handleLeaveWorkContent = this.handleLeaveWorkContent.bind(this);
     this.handleFadeIn = this.handleFadeIn.bind(this);
+    this.handleCompleteLoadingAnimations = this.handleCompleteLoadingAnimations.bind(this);
 
     this.childSplit = null;
     this.idSplit = null;
 
     this.tweenText = null;
     this.tweenId = null;
+    this.interactionsReady = false;
   }
 
   componentDidMount () {
@@ -52,21 +54,27 @@ class Section extends PureComponent {
     });
   }
 
+  handleCompleteLoadingAnimations () {
+    this.interactionsReady = true;
+  }
+
   handleFadeIn () {
-    gsap.from(this.childSplit.chars, {
-      delay: 0.5 + this.props.delay / 5,
-      duration: 1,
-      ease: 'power4',
-      stagger: 0.02,
-      yPercent: 100,
-    });
-    gsap.from(this.idSplit.chars, {
-      delay: 0.5 + this.props.delay / 5,
-      duration: 1,
-      ease: 'power4',
-      stagger: 0.02,
-      yPercent: 100,
-    });
+    if (this.interactionsReady) {
+      gsap.from(this.childSplit.chars, {
+        delay: 0.5 + this.props.delay / 5,
+        duration: 1,
+        ease: 'power4',
+        stagger: 0.02,
+        yPercent: 100,
+      });
+      gsap.from(this.idSplit.chars, {
+        delay: 0.5 + this.props.delay / 5,
+        duration: 1,
+        ease: 'power4',
+        stagger: 0.02,
+        yPercent: 100,
+      });
+    }
   }
 
   handleLinkMouseEnter () {
@@ -74,15 +82,17 @@ class Section extends PureComponent {
       this.tweenText.kill();
       this.tweenId.kill();
     }
-    this.tweenText = TweenLite.to(this.childSplit.chars, 0.2, {
-      color: '#ffcc5e',
-      stagger: 0.01,
-    });
-    this.tweenId = TweenLite.to(this.idSplit.chars, 0.2, {
-      color: '#ffcc5e',
-      stagger: 0.01,
-    });
-    this.props.showDescription(this.props.description);
+    if (this.interactionsReady) {
+      this.tweenText = TweenLite.to(this.childSplit.chars, 0.2, {
+        color: '#ffcc5e',
+        stagger: 0.01,
+      });
+      this.tweenId = TweenLite.to(this.idSplit.chars, 0.2, {
+        color: '#ffcc5e',
+        stagger: 0.01,
+      });
+      this.props.showDescription(this.props.description);
+    }
   }
 
   handleLinkMouseLeave () {
@@ -90,14 +100,16 @@ class Section extends PureComponent {
       this.tweenText.kill();
       this.tweenId.kill();
     }
-    this.tweenText = TweenLite.to(this.childSplit.chars, 0.2, {
-      color: '#FFFFFF',
-      stagger: 0.01,
-    });
-    this.tweenId = TweenLite.to(this.idSplit.chars, 0.2, {
-      color: '#FFFFFF',
-      stagger: 0.01,
-    });
+    if (this.interactionsReady) {
+      this.tweenText = TweenLite.to(this.childSplit.chars, 0.2, {
+        color: '#FFFFFF',
+        stagger: 0.01,
+      });
+      this.tweenId = TweenLite.to(this.idSplit.chars, 0.2, {
+        color: '#FFFFFF',
+        stagger: 0.01,
+      });
+    }
   }
 
   handleEnterWorkContent () {
@@ -105,12 +117,14 @@ class Section extends PureComponent {
       this.tweenText.kill();
       this.tweenId.kill();
     }
-    this.tweenText = TweenLite.to(this.childSplit.chars, 0.2, {
-      color: '#FFFFFF',
-    });
-    this.tweenId = TweenLite.to(this.idSplit.chars, 0.2, {
-      color: '#FFFFFF',
-    });
+    if (this.interactionsReady) {
+      this.tweenText = TweenLite.to(this.childSplit.chars, 0.2, {
+        color: '#FFFFFF',
+      });
+      this.tweenId = TweenLite.to(this.idSplit.chars, 0.2, {
+        color: '#FFFFFF',
+      });
+    }
   }
 
   handleLeaveWorkContent () {
@@ -118,12 +132,14 @@ class Section extends PureComponent {
       this.tweenText.kill();
       this.tweenId.kill();
     }
-    this.tweenText = TweenLite.to(this.childSplit.chars, 0.2, {
-      color: '#111111',
-    });
-    this.tweenId = TweenLite.to(this.idSplit.chars, 0.2, {
-      color: '#111111',
-    });
+    if (this.interactionsReady) {
+      this.tweenText = TweenLite.to(this.childSplit.chars, 0.2, {
+        color: '#111111',
+      });
+      this.tweenId = TweenLite.to(this.idSplit.chars, 0.2, {
+        color: '#111111',
+      });
+    }
   }
 
   render () {

@@ -32,9 +32,13 @@ class Work extends PureComponent {
     this.showDescription = this.showDescription.bind(this);
     this.handleEnterWorkContent = this.handleEnterWorkContent.bind(this);
     this.handleLeaveWorkContent = this.handleLeaveWorkContent.bind(this);
+    this.handleMoveWorkContent = this.handleMoveWorkContent.bind(this);
 
     this.prevRef = null;
     this.childSplit = null;
+    this.interactionsReady = false;
+    this.workHovered = false;
+    this.firstHover = false;
 
     this.moodboard = React.createRef();
     this.webglgallery = React.createRef();
@@ -115,6 +119,7 @@ class Work extends PureComponent {
 
   componentDidMount () {
     this.props.hideLoader();
+    this.interactionsReady = false;
 
     // Tweening seed to high levels to create 'noise' effect
     TweenLite.to('#workTurbulence', 8, {
@@ -144,6 +149,17 @@ class Work extends PureComponent {
 
     this.projects.forEach((project) => {
       project.ref.current.handleFadeIn();
+    });
+
+    setTimeout(() => {
+      this.handleCompleteLoadingAnimations();
+    }, 1000);
+  }
+
+  handleCompleteLoadingAnimations () {
+    this.interactionsReady = true;
+    this.projects.forEach((project) => {
+      project.ref.current.handleCompleteLoadingAnimations();
     });
   }
 
@@ -182,27 +198,39 @@ class Work extends PureComponent {
     }).finished;
   }
 
-  showDescription (description, background, ref) {
+  showDescription (description) {
     TweenLite.to(this.description, 0, {
       text: description,
     });
   }
 
+  handleMoveWorkContent () {
+    // Used for when hovered over the page before all animations are done
+    if (this.workHovered && !this.firstHover) {
+      this.handleEnterWorkContent();
+      this.firstHover = true;
+    }
+  }
+
   handleEnterWorkContent () {
-    TweenLite.to(this.el, 0.5, {
-      backgroundColor: '#111111',
-    });
-    TweenLite.to(this.description, 0.5, {
-      color: 'white',
-    });
-    this.projects.forEach((project) => {
-      project.ref.current.handleEnterWorkContent();
-    });
+    if (this.interactionsReady) {
+      TweenLite.to(this.el, 0.5, {
+        backgroundColor: '#111111',
+      });
+      TweenLite.to(this.description, 0.5, {
+        color: 'white',
+      });
+      this.projects.forEach((project) => {
+        project.ref.current.handleEnterWorkContent();
+      });
+    } else {
+      this.workHovered = true;
+    }
   }
 
   handleLeaveWorkContent (event) {
     // Remove random bubbling by Section component
-    if (event.target === this.workcontent) {
+    if (event.target === this.workcontent && this.interactionsReady) {
       TweenLite.to(this.el, 0.5, {
         backgroundColor: '#EDECED',
       });
@@ -215,6 +243,8 @@ class Work extends PureComponent {
       this.projects.forEach((project) => {
         project.ref.current.handleLeaveWorkContent();
       });
+    } else {
+      this.workHovered = false;
     }
   }
 
@@ -277,6 +307,7 @@ class Work extends PureComponent {
             className={styles['work-content']}
             onMouseEnter={this.handleEnterWorkContent}
             onMouseLeave={this.handleLeaveWorkContent}
+            onMouseMove={this.handleMoveWorkContent}
             ref={(element) => {
               this.workcontent = element;
             }}
