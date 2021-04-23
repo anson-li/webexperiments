@@ -3,8 +3,8 @@
   position: absolute;
   height: 100vh;
   overflow: hidden;
-  background-color: #EDECED;
-  
+  background-color: #edeced;
+
   .background {
     height: 100%;
     width: 100%;
@@ -56,17 +56,4 @@
   .work-image .work-description {
     font-size: 9em;
   }
-}
-
-.box-image-background {
-  opacity: 0;
-  z-index: 0;
-  height: 100%;
-  width: 100%;
-  object-fit: cover;
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
 }
