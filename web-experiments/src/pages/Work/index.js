@@ -6,6 +6,9 @@ import {
   ScrollTrigger,
 } from 'gsap/ScrollTrigger';
 import {
+  SplitText,
+} from 'gsap/SplitText';
+import {
   TextPlugin,
 } from 'gsap/TextPlugin';
 import {
@@ -20,7 +23,7 @@ import WithTransition from '../../common/WithTransition';
 import Section from './components/Section';
 import styles from './style.module.scss';
 
-gsap.registerPlugin(ScrollTrigger, TextPlugin, Draggable, InertiaPlugin);
+gsap.registerPlugin(ScrollTrigger, TextPlugin, SplitText, Draggable, InertiaPlugin);
 
 class Work extends PureComponent {
   constructor (props) {
@@ -31,6 +34,7 @@ class Work extends PureComponent {
     this.handleLeaveWorkContent = this.handleLeaveWorkContent.bind(this);
 
     this.prevRef = null;
+    this.childSplit = null;
 
     this.moodboard = React.createRef();
     this.webglgallery = React.createRef();
@@ -121,6 +125,23 @@ class Work extends PureComponent {
       yoyo: true,
     });
 
+    this.childSplit = new SplitText(this.description, {
+      linesClass: 'inview-split-child',
+      type: 'lines',
+    });
+    // eslint-disable-next-line no-new
+    new SplitText(this.description, {
+      linesClass: 'inview-split-parent',
+      type: 'lines',
+    });
+    gsap.from(this.childSplit.lines, {
+      delay: 1,
+      duration: 1.5,
+      ease: 'power4',
+      stagger: 0.1,
+      yPercent: 100,
+    });
+
     this.projects.forEach((project) => {
       project.ref.current.handleFadeIn();
     });
@@ -180,10 +201,6 @@ class Work extends PureComponent {
   }
 
   handleLeaveWorkContent (event) {
-    console.log(event);
-    console.log(this.workcontent);
-    console.log(event.target === this.workcontent);
-
     // Remove random bubbling by Section component
     if (event.target === this.workcontent) {
       TweenLite.to(this.el, 0.5, {
