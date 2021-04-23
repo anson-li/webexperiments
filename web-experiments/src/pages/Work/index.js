@@ -120,6 +120,10 @@ class Work extends PureComponent {
       repeat: -1,
       yoyo: true,
     });
+
+    this.projects.forEach((project) => {
+      project.ref.current.handleFadeIn();
+    });
   }
 
   hidePage () {
@@ -199,12 +203,14 @@ class Work extends PureComponent {
 
     const renderText = this.projects.map((project) => {
       return <Section
+        delay={this.projects.length - project.id}
         description={project.description}
         hover={cursorHover}
         id={project.id}
         imageref={project.ref}
         key={project.id}
         link={project.link}
+        ref={project.ref}
         showDescription={this.showDescription}
         title={project.title}
         unhover={cursorUnhover}
@@ -242,8 +248,8 @@ class Work extends PureComponent {
           <div className={styles['work-image']}>
             {renderImages}
             <div
-              className={styles['work-description']} ref={(e) => {
-                this.description = e;
+              className={styles['work-description']} ref={(element) => {
+                this.description = element;
               }}>
               ANSON LI WEB EXPERIMENTS THREEJS GREENSOCK CURTAINSJS BLENDER VIDEOEDITING SVG
             </div>
