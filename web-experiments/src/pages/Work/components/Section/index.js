@@ -103,13 +103,13 @@ class Section extends PureComponent {
         >
           {formattedId}
         </div>
-        <p
+        <div
           className={styles['section-title']}
           ref={(ref) => {
             this.title = ref;
           }}>
           {title}
-        </p>
+        </div>
       </Link>
     );
   }

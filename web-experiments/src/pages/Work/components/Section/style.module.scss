@@ -1,5 +1,5 @@
 .section {
-  display: block;
+  display: flex;
   padding-bottom: 1em;
 
   .id {
@@ -27,4 +27,12 @@
       font-size: 1.3em;
     }
   }
+}
+
+.inview-split-parent {
+  overflow: hidden;
+}
+
+.inview-split-child {
+  display: inline-block;
 }
