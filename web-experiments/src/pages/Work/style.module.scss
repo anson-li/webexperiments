@@ -3,7 +3,13 @@
   position: absolute;
   height: 100vh;
   overflow: hidden;
-  background-color: #edeced;
+  background-color: #EDECED;
+  
+  .background {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+  }
 }
 
 .scroll-hint {

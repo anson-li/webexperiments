@@ -111,6 +111,15 @@ class Work extends PureComponent {
 
   componentDidMount () {
     this.props.hideLoader();
+
+    // Tweening seed to high levels to create 'noise' effect
+    TweenLite.to('#workTurbulence', 8, {
+      attr: {
+        seed: 10000,
+      },
+      repeat: -1,
+      yoyo: true,
+    });
   }
 
   hidePage () {
@@ -207,6 +216,24 @@ class Work extends PureComponent {
         id={styles['work-page']} ref={(element) => {
           this.el = element;
         }}>
+        <div className={styles.background}>
+          <svg
+            height='100%'
+            width='100%'
+          >
+            <filter id='workFilter' x='0' y='0'>
+              <feTurbulence
+                baseFrequency='0.6'
+                id='workTurbulence'
+                seed='0'
+                type='turbulence' />
+              <feColorMatrix type='matrix' values='.33 .33 .33 0 0 .33 .33 .33 0 0 .33 .33 .33 0 0 0 0 0 1 0' />
+            </filter>
+
+            <rect fill='#fff' height='100%' opacity='0.00' width='100%' />
+            <rect filter='url(#workFilter)' height='100%' opacity='0.50' width='100%' />
+          </svg>
+        </div>
         <div id={styles['animation-wrapper']}>
           <TextLogo
             hover={cursorHover}
