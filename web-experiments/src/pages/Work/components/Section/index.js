@@ -59,22 +59,20 @@ class Section extends PureComponent {
   }
 
   handleFadeIn () {
-    if (this.interactionsReady) {
-      gsap.from(this.childSplit.chars, {
-        delay: 0.5 + this.props.delay / 5,
-        duration: 1,
-        ease: 'power4',
-        stagger: 0.02,
-        yPercent: 100,
-      });
-      gsap.from(this.idSplit.chars, {
-        delay: 0.5 + this.props.delay / 5,
-        duration: 1,
-        ease: 'power4',
-        stagger: 0.02,
-        yPercent: 100,
-      });
-    }
+    gsap.from(this.childSplit.chars, {
+      delay: 0.5 + this.props.delay / 5,
+      duration: 1,
+      ease: 'power4',
+      stagger: 0.02,
+      yPercent: 100,
+    });
+    gsap.from(this.idSplit.chars, {
+      delay: 0.5 + this.props.delay / 5,
+      duration: 1,
+      ease: 'power4',
+      stagger: 0.02,
+      yPercent: 100,
+    });
   }
 
   handleLinkMouseEnter () {
