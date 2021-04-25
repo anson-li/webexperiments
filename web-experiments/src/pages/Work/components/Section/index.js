@@ -175,7 +175,7 @@ class Section extends PureComponent {
 Section.propTypes = {
   delay: PropTypes.number.isRequired,
   description: PropTypes.string.isRequired,
-  id: PropTypes.string.isRequired,
+  id: PropTypes.number.isRequired,
   link: PropTypes.string.isRequired,
   showDescription: PropTypes.func.isRequired,
   title: PropTypes.string.isRequired,

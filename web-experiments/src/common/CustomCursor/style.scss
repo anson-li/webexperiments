@@ -29,11 +29,7 @@
 }
 
 .cursor {
-  // mix-blend-mode: difference;
-  // background-color: white;
-  // border-color: white;
-  // transform-style: preserve-3d;
-  // z-index: 20000;
+  pointer-events: none;
 }
 
 a:hover,
