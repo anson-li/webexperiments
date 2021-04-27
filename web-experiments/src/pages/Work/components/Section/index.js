@@ -34,6 +34,7 @@ class Section extends PureComponent {
   }
 
   componentDidMount () {
+    this.interactionsReady = false;
     // eslint-disable-next-line no-new
     new SplitText(this.title, {
       charsClass: 'inview-split-parent',
@@ -76,11 +77,11 @@ class Section extends PureComponent {
   }
 
   handleLinkMouseEnter () {
-    if (this.tweenText) {
-      this.tweenText.kill();
-      this.tweenId.kill();
-    }
     if (this.interactionsReady) {
+      if (this.tweenText) {
+        this.tweenText.kill();
+        this.tweenId.kill();
+      }
       this.tweenText = TweenLite.to(this.childSplit.chars, 0.2, {
         color: '#ffcc5e',
         stagger: 0.01,
@@ -94,11 +95,11 @@ class Section extends PureComponent {
   }
 
   handleLinkMouseLeave () {
-    if (this.tweenText) {
-      this.tweenText.kill();
-      this.tweenId.kill();
-    }
     if (this.interactionsReady) {
+      if (this.tweenText) {
+        this.tweenText.kill();
+        this.tweenId.kill();
+      }
       this.tweenText = TweenLite.to(this.childSplit.chars, 0.2, {
         color: '#FFFFFF',
         stagger: 0.01,
@@ -111,11 +112,11 @@ class Section extends PureComponent {
   }
 
   handleEnterWorkContent () {
-    if (this.tweenText) {
-      this.tweenText.kill();
-      this.tweenId.kill();
-    }
     if (this.interactionsReady) {
+      if (this.tweenText) {
+        this.tweenText.kill();
+        this.tweenId.kill();
+      }
       this.tweenText = TweenLite.to(this.childSplit.chars, 0.2, {
         color: '#FFFFFF',
       });
@@ -126,11 +127,11 @@ class Section extends PureComponent {
   }
 
   handleLeaveWorkContent () {
-    if (this.tweenText) {
-      this.tweenText.kill();
-      this.tweenId.kill();
-    }
     if (this.interactionsReady) {
+      if (this.tweenText) {
+        this.tweenText.kill();
+        this.tweenId.kill();
+      }
       this.tweenText = TweenLite.to(this.childSplit.chars, 0.2, {
         color: '#111111',
       });
