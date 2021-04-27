@@ -131,10 +131,11 @@ class Work extends PureComponent {
     this.interactionsReady = false;
 
     // Tweening seed to high levels to create 'noise' effect
-    TweenLite.to('#workTurbulence', 8, {
+    TweenLite.to('#workTurbulence', 5, {
       attr: {
         seed: 10000,
       },
+      ease: 'none',
       repeat: -1,
       yoyo: true,
     });
@@ -295,7 +296,6 @@ class Work extends PureComponent {
                 type='turbulence' />
               <feColorMatrix type='matrix' values='.33 .33 .33 0 0 .33 .33 .33 0 0 .33 .33 .33 0 0 0 0 0 1 0' />
             </filter>
-
             <rect fill='#fff' height='100%' opacity='0.00' width='100%' />
             <rect filter='url(#workFilter)' height='100%' opacity='0.50' width='100%' />
           </svg>
