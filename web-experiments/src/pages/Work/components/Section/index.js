@@ -27,6 +27,7 @@ class Section extends PureComponent {
 
     this.childSplit = null;
     this.idSplit = null;
+    this.descriptionSplit = null;
 
     this.tweenText = null;
     this.tweenId = null;
@@ -53,6 +54,15 @@ class Section extends PureComponent {
       charsClass: 'inview-split-child',
       type: 'words,chars',
     });
+    // eslint-disable-next-line no-new
+    new SplitText(this.description, {
+      charsClass: 'inview-split-parent',
+      type: 'words,chars',
+    });
+    this.descriptionSplit = new SplitText(this.description, {
+      charsClass: 'inview-split-child',
+      type: 'words,chars',
+    });
   }
 
   handleCompleteLoadingAnimations () {
@@ -74,6 +84,13 @@ class Section extends PureComponent {
       stagger: 0.02,
       yPercent: 100,
     });
+    gsap.from(this.descriptionSplit.chars, {
+      delay: 0.75 + this.props.delay / 5,
+      duration: 1,
+      ease: 'power4',
+      stagger: 0.02,
+      yPercent: 100,
+    });
   }
 
   handleLinkMouseEnter () {
@@ -81,12 +98,17 @@ class Section extends PureComponent {
       if (this.tweenText) {
         this.tweenText.kill();
         this.tweenId.kill();
+        this.tweenDescription.kill();
       }
       this.tweenText = TweenLite.to(this.childSplit.chars, 0.2, {
         color: '#ffcc5e',
         stagger: 0.01,
       });
       this.tweenId = TweenLite.to(this.idSplit.chars, 0.2, {
+        color: '#ffcc5e',
+        stagger: 0.01,
+      });
+      this.tweenDescription = TweenLite.to(this.descriptionSplit.chars, 0.2, {
         color: '#ffcc5e',
         stagger: 0.01,
       });
@@ -99,12 +121,17 @@ class Section extends PureComponent {
       if (this.tweenText) {
         this.tweenText.kill();
         this.tweenId.kill();
+        this.tweenDescription.kill();
       }
       this.tweenText = TweenLite.to(this.childSplit.chars, 0.2, {
         color: '#FFFFFF',
         stagger: 0.01,
       });
       this.tweenId = TweenLite.to(this.idSplit.chars, 0.2, {
+        color: '#FFFFFF',
+        stagger: 0.01,
+      });
+      this.tweenDescription = TweenLite.to(this.descriptionSplit.chars, 0.2, {
         color: '#FFFFFF',
         stagger: 0.01,
       });
@@ -116,11 +143,15 @@ class Section extends PureComponent {
       if (this.tweenText) {
         this.tweenText.kill();
         this.tweenId.kill();
+        this.tweenDescription.kill();
       }
       this.tweenText = TweenLite.to(this.childSplit.chars, 0.2, {
         color: '#FFFFFF',
       });
       this.tweenId = TweenLite.to(this.idSplit.chars, 0.2, {
+        color: '#FFFFFF',
+      });
+      this.tweenDescription = TweenLite.to(this.descriptionSplit.chars, 0.2, {
         color: '#FFFFFF',
       });
     }
@@ -131,6 +162,7 @@ class Section extends PureComponent {
       if (this.tweenText) {
         this.tweenText.kill();
         this.tweenId.kill();
+        this.tweenDescription.kill();
       }
       this.tweenText = TweenLite.to(this.childSplit.chars, 0.2, {
         color: '#111111',
@@ -138,11 +170,14 @@ class Section extends PureComponent {
       this.tweenId = TweenLite.to(this.idSplit.chars, 0.2, {
         color: '#111111',
       });
+      this.tweenDescription = TweenLite.to(this.descriptionSplit.chars, 0.2, {
+        color: '#111111',
+      });
     }
   }
 
   render () {
-    const {id, title, link} = this.props;
+    const {id, title, link, technology} = this.props;
     const formattedId = id < 10 ? `0${id}` : id;
 
     return (
@@ -168,6 +203,13 @@ class Section extends PureComponent {
           }}>
           {title}
         </div>
+        <div
+          className={styles['section-description']}
+          ref={(ref) => {
+            this.description = ref;
+          }}>
+          {technology}
+        </div>
       </Link>
     );
   }
@@ -179,6 +221,7 @@ Section.propTypes = {
   id: PropTypes.number.isRequired,
   link: PropTypes.string.isRequired,
   showDescription: PropTypes.func.isRequired,
+  technology: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
 };
 

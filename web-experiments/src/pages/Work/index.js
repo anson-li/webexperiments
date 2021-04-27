@@ -56,6 +56,7 @@ class Work extends PureComponent {
         id: 9,
         link: '/moodboard',
         ref: this.moodboard,
+        technology: 'GSAP',
         title: 'Polaroid Wall',
       },
       {
@@ -63,6 +64,7 @@ class Work extends PureComponent {
         id: 8,
         link: '/webglgallery',
         ref: this.webglgallery,
+        technology: 'WebGL',
         title: 'WebGL Gallery',
       },
       {
@@ -70,6 +72,7 @@ class Work extends PureComponent {
         id: 7,
         link: '/webglcurtains',
         ref: this.webglcurtains,
+        technology: 'WebGL',
         title: 'WebGL Shader Library',
       },
       {
@@ -77,6 +80,7 @@ class Work extends PureComponent {
         id: 6,
         link: '/drumheller',
         ref: this.drumhellerconcept,
+        technology: 'GSAP',
         title: 'Drumheller Concept',
       },
       {
@@ -84,6 +88,7 @@ class Work extends PureComponent {
         id: 5,
         link: '/dinosaurloader',
         ref: this.dinosaurloader,
+        technology: 'SVG',
         title: 'SVG Loader',
       },
       {
@@ -91,6 +96,7 @@ class Work extends PureComponent {
         id: 4,
         link: '/additiveshader',
         ref: this.colorshader,
+        technology: 'ThreeJS',
         title: 'Color Shader',
       },
       {
@@ -98,6 +104,7 @@ class Work extends PureComponent {
         id: 3,
         link: '/asciishader',
         ref: this.asciishader,
+        technology: 'ThreeJS',
         title: 'ASCII Shader',
       },
       {
@@ -105,6 +112,7 @@ class Work extends PureComponent {
         id: 2,
         link: '/coffeecup',
         ref: this.coffeecup,
+        technology: 'Blender',
         title: 'Coffee Cup',
       },
       {
@@ -112,6 +120,7 @@ class Work extends PureComponent {
         id: 1,
         link: '/jellicent',
         ref: this.jellicent,
+        technology: 'ThreeJS',
         title: 'Jellicent',
       },
     ];
@@ -262,6 +271,7 @@ class Work extends PureComponent {
         link={project.link}
         ref={project.ref}
         showDescription={this.showDescription}
+        technology={project.technology}
         title={project.title}
         unhover={cursorUnhover}
       />;

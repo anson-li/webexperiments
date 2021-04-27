@@ -4,10 +4,11 @@
 
   .id {
     display: inline;
-    margin-right: 15px;
+    margin-right: 20px;
+    padding-top: 10px;
     color: #111111;
-    font-family: condor-compressed, sans-serif;
-    font-weight: 200;
+    font-family: forma-djr-text, sans-serif;
+    font-weight: 100;
   }
 
   .section-title {
@@ -17,6 +18,18 @@
     display: inline;
     color: #111111;
   }
+
+  .section-description {
+    font-family: forma-djr-text, sans-serif;
+    font-weight: 100;
+    display: inline;
+    color: #111111;
+    font-size: 0.8em;
+    letter-spacing: 2px;
+    top: 10px;
+    padding-top: 21px;
+    padding-left: 20px;
+  }
 }
 
 @media (max-height: 1080px) {
@@ -25,6 +38,15 @@
 
     .section-title {
       font-size: 1.3em;
+    }
+
+    .section-description {
+      padding-top: 10px;
+      font-size: 0.7em;
+    }
+
+    .id {
+      padding-top: 3px;
     }
   }
 }
