@@ -9,6 +9,9 @@
     height: 100%;
     width: 100%;
     position: absolute;
+    background-image: url('./images/noise.png');
+    opacity: 0.05;
+    mix-blend-mode: difference;
   }
 }
 

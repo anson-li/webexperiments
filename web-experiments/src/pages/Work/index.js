@@ -33,6 +33,7 @@ class Work extends PureComponent {
     this.handleEnterWorkContent = this.handleEnterWorkContent.bind(this);
     this.handleLeaveWorkContent = this.handleLeaveWorkContent.bind(this);
     this.handleMoveWorkContent = this.handleMoveWorkContent.bind(this);
+    this.repeatStatic = this.repeatStatic.bind(this);
 
     this.prevRef = null;
     this.childSplit = null;
@@ -131,13 +132,19 @@ class Work extends PureComponent {
     this.interactionsReady = false;
 
     // Tweening seed to high levels to create 'noise' effect
-    TweenLite.to('#workTurbulence', 5, {
-      attr: {
-        seed: 10000,
-      },
+    // TweenLite.to('#workTurbulence', 5, {
+    //   attr: {
+    //     seed: 10000,
+    //   },
+    //   ease: 'none',
+    //   repeat: -1,
+    //   yoyo: true,
+    // });
+
+    TweenLite.to(this.noise, 0.03, {
       ease: 'none',
+      onRepeat: this.repeatStatic,
       repeat: -1,
-      yoyo: true,
     });
 
     this.childSplit = new SplitText(this.description, {
@@ -164,6 +171,12 @@ class Work extends PureComponent {
     setTimeout(() => {
       this.handleCompleteLoadingAnimations();
     }, 1000);
+  }
+
+  repeatStatic () {
+    TweenLite.set(this.noise, {
+      backgroundPosition: Math.floor(Math.random() * 100) + 1 + '% ' + Math.floor(Math.random() * 10) + 1 + '%',
+    });
   }
 
   handleCompleteLoadingAnimations () {
@@ -283,8 +296,12 @@ class Work extends PureComponent {
         id={styles['work-page']} ref={(element) => {
           this.el = element;
         }}>
-        <div className={styles.background}>
-          <svg
+        <div
+          className={styles.background}
+          ref={(element) => {
+            this.noise = element;
+          }}>
+          {/* <svg
             height='100%'
             width='100%'
           >
@@ -298,7 +315,7 @@ class Work extends PureComponent {
             </filter>
             <rect fill='#fff' height='100%' opacity='0.00' width='100%' />
             <rect filter='url(#workFilter)' height='100%' opacity='0.50' width='100%' />
-          </svg>
+          </svg> */}
         </div>
         <div id={styles['animation-wrapper']}>
           <TextLogo
