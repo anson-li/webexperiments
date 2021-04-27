@@ -229,7 +229,7 @@ class Work extends PureComponent {
 
   handleMoveWorkContent () {
     // Used for when hovered over the page before all animations are done
-    if (this.workHovered && !this.firstHover) {
+    if (this.interactionsReady && this.workHovered && !this.firstHover) {
       this.handleEnterWorkContent();
       this.firstHover = true;
     }
@@ -237,10 +237,10 @@ class Work extends PureComponent {
 
   handleEnterWorkContent () {
     if (this.interactionsReady) {
-      TweenLite.to(this.el, 0.5, {
+      TweenLite.to(this.el, 0.3, {
         backgroundColor: '#111111',
       });
-      TweenLite.to(this.description, 0.5, {
+      TweenLite.to(this.description, 0.3, {
         color: 'white',
       });
       this.projects.forEach((project) => {
@@ -254,10 +254,10 @@ class Work extends PureComponent {
   handleLeaveWorkContent (event) {
     // Remove random bubbling by Section component
     if (event.target === this.workcontent && this.interactionsReady) {
-      TweenLite.to(this.el, 0.5, {
+      TweenLite.to(this.el, 0.3, {
         backgroundColor: '#EDECED',
       });
-      TweenLite.to(this.description, 0.5, {
+      TweenLite.to(this.description, 0.3, {
         color: 'black',
       });
       TweenLite.to(this.description, 0, {
