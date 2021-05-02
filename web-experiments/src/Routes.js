@@ -8,6 +8,7 @@ import DrumhellerConcept from './pages/ProjectList/06_DrumhellerConcept';
 import WebGLCurtains from './pages/ProjectList/07_WebGLCurtains';
 import WebGLGallery from './pages/ProjectList/08_WebGLGallery';
 import InteractiveMoodBoard from './pages/ProjectList/09_InteractiveMoodBoard';
+import GenerativeArt from './pages/ProjectList/10_GenerativeArt';
 import Work from './pages/Work';
 
 const Routes = [
@@ -16,6 +17,13 @@ const Routes = [
     key: 'work',
     path: {
       path: '/work',
+    },
+  },
+  {
+    Component: GenerativeArt,
+    key: 'generativeart',
+    path: {
+      path: '/generativeart',
     },
   },
   {

@@ -41,6 +41,7 @@ class Work extends PureComponent {
     this.workHovered = false;
     this.firstHover = false;
 
+    this.generativeart = React.createRef();
     this.moodboard = React.createRef();
     this.webglgallery = React.createRef();
     this.webglcurtains = React.createRef();
@@ -52,6 +53,14 @@ class Work extends PureComponent {
     this.jellicent = React.createRef();
 
     this.projects = [
+      {
+        description: 'WIP WIP WIP WIP WIP WIP WIP WIP WIP WIP WIP WIP WIP WIP WIP WIP WIP WIP WIP WIP WIP',
+        id: 9,
+        link: '/generativeart',
+        ref: this.generativeart,
+        technology: 'Design',
+        title: 'Generative Art',
+      },
       {
         description: 'Interactive mood board, with draggable elements built with GSAP and new page structure',
         id: 9,
