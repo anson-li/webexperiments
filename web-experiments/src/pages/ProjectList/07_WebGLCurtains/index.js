@@ -17,6 +17,7 @@ import WithTransition from '../../../common/WithTransition';
 import BasicFs from './Shaders/BasicFs';
 import BasicVs from './Shaders/BasicVs';
 import ColorFs from './Shaders/ColorFs';
+import DitheringFs from './Shaders/DitheringFs';
 import DragFs from './Shaders/DragFs';
 import DragVs from './Shaders/DragVs';
 import DragWaterVs from './Shaders/DragWaterVs';
@@ -41,6 +42,10 @@ class WebGLCurtains extends PureComponent {
           ref: ColorFs,
           status: false,
         },
+        dithering: {
+          ref: DitheringFs,
+          status: true,
+        },
         mousecolor: {
           ref: MouseColorFs,
           status: false,
@@ -55,7 +60,7 @@ class WebGLCurtains extends PureComponent {
         },
         noisypage: {
           ref: NoisyPageFs,
-          status: true,
+          status: false,
         },
         none: {
           ref: DragFs,
@@ -135,6 +140,9 @@ class WebGLCurtains extends PureComponent {
     });
     fragmentShader.add(this.state.fragmentshader.color, 'status').name('Automatically change colors').listen().onChange(() => {
       this.setFragmentChecked('color');
+    });
+    fragmentShader.add(this.state.fragmentshader.dithering, 'status').name('Dithering filter').listen().onChange(() => {
+      this.setFragmentChecked('dithering');
     });
     fragmentShader.add(this.state.fragmentshader.mousecolor, 'status').name('Color shifting via mouse position').listen().onChange(() => {
       this.setFragmentChecked('mousecolor');
