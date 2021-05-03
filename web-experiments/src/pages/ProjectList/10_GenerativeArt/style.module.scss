@@ -8,20 +8,18 @@
 .page-content {
   min-height: 80vh;
   width: 80vw;
-  padding: 50px;
-  margin: 15vh 10vw;
+  padding: 0px 50px;
+  margin: 0vh 10vw;
+  display: flex;
 }
 
 .title-text {
-  left: 50vw;
-  transform: translate(-50%, 0%);
-  position: absolute;
-  top: 760px;
-  font-size: 5em;
-  font-family: 'ivymode';
+  font-size: 10em;
+  font-family: "ivymode";
   font-weight: 500;
   letter-spacing: 5px;
   color: #333;
+  line-height: 1em;
 }
 
 .body { 
@@ -29,4 +27,38 @@
   font-weight: 400;
   font-style: normal;
   padding-top: 700px;
+}
+
+.left-content {
+  order: 1;
+  padding: 150px;
+  margin-top: 20vh;
+  position: fixed;
+  width: 40vw;
+}
+
+.right-content {
+  order: 2;
+  margin-left: 50%;
+
+  .description {
+    padding: 150px;
+  }
+}
+
+.description-text {
+  padding-top: 5em;
+  display: flex;
+  justify-content: space-between;
+  font-family: forma-djr-text, sans-serif;
+  font-weight: 400;
+
+  .left-description {
+    padding-right: 50px;
+  }
+  
+  .right-description {
+    width: 30%;
+    transform: translate(-150px, 0px);
+  }
 }

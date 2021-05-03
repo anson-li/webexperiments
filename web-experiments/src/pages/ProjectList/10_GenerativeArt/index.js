@@ -70,53 +70,60 @@ class GenerativeArt extends PureComponent {
         <div
           className={styles['page-content']}
         >
-          <ThreeJS
-            height={500}
-            hideLoader={hideLoader}
-            width={500}
-          />
-          <div
-            className={styles['title-text']}
-            ref={(element) => {
-              this.title = element;
-            }}
-          >
-            Generative <i>A</i>rt
+          <div className={styles['left-content']}>
+            <div
+              className={styles['title-text']}
+              ref={(element) => {
+                this.title = element;
+              }}
+            >
+              Purple <i>E</i>lephants
+            </div>
+            <div
+              className={styles['description-text']}
+            >
+              <div className={styles['left-description']}>
+                Design
+              </div>
+              <div className={styles['right-description']}>
+                Collection of generative art from around the globe, curated into one collection.
+              </div>
+            </div>
           </div>
-          <div className={styles.body}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ullamcorper sit amet lacus ac tincidunt. Duis a
-            c viverra orci. Fusce rutrum lacus dolor. Aenean sed mi porta orci accumsan viverra. Nulla ultrices tellus vitae pla
-            cerat facilisis. Aenean commodo suscipit dolor, quis lobortis odio iaculis in. Cras sit amet mi neque. Ut ac aliquam sapien.
-            <br /><br />
-            Nullam blandit lacinia purus, ac efficitur lorem commodo eget. Mauris posuere pellentesque tellus vitae porttitor. Pr
-            oin ac euismod lorem. Donec nunc quam, vulputate nec ullamcorper et, ullamcorper quis lorem. Aliquam porta, massa eu veh
-            icula mattis, nisi ipsum sodales tortor, id congue felis urna auctor lectus. Mauris felis libero, ultricies vitae ma
-            ssa sit amet, tempus blandit quam. Donec a mauris sapien. Curabitur nunc diam, molestie eu ultricies in, auctor nec ni
-            bh. Duis consectetur blandit rutrum. Sed ac magna ipsum. Praesent enim lectus, porta non suscipit eleifend, mattis eget ne
-            que. Nullam convallis venenatis tortor, non aliquet enim sollicitudin quis. In a ullamcorper odio. Vivamus a gravida odio, eu semper mauris.
-            <br /><br />
-            Cras vel mattis ipsum. Quisque in lorem at diam gravida tincidunt. Quisque et turpis tristique, imperdiet nunc in, posu
-            ere ipsum. Aenean sed volutpat nibh. Curabitur non feugiat dolor. Vivamus sollicitudin fringilla turpis, eget bibendum nul
-            la efficitur pulvinar. Aliquam erat volutpat. Fusce vel justo eget nulla rutrum posuere. Nulla eu nibh quam. Donec qu
-            is ligula tincidunt mauris dapibus commodo. Cras tempus ut odio at molestie.
-            <br /><br />
-            Nam mattis vel metus et ornare. Sed facilisis urna nisi, nec dapibus nibh hendrerit sed. Mauris in est volutpat, commod
-            o nisi quis, ultrices ligula. Phasellus urna purus, tincidunt non diam et, tempus fringilla nibh. Maecenas facilisis ligula et te
-            llus dapibus ullamcorper. Donec ultrices aliquet arcu. Nunc finibus ornare nunc id porttitor. Phasellus elementum mi at magna r
-            honcus, at ullamcorper tellus accumsan. Nullam sit amet enim dolor. Cras lacinia pretium purus ac euismod. Ut nec sem est. Aen
-            ean luctus mattis elementum. Cras velit sapien, dapibus ut mi quis, dignissim sollicitudin sapien.
-            <br /><br />
-            Integer vehicula posuere velit, ac scelerisque arcu semper nec. Suspendisse sit amet imperdiet libero. Vestibulum pretium a
-            ugue nisi, quis maximus nulla facilisis sed. Proin euismod, leo et aliquet egestas, turpis lorem rutrum est, non susci
-            pit nisl augue id dui. Proin a augue est. Fusce facilisis finibus magna nec condimentum. Nulla turpis nulla, dictum in pul
-            vinar non, mollis sed lectus. In ullamcorper convallis ex, eget ultrices augue cursus scelerisque.
-            <br /><br />
-            Nullam sit amet justo metus. Pellentesque dictum nisi ac orci ultricies pretium. In urna ex, tempor vehicula velit id, pelle
-            ntesque venenatis arcu. Duis luctus accumsan risus ut consectetur. Duis eu arcu consectetur, mollis diam vitae, conva
-            llis metus. Morbi et nisl consequat, varius turpis sed, interdum purus. Nunc porttitor vestibulum eros, eu tincidunt urna su
-            scipit eu. Etiam libero augue, varius feugiat efficitur at, venenatis quis nisl. Aliquam enim lectus, ornare eget augue et, faci
-            lisis fermentum purus. Nam tellus lorem, malesuada sed ipsum a, sollicitudin consectetur ante. Nunc posuere gravida ma
-            gna, suscipit tincidunt augue fermentum eget.
+          <div className={styles['right-content']}>
+            <div className={styles['image-content']}>
+              <div className={styles.image}>
+                <ThreeJS
+                  height={window.innerHeight * 0.4}
+                  hideLoader={hideLoader}
+                  width={window.innerWidth * 0.4}
+                />
+              </div>
+              <div className={styles.description}>
+                A handmade generative isodecahedron.
+              </div>
+            </div>
+
+            <ThreeJS
+              height={window.innerHeight * 0.4}
+              hideLoader={hideLoader}
+              width={window.innerWidth * 0.4}
+            />
+            <ThreeJS
+              height={window.innerHeight * 0.4}
+              hideLoader={hideLoader}
+              width={window.innerWidth * 0.4}
+            />
+            <ThreeJS
+              height={window.innerHeight * 0.4}
+              hideLoader={hideLoader}
+              width={window.innerWidth * 0.4}
+            />
+            <ThreeJS
+              height={window.innerHeight * 0.4}
+              hideLoader={hideLoader}
+              width={window.innerWidth * 0.4}
+            />
           </div>
         </div>
       </div>
