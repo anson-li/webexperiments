@@ -1,14 +1,11 @@
 import anime from 'animejs';
-import {
-  TweenLite,
-} from 'gsap';
 import PropTypes from 'prop-types';
 import React, {
   PureComponent,
 } from 'react';
 import TextLogo from '../../../common/TextLogo';
 import WithTransition from '../../../common/WithTransition';
-import ThreeJS from './components/ThreeJS';
+import DitheredImage from './components/DitheredImage';
 import styles from './style.module.scss';
 
 class GenerativeArt extends PureComponent {
@@ -54,7 +51,7 @@ class GenerativeArt extends PureComponent {
   }
 
   render () {
-    const {hideLoader, cursorHover, cursorUnhover} = this.props;
+    const {cursorHover, cursorUnhover} = this.props;
 
     return (
       <div
@@ -70,6 +67,10 @@ class GenerativeArt extends PureComponent {
         <div
           className={styles['page-content']}
         >
+          <div className={styles.cross}>
+            <span className={styles['cross-height']} />
+            <span className={styles['cross-width']} />
+          </div>
           <div className={styles['left-content']}>
             <div
               className={styles['title-text']}
@@ -93,37 +94,54 @@ class GenerativeArt extends PureComponent {
           <div className={styles['right-content']}>
             <div className={styles['image-content']}>
               <div className={styles.image}>
-                <ThreeJS
-                  height={window.innerHeight * 0.4}
-                  hideLoader={hideLoader}
-                  width={window.innerWidth * 0.4}
+                <DitheredImage
+                  image='https://unsplash.it/1920/1080?random=1'
                 />
               </div>
               <div className={styles.description}>
                 A handmade generative isodecahedron.
               </div>
             </div>
-
-            <ThreeJS
-              height={window.innerHeight * 0.4}
-              hideLoader={hideLoader}
-              width={window.innerWidth * 0.4}
-            />
-            <ThreeJS
-              height={window.innerHeight * 0.4}
-              hideLoader={hideLoader}
-              width={window.innerWidth * 0.4}
-            />
-            <ThreeJS
-              height={window.innerHeight * 0.4}
-              hideLoader={hideLoader}
-              width={window.innerWidth * 0.4}
-            />
-            <ThreeJS
-              height={window.innerHeight * 0.4}
-              hideLoader={hideLoader}
-              width={window.innerWidth * 0.4}
-            />
+            <div className={styles['image-content']}>
+              <div className={styles.image}>
+                <DitheredImage
+                  image='https://unsplash.it/1920/1080?random=2'
+                />
+              </div>
+              <div className={styles.description}>
+                A handmade generative isodecahedron.
+              </div>
+            </div>
+            <div className={styles['image-content']}>
+              <div className={styles.image}>
+                <DitheredImage
+                  image='https://unsplash.it/1920/1080?random=3'
+                />
+              </div>
+              <div className={styles.description}>
+                A handmade generative isodecahedron.
+              </div>
+            </div>
+            <div className={styles['image-content']}>
+              <div className={styles.image}>
+                <DitheredImage
+                  image='https://unsplash.it/1920/1080?random=4'
+                />
+              </div>
+              <div className={styles.description}>
+                A handmade generative isodecahedron.
+              </div>
+            </div>
+            <div className={styles['image-content']}>
+              <div className={styles.image}>
+                <DitheredImage
+                  image='https://unsplash.it/1920/1080?random=5'
+                />
+              </div>
+              <div className={styles.description}>
+                A handmade generative isodecahedron.
+              </div>
+            </div>
           </div>
         </div>
       </div>

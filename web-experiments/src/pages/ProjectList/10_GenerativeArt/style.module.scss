@@ -35,11 +35,13 @@
   margin-top: 20vh;
   position: fixed;
   width: 40vw;
+  z-index: 10;
 }
 
 .right-content {
   order: 2;
   margin-left: 50%;
+  padding-left: 50px;
 
   .description {
     padding: 150px;
@@ -60,5 +62,23 @@
   .right-description {
     width: 30%;
     transform: translate(-150px, 0px);
+  }
+}
+
+.cross {
+  .cross-width {
+    width: 200px;
+    height: 200px;
+    position: fixed;
+    border-bottom: 2px solid #333;
+    left: 10vw;
+  }
+
+  .cross-height {
+    width: 200px;
+    height: 90vh;
+    position: fixed;
+    border-left: 2px solid #333;
+    top: 10vh;
   }
 }

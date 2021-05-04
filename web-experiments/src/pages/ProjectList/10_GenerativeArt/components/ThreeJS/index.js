@@ -132,7 +132,7 @@ class ThreeJS extends PureComponent {
         }
       `,
       uniforms: {
-        color: {value: new Color(0xb06fb2)},
+        color: {value: new Color(0x160b00)},
         tDiffuse: {value: null},
       },
       vertexShader: `

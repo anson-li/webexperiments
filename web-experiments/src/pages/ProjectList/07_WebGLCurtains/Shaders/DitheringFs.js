@@ -1,3 +1,4 @@
+// Reference: https://www.shadertoy.com/view/WstXR8
 const DitheringFs = `
   precision mediump float;
 
