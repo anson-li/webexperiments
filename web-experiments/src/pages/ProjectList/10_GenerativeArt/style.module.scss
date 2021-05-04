@@ -38,14 +38,20 @@
   z-index: 10;
 }
 
+
+@media (max-height: 1024px) {
+  .title-text {
+    font-size: 5em;
+  }
+  .left-content {
+    padding: 100px;
+  }
+}
+
 .right-content {
   order: 2;
   margin-left: 50%;
   padding-left: 50px;
-
-  .description {
-    padding: 150px;
-  }
 }
 
 .description-text {
@@ -80,5 +86,25 @@
     position: fixed;
     border-left: 2px solid #333;
     top: 10vh;
+  }
+}
+
+.lead-text {
+  position: fixed;
+  top: 90vh;
+  padding-left: 150px;
+}
+
+.icon-set {
+  position: fixed;
+  left: 8vw;
+  bottom: 20vh;
+  display: flex;
+  flex-direction: column;
+  height: 200px;
+  justify-content: space-around;
+
+  svg {
+    color: #333;
   }
 }

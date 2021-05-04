@@ -125,9 +125,9 @@ const DitheringFs = `
     vec3 color;
   
     vec3 cloudEffect = clouds(vVertexPosition.x, vVertexPosition.y);
-    color = cloudEffect + vec3(.95, .8, 0.95);
+    color = cloudEffect + vec3(0.95, 0.8, 0.95);
 
-    float distance = distance(vec2(vVertexPosition.x, vVertexPosition.y), uMousePosition);
+    float distance = distance(vec2(vVertexPosition.x, vVertexPosition.y * 0.5), uMousePosition);
 
     // The farther the distance, the closer opacity should hit 1
 
