@@ -178,6 +178,6 @@ class DitheredImage extends PureComponent {
 DitheredImage.propTypes = {
   image: PropTypes.string.isRequired,
 
-}
+};
 
 export default DitheredImage;

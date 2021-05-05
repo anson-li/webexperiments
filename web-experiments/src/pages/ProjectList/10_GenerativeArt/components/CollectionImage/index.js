@@ -18,7 +18,7 @@ class CollectionImage extends PureComponent {
           <div className={styles.date}>
             {this.props.date}
           </div>
-          <div className={styles.descriptionText}>
+          <div className={styles['description-text']}>
             {this.props.description}
           </div>
         </div>

@@ -1,28 +1,29 @@
 .generative-background {
-  background-color: #E9DED0;
+  background-color: #e9ded0;
   width: 100vw;
   height: fit-content;
   position: absolute;
+  overflow: hidden;
 }
 
 .page-content {
   min-height: 80vh;
   width: 80vw;
-  padding: 0px 50px;
-  margin: 0vh 10vw;
+  padding: 0 50px;
+  margin: 0 10vw;
   display: flex;
 }
 
 .title-text {
   font-size: 10em;
-  font-family: "ivymode";
+  font-family: 'ivymode';
   font-weight: 500;
   letter-spacing: 5px;
-  color: #333;
+  color: #333333;
   line-height: 1em;
 }
 
-.body { 
+.body {
   font-family: source-serif-pro, serif;
   font-weight: 400;
   font-style: normal;
@@ -36,16 +37,6 @@
   position: fixed;
   width: 40vw;
   z-index: 10;
-}
-
-
-@media (max-height: 1024px) {
-  .title-text {
-    font-size: 5em;
-  }
-  .left-content {
-    padding: 100px;
-  }
 }
 
 .right-content {
@@ -64,10 +55,10 @@
   .left-description {
     padding-right: 50px;
   }
-  
+
   .right-description {
     width: 30%;
-    transform: translate(-150px, 0px);
+    transform: translate(-150px, 0);
   }
 }
 
@@ -76,7 +67,7 @@
     width: 200px;
     height: 200px;
     position: fixed;
-    border-bottom: 2px solid #333;
+    border-bottom: 2px solid #333333;
     left: 10vw;
   }
 
@@ -84,14 +75,14 @@
     width: 200px;
     height: 90vh;
     position: fixed;
-    border-left: 2px solid #333;
+    border-left: 2px solid #333333;
     top: 10vh;
   }
 }
 
 .lead-text {
   position: fixed;
-  top: 90vh;
+  bottom: 10vh;
   padding-left: 150px;
 }
 
@@ -103,8 +94,43 @@
   flex-direction: column;
   height: 200px;
   justify-content: space-around;
+  z-index: 10;
 
   svg {
-    color: #333;
+    color: #333333;
+  }
+}
+
+@media (max-height: 1080px) {
+  .title-text {
+    font-size: 8em;
+  }
+
+  .left-content {
+    padding: 100px;
+  }
+
+  .lead-text,
+  .description-text {
+    font-size: 0.8em;
+  }
+
+  .cross .cross-width {
+    height: 120px;
+    width: 100px;
+  }
+
+  .cross .cross-height {
+    top: 15vh;
+  }
+
+  .left-content {
+    margin-top: 8vh;
+  }
+}
+
+@media (max-width: 1440px) {
+  .title-text {
+    font-size: 5em;
   }
 }

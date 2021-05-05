@@ -79,9 +79,9 @@ class GenerativeArt extends PureComponent {
           className={styles['page-content']}
         >
           <div className={styles['icon-set']}>
-            <FontAwesomeIcon icon={['fab', 'github']} size='lg' />
-            <FontAwesomeIcon icon={['fab', 'linkedin']} size='lg' />
-            <FontAwesomeIcon icon={['fab', 'dribbble']} size='lg' />
+            <a href='https://github.com/anson-li'><FontAwesomeIcon icon={['fab', 'github']} size='lg' /></a>
+            <a href='https://www.linkedin.com/in/anson-ii/'><FontAwesomeIcon icon={['fab', 'linkedin']} size='lg' /></a>
+            <a href='https://dribbble.com/anson-li'><FontAwesomeIcon icon={['fab', 'dribbble']} size='lg' /></a>
           </div>
           <div className={styles.cross}>
             <span className={styles['cross-height']} />
@@ -98,7 +98,7 @@ class GenerativeArt extends PureComponent {
                 this.title = element;
               }}
             >
-              Purple <i>E</i>lephants
+              Hide &amp; <i>R</i>eveal
             </div>
             <div
               className={styles['description-text']}
