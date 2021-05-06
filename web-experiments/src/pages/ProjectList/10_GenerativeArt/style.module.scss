@@ -134,3 +134,32 @@
     font-size: 5em;
   }
 }
+
+// Dribble-specific media queries
+@media (width: 1536px) and (height: 1152px) {
+  .cross {
+    .cross-height {
+      left: 100px;
+      height: 100vh;
+      top: 15vh;
+    }
+
+    .cross-width {
+      left: 3.5vw;
+      width: 100px;
+    }
+  }
+
+  .icon-set {
+    left: 40px;
+  }
+
+  .left-content {
+    padding: 0;
+
+    .title-text {
+      font-size: 8em;
+      width: 500px;
+    }
+  }
+}

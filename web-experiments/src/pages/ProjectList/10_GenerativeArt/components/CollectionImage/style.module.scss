@@ -22,3 +22,10 @@
     }
   }
 }
+
+// Dribble-specific media queries
+@media (width: 1536px) and (height: 1152px) {
+  .description {
+    padding: 75px;
+  }
+}

@@ -183,9 +183,11 @@ class Work extends PureComponent {
   }
 
   repeatStatic () {
-    TweenLite.set(this.noise, {
-      backgroundPosition: Math.floor(Math.random() * 100) + 1 + '% ' + Math.floor(Math.random() * 10) + 1 + '%',
-    });
+    if (this.noise) {
+      TweenLite.set(this.noise, {
+        backgroundPosition: Math.floor(Math.random() * 100) + 1 + '% ' + Math.floor(Math.random() * 10) + 1 + '%',
+      });
+    }
   }
 
   handleCompleteLoadingAnimations () {

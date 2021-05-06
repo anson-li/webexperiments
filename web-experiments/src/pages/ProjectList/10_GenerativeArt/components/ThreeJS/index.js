@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React, {
   PureComponent,
 } from 'react';
@@ -184,5 +185,10 @@ class ThreeJS extends PureComponent {
     );
   }
 }
+
+ThreeJS.propTypes = {
+  height: PropTypes.number.isRequired,
+  width: PropTypes.number.isRequired,
+};
 
 export default ThreeJS;
