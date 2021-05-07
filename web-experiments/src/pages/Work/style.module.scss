@@ -3,15 +3,13 @@
   position: absolute;
   height: 100vh;
   overflow: hidden;
-  background-color: #edeced;
+  background-color: #111111;
 
   .background {
     height: 100%;
     width: 100%;
     position: absolute;
-    background-image: url('./images/noise.png');
-    opacity: 0.05;
-    mix-blend-mode: difference;
+    opacity: 0.2;
   }
 }
 
@@ -39,7 +37,7 @@
     text-align: right;
     width: 50vw;
     font-style: italic;
-    color: black;
+    color: #FFFFFF;
   }
 }
 

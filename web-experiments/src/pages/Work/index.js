@@ -54,12 +54,12 @@ class Work extends PureComponent {
 
     this.projects = [
       {
-        description: 'WIP WIP WIP WIP WIP WIP WIP WIP WIP WIP WIP WIP WIP WIP WIP WIP WIP WIP WIP WIP WIP',
-        id: 9,
+        description: 'Hide and reveal shaders, using mouse interactions to slowly peel back layers of a painting.',
+        id: 10,
         link: '/generativeart',
         ref: this.generativeart,
         technology: 'Design',
-        title: 'Generative Art',
+        title: 'Hide & Seek',
       },
       {
         description: 'Interactive mood board, with draggable elements built with GSAP and new page structure',
@@ -141,20 +141,20 @@ class Work extends PureComponent {
     this.interactionsReady = false;
 
     // Tweening seed to high levels to create 'noise' effect
-    // TweenLite.to('#workTurbulence', 5, {
-    //   attr: {
-    //     seed: 10000,
-    //   },
-    //   ease: 'none',
-    //   repeat: -1,
-    //   yoyo: true,
-    // });
-
-    TweenLite.to(this.noise, 0.03, {
+    TweenLite.to('#workTurbulence', 5, {
+      attr: {
+        seed: 10000,
+      },
       ease: 'none',
-      onRepeat: this.repeatStatic,
       repeat: -1,
+      yoyo: true,
     });
+
+    // TweenLite.to(this.noise, 0.03, {
+    //   ease: 'none',
+    //   onRepeat: this.repeatStatic,
+    //   repeat: -1,
+    // });
 
     this.childSplit = new SplitText(this.description, {
       linesClass: 'inview-split-child',
@@ -312,7 +312,7 @@ class Work extends PureComponent {
           ref={(element) => {
             this.noise = element;
           }}>
-          {/* <svg
+          <svg
             height='100%'
             width='100%'
           >
@@ -325,8 +325,8 @@ class Work extends PureComponent {
               <feColorMatrix type='matrix' values='.33 .33 .33 0 0 .33 .33 .33 0 0 .33 .33 .33 0 0 0 0 0 1 0' />
             </filter>
             <rect fill='#fff' height='100%' opacity='0.00' width='100%' />
-            <rect filter='url(#workFilter)' height='100%' opacity='0.50' width='100%' />
-          </svg> */}
+            <rect filter='url(#workFilter)' height='100%' opacity='1.00' width='100%' />
+          </svg>
         </div>
         <div id={styles['animation-wrapper']}>
           <TextLogo
@@ -343,9 +343,6 @@ class Work extends PureComponent {
           </div>
           <div
             className={styles['work-content']}
-            onMouseEnter={this.handleEnterWorkContent}
-            onMouseLeave={this.handleLeaveWorkContent}
-            onMouseMove={this.handleMoveWorkContent}
             ref={(element) => {
               this.workcontent = element;
             }}
