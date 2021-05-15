@@ -50,7 +50,7 @@ class WebGLCurtains extends PureComponent {
         },
         gradientclouds: {
           ref: GradientCloudsFs,
-          status: true,
+          status: false,
         },
         mousecolor: {
           ref: MouseColorFs,
@@ -70,7 +70,7 @@ class WebGLCurtains extends PureComponent {
         },
         noisypage: {
           ref: NoisyPageFs,
-          status: false,
+          status: true,
         },
         none: {
           ref: DragFs,
