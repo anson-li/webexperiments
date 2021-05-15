@@ -21,8 +21,10 @@ import DitheringFs from './Shaders/DitheringFs';
 import DragFs from './Shaders/DragFs';
 import DragVs from './Shaders/DragVs';
 import DragWaterVs from './Shaders/DragWaterVs';
+import GradientCloudsFs from './Shaders/GradientCloudsFs';
 import HorizontalDragVs from './Shaders/HorizontalDragVs';
 import MouseColorFs from './Shaders/MouseColorFs';
+import MouseDitherFs from './Shaders/MouseDitherFs';
 import MouseOpacityFs from './Shaders/MouseOpacityFs';
 import MouseOverFs from './Shaders/MouseOverFs';
 import NoiseFs from './Shaders/NoiseFs';
@@ -44,10 +46,18 @@ class WebGLCurtains extends PureComponent {
         },
         dithering: {
           ref: DitheringFs,
+          status: false,
+        },
+        gradientclouds: {
+          ref: GradientCloudsFs,
           status: true,
         },
         mousecolor: {
           ref: MouseColorFs,
+          status: false,
+        },
+        mousedither: {
+          ref: MouseDitherFs,
           status: false,
         },
         mouseopacity: {
@@ -144,8 +154,14 @@ class WebGLCurtains extends PureComponent {
     fragmentShader.add(this.state.fragmentshader.dithering, 'status').name('Dithering filter').listen().onChange(() => {
       this.setFragmentChecked('dithering');
     });
+    fragmentShader.add(this.state.fragmentshader.gradientclouds, 'status').name('Gradient Clouds').listen().onChange(() => {
+      this.setFragmentChecked('gradientclouds');
+    });
     fragmentShader.add(this.state.fragmentshader.mousecolor, 'status').name('Color shifting via mouse position').listen().onChange(() => {
       this.setFragmentChecked('mousecolor');
+    });
+    fragmentShader.add(this.state.fragmentshader.mousedither, 'status').name('Perlin-based dithering via mouse position').listen().onChange(() => {
+      this.setFragmentChecked('mousedither');
     });
     fragmentShader.add(this.state.fragmentshader.mouseopacity, 'status').name('Opacity shifting via mouse position').listen().onChange(() => {
       this.setFragmentChecked('mouseopacity');
