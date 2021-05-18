@@ -9,9 +9,17 @@ import WebGLCurtains from './pages/ProjectList/07_WebGLCurtains';
 import WebGLGallery from './pages/ProjectList/08_WebGLGallery';
 import InteractiveMoodBoard from './pages/ProjectList/09_InteractiveMoodBoard';
 import GenerativeArt from './pages/ProjectList/10_GenerativeArt';
+import SlideInText from './pages/ProjectList/11_SlideInText';
 import Work from './pages/Work';
 
 const Routes = [
+  {
+    Component: SlideInText,
+    key: 'slideintext',
+    path: {
+      path: '/slideintext',
+    },
+  },
   {
     Component: Work,
     key: 'work',

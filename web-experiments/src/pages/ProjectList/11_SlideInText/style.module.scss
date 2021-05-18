@@ -1,0 +1,22 @@
+.slidein-background {
+  background-color: #fffdf0;
+  width: 100vw;
+  height: fit-content;
+  position: absolute;
+}
+
+.page-content {
+  min-height: 80vh;
+  width: 80vw;
+  padding: 50px;
+  margin: 15vh 30vw; // margin: 15vh 10vw;
+}
+
+.animated-text {
+  font-family: ivymode, serif;
+  font-weight: 800;
+  font-size: 5em;
+  line-height: 3em;
+  color: black;
+  perspective-origin: center;
+}

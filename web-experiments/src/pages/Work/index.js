@@ -41,6 +41,7 @@ class Work extends PureComponent {
     this.workHovered = false;
     this.firstHover = false;
 
+    this.slideintext = React.createRef();
     this.generativeart = React.createRef();
     this.moodboard = React.createRef();
     this.webglgallery = React.createRef();
@@ -53,6 +54,14 @@ class Work extends PureComponent {
     this.jellicent = React.createRef();
 
     this.projects = [
+      {
+        description: 'Text manipulation, warping, and animations driven by scroll and hover interactions, powered by GSAP.',
+        id: 11,
+        link: '/slideintext',
+        ref: this.slideintext,
+        technology: 'GSAP',
+        title: 'Slide-in Text',
+      },
       {
         description: 'Hide and reveal shaders, using mouse interactions to slowly peel back layers of a painting.',
         id: 10,
