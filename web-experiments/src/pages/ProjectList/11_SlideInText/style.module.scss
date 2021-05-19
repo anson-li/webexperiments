@@ -1,5 +1,5 @@
 .slidein-background {
-  background-color: #fffdf0;
+  background-color: #E3655B;
   width: 100vw;
   height: fit-content;
   position: absolute;
@@ -9,14 +9,33 @@
   min-height: 80vh;
   width: 80vw;
   padding: 50px;
-  margin: 15vh 30vw; // margin: 15vh 10vw;
+  margin: 15vh 10vw; // margin: 15vh 10vw;
 }
 
 .animated-text {
-  font-family: ivymode, serif;
-  font-weight: 800;
+  font-family: forma-djr-text, sans-serif;
+  font-weight: 700;
+  font-style: normal;
   font-size: 5em;
-  line-height: 3em;
-  color: black;
+  line-height: 1.5em;
+  color: white;
   perspective-origin: center;
+}
+
+.animated-description {
+  font-family: forma-djr-text, sans-serif;
+  font-weight: 200;
+  font-style: normal;
+  font-size: 1em;
+  line-height: 1.3em;
+  color: white;
+  perspective-origin: center;
+}
+
+.animated-image {
+  img {
+    width: 600px;
+    height: 400px;
+    padding: 50px;  
+  }
 }
