@@ -11,6 +11,7 @@ import React, {
 } from 'react';
 import TextLogo from '../../../common/TextLogo';
 import WithTransition from '../../../common/WithTransition';
+import GridBackground from './Images/pixelgrid.png';
 import styles from './style.module.scss';
 
 gsap.registerPlugin(SplitText);
@@ -32,8 +33,10 @@ class SlideInText extends PureComponent {
     // Template for rolling items up into the page
     gsap.set(this.animatedtitle, {
       perspective: '600px',
-      perspectiveOrigin: '100px',
+      perspectiveOrigin: '300px',
       transformOrigin: 'center',
+      scale: 0.5,
+      x: -335,
     });
     gsap.set(this.animatedelements.chars, {
       backfaceVisibility: 'hidden',
@@ -48,6 +51,7 @@ class SlideInText extends PureComponent {
       transformOrigin: '50% 50% 50px',
     });
 
+    // Template for rolling images up into the page
     gsap.set(this.animatedimage, {
       perspective: '1000px',
       perspectiveOrigin: '300px',
@@ -122,7 +126,12 @@ class SlideInText extends PureComponent {
           hover={cursorHover}
           unhover={cursorUnhover}
         />
-        <div className={styles['page-content']}>
+        <div
+          className={styles['page-content']}
+          style={{backgroundImage: `url(${GridBackground})`}}>
+          <div className={styles['animated-text-template']}>
+            TEXT.
+          </div>
           <div
             className={styles['animated-text']}
             ref={(element) => {

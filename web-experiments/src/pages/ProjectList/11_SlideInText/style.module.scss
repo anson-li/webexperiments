@@ -16,10 +16,21 @@
   font-family: forma-djr-text, sans-serif;
   font-weight: 700;
   font-style: normal;
-  font-size: 5em;
+  font-size: 12em;
   line-height: 1.5em;
   color: white;
   perspective-origin: center;
+}
+
+.animated-text-template {
+  font-family: forma-djr-text, sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  font-size: 12em;
+  line-height: 1.5em;
+  position: absolute;
+  color: none;
+  border: 2px solid blue;
 }
 
 .animated-description {
