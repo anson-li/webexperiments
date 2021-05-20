@@ -45,7 +45,7 @@ class SlideInText extends PureComponent {
       opacity: 0,
       rotationX: '180',
       stagger: 0.1,
-      transformOrigin: '50% 50% 100px',
+      transformOrigin: '50% 50% 50px',
     });
 
     this.animatedelementsdescription = new SplitText(this.animateddescription, {
@@ -64,15 +64,21 @@ class SlideInText extends PureComponent {
     });
 
     gsap.set(this.animatedimage, {
-      backfaceVisibility: 'hidden',
-      transformOrigin: 'center center -100px',
+      perspective: '1000px',
+      perspectiveOrigin: '200px',
+      transformOrigin: 'center',
     });
-    gsap.from(this.animatedimage, 1.0, {
+    gsap.set(this.animatedinnerimage, {
+      backfaceVisibility: 'hidden',
+      z: 300,
+    });
+    gsap.from(this.animatedinnerimage, 1.0, {
       delay: 1,
       ease: Power4,
       opacity: 0,
-      rotationX: '-180',
+      rotationX: '180',
       stagger: 0.1,
+      transformOrigin: '50% 50% 100px',
     });
   }
 
@@ -139,7 +145,12 @@ class SlideInText extends PureComponent {
             ref={(element) => {
               this.animatedimage = element;
             }}>
-            {/* <img alt='Card alternate' src='https://unsplash.it/1920/1080?random=1' /> */}
+            <img
+              alt='Card alternate'
+              ref={(element) => {
+                this.animatedinnerimage = element;
+              }}
+              src='https://unsplash.it/1920/1080?random=1' />
           </div>
           <div
             className={styles['animated-description']}
