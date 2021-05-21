@@ -9,6 +9,7 @@ import PropTypes from 'prop-types';
 import React, {
   PureComponent,
 } from 'react';
+import SmoothScroll from '../../../common/SmoothScroll';
 import TextLogo from '../../../common/TextLogo';
 import WithTransition from '../../../common/WithTransition';
 import GridBackground from './Images/pixelgrid.png';
@@ -72,18 +73,20 @@ class SlideInText extends PureComponent {
         ref={(element) => {
           this.el = element;
         }}>
-        <TextLogo
-          hover={cursorHover}
-          unhover={cursorUnhover}
-        />
-        <Header />
-        <div
-          className={styles['page-content']}
-          style={{backgroundImage: `url(${GridBackground})`}}>
-          <HeroText />
-          <SingleImageDescription />
-          <MultipleImageGallery />
-        </div>
+        <SmoothScroll>
+          <TextLogo
+            hover={cursorHover}
+            unhover={cursorUnhover}
+          />
+          <Header />
+          <div
+            className={styles['page-content']}
+            style={{backgroundImage: `url(${GridBackground})`}}>
+            <HeroText />
+            <SingleImageDescription />
+            <MultipleImageGallery />
+          </div>
+        </SmoothScroll>
       </div>
     );
   }
