@@ -12,6 +12,7 @@ import React, {
 import TextLogo from '../../../common/TextLogo';
 import WithTransition from '../../../common/WithTransition';
 import GridBackground from './Images/pixelgrid.png';
+import Header from './components/Header';
 import styles from './style.module.scss';
 
 gsap.registerPlugin(SplitText);
@@ -163,6 +164,7 @@ class SlideInText extends PureComponent {
           hover={cursorHover}
           unhover={cursorUnhover}
         />
+        <Header />
         <div
           className={styles['page-content']}
           style={{backgroundImage: `url(${GridBackground})`}}>

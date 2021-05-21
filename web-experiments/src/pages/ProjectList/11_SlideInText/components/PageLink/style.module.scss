@@ -1,0 +1,25 @@
+.page-header-link {
+  font-family: forma-djr-text, sans-serif;
+  font-weight: 200;
+  font-style: normal;
+  color: white;
+  margin-right: 50px;
+
+  .page-header-link-id {
+    font-size: 0.7em;
+  }
+
+  .page-header-link-text {
+    font-size: 1em;
+  }
+
+  .underline {
+    display: block;
+    position: absolute;
+    bottom: 0;
+    left: 0; // Animated via JS
+    width: 0; // Animated via JS
+    height: 1px;
+    background-color: white;
+  }
+}
