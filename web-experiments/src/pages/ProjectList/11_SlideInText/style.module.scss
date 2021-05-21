@@ -12,86 +12,10 @@
   margin: 15vh 10vw; // margin: 15vh 10vw;
 }
 
-.animated-text {
-  font-family: forma-djr-text, sans-serif;
-  font-weight: 700;
-  font-style: normal;
-  font-size: 20em;
-  line-height: 1.5em;
-  color: white;
-  perspective-origin: center;
+.inview-split-parent {
+  overflow: hidden;
 }
 
-.animated-text-template {
-  font-family: forma-djr-text, sans-serif;
-  font-weight: 700;
-  font-style: normal;
-  font-size: 20em;
-  line-height: 1.5em;
-  position: absolute;
-  color: none;
-  border: 2px solid blue;
-}
-
-.animated-description {
-  font-family: forma-djr-text, sans-serif;
-  font-weight: 200;
-  font-style: normal;
-  font-size: 1em;
-  line-height: 1.3em;
-  color: white;
-  perspective-origin: center;
-}
-
-.main-banner {
-  display: flex;
-}
-
-.animated-image {
-  .animated-inner-image {
-    width: 600px;
-    height: 400px;
-  }
-}
-
-.animated-box {
-  position: absolute;
-  width: 600px;
-  height: 400px;
-  border: 3px red solid;
-  z-index: 1000;
-}
-
-.image-description {
-  padding-left: 150px;
-  font-family: forma-djr-text, sans-serif;
-  font-weight: 200;
-  font-style: normal;
-  font-size: 1.3em;
-  line-height: 1.3em;
-  color: white;
-
-  .inview-split-parent {
-    overflow: hidden;
-  }
-  
-  .inview-split-child {
-    display: inline-block;
-  }
-}
-
-.first-image {
-  display: flex;
-}
-
-.main-subtitle {
-  padding-top: 180px;
-  padding-left: 100px;
-  font-family: forma-djr-text, sans-serif;
-  font-weight: 200;
-  font-style: normal;
-  font-size: 3.5em;
-  line-height: 1em;
-  letter-spacing: 2px;
-  color: white;
+.inview-split-child {
+  display: inline-block;
 }

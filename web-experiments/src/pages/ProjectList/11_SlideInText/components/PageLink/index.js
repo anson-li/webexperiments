@@ -33,7 +33,7 @@ class PageLink extends PureComponent {
       <div
         className={styles['page-header-link']}
         onMouseEnter={this.handleMouseEnter}
-        onMouseOut={this.handleMouseLeave}
+        onMouseLeave={this.handleMouseLeave}
       >
         <div className={styles['page-header-link-id']}>{id}</div>
         <div className={styles['page-header-link-text']}>{text}</div>

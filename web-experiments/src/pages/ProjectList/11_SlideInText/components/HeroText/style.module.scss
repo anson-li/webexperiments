@@ -1,0 +1,36 @@
+.main-banner {
+  display: flex;
+
+  .main-subtitle {
+    padding-top: 180px;
+    padding-left: 100px;
+    font-family: forma-djr-text, sans-serif;
+    font-weight: 200;
+    font-style: normal;
+    font-size: 3.5em;
+    line-height: 1em;
+    letter-spacing: 2px;
+    color: white;
+  }
+  
+  .animated-text {
+    font-family: forma-djr-text, sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 20em;
+    line-height: 1.5em;
+    color: white;
+    perspective-origin: center;
+  }
+}
+
+.animated-text-template {
+  font-family: forma-djr-text, sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  font-size: 20em;
+  line-height: 1.5em;
+  position: absolute;
+  color: none;
+  border: 2px solid blue;
+}
