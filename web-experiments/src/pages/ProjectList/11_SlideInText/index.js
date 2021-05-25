@@ -15,6 +15,7 @@ import WithTransition from '../../../common/WithTransition';
 import GridBackground from './Images/pixelgrid.png';
 import Header from './components/Header';
 import HeroText from './components/HeroText';
+import HorizontalSlidingText from './components/HorizontalSlidingText';
 import MultipleImageGallery from './components/MultipleImageGallery';
 import SingleImageDescription from './components/SingleImageDescription';
 import styles from './style.module.scss';
@@ -84,6 +85,7 @@ class SlideInText extends PureComponent {
             style={{backgroundImage: `url(${GridBackground})`}}>
             <HeroText />
             <SingleImageDescription />
+            <HorizontalSlidingText />
             <MultipleImageGallery />
           </div>
         </SmoothScroll>
