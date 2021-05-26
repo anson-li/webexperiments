@@ -31,6 +31,9 @@ class HorizontalSlidingText extends PureComponent {
         text: 'Flawless &',
       },
     ];
+
+    this.handleLinkMouseEnter = this.handleLinkMouseEnter.bind(this);
+    this.handleLinkMouseLeave = this.handleLinkMouseLeave.bind(this);
   }
 
   componentDidMount () {
@@ -76,6 +79,18 @@ class HorizontalSlidingText extends PureComponent {
     }, time);
   }
 
+  handleLinkMouseEnter (event) {
+    gsap.to(event.target, 0.2, {
+      opacity: 1,
+    });
+  }
+
+  handleLinkMouseLeave (event) {
+    gsap.to(event.target, 0.2, {
+      opacity: 0.5,
+    });
+  }
+
   render () {
     return (
       <div
@@ -95,6 +110,8 @@ class HorizontalSlidingText extends PureComponent {
               <div
                 className={styles.box}
                 key={key}
+                onMouseEnter={this.handleLinkMouseEnter}
+                onMouseLeave={this.handleLinkMouseLeave}
                 ref={(ref) => {
                   this.scrollList[index].ref = ref;
                 }}
@@ -116,6 +133,8 @@ class HorizontalSlidingText extends PureComponent {
               <div
                 className={styles.box}
                 key={key}
+                onMouseEnter={this.handleLinkMouseEnter}
+                onMouseLeave={this.handleLinkMouseLeave}
                 ref={(ref) => {
                   this.scrollList[index].ref = ref;
                 }}

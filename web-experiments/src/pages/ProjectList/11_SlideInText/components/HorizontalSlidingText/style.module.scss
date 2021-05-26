@@ -4,7 +4,7 @@
   font-style: normal;
   font-size: 320px;
   line-height: 1em;
-  height: 15em;
+  height: 18em;
   color: white;
 
   position:relative;
@@ -14,15 +14,16 @@
   overflow: hidden; 
 
   transform: translateX(-12vw);
-  margin-bottom: 25px;
+  margin-bottom: 50px;
 
   .horizontal-slider-list {
     position: absolute;
     display: inline-block;
-
+    
     .box {
       float: left;
       padding-left: 50px;
+      opacity: 0.5;
     }
   }
 
