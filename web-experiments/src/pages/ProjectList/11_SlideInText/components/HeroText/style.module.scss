@@ -1,5 +1,9 @@
 .main-banner {
   display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  width: max-content;
+  padding-left: 50px;
 
   .main-subtitle {
     padding-top: 180px;
@@ -21,6 +25,19 @@
     line-height: 1.5em;
     color: white;
     perspective-origin: center;
+    flex: 1;
+  }
+}
+
+@media (max-width: 1680px) {
+  .main-banner .animated-text {
+    font-size: 15em;
+  }
+
+  .main-banner .main-subtitle {
+    font-size: 2em;
+    padding-left: 0;
+    padding-top: 150px;
   }
 }
 

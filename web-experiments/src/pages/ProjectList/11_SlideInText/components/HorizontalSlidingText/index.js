@@ -44,7 +44,7 @@ class HorizontalSlidingText extends PureComponent {
     });
 
     // Add additional end padding to fit everything on one line
-    listWidth += 50;
+    listWidth += 150;
 
     gsap.set(this.list, {
       width: `${listWidth}px`,

@@ -27,3 +27,9 @@
     color: white;
   }  
 }
+
+@media (max-width: 1680px) {
+  .first-image .image-description {
+    font-size: 0.8em;
+  }
+}
