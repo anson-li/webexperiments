@@ -1,6 +1,5 @@
-import anime from 'animejs';
 import {
-  gsap, Power4,
+  gsap,
 } from 'gsap';
 import {
   SplitText,
@@ -30,18 +29,11 @@ class SlideInText extends PureComponent {
   animateIn () {
     this.props.hideLoader();
     this.props.hideFollow();
-    gsap.to(this.el, 1, {
-      delay: 1,
-      opacity: 1,
-    });
   }
 
   animateOut () {
     this.props.showFollow();
     this.props.showLoader();
-    gsap.to(this.el, 1, {
-      opacity: 0,
-    });
   }
 
   render () {
