@@ -24,52 +24,32 @@ gsap.registerPlugin(SplitText);
 
 class SlideInText extends PureComponent {
   componentDidMount () {
-    this.props.hideLoader();
-    this.props.hideFollow();
-  }
-
-  hidePage () {
-    anime.remove(this.el);
-
-    return anime({
-      duration: 0,
-      opacity: 0,
-      targets: this.el,
-    }).finished;
+    this.animateIn();
   }
 
   animateIn () {
-    anime.remove(this.el);
-
-    return anime({
-      delay: 1000,
-      duration: 1000,
-      easing: 'easeOutExpo',
-      opacity: [0, 1],
-      targets: this.el,
-    }).finished;
+    this.props.hideLoader();
+    this.props.hideFollow();
+    gsap.to(this.el, 1, {
+      delay: 1,
+      opacity: 1,
+    });
   }
 
   animateOut () {
-    anime.remove(this.el);
     this.props.showFollow();
-    const {showLoader} = this.props;
-    showLoader();
-
-    return anime({
-      duration: 1000,
-      easing: 'easeOutExpo',
+    this.props.showLoader();
+    gsap.to(this.el, 1, {
       opacity: 0,
-      targets: this.el,
-    }).finished;
+    });
   }
 
   render () {
-    const {cursorHover, cursorUnhover} = this.props;
+    const {cursorHover, cursorUnhover, transitionStatus} = this.props;
 
     return (
       <div
-        className={styles['slidein-background']}
+        className={`${styles['slidein-background']} ${transitionStatus}`}
         id='generative-art'
         ref={(element) => {
           this.el = element;
@@ -101,6 +81,7 @@ SlideInText.propTypes = {
   hideLoader: PropTypes.func.isRequired,
   showFollow: PropTypes.func.isRequired,
   showLoader: PropTypes.func.isRequired,
+  transitionStatus: PropTypes.string.isRequired,
 };
 
 export default WithTransition(SlideInText);

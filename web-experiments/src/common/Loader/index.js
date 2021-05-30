@@ -15,7 +15,7 @@ class Loader extends PureComponent {
   }
 
   fadeIn () {
-    TweenLite.to(this.loader, 0.9, {
+    TweenLite.to(this.loader, 1, {
       opacity: 1,
       zIndex: 5,
     });
@@ -23,7 +23,6 @@ class Loader extends PureComponent {
 
   fadeOut () {
     TweenLite.to(this.loader, 1, {
-      delay: 1,
       opacity: 0,
       zIndex: -1,
     });

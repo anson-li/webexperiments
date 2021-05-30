@@ -206,39 +206,21 @@ class Work extends PureComponent {
     });
   }
 
-  hidePage () {
-    anime.remove(this.el);
-
-    return anime({
-      duration: 0,
-      opacity: 0,
-      targets: this.el,
-    }).finished;
-  }
-
   animateIn () {
-    anime.remove(this.el);
-
-    return anime({
-      delay: 1000,
-      duration: 1000,
-      easing: 'easeOutExpo',
-      opacity: [0, 1],
-      targets: this.el,
-    }).finished;
+    this.props.hideLoader();
+    gsap.to(this.el, 1, {
+      delay: 1,
+      opacity: 1,
+    });
   }
 
   animateOut () {
-    anime.remove(this.el);
-    const {showLoader} = this.props;
-    showLoader();
+    console.log('workout');
+    this.props.showLoader();
 
-    return anime({
-      duration: 1000,
-      easing: 'easeOutExpo',
+    gsap.to(this.el, 1, {
       opacity: 0,
-      targets: this.el,
-    }).finished;
+    });
   }
 
   showDescription (description) {
@@ -311,9 +293,13 @@ class Work extends PureComponent {
       />;
     });
 
+    const {transitionStatus} = this.props;
+
     return (
       <div
-        id={styles['work-page']} ref={(element) => {
+        className={transitionStatus}
+        id={styles['work-page']}
+        ref={(element) => {
           this.el = element;
         }}>
         <div
@@ -369,6 +355,7 @@ Work.propTypes = {
   cursorUnhover: PropTypes.func.isRequired,
   hideLoader: PropTypes.func.isRequired,
   showLoader: PropTypes.func.isRequired,
+  transitionStatus: PropTypes.string.isRequired,
 };
 
 export default WithTransition(Work);

@@ -4,6 +4,7 @@ import React from 'react';
 import {
   Transition,
 } from 'react-transition-group';
+import './style.scss';
 
 export default function WithTransition (WrappedComponent) {
   return class extends React.Component {
@@ -36,31 +37,17 @@ export default function WithTransition (WrappedComponent) {
       }
     }
 
-    hidePage (done) {
-      if (typeof this.wrappedComponent.hidePage === 'function') {
-        const promise = this.wrappedComponent.hidePage();
-        if (promise && typeof promise.then === 'function') {
-          promise.then(done);
-        } else {
-          done();
-        }
-      }
-    }
-
     render () {
       return (
         <Transition
           {...this.props}
           addEndListener={(node, done) => {
-            window.scroll(0, 0);
             // eslint-disable-next-line react/prop-types
             if (this.props.in) {
-              this.hidePage(done);
               setTimeout(() => {
                 this.handleAnimateIn(done);
-              }, 100);
+              }, 1000);
             } else {
-              this.hidePage(done);
               this.handleAnimateOut(done);
             }
           }}
