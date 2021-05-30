@@ -12,46 +12,20 @@ class WebGLGallery extends PureComponent {
     this.el = null;
   }
 
-  hidePage () {
-    anime.remove(this.el);
-
-    return anime({
-      duration: 0,
-      opacity: 0,
-      targets: this.el,
-    }).finished;
-  }
-
   animateIn () {
-    anime.remove(this.el);
-
-    return anime({
-      delay: 1000,
-      duration: 1000,
-      easing: 'easeOutExpo',
-      opacity: [0, 1],
-      targets: this.el,
-    }).finished;
+    this.props.hideLoader();
   }
 
   animateOut () {
-    anime.remove(this.el);
-    const {showLoader} = this.props;
-    showLoader();
-
-    return anime({
-      duration: 1000,
-      easing: 'easeOutExpo',
-      opacity: 0,
-      targets: this.el,
-    }).finished;
+    this.props.showLoader();
   }
 
   render () {
-    const {cursorHover, cursorUnhover, hideLoader} = this.props;
+    const {cursorHover, cursorUnhover, hideLoader, transitionStatus} = this.props;
 
     return (
       <div
+        className={transitionStatus}
         id='main-page'
         ref={(element) => {
           this.el = element;
@@ -73,6 +47,7 @@ WebGLGallery.propTypes = {
   cursorUnhover: PropTypes.func.isRequired,
   hideLoader: PropTypes.func.isRequired,
   showLoader: PropTypes.func.isRequired,
+  transitionStatus: PropTypes.string.isRequired,
 };
 
 export default WithTransition(WebGLGallery);

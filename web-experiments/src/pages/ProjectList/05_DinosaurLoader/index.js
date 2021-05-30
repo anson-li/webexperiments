@@ -12,7 +12,7 @@ import styles from './style.module.scss';
 
 class DinosaurLoader extends PureComponent {
   componentDidMount () {
-    this.props.hideLoader();
+    this.animateIn();
     TweenLite.to(this.dinosaurGradientBase, 2, {
       attr: {offset: '0%'},
       ease: 'none',
@@ -29,46 +29,20 @@ class DinosaurLoader extends PureComponent {
     });
   }
 
-  hidePage () {
-    anime.remove(this.el);
-
-    return anime({
-      duration: 0,
-      opacity: 0,
-      targets: this.el,
-    }).finished;
-  }
-
   animateIn () {
-    anime.remove(this.el);
-
-    return anime({
-      delay: 1000,
-      duration: 1000,
-      easing: 'easeOutExpo',
-      opacity: [0, 1],
-      targets: this.el,
-    }).finished;
+    this.props.hideLoader();
   }
 
   animateOut () {
-    anime.remove(this.el);
-    const {showLoader} = this.props;
-    showLoader();
-
-    return anime({
-      duration: 1000,
-      easing: 'easeOutExpo',
-      opacity: 0,
-      targets: this.el,
-    }).finished;
+    this.props.showLoader();
   }
 
   render () {
-    const {cursorHover, cursorUnhover} = this.props;
+    const {cursorHover, cursorUnhover, transitionStatus} = this.props;
 
     return (
       <div
+        className={transitionStatus}
         id='main-page' ref={(element) => {
           this.el = element;
         }}>
@@ -135,6 +109,7 @@ DinosaurLoader.propTypes = {
   cursorUnhover: PropTypes.func.isRequired,
   hideLoader: PropTypes.func.isRequired,
   showLoader: PropTypes.func.isRequired,
+  transitionStatus: PropTypes.string.isRequired,
 };
 
 export default WithTransition(DinosaurLoader);

@@ -42,6 +42,7 @@ class InteractiveMoodBoard extends PureComponent {
     this.animateFadeIn();
     this.setupDraggable();
     window.addEventListener('resize', this.onWindowResize, false);
+    this.animateIn();
   }
 
   componentWillUnmount () {
@@ -122,39 +123,12 @@ class InteractiveMoodBoard extends PureComponent {
     });
   }
 
-  hidePage () {
-    anime.remove(this.el);
-
-    return anime({
-      duration: 0,
-      opacity: 0,
-      targets: this.el,
-    }).finished;
-  }
-
   animateIn () {
-    anime.remove(this.el);
-
-    return anime({
-      delay: 1000,
-      duration: 1000,
-      easing: 'easeOutExpo',
-      opacity: [0, 1],
-      targets: this.el,
-    }).finished;
+    this.props.hideLoader();
   }
 
   animateOut () {
-    anime.remove(this.el);
-    const {showLoader} = this.props;
-    showLoader();
-
-    return anime({
-      duration: 1000,
-      easing: 'easeOutExpo',
-      opacity: 0,
-      targets: this.el,
-    }).finished;
+    this.props.showLoader();
   }
 
   setupDraggable () {
@@ -177,11 +151,11 @@ class InteractiveMoodBoard extends PureComponent {
   }
 
   render () {
-    const {cursorHover, cursorUnhover} = this.props;
+    const {cursorHover, cursorUnhover, transitionStatus} = this.props;
 
     return (
       <div
-        className={styles['page-background']}
+        className={`${styles['page-background']} ${transitionStatus}`}
         id='main-page'
         ref={(element) => {
           this.el = element;
@@ -280,6 +254,7 @@ InteractiveMoodBoard.propTypes = {
   hideLoader: PropTypes.func.isRequired,
   moveCursor: PropTypes.func.isRequired,
   showLoader: PropTypes.func.isRequired,
+  transitionStatus: PropTypes.string.isRequired,
 };
 
 export default WithTransition(InteractiveMoodBoard);

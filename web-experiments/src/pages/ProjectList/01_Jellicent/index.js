@@ -9,46 +9,24 @@ import WithTransition from '../../../common/WithTransition';
 import JellicentObject from './components/JellicentObject';
 
 class Jellicent extends PureComponent {
-  hidePage () {
-    anime.remove(this.el);
-
-    return anime({
-      duration: 0,
-      opacity: 0,
-      targets: this.el,
-    }).finished;
+  componentDidMount () {
+    this.animateIn();
   }
 
   animateIn () {
-    anime.remove(this.el);
-
-    return anime({
-      delay: 1000,
-      duration: 1000,
-      easing: 'easeOutExpo',
-      opacity: [0, 1],
-      targets: this.el,
-    }).finished;
+    this.props.hideLoader();
   }
 
   animateOut () {
-    anime.remove(this.el);
-    const {showLoader} = this.props;
-    showLoader();
-
-    return anime({
-      duration: 1000,
-      easing: 'easeOutExpo',
-      opacity: 0,
-      targets: this.el,
-    }).finished;
+    this.props.showLoader();
   }
 
   render () {
-    const {hideLoader, cursorHover, cursorUnhover} = this.props;
+    const {hideLoader, cursorHover, cursorUnhover, transitionStatus} = this.props;
 
     return (
       <div
+        className={transitionStatus}
         id='main-page' ref={(element) => {
           this.el = element;
         }}>
@@ -70,6 +48,7 @@ Jellicent.propTypes = {
   cursorUnhover: PropTypes.func.isRequired,
   hideLoader: PropTypes.func.isRequired,
   showLoader: PropTypes.func.isRequired,
+  transitionStatus: PropTypes.string.isRequired,
 };
 
 export default WithTransition(Jellicent);

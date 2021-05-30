@@ -10,50 +10,25 @@ import ThreeJS from './components/ThreeJS';
 
 class CoffeeCup extends PureComponent {
   componentDidMount () {
-    this.props.hideFollow();
-  }
-
-  hidePage () {
-    anime.remove(this.el);
-
-    return anime({
-      duration: 0,
-      opacity: 0,
-      targets: this.el,
-    }).finished;
+    this.animateIn();
   }
 
   animateIn () {
-    anime.remove(this.el);
-
-    return anime({
-      delay: 1000,
-      duration: 1000,
-      easing: 'easeOutExpo',
-      opacity: [0, 1],
-      targets: this.el,
-    }).finished;
+    this.props.hideLoader();
+    this.props.hideFollow();
   }
 
   animateOut () {
-    anime.remove(this.el);
+    this.props.showLoader();
     this.props.showFollow();
-    const {showLoader} = this.props;
-    showLoader();
-
-    return anime({
-      duration: 1000,
-      easing: 'easeOutExpo',
-      opacity: 0,
-      targets: this.el,
-    }).finished;
   }
 
   render () {
-    const {hideLoader, cursorHover, cursorUnhover} = this.props;
+    const {hideLoader, cursorHover, cursorUnhover, transitionStatus} = this.props;
 
     return (
       <div
+        className={transitionStatus}
         id='additiveshader-page' ref={(event) => {
           this.el = event;
         }}>
@@ -77,6 +52,7 @@ CoffeeCup.propTypes = {
   hideLoader: PropTypes.func.isRequired,
   showFollow: PropTypes.func.isRequired,
   showLoader: PropTypes.func.isRequired,
+  transitionStatus: PropTypes.string.isRequired,
 };
 
 export default WithTransition(CoffeeCup);

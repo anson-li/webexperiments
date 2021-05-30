@@ -220,39 +220,12 @@ class WebGLCurtains extends PureComponent {
     window.removeEventListener('touchmove', this.handleMovement);
   }
 
-  hidePage () {
-    anime.remove(this.el);
-
-    return anime({
-      duration: 0,
-      opacity: 0,
-      targets: this.el,
-    }).finished;
-  }
-
   animateIn () {
-    anime.remove(this.el);
-
-    return anime({
-      delay: 1000,
-      duration: 1000,
-      easing: 'easeOutExpo',
-      opacity: [0, 1],
-      targets: this.el,
-    }).finished;
+    this.props.hideLoader();
   }
 
   animateOut () {
-    anime.remove(this.el);
-    const {showLoader} = this.props;
-    showLoader();
-
-    return anime({
-      duration: 1000,
-      easing: 'easeOutExpo',
-      opacity: 0,
-      targets: this.el,
-    }).finished;
+    this.props.showLoader();
   }
 
   handleInteractCanvasStart () {
@@ -367,7 +340,7 @@ class WebGLCurtains extends PureComponent {
   }
 
   render () {
-    const {cursorHover, cursorUnhover} = this.props;
+    const {cursorHover, cursorUnhover, transitionStatus} = this.props;
     const fragmentShader = this.getActiveFragment();
     const vertexShader = this.getActiveVertex();
     const hoverAnimations = this.getActiveHover();
@@ -403,6 +376,7 @@ class WebGLCurtains extends PureComponent {
 
     return (
       <div
+        className={transitionStatus}
         id='main-page'
         key={`${fragmentShader}-${vertexShader}`}
         ref={(element) => {
@@ -459,6 +433,7 @@ WebGLCurtains.propTypes = {
   cursorUnhover: PropTypes.func.isRequired,
   hideLoader: PropTypes.func.isRequired,
   showLoader: PropTypes.func.isRequired,
+  transitionStatus: PropTypes.string.isRequired,
 };
 
 export default WithTransition(WebGLCurtains);
