@@ -1,5 +1,4 @@
 /* eslint-disable no-new */
-import anime from 'animejs';
 import {
   gsap,
 } from 'gsap';

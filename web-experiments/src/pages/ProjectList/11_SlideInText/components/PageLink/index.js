@@ -8,7 +8,7 @@ import React, {
 import styles from './style.module.scss';
 
 class PageLink extends PureComponent {
-  constructor(props) {
+  constructor (props) {
     super(props);
     this.handleMouseEnter = this.handleMouseEnter.bind(this);
     this.handleMouseLeave = this.handleMouseLeave.bind(this);

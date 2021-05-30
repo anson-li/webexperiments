@@ -1,4 +1,3 @@
-import anime from 'animejs';
 import PropTypes from 'prop-types';
 import React, {
   PureComponent,

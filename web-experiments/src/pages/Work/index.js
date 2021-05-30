@@ -1,4 +1,3 @@
-import anime from 'animejs';
 import {
   TweenLite, gsap,
 } from 'gsap';
@@ -215,7 +214,6 @@ class Work extends PureComponent {
   }
 
   animateOut () {
-    console.log('workout');
     this.props.showLoader();
 
     gsap.to(this.el, 1, {

@@ -1,4 +1,3 @@
-import anime from 'animejs';
 import {
   GUI,
 } from 'dat.gui';
