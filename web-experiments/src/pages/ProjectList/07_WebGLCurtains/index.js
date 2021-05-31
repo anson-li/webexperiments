@@ -12,7 +12,6 @@ import {
   Curtains, Plane,
 } from 'react-curtains';
 import TextLogo from '../../../common/TextLogo';
-import WithTransition from '../../../common/WithTransition';
 import BasicFs from './Shaders/BasicFs';
 import BasicVs from './Shaders/BasicVs';
 import ColorFs from './Shaders/ColorFs';
@@ -435,4 +434,4 @@ WebGLCurtains.propTypes = {
   transitionStatus: PropTypes.string.isRequired,
 };
 
-export default WithTransition(WebGLCurtains);
+export default WebGLCurtains;

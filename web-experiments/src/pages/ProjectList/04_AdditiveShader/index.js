@@ -4,7 +4,6 @@ import React, {
 } from 'react';
 import Background from '../../../common/Background';
 import TextLogo from '../../../common/TextLogo';
-import WithTransition from '../../../common/WithTransition';
 import ThreeJS from './components/ThreeJS';
 
 class AdditiveShader extends PureComponent {
@@ -50,4 +49,4 @@ AdditiveShader.propTypes = {
   transitionStatus: PropTypes.string.isRequired,
 };
 
-export default WithTransition(AdditiveShader);
+export default AdditiveShader;

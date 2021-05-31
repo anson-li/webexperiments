@@ -14,7 +14,6 @@ import React, {
   PureComponent,
 } from 'react';
 import TextLogo from '../../../common/TextLogo';
-import WithTransition from '../../../common/WithTransition';
 import GridBackground from './Images/pixelgrid.png';
 import Card from './components/Card';
 import styles from './style.module.scss';
@@ -256,4 +255,4 @@ InteractiveMoodBoard.propTypes = {
   transitionStatus: PropTypes.string.isRequired,
 };
 
-export default WithTransition(InteractiveMoodBoard);
+export default InteractiveMoodBoard;
