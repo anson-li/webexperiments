@@ -1,5 +1,5 @@
 import {
-  TweenLite,
+  TweenLite, gsap,
 } from 'gsap';
 import React, {
   PureComponent,
@@ -15,6 +15,8 @@ class Loader extends PureComponent {
   }
 
   fadeIn () {
+    console.log('fading in');
+    gsap.killTweensOf(this.loader);
     TweenLite.to(this.loader, 1, {
       opacity: 1,
       zIndex: 5,
@@ -22,6 +24,8 @@ class Loader extends PureComponent {
   }
 
   fadeOut () {
+    console.log('fading out');
+    gsap.killTweensOf(this.loader);
     TweenLite.to(this.loader, 1, {
       opacity: 0,
       zIndex: -1,
