@@ -125,6 +125,7 @@ class WebGLCurtains extends PureComponent {
     this.getActiveFragment = this.getActiveFragment.bind(this);
     this.getActiveHover = this.getActiveHover.bind(this);
     this.getActiveVertex = this.getActiveVertex.bind(this);
+    this.renderGui = this.renderGui.bind(this);
     this.gui = null;
     this.mousePosition = {
       x: 0,
@@ -134,6 +135,25 @@ class WebGLCurtains extends PureComponent {
   }
 
   componentDidMount () {
+    this.mousePosition = {
+      x: 0,
+      y: 0,
+    };
+    this.progress = 0;
+
+    // Timeout on GUI to account to prevent early pop in
+    setTimeout(() => {
+      this.renderGui();
+    }, 1000);
+  }
+
+  componentWillUnmount () {
+    this.gui.destroy();
+    window.removeEventListener('mousemove', this.handleMovement);
+    window.removeEventListener('touchmove', this.handleMovement);
+  }
+
+  renderGui () {
     this.gui = new GUI();
     this.gui.width = 500;
     this.gui.closed = false;
@@ -203,18 +223,6 @@ class WebGLCurtains extends PureComponent {
       this.setHoverChecked('zoom');
     });
     hoverAnimations.open();
-
-    this.mousePosition = {
-      x: 0,
-      y: 0,
-    };
-    this.progress = 0;
-  }
-
-  componentWillUnmount () {
-    this.gui.destroy();
-    window.removeEventListener('mousemove', this.handleMovement);
-    window.removeEventListener('touchmove', this.handleMovement);
   }
 
   handleInteractCanvasStart () {
@@ -365,7 +373,7 @@ class WebGLCurtains extends PureComponent {
 
     return (
       <div
-        id='main-page'
+        id={styles['webgl-curtains-page']}
         key={`${fragmentShader}-${vertexShader}`}
         ref={(element) => {
           this.el = element;

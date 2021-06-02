@@ -16,6 +16,10 @@ class SectionOne extends PureComponent {
     this.drawUnderline = this.drawUnderline.bind(this);
     this.tl = null;
   }
+  
+  componentDidMount () {
+    this.drawUnderline();
+  }
 
   componentDidUpdate () {
     const {timeline, scrollDistance} = this.props;
@@ -34,7 +38,7 @@ class SectionOne extends PureComponent {
       this.tl = gsap.timeline()
         .from(this.underline, 1.5, {
           clipPath: 'inset(0% 100% 0% 0%)',
-          delay: 1,
+          delay: 1.5,
           ease: Power4,
         });
       this.tl.play();

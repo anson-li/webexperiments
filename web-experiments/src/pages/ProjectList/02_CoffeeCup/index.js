@@ -8,7 +8,7 @@ import ThreeJS from './components/ThreeJS';
 
 class CoffeeCup extends PureComponent {
   render () {
-    const {hideLoader, cursorHover, cursorUnhover} = this.props;
+    const {cursorHover, cursorUnhover} = this.props;
 
     return (
       <div

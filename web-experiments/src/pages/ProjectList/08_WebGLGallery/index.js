@@ -4,6 +4,7 @@ import React, {
 } from 'react';
 import TextLogo from '../../../common/TextLogo';
 import MultiplePlanes from './components/MultiplePlanes';
+import styles from './styles.module.scss';
 
 class WebGLGallery extends PureComponent {
   componentDidMount () {
@@ -15,7 +16,7 @@ class WebGLGallery extends PureComponent {
 
     return (
       <div
-        id='main-page'
+        id={styles['webgl-gallery-page']}
         ref={(element) => {
           this.el = element;
         }}>
