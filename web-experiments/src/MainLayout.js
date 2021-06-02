@@ -85,46 +85,44 @@ class MainLayout extends PureComponent {
   }
 
   handleEnterHandler (node) {
-    // gsap.killTweensOf(node);
-    setTimeout(() => {
-      this.hideLoader();
-    }, 1000);
+    gsap.killTweensOf(node);
+    // this.hideLoader();
 
-    // // Set initial position and styles
-    // gsap.set(node, {
-    //   autoAlpha: 0,
-    //   left: 0,
-    //   position: 'absolute',
-    //   y: 100,
-    // });
-    // gsap.set(this.parentNode.current, {overflow: 'hidden'});
+    // Set initial position and styles
+    gsap.set(node, {
+      autoAlpha: 0,
+      left: 0,
+      position: 'absolute',
+      y: 100,
+    });
+    gsap.set(this.parentNode.current, {overflow: 'hidden'});
 
-    // // Create the animation for the incoming component
-    // gsap.to(node, {
-    //   autoAlpha: 1,
-    //   duration: 2,
-    //   onComplete: this.completeCall,
-    //   onCompleteParams: [node, this.parentNode.current],
-    //   y: 0,
-    // });
+    // Create the animation for the incoming component
+    gsap.to(node, {
+      autoAlpha: 1,
+      duration: 2,
+      onComplete: this.completeCall,
+      onCompleteParams: [node, this.parentNode.current],
+      y: 0,
+    });
   }
 
   handleExitHandler (node) {
-    // gsap.killTweensOf(node);
-    this.showLoader();
+    gsap.killTweensOf(node);
+    // this.showLoader();
 
-  //   // Set initial position and styles
-  //   gsap.set(node, {
-  //     left: 0,
-  //     position: 'absolute',
-  //   });
+    // Set initial position and styles
+    gsap.set(node, {
+      left: 0,
+      position: 'absolute',
+    });
 
-  //   // Create the animation for the incoming component
-  //   gsap.to(node, {
-  //     autoAlpha: 0,
-  //     duration: 2,
-  //     y: -100,
-  //   });
+    // Create the animation for the incoming component
+    gsap.to(node, {
+      autoAlpha: 0,
+      duration: 2,
+      y: -100,
+    });
   }
 
   render () {
@@ -138,13 +136,13 @@ class MainLayout extends PureComponent {
       showLoader: this.showLoader,
     };
 
-    // RoutesConfig.map(({Component, path}) => {
-    //   console.log((<Route path={path}>
-    //     <Component
-    //       {...componentProps}
-    //     />
-    //   </Route>));
-    // });
+    RoutesConfig.map(({Component, path}) => {
+      console.log((<Route path={path}>
+        <Component
+          {...componentProps}
+        />
+      </Route>));
+    });
 
     return (
       <>
@@ -162,10 +160,7 @@ class MainLayout extends PureComponent {
               key={this.props.location.pathname}
               onEnter={this.handleEnterHandler}
               onExit={this.handleExitHandler}
-              timeout={{
-                enter: 1000,
-                exit: 1000,
-               }}
+              timeout={500}
             >
               <Switch location={this.props.location}>
                 <Route exact path='/'>
