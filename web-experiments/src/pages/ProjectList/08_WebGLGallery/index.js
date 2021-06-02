@@ -10,20 +10,11 @@ class WebGLGallery extends PureComponent {
     this.el = null;
   }
 
-  animateIn () {
-    this.props.hideLoader();
-  }
-
-  animateOut () {
-    this.props.showLoader();
-  }
-
   render () {
-    const {cursorHover, cursorUnhover, hideLoader, transitionStatus} = this.props;
+    const {cursorHover, cursorUnhover} = this.props;
 
     return (
       <div
-        className={transitionStatus}
         id='main-page'
         ref={(element) => {
           this.el = element;
@@ -32,9 +23,7 @@ class WebGLGallery extends PureComponent {
           hover={cursorHover}
           unhover={cursorUnhover}
         />
-        <MultiplePlanes
-          hideLoader={hideLoader}
-        />
+        <MultiplePlanes />
       </div>
     );
   }
@@ -43,9 +32,6 @@ class WebGLGallery extends PureComponent {
 WebGLGallery.propTypes = {
   cursorHover: PropTypes.func.isRequired,
   cursorUnhover: PropTypes.func.isRequired,
-  hideLoader: PropTypes.func.isRequired,
-  showLoader: PropTypes.func.isRequired,
-  transitionStatus: PropTypes.string.isRequired,
 };
 
 export default WebGLGallery;

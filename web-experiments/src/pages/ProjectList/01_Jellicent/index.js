@@ -7,28 +7,11 @@ import TextLogo from '../../../common/TextLogo';
 import JellicentObject from './components/JellicentObject';
 
 class Jellicent extends PureComponent {
-  componentDidMount () {
-    // this.animateIn();
-  }
-
-  animateIn () {
-    this.props.hideLoader();
-  }
-
-  animateOut () {
-    this.props.showLoader();
-  }
-
-  componentWillUnmount () {
-    this.props.showLoader();
-  }
-
   render () {
-    const {hideLoader, cursorHover, cursorUnhover, transitionStatus} = this.props;
+    const {cursorHover, cursorUnhover} = this.props;
 
     return (
       <div
-        className={transitionStatus}
         id='main-page' ref={(element) => {
           this.el = element;
         }}>
@@ -37,9 +20,7 @@ class Jellicent extends PureComponent {
           unhover={cursorUnhover}
         />
         <Background />
-        <JellicentObject
-          hideLoader={hideLoader}
-        />
+        <JellicentObject />
       </div>
     );
   }
@@ -48,9 +29,6 @@ class Jellicent extends PureComponent {
 Jellicent.propTypes = {
   cursorHover: PropTypes.func.isRequired,
   cursorUnhover: PropTypes.func.isRequired,
-  hideLoader: PropTypes.func.isRequired,
-  showLoader: PropTypes.func.isRequired,
-  transitionStatus: PropTypes.string.isRequired,
 };
 
 export default Jellicent;

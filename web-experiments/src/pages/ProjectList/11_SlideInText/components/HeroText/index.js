@@ -30,7 +30,7 @@ class HeroText extends PureComponent {
       z: 300,
     });
     gsap.from(animatedelements.chars, 0.7, {
-      delay: 1,
+      delay: 2,
       ease: Power4,
       opacity: 0,
       rotationX: '90',
@@ -49,7 +49,7 @@ class HeroText extends PureComponent {
       type: 'lines',
     });
     gsap.from(childSplit2.lines, {
-      delay: 1.8,
+      delay: 2.5,
       duration: 1.5,
       ease: 'power4',
       stagger: 0.1,

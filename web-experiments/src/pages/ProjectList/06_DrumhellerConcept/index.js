@@ -88,17 +88,9 @@ class DrumhellerConcept extends PureComponent {
 
   checkLoaderStatus () {
     if (this.loadedImages <= 0) {
-      this.props.hideLoader();
+      // this.props.hideLoader();
       this.sectionOne.current.drawUnderline();
     }
-  }
-
-  animateIn () {
-    this.props.hideLoader();
-  }
-
-  animateOut () {
-    this.props.showLoader();
   }
 
   onWindowResize () {
@@ -187,11 +179,10 @@ class DrumhellerConcept extends PureComponent {
   }
 
   render () {
-    const {cursorHover, cursorUnhover, transitionStatus} = this.props;
+    const {cursorHover, cursorUnhover} = this.props;
 
     return (
       <div
-        className={transitionStatus}
         id={styles['drumheller-main-page']} ref={(element) => {
           this.el = element;
         }}>
@@ -256,9 +247,6 @@ class DrumhellerConcept extends PureComponent {
 DrumhellerConcept.propTypes = {
   cursorHover: PropTypes.func.isRequired,
   cursorUnhover: PropTypes.func.isRequired,
-  hideLoader: PropTypes.func.isRequired,
-  showLoader: PropTypes.func.isRequired,
-  transitionStatus: PropTypes.string.isRequired,
 };
 
 export default DrumhellerConcept;

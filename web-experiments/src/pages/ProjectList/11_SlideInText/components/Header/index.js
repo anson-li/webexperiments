@@ -25,7 +25,7 @@ class Header extends PureComponent {
       type: 'lines',
     });
     gsap.from(childSplit.lines, {
-      delay: 1.8,
+      delay: 2.5,
       duration: 1.5,
       ease: 'power4',
       stagger: 0.1,

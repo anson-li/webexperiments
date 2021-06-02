@@ -40,7 +40,6 @@ class InteractiveMoodBoard extends PureComponent {
     this.animateFadeIn();
     this.setupDraggable();
     window.addEventListener('resize', this.onWindowResize, false);
-    this.animateIn();
   }
 
   componentWillUnmount () {
@@ -54,7 +53,6 @@ class InteractiveMoodBoard extends PureComponent {
   }
 
   animateFadeIn () {
-    this.props.hideLoader();
     new SplitText(this.pagetitle, {
       charsClass: 'inview-split-parent',
       type: 'words,chars',
@@ -121,14 +119,6 @@ class InteractiveMoodBoard extends PureComponent {
     });
   }
 
-  animateIn () {
-    this.props.hideLoader();
-  }
-
-  animateOut () {
-    this.props.showLoader();
-  }
-
   setupDraggable () {
     const cardElements = [this.card1.current, this.card2.current, this.card3.current, this.card4.current, this.card5.current];
     cardElements.forEach((card) => {
@@ -149,11 +139,11 @@ class InteractiveMoodBoard extends PureComponent {
   }
 
   render () {
-    const {cursorHover, cursorUnhover, transitionStatus} = this.props;
+    const {cursorHover, cursorUnhover} = this.props;
 
     return (
       <div
-        className={`${styles['page-background']} ${transitionStatus}`}
+        className={`${styles['page-background']}`}
         id='main-page'
         ref={(element) => {
           this.el = element;
@@ -249,10 +239,7 @@ class InteractiveMoodBoard extends PureComponent {
 InteractiveMoodBoard.propTypes = {
   cursorHover: PropTypes.func.isRequired,
   cursorUnhover: PropTypes.func.isRequired,
-  hideLoader: PropTypes.func.isRequired,
   moveCursor: PropTypes.func.isRequired,
-  showLoader: PropTypes.func.isRequired,
-  transitionStatus: PropTypes.string.isRequired,
 };
 
 export default InteractiveMoodBoard;

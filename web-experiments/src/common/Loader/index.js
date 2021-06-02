@@ -19,7 +19,7 @@ class Loader extends PureComponent {
     console.log('fading in');
     gsap.killTweensOf(this.loader);
     this.tl.set(this.loader, {
-      y: window.innerHeight
+      y: window.innerHeight,
     }).to(this.loader, 1, {
       y: 0,
     });
@@ -29,9 +29,9 @@ class Loader extends PureComponent {
     console.log('fading out');
     gsap.killTweensOf(this.loader);
     this.tl.to(this.loader, 1, {
-      y: -window.innerHeight
+      y: -window.innerHeight,
     }).set(this.loader, {
-      y: window.innerHeight
+      y: window.innerHeight,
     });
   }
 

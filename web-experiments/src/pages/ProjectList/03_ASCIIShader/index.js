@@ -7,26 +7,11 @@ import TextLogo from '../../../common/TextLogo';
 import ThreeJS from './components/ThreeJS';
 
 class AdditiveShader extends PureComponent {
-  componentDidMount () {
-    this.animateIn();
-  }
-
-  animateIn () {
-    this.props.hideLoader();
-    this.props.hideFollow();
-  }
-
-  animateOut () {
-    this.props.showLoader();
-    this.props.showFollow();
-  }
-
   render () {
-    const {hideLoader, cursorHover, cursorUnhover, transitionStatus} = this.props;
+    const {cursorHover, cursorUnhover} = this.props;
 
     return (
       <div
-        className={transitionStatus}
         id='additiveshader-page'
         ref={(event) => {
           this.el = event;
@@ -36,9 +21,7 @@ class AdditiveShader extends PureComponent {
           unhover={cursorUnhover}
         />
         <Background />
-        <ThreeJS
-          hideLoader={hideLoader}
-        />
+        <ThreeJS />
       </div>
     );
   }
@@ -47,11 +30,6 @@ class AdditiveShader extends PureComponent {
 AdditiveShader.propTypes = {
   cursorHover: PropTypes.func.isRequired,
   cursorUnhover: PropTypes.func.isRequired,
-  hideFollow: PropTypes.func.isRequired,
-  hideLoader: PropTypes.func.isRequired,
-  showFollow: PropTypes.func.isRequired,
-  showLoader: PropTypes.func.isRequired,
-  transitionStatus: PropTypes.string.isRequired,
 };
 
 export default AdditiveShader;

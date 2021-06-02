@@ -92,7 +92,6 @@ class MultiplePlanes extends PureComponent {
 
   setupInitialScrollAnimation () {
     this.planesref.scrollTop = 2500;
-    this.props.hideLoader();
     setTimeout(() => {
       this.planesref.scrollTo({
         behavior: 'smooth',
@@ -495,9 +494,5 @@ class MultiplePlanes extends PureComponent {
     );
   }
 }
-
-MultiplePlanes.propTypes = {
-  hideLoader: PropTypes.func.isRequired,
-};
 
 export default MultiplePlanes;

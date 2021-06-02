@@ -21,26 +21,12 @@ import styles from './style.module.scss';
 gsap.registerPlugin(SplitText);
 
 class SlideInText extends PureComponent {
-  componentDidMount () {
-    this.animateIn();
-  }
-
-  animateIn () {
-    this.props.hideLoader();
-    this.props.hideFollow();
-  }
-
-  animateOut () {
-    this.props.showFollow();
-    this.props.showLoader();
-  }
-
   render () {
-    const {cursorHover, cursorUnhover, transitionStatus} = this.props;
+    const {cursorHover, cursorUnhover} = this.props;
 
     return (
       <div
-        className={`${styles['slidein-background']} ${transitionStatus}`}
+        className={`${styles['slidein-background']}`}
         id='generative-art'
         ref={(element) => {
           this.el = element;
@@ -68,11 +54,6 @@ class SlideInText extends PureComponent {
 SlideInText.propTypes = {
   cursorHover: PropTypes.func.isRequired,
   cursorUnhover: PropTypes.func.isRequired,
-  hideFollow: PropTypes.func.isRequired,
-  hideLoader: PropTypes.func.isRequired,
-  showFollow: PropTypes.func.isRequired,
-  showLoader: PropTypes.func.isRequired,
-  transitionStatus: PropTypes.string.isRequired,
 };
 
 export default SlideInText;

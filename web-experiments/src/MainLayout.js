@@ -11,6 +11,7 @@ import {
 import {
   TransitionGroup, Transition,
 } from 'react-transition-group';
+import RoutesConfig from './RoutesConfig';
 import Border from './common/Border';
 import CustomCursor from './common/CustomCursor';
 import Loader from './common/Loader';
@@ -28,7 +29,9 @@ import InteractiveMoodBoard from './pages/ProjectList/09_InteractiveMoodBoard';
 import GenerativeArt from './pages/ProjectList/10_GenerativeArt';
 import SlideInText from './pages/ProjectList/11_SlideInText';
 import Work from './pages/Work';
-import RoutesConfig from './RoutesConfig';
+import {
+  play, exit,
+} from './timelines';
 
 class MainLayout extends PureComponent {
   constructor (props) {
@@ -113,11 +116,11 @@ class MainLayout extends PureComponent {
     // gsap.killTweensOf(node);
     this.showLoader();
 
-  //   // Set initial position and styles
-  //   gsap.set(node, {
-  //     left: 0,
-  //     position: 'absolute',
-  //   });
+    //   // Set initial position and styles
+    //   gsap.set(node, {
+    //     left: 0,
+    //     position: 'absolute',
+    //   });
 
   //   // Create the animation for the incoming component
   //   gsap.to(node, {
@@ -159,13 +162,16 @@ class MainLayout extends PureComponent {
           ref={this.parentNode}>
           <TransitionGroup component={null}>
             <Transition
+              appear
               key={this.props.location.pathname}
-              onEnter={this.handleEnterHandler}
-              onExit={this.handleExitHandler}
-              timeout={{
-                enter: 2000,
-                exit: 1000,
-               }}
+              onEnter={(node, appears) => {
+                return play(node, appears, this.loader.current);
+              }}
+              onExit={(node, appears) => {
+                return exit(node, appears, this.loader.current);
+              }}
+              timeout={{enter: 2000,
+                exit: 1000}}
             >
               <Switch location={this.props.location}>
                 <Route exact path='/'>

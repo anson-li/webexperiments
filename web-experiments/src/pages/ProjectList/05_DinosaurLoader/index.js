@@ -10,7 +10,6 @@ import styles from './style.module.scss';
 
 class DinosaurLoader extends PureComponent {
   componentDidMount () {
-    this.animateIn();
     TweenLite.to(this.dinosaurGradientBase, 2, {
       attr: {offset: '0%'},
       ease: 'none',
@@ -27,20 +26,11 @@ class DinosaurLoader extends PureComponent {
     });
   }
 
-  animateIn () {
-    this.props.hideLoader();
-  }
-
-  animateOut () {
-    this.props.showLoader();
-  }
-
   render () {
-    const {cursorHover, cursorUnhover, transitionStatus} = this.props;
+    const {cursorHover, cursorUnhover} = this.props;
 
     return (
       <div
-        className={transitionStatus}
         id='main-page' ref={(element) => {
           this.el = element;
         }}>
@@ -105,9 +95,6 @@ class DinosaurLoader extends PureComponent {
 DinosaurLoader.propTypes = {
   cursorHover: PropTypes.func.isRequired,
   cursorUnhover: PropTypes.func.isRequired,
-  hideLoader: PropTypes.func.isRequired,
-  showLoader: PropTypes.func.isRequired,
-  transitionStatus: PropTypes.string.isRequired,
 };
 
 export default DinosaurLoader;

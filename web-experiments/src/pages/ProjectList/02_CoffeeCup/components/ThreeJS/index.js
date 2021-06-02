@@ -112,7 +112,6 @@ class ThreeJS extends PureComponent {
         this.modelContainer.add(gltf.scene);
         this.mixer = new AnimationMixer(gltf.scene);
         this.action = this.mixer.clipAction(gltf.animations[0]);
-        this.props.hideLoader();
         this.action.play();
       },
       undefined,
@@ -174,9 +173,5 @@ class ThreeJS extends PureComponent {
     );
   }
 }
-
-ThreeJS.propTypes = {
-  hideLoader: PropTypes.func.isRequired,
-};
 
 export default ThreeJS;

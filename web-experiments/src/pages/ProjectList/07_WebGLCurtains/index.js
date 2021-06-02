@@ -134,7 +134,6 @@ class WebGLCurtains extends PureComponent {
   }
 
   componentDidMount () {
-    this.props.hideLoader();
     this.gui = new GUI();
     this.gui.width = 500;
     this.gui.closed = false;
@@ -216,14 +215,6 @@ class WebGLCurtains extends PureComponent {
     this.gui.destroy();
     window.removeEventListener('mousemove', this.handleMovement);
     window.removeEventListener('touchmove', this.handleMovement);
-  }
-
-  animateIn () {
-    this.props.hideLoader();
-  }
-
-  animateOut () {
-    this.props.showLoader();
   }
 
   handleInteractCanvasStart () {
@@ -338,7 +329,7 @@ class WebGLCurtains extends PureComponent {
   }
 
   render () {
-    const {cursorHover, cursorUnhover, transitionStatus} = this.props;
+    const {cursorHover, cursorUnhover} = this.props;
     const fragmentShader = this.getActiveFragment();
     const vertexShader = this.getActiveVertex();
     const hoverAnimations = this.getActiveHover();
@@ -374,7 +365,6 @@ class WebGLCurtains extends PureComponent {
 
     return (
       <div
-        className={transitionStatus}
         id='main-page'
         key={`${fragmentShader}-${vertexShader}`}
         ref={(element) => {
@@ -429,9 +419,6 @@ class WebGLCurtains extends PureComponent {
 WebGLCurtains.propTypes = {
   cursorHover: PropTypes.func.isRequired,
   cursorUnhover: PropTypes.func.isRequired,
-  hideLoader: PropTypes.func.isRequired,
-  showLoader: PropTypes.func.isRequired,
-  transitionStatus: PropTypes.string.isRequired,
 };
 
 export default WebGLCurtains;

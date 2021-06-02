@@ -103,13 +103,10 @@ class JellicentObject extends PureComponent {
     window.addEventListener('resize', this.onWindowResize, false);
     window.addEventListener('mousemove', this.mousemove);
 
-    const {hideLoader} = this.props;
-
     this.camera.rotation.x = 0;
     this.camera.rotation.z = 0.5;
     this.camera.rotation.y = 6.1;
 
-    hideLoader();
     this.animate();
   }
 

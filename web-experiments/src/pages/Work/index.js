@@ -145,7 +145,6 @@ class Work extends PureComponent {
   }
 
   componentDidMount () {
-    this.props.hideLoader();
     this.interactionsReady = false;
 
     // Tweening seed to high levels to create 'noise' effect
@@ -188,10 +187,6 @@ class Work extends PureComponent {
     setTimeout(() => {
       this.handleCompleteLoadingAnimations();
     }, 1000);
-  }
-
-  componentWillUnmount () {
-    this.props.showLoader();
   }
 
   repeatStatic () {
@@ -295,11 +290,8 @@ class Work extends PureComponent {
       />;
     });
 
-    const {transitionStatus} = this.props;
-
     return (
       <div
-        className={transitionStatus}
         id={styles['work-page']}
         ref={(element) => {
           this.el = element;
@@ -357,7 +349,6 @@ Work.propTypes = {
   cursorUnhover: PropTypes.func.isRequired,
   hideLoader: PropTypes.func.isRequired,
   showLoader: PropTypes.func.isRequired,
-  transitionStatus: PropTypes.string.isRequired,
 };
 
 export default WithTransition(Work);
