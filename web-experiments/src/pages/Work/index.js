@@ -190,10 +190,6 @@ class Work extends PureComponent {
     }, 1000);
   }
 
-  componentWillUnmount () {
-    this.props.showLoader();
-  }
-
   repeatStatic () {
     if (this.noise) {
       TweenLite.set(this.noise, {

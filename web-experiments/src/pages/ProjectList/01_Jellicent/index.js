@@ -8,7 +8,7 @@ import JellicentObject from './components/JellicentObject';
 
 class Jellicent extends PureComponent {
   componentDidMount () {
-    // this.animateIn();
+    this.animateIn();
   }
 
   animateIn () {
@@ -16,10 +16,6 @@ class Jellicent extends PureComponent {
   }
 
   animateOut () {
-    this.props.showLoader();
-  }
-
-  componentWillUnmount () {
     this.props.showLoader();
   }
 

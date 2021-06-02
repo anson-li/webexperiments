@@ -163,7 +163,7 @@ class MainLayout extends PureComponent {
               onEnter={this.handleEnterHandler}
               onExit={this.handleExitHandler}
               timeout={{
-                enter: 2000,
+                enter: 1000,
                 exit: 1000,
                }}
             >
