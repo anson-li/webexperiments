@@ -4,7 +4,6 @@ import React, {
 } from 'react';
 import Background from '../../../common/Background';
 import TextLogo from '../../../common/TextLogo';
-import WithTransition from '../../../common/WithTransition';
 import ThreeJS from './components/ThreeJS';
 
 class CoffeeCup extends PureComponent {
@@ -54,4 +53,4 @@ CoffeeCup.propTypes = {
   transitionStatus: PropTypes.string.isRequired,
 };
 
-export default WithTransition(CoffeeCup);
+export default CoffeeCup;

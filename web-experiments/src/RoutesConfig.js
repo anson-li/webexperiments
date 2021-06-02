@@ -12,7 +12,7 @@ import GenerativeArt from './pages/ProjectList/10_GenerativeArt';
 import SlideInText from './pages/ProjectList/11_SlideInText';
 import Work from './pages/Work';
 
-const Routes = [
+const RoutesConfig = [
   {
     Component: SlideInText,
     key: 'slideintext',
@@ -107,4 +107,4 @@ const Routes = [
   },
 ];
 
-export default Routes;
+export default RoutesConfig;
