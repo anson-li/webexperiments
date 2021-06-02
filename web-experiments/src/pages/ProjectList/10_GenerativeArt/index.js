@@ -12,6 +12,7 @@ import React, {
   PureComponent,
 } from 'react';
 import TextLogo from '../../../common/TextLogo';
+import WithTransition from '../../../common/WithTransition';
 import CollectionImage from './components/CollectionImage';
 import styles from './style.module.scss';
 
@@ -135,4 +136,4 @@ GenerativeArt.propTypes = {
   transitionStatus: PropTypes.string.isRequired,
 };
 
-export default GenerativeArt;
+export default WithTransition(GenerativeArt);

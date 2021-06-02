@@ -10,6 +10,7 @@ import React, {
 } from 'react';
 import SmoothScroll from '../../../common/SmoothScroll';
 import TextLogo from '../../../common/TextLogo';
+import WithTransition from '../../../common/WithTransition';
 import GridBackground from './Images/pixelgrid.png';
 import Header from './components/Header';
 import HeroText from './components/HeroText';
@@ -75,4 +76,4 @@ SlideInText.propTypes = {
   transitionStatus: PropTypes.string.isRequired,
 };
 
-export default SlideInText;
+export default WithTransition(SlideInText);

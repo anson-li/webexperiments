@@ -6,6 +6,7 @@ import React, {
   PureComponent,
 } from 'react';
 import TextLogo from '../../../common/TextLogo';
+import WithTransition from '../../../common/WithTransition';
 import styles from './style.module.scss';
 
 class DinosaurLoader extends PureComponent {
@@ -110,4 +111,4 @@ DinosaurLoader.propTypes = {
   transitionStatus: PropTypes.string.isRequired,
 };
 
-export default DinosaurLoader;
+export default WithTransition(DinosaurLoader);

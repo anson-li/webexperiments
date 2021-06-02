@@ -3,6 +3,7 @@ import React, {
   PureComponent,
 } from 'react';
 import TextLogo from '../../../common/TextLogo';
+import WithTransition from '../../../common/WithTransition';
 import MultiplePlanes from './components/MultiplePlanes';
 
 class WebGLGallery extends PureComponent {
@@ -48,4 +49,4 @@ WebGLGallery.propTypes = {
   transitionStatus: PropTypes.string.isRequired,
 };
 
-export default WebGLGallery;
+export default WithTransition(WebGLGallery);
