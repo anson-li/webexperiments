@@ -28,7 +28,7 @@ class SingleImageDescription extends PureComponent {
     });
     gsap.from(this.animatedinnerimage, 0.7, {
       backgroundSize: '200% 200%',
-      delay: 1.5,
+      delay: 2.5,
       ease: Power4,
       filter: 'grayscale(100%)',
       opacity: 0,
@@ -48,7 +48,7 @@ class SingleImageDescription extends PureComponent {
       type: 'lines',
     });
     gsap.from(childSplit.lines, {
-      delay: 1.8,
+      delay: 2.5,
       duration: 1.5,
       ease: 'power4',
       stagger: 0.1,

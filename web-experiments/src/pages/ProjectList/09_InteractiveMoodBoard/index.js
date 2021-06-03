@@ -82,7 +82,7 @@ class InteractiveMoodBoard extends PureComponent {
     });
     gsap.from(this.childSplit.chars, {
       delay: 1,
-      duration: 1.5,
+      duration: 2.5,
       ease: 'power4',
       rotationX: 170,
       stagger: 0.05,
@@ -92,7 +92,7 @@ class InteractiveMoodBoard extends PureComponent {
       perspective: 400,
     });
     gsap.from(this.childHeaderSplit.lines, {
-      delay: 1.5,
+      delay: 2.5,
       duration: 1,
       ease: 'power4',
       rotationX: 170,
@@ -103,7 +103,7 @@ class InteractiveMoodBoard extends PureComponent {
       perspective: 400,
     });
     gsap.from(this.childDescriptionSplit.lines, {
-      delay: 1.7,
+      delay: 2.7,
       duration: 1.5,
       ease: 'power4',
       rotationX: 170,
@@ -111,7 +111,7 @@ class InteractiveMoodBoard extends PureComponent {
       yPercent: 100,
     });
     gsap.from(this.dragcontainer, {
-      delay: 1.5,
+      delay: 2.7,
       duration: 2.5,
       ease: 'power4',
       opacity: 0,
