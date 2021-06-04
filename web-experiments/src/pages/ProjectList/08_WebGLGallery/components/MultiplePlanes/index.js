@@ -11,9 +11,6 @@ import {
 import {
   Draggable, InertiaPlugin,
 } from 'gsap/all';
-import {
-  PropTypes,
-} from 'prop-types';
 import React, {
   PureComponent,
 } from 'react';

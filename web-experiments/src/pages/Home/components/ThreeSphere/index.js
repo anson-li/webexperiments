@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import React, {
   PureComponent,
 } from 'react';
@@ -276,7 +275,6 @@ class ThreeSphere extends PureComponent {
     window.addEventListener('mousemove', this.mousemove);
     window.addEventListener('resize', this.resizeRenderer);
 
-    this.props.hideLoader();
     this.renderScene();
   }
 
@@ -367,9 +365,5 @@ class ThreeSphere extends PureComponent {
     );
   }
 }
-
-ThreeSphere.propTypes = {
-  hideLoader: PropTypes.func.isRequired,
-};
 
 export default ThreeSphere;

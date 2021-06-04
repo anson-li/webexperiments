@@ -16,7 +16,7 @@ class SectionOne extends PureComponent {
     this.drawUnderline = this.drawUnderline.bind(this);
     this.tl = null;
   }
-  
+
   componentDidMount () {
     this.drawUnderline();
   }

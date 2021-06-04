@@ -4,7 +4,7 @@ import React, {
 } from 'react';
 import TextLogo from '../../../common/TextLogo';
 import MultiplePlanes from './components/MultiplePlanes';
-import styles from './styles.module.scss';
+import styles from './style.module.scss';
 
 class WebGLGallery extends PureComponent {
   componentDidMount () {

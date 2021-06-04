@@ -3,15 +3,14 @@ import {
 } from 'gsap';
 import PropTypes from 'prop-types';
 import React, {
-  useRef, PureComponent,
+  PureComponent,
 } from 'react';
 import {
-  BrowserRouter as Router, Switch, Route,
+  Switch, Route,
 } from 'react-router-dom';
 import {
   TransitionGroup, Transition,
 } from 'react-transition-group';
-import RoutesConfig from './RoutesConfig';
 import Border from './common/Border';
 import CustomCursor from './common/CustomCursor';
 import Loader from './common/Loader';
@@ -88,46 +87,13 @@ class MainLayout extends PureComponent {
   }
 
   handleEnterHandler (node) {
-    // gsap.killTweensOf(node);
     setTimeout(() => {
       this.hideLoader();
     }, 1000);
-
-    // // Set initial position and styles
-    // gsap.set(node, {
-    //   autoAlpha: 0,
-    //   left: 0,
-    //   position: 'absolute',
-    //   y: 100,
-    // });
-    // gsap.set(this.parentNode.current, {overflow: 'hidden'});
-
-    // // Create the animation for the incoming component
-    // gsap.to(node, {
-    //   autoAlpha: 1,
-    //   duration: 2,
-    //   onComplete: this.completeCall,
-    //   onCompleteParams: [node, this.parentNode.current],
-    //   y: 0,
-    // });
   }
 
   handleExitHandler (node) {
-    // gsap.killTweensOf(node);
     this.showLoader();
-
-    //   // Set initial position and styles
-    //   gsap.set(node, {
-    //     left: 0,
-    //     position: 'absolute',
-    //   });
-
-  //   // Create the animation for the incoming component
-  //   gsap.to(node, {
-  //     autoAlpha: 0,
-  //     duration: 2,
-  //     y: -100,
-  //   });
   }
 
   render () {
@@ -135,19 +101,9 @@ class MainLayout extends PureComponent {
       cursorHover: this.onCursorHover,
       cursorUnhover: this.onCursorUnhover,
       hideFollow: this.hideFollow,
-      hideLoader: this.hideLoader,
       moveCursor: this.moveCursor,
       showFollow: this.showFollow,
-      showLoader: this.showLoader,
     };
-
-    // RoutesConfig.map(({Component, path}) => {
-    //   console.log((<Route path={path}>
-    //     <Component
-    //       {...componentProps}
-    //     />
-    //   </Route>));
-    // });
 
     return (
       <>

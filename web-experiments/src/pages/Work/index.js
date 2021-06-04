@@ -157,12 +157,6 @@ class Work extends PureComponent {
       yoyo: true,
     });
 
-    // TweenLite.to(this.noise, 0.03, {
-    //   ease: 'none',
-    //   onRepeat: this.repeatStatic,
-    //   repeat: -1,
-    // });
-
     this.childSplit = new SplitText(this.description, {
       linesClass: 'inview-split-child',
       type: 'lines',
@@ -180,9 +174,9 @@ class Work extends PureComponent {
       yPercent: 100,
     });
 
-    this.projects.forEach((project) => {
-      project.ref.current.handleFadeIn();
-    });
+    // this.projects.forEach((project) => {
+    //   project.ref.current.handleFadeIn();
+    // });
 
     setTimeout(() => {
       this.handleCompleteLoadingAnimations();

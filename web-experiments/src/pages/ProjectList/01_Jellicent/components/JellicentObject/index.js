@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import React, {
   PureComponent,
 } from 'react';
@@ -97,9 +96,6 @@ class JellicentObject extends PureComponent {
     this.renderPass = new RenderPass(this.scene, this.camera);
     this.composer.addPass(this.renderPass);
 
-    // this.glitchPass = new GlitchPass();
-    // this.composer.addPass(this.glitchPass);
-
     window.addEventListener('resize', this.onWindowResize, false);
     window.addEventListener('mousemove', this.mousemove);
 
@@ -149,9 +145,5 @@ class JellicentObject extends PureComponent {
     );
   }
 }
-
-JellicentObject.propTypes = {
-  hideLoader: PropTypes.func.isRequired,
-};
 
 export default JellicentObject;
