@@ -71,24 +71,27 @@ class Section extends PureComponent {
 
   handleFadeIn () {
     gsap.from(this.childSplit.chars, {
+
+      // stagger: 0.02,
       delay: 1 + this.props.delay / 5,
       duration: 1,
       ease: 'power4',
-      stagger: 0.02,
       yPercent: 100,
     });
     gsap.from(this.idSplit.chars, {
+
+      // stagger: 0.02,
       delay: 1 + this.props.delay / 5,
       duration: 1,
       ease: 'power4',
-      stagger: 0.02,
       yPercent: 100,
     });
     gsap.from(this.descriptionSplit.chars, {
+
+      // stagger: 0.02,
       delay: 1.25 + this.props.delay / 5,
       duration: 1,
       ease: 'power4',
-      stagger: 0.02,
       yPercent: 100,
     });
   }
