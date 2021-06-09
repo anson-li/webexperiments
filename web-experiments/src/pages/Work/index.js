@@ -40,6 +40,7 @@ class Work extends PureComponent {
     this.workHovered = false;
     this.firstHover = false;
 
+    this.interactiveparticles = React.createRef();
     this.slideintext = React.createRef();
     this.generativeart = React.createRef();
     this.moodboard = React.createRef();
@@ -53,6 +54,14 @@ class Work extends PureComponent {
     this.jellicent = React.createRef();
 
     this.projects = [
+      {
+        description: 'Particle-based Three simulations, with both graphics based animations as well as sinusoidal generation.',
+        id: 12,
+        link: '/interactiveparticles',
+        ref: this.interactiveparticles,
+        technology: 'ThreeJS',
+        title: 'Interactive Particles',
+      },
       {
         description: 'Text manipulation, warping, and animations driven by scroll and hover interactions, powered by GSAP.',
         id: 11,

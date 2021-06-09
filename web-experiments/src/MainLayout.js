@@ -27,6 +27,7 @@ import WebGLGallery from './pages/ProjectList/08_WebGLGallery';
 import InteractiveMoodBoard from './pages/ProjectList/09_InteractiveMoodBoard';
 import GenerativeArt from './pages/ProjectList/10_GenerativeArt';
 import SlideInText from './pages/ProjectList/11_SlideInText';
+import InteractiveParticles from './pages/ProjectList/12_InteractiveParticles';
 import Work from './pages/Work';
 import {
   play, exit,
@@ -192,6 +193,11 @@ class MainLayout extends PureComponent {
                 </Route>
                 <Route path='/jellicent'>
                   <Jellicent
+                    {...componentProps}
+                  />
+                </Route>
+                <Route path='/interactiveparticles'>
+                  <InteractiveParticles
                     {...componentProps}
                   />
                 </Route>
