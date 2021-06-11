@@ -2,14 +2,13 @@
 import {
   TweenLite, Power4,
 } from 'gsap';
-import glslify from 'glslify';
 import {
   Object3D, TextureLoader, LinearFilter, RGBFormat, Vector2, RawShaderMaterial,
   InstancedBufferGeometry, BufferAttribute, InstancedBufferAttribute, Mesh, PlaneGeometry, MeshBasicMaterial,
 } from 'three';
 import TouchTexture from './TouchTexture';
-import fragmentShader from './Shaders/particle.frag';
-import vertexShader from './Shaders/particle.vert';
+import fs from './Shaders/fs';
+import vs from './Shaders/vs';
 
 export default class Particles {
   constructor (webgl) {
@@ -29,7 +28,7 @@ export default class Particles {
   init (src) {
     const loader = new TextureLoader();
     // FIXME: Point to src instead of imageref.default to randomize image
-    const imageref = require('../images/sample-3.jpg');
+    const imageref = require('../images/sample-2.jpg');
     loader.load(imageref.default, (texture) => {
       this.texture = texture;
       this.texture.minFilter = LinearFilter;
@@ -63,7 +62,6 @@ export default class Particles {
 
       const img = this.texture.image;
 
-      console.log(img);
       const canvas = document.createElement('canvas');
       const ctx = canvas.getContext('2d');
 
@@ -93,12 +91,6 @@ export default class Particles {
       uTime: {value: 0},
       uTouch: {value: null},
     };
-
-    const fs = glslify.file(fragmentShader);
-    const vs = glslify.file(vertexShader);
-
-    console.log(fs);
-    console.log(vs);
 
     const material = new RawShaderMaterial({
       depthTest: false,
