@@ -28,7 +28,7 @@ export default class Particles {
   init (src) {
     const loader = new TextureLoader();
     // FIXME: Point to src instead of imageref.default to randomize image
-    const imageref = require('../images/sample-2.jpg');
+    const imageref = require('../images/sample-1.jpg');
     loader.load(imageref.default, (texture) => {
       this.texture = texture;
       this.texture.minFilter = LinearFilter;
@@ -163,7 +163,7 @@ export default class Particles {
     const material = new MeshBasicMaterial({color: 0xFFFFFF,
       depthTest: false,
       wireframe: true});
-    material.visible = false;
+    material.visible = true;
     this.hitArea = new Mesh(geometry, material);
     this.container.add(this.hitArea);
   }
@@ -256,6 +256,7 @@ export default class Particles {
   }
 
   onInteractiveMove (e) {
+    console.log('test');
     const uv = e.intersectionData.uv;
     if (this.touch) {
       this.touch.addTouch(uv);

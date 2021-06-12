@@ -52,17 +52,17 @@ export default class InteractiveControls extends EventEmitter {
     this.handlerUp = this.onUp.bind(this);
     this.handlerLeave = this.onLeave.bind(this);
 
-    this.el.addEventListener('mousedown', this.handlerDown);
-    this.el.addEventListener('mousemove', this.handlerMove);
-    this.el.addEventListener('mouseup', this.handlerUp);
-    this.el.addEventListener('mouseleave', this.handlerLeave);
+    window.addEventListener('mousedown', this.handlerDown);
+    window.addEventListener('mousemove', this.handlerMove);
+    window.addEventListener('mouseup', this.handlerUp);
+    window.addEventListener('mouseleave', this.handlerLeave);
   }
 
   removeListeners () {
-    this.el.removeEventListener('mousedown', this.handlerDown);
-    this.el.removeEventListener('mousemove', this.handlerMove);
-    this.el.removeEventListener('mouseup', this.handlerUp);
-    this.el.removeEventListener('mouseleave', this.handlerLeave);
+    window.removeEventListener('mousedown', this.handlerDown);
+    window.removeEventListener('mousemove', this.handlerMove);
+    window.removeEventListener('mouseup', this.handlerUp);
+    window.removeEventListener('mouseleave', this.handlerLeave);
   }
 
   resize (x, y, width, height) {
@@ -82,6 +82,7 @@ export default class InteractiveControls extends EventEmitter {
   }
 
   onMove (e) {
+    console.log(e);
     const t = e.touches ? e.touches[0] : e;
     const touch = {x: t.clientX,
       y: t.clientY};
