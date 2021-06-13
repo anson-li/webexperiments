@@ -16,6 +16,7 @@ class ImageParticles extends PureComponent {
 
     this.init = this.init.bind(this);
     this.animate = this.animate.bind(this);
+    this.next = this.next.bind(this);
 
     this.renderer = null;
     this.container = null;
@@ -26,9 +27,10 @@ class ImageParticles extends PureComponent {
     this.currSample = null;
 
     this.samples = [
-      '../images/sample-1.jpg',
-      '../images/sample-2.jpg',
-      '../images/sample-3.jpg',
+      require('../images/sample-1.png'),
+      require('../images/sample-2.jpg'),
+      require('../images/sample-3.jpg'),
+      require('../images/sample-4.jpeg'),
     ];
   }
 
@@ -69,6 +71,7 @@ class ImageParticles extends PureComponent {
 
   initControls () {
     this.interactive = new InteractiveControls(this.camera, this.renderer.domElement);
+    window.addEventListener('click', this.next);
   }
 
   initParticles () {
@@ -105,6 +108,7 @@ class ImageParticles extends PureComponent {
   }
 
   next () {
+    console.log('hit');
     if (this.currSample < this.samples.length - 1) {
       this.goto(this.currSample + 1);
     } else {

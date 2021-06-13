@@ -82,7 +82,6 @@ export default class InteractiveControls extends EventEmitter {
   }
 
   onMove (e) {
-    console.log(e);
     const t = e.touches ? e.touches[0] : e;
     const touch = {x: t.clientX,
       y: t.clientY};
