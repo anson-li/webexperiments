@@ -9,6 +9,7 @@ import {
 } from 'three';
 import InteractiveControls from '../InteractiveControls';
 import Particles from '../Particles';
+import styles from './style.module.scss';
 
 class ImageParticles extends PureComponent {
   constructor (props) {
@@ -17,6 +18,7 @@ class ImageParticles extends PureComponent {
     this.init = this.init.bind(this);
     this.animate = this.animate.bind(this);
     this.next = this.next.bind(this);
+    this.handleChangeValue = this.handleChangeValue.bind(this);
 
     this.renderer = null;
     this.container = null;
@@ -75,7 +77,7 @@ class ImageParticles extends PureComponent {
 
   initControls () {
     this.interactive = new InteractiveControls(this.camera, this.renderer.domElement);
-    window.addEventListener('click', this.next);
+    // window.addEventListener('click', this.next);
   }
 
   initParticles () {
@@ -138,11 +140,26 @@ class ImageParticles extends PureComponent {
     }
   }
 
+  handleChangeValue (event) {
+    this.goto(event.target.value);
+  }
+
   render () {
     return (
-      <div ref={(ref) => {
-        this.mount = ref;
-      }} />
+      <>
+        <div
+          className={styles['input-radio']}
+          onChange={this.handleChangeValue}
+        >
+          <input name='image' type='radio' value='0' />
+          <input name='image' type='radio' value='1' />
+          <input name='image' type='radio' value='2' />
+          <input name='image' type='radio' value='3' />
+        </div>
+        <div ref={(ref) => {
+          this.mount = ref;
+        }} />
+      </>
     );
   }
 }
