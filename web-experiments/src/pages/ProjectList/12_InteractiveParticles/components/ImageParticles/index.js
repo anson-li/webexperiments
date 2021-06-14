@@ -65,6 +65,10 @@ class ImageParticles extends PureComponent {
     this.camera.position.z = 300;
     this.renderer = new WebGLRenderer({alpha: true,
       antialias: true});
+    this.renderer.setSize(window.innerWidth, window.innerHeight);
+    if (window.devicePixelRatio > 1) {
+      this.renderer.setPixelRatio(window.devicePixelRatio);
+    }
     this.clock = new Clock(true);
     this.container.appendChild(this.renderer.domElement);
   }
@@ -108,7 +112,6 @@ class ImageParticles extends PureComponent {
   }
 
   next () {
-    console.log('hit');
     if (this.currSample < this.samples.length - 1) {
       this.goto(this.currSample + 1);
     } else {
