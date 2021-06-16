@@ -34,6 +34,8 @@ class ImageParticles extends PureComponent {
       require('../images/sample-3.jpg'),
       require('../images/sample-4.jpeg'),
     ];
+
+    this.sample = 0;
   }
 
   componentDidMount () {
@@ -44,8 +46,7 @@ class ImageParticles extends PureComponent {
       this.animate();
       this.resize();
 
-      const rnd = ~~(Math.random() * this.samples.length);
-      this.goto(rnd);
+      this.goto(this.sample);
     }, 1000);
   }
 
@@ -77,6 +78,7 @@ class ImageParticles extends PureComponent {
 
   initControls () {
     this.interactive = new InteractiveControls(this.camera, this.renderer.domElement);
+
     // window.addEventListener('click', this.next);
   }
 
@@ -141,7 +143,8 @@ class ImageParticles extends PureComponent {
   }
 
   handleChangeValue (event) {
-    this.goto(event.target.value);
+    this.sample = event.target.value;
+    this.goto(this.sample);
   }
 
   render () {
@@ -151,7 +154,7 @@ class ImageParticles extends PureComponent {
           className={styles['input-radio']}
           onChange={this.handleChangeValue}
         >
-          <input name='image' type='radio' value='0' />
+          <input defaultChecked name='image' type='radio' value='0' />
           <input name='image' type='radio' value='1' />
           <input name='image' type='radio' value='2' />
           <input name='image' type='radio' value='3' />
