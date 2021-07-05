@@ -108,6 +108,24 @@ class MultiplePlanes extends PureComponent {
     }, 1000);
   }
 
+  buildPlane (index) {
+    return (
+      <SinglePlane
+        index={index}
+        key={index}
+        onPlaneReady={this.handlePlaneReady}
+      />
+    );
+  }
+
+  setupPlanes () {
+    const allPlanes = [];
+    for (let index = 0; index < this.state.nbPlanes; index++) {
+      allPlanes.push(this.buildPlane(index));
+    }
+    this.setState({allPlanes});
+  }
+
   setupCloseButton () {
     this.closebutton.addEventListener('click', () => {
       const fullScreenPlane = this.state.planes.find((plane) => {
@@ -213,61 +231,45 @@ class MultiplePlanes extends PureComponent {
     });
   }
 
-  handleScroll (event) {
-    if (!this.galleryState.fullscreen) {
-      TweenLite.to(this, 1, {
-        ease: Power0,
-        onComplete: () => {
-          this.updateScroll(0, this.scroll);
-        },
-        onUpdate: () => {
-          this.updateScroll(0, this.scroll);
-        },
-        scroll: event.target.scrollTop,
-      });
-    }
+  handleSetupCurtain (curtain) {
+    curtain.disableDrawing();
+    this.curtain = curtain;
+    this.curtain.needRender();
   }
 
-  setupPlanes () {
-    const allPlanes = [];
-    for (let index = 0; index < this.state.nbPlanes; index++) {
-      allPlanes.push(this.buildPlane(index));
-    }
-    this.setState({allPlanes});
-  }
-
-  scrollCurtain (curtains) {
-    // get scroll deltas to apply the effect on scroll
-    const delta = curtains.getScrollDeltas();
-
-    // invert value for the effect
-    delta.y = -delta.y;
-
-    // threshold
-    if (delta.y > 10) {
-      delta.y = 10;
-    } else if (delta.y < -10) {
-      delta.y = -10;
-    }
-
-    if (Math.abs(delta.y) > Math.abs(this.planesDeformations)) {
-      this.planesDeformations = curtains.lerp(Math.abs(this.planesDeformations), delta.y * 1.5, 1);
-    }
-
-    this.state.planes.forEach((plane) => {
-      this.calculatePlaneUniforms(plane);
+  handlePlaneReady (plane) {
+    plane.htmlElement.addEventListener('mouseover', () => {
+      this.handlePlaneMouseOver(plane);
     });
+    plane.htmlElement.addEventListener('mouseout', () => {
+      this.handlePlaneMouseOut(plane);
+    });
+    plane.htmlElement.addEventListener('click', () => {
+      this.handlePlaneClick(plane);
+    });
+    this.setState((prevState) => {
+      return {
+        ...prevState,
+        planes: [...prevState.planes, plane],
+      };
+    });
+
+    // Check when all planes have loaded
+    if (this.state.planes.length === this.state.nbPlanes) {
+      this.curtain.needRender();
+      this.setupInitialScrollAnimation();
+    }
   }
 
-  calculatePlaneUniforms (plane) {
-    if (plane.uniforms) {
-      plane.uniforms.planeDeformation.value =
-        Math.abs(this.planesDeformations) * (plane._boundingRect.document.top - window.innerHeight / 2) / (window.innerHeight / 2);
-
-      plane.uniforms.planePosition.value =
-        1 - Math.abs(Math.min(Math.max(plane._boundingRect.document.top, 0), window.innerHeight) - window.innerHeight / 2) / (window.innerHeight / 2);
-
-      plane.uniforms.planeVelocity.value = Math.min(Math.max(Math.abs(this.planesDeformations), 0), 10);
+  handlePlaneMouseOut (plane) {
+    if (!this.galleryState.fullscreen) {
+      gsap.to(plane.uniforms.hoverProgress, 0.5, {
+        ease: 'expo.inOut',
+        onUpdate: () => {
+          this.curtain.needRender();
+        },
+        value: 0,
+      });
     }
   }
 
@@ -388,64 +390,62 @@ class MultiplePlanes extends PureComponent {
     }
   }
 
-  handlePlaneMouseOut (plane) {
+  scrollCurtain (curtains) {
+    // get scroll deltas to apply the effect on scroll
+    const delta = curtains.getScrollDeltas();
+
+    // invert value for the effect
+    delta.y = -delta.y;
+
+    // threshold
+    if (delta.y > 10) {
+      delta.y = 10;
+    } else if (delta.y < -10) {
+      delta.y = -10;
+    }
+
+    if (Math.abs(delta.y) > Math.abs(this.planesDeformations)) {
+      this.planesDeformations = curtains.lerp(Math.abs(this.planesDeformations), delta.y * 1.5, 1);
+    }
+
+    this.state.planes.forEach((plane) => {
+      this.calculatePlaneUniforms(plane);
+    });
+  }
+
+  calculatePlaneUniforms (plane) {
+    if (plane.uniforms) {
+      plane.uniforms.planeDeformation.value =
+        Math.abs(this.planesDeformations) * (plane._boundingRect.document.top - window.innerHeight / 2) / (window.innerHeight / 2);
+
+      plane.uniforms.planePosition.value =
+        1 - Math.abs(Math.min(Math.max(plane._boundingRect.document.top, 0), window.innerHeight) - window.innerHeight / 2) / (window.innerHeight / 2);
+
+      plane.uniforms.planeVelocity.value = Math.min(Math.max(Math.abs(this.planesDeformations), 0), 10);
+    }
+  }
+
+  handleScroll (event) {
     if (!this.galleryState.fullscreen) {
-      gsap.to(plane.uniforms.hoverProgress, 0.5, {
-        ease: 'expo.inOut',
-        onUpdate: () => {
-          this.curtain.needRender();
+      TweenLite.to(this, 1, {
+        ease: Power0,
+        onComplete: () => {
+          this.updateScroll(this.scroll);
         },
-        value: 0,
+        onUpdate: () => {
+          this.updateScroll(this.scroll);
+        },
+        scroll: event.target.scrollTop,
       });
     }
   }
 
-  handlePlaneReady (plane) {
-    plane.htmlElement.addEventListener('mouseover', () => {
-      this.handlePlaneMouseOver(plane);
-    });
-    plane.htmlElement.addEventListener('mouseout', () => {
-      this.handlePlaneMouseOut(plane);
-    });
-    plane.htmlElement.addEventListener('click', () => {
-      this.handlePlaneClick(plane);
-    });
-    this.setState((prevState) => {
-      return {
-        ...prevState,
-        planes: [...prevState.planes, plane],
-      };
-    });
-
-    // Check when all planes have loaded
-    if (this.state.planes.length === this.state.nbPlanes) {
-      this.curtain.needRender();
-      this.setupInitialScrollAnimation();
-    }
-  }
-
-  buildPlane (index) {
-    return (
-      <SinglePlane
-        index={index}
-        key={index}
-        onPlaneReady={this.handlePlaneReady}
-      />
-    );
-  }
-
-  updateScroll (xOffset, yOffset) {
+  updateScroll (yOffset) {
     // update our scroll manager values
     if (this.curtain) {
-      this.curtain.updateScrollValues(xOffset, yOffset);
+      this.curtain.updateScrollValues(0, yOffset);
       this.curtain.needRender();
     }
-  }
-
-  handleSetupCurtain (curtain) {
-    curtain.disableDrawing();
-    this.curtain = curtain;
-    this.curtain.needRender();
   }
 
   render () {

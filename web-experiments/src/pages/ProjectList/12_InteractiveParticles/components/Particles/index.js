@@ -6,9 +6,9 @@ import {
   Object3D, TextureLoader, LinearFilter, RGBFormat, Vector2, RawShaderMaterial,
   InstancedBufferGeometry, BufferAttribute, InstancedBufferAttribute, Mesh, PlaneGeometry, MeshBasicMaterial,
 } from 'three';
-import TouchTexture from './TouchTexture';
 import fs from './Shaders/fs';
 import vs from './Shaders/vs';
+import TouchTexture from './TouchTexture';
 
 export default class Particles {
   constructor (webgl) {
@@ -27,6 +27,7 @@ export default class Particles {
 
   init (src) {
     const loader = new TextureLoader();
+
     // FIXME: Point to src instead of imageref.default to randomize image
     loader.load(src.default, (texture) => {
       this.texture = texture;
