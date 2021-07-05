@@ -28,9 +28,9 @@ class MultiplePlanes extends PureComponent {
     this.state = {
       allPlanes: [],
       nbPlanes: 48,
+      planes: [],
     };
-    this.planes = [];
-    this.allPlanes = [];
+
     this.curtain = null;
     this.planesDeformations = 0;
     this.previousY = 0;
@@ -46,20 +46,28 @@ class MultiplePlanes extends PureComponent {
       openTween: null,
     };
 
-    this.handlePlaneReady = this.handlePlaneReady.bind(this);
     this.setupPlanes = this.setupPlanes.bind(this);
+    this.setupTextAnimations = this.setupTextAnimations.bind(this);
+    this.setupDraggableCanvas = this.setupDraggableCanvas.bind(this);
+    this.setupCloseButton = this.setupCloseButton.bind(this);
+    this.setupInitialScrollAnimation = this.setupInitialScrollAnimation.bind(this);
+
     this.handleSetupCurtain = this.handleSetupCurtain.bind(this);
     this.handleScroll = this.handleScroll.bind(this);
     this.handlePlaneClick = this.handlePlaneClick.bind(this);
     this.handlePlaneMouseOut = this.handlePlaneMouseOut.bind(this);
     this.handlePlaneMouseOver = this.handlePlaneMouseOver.bind(this);
-    this.setupCloseButton = this.setupCloseButton.bind(this);
-    this.setupInitialScrollAnimation = this.setupInitialScrollAnimation.bind(this);
+    this.handlePlaneReady = this.handlePlaneReady.bind(this);
   }
 
   componentDidMount () {
     this.setupPlanes();
     this.setupCloseButton();
+    this.setupTextAnimations();
+    this.setupDraggableCanvas();
+  }
+
+  setupTextAnimations () {
     this.childSplit = new SplitText(this.fullscreentext, {
       linesClass: 'inview-split-child',
       type: 'lines',
@@ -78,7 +86,9 @@ class MultiplePlanes extends PureComponent {
       linesClass: 'inview-split-parent',
       type: 'lines',
     });
+  }
 
+  setupDraggableCanvas () {
     Draggable.create(this.planesref, {
       autoScroll: false,
       dragClickables: true,
@@ -100,7 +110,7 @@ class MultiplePlanes extends PureComponent {
 
   setupCloseButton () {
     this.closebutton.addEventListener('click', () => {
-      const fullScreenPlane = this.planes.find((plane) => {
+      const fullScreenPlane = this.state.planes.find((plane) => {
         return plane.userData.isFullscreen;
       });
 
@@ -121,7 +131,7 @@ class MultiplePlanes extends PureComponent {
           translationY: fullScreenPlane.relativeTranslation.y,
         };
 
-        const allOtherPlanes = this.planes.filter((el) => {
+        const allOtherPlanes = this.state.planes.filter((el) => {
           return el.uuid !== fullScreenPlane.uuid;
         });
         gsap.to(this, 1, {
@@ -244,22 +254,24 @@ class MultiplePlanes extends PureComponent {
       this.planesDeformations = curtains.lerp(Math.abs(this.planesDeformations), delta.y * 1.5, 1);
     }
 
-    this.planes.forEach((plane) => {
+    this.state.planes.forEach((plane) => {
       this.calculatePlaneUniforms(plane);
     });
   }
 
   calculatePlaneUniforms (plane) {
-    plane.uniforms.planeDeformation.value =
-      Math.abs(this.planesDeformations) * (plane._boundingRect.document.top - window.innerHeight / 2) / (window.innerHeight / 2);
+    if (plane.uniforms) {
+      plane.uniforms.planeDeformation.value =
+        Math.abs(this.planesDeformations) * (plane._boundingRect.document.top - window.innerHeight / 2) / (window.innerHeight / 2);
 
-    plane.uniforms.planePosition.value =
-      1 - Math.abs(Math.min(Math.max(plane._boundingRect.document.top, 0), window.innerHeight) - window.innerHeight / 2) / (window.innerHeight / 2);
+      plane.uniforms.planePosition.value =
+        1 - Math.abs(Math.min(Math.max(plane._boundingRect.document.top, 0), window.innerHeight) - window.innerHeight / 2) / (window.innerHeight / 2);
 
-    plane.uniforms.planeVelocity.value = Math.min(Math.max(Math.abs(this.planesDeformations), 0), 10);
+      plane.uniforms.planeVelocity.value = Math.min(Math.max(Math.abs(this.planesDeformations), 0), 10);
+    }
   }
 
-  handlePlaneClick (event, plane) {
+  handlePlaneClick (plane) {
     if (!this.galleryState.fullscreen) {
       this.galleryState.fullscreen = true;
       plane.userData.isFullscreen = true;
@@ -286,7 +298,7 @@ class MultiplePlanes extends PureComponent {
         this.galleryState.openTween.kill();
       }
 
-      const nonClickedPlanes = this.planes.filter((el) => {
+      const nonClickedPlanes = this.state.planes.filter((el) => {
         return el.uuid !== plane.uuid;
       });
       gsap.to(this, 1, {
@@ -364,7 +376,7 @@ class MultiplePlanes extends PureComponent {
     }
   }
 
-  handlePlaneMouseOver (event, plane) {
+  handlePlaneMouseOver (plane) {
     if (!this.galleryState.fullscreen) {
       gsap.to(plane.uniforms.hoverProgress, 0.25, {
         ease: 'expo.inOut',
@@ -376,7 +388,7 @@ class MultiplePlanes extends PureComponent {
     }
   }
 
-  handlePlaneMouseOut (event, plane) {
+  handlePlaneMouseOut (plane) {
     if (!this.galleryState.fullscreen) {
       gsap.to(plane.uniforms.hoverProgress, 0.5, {
         ease: 'expo.inOut',
@@ -389,19 +401,24 @@ class MultiplePlanes extends PureComponent {
   }
 
   handlePlaneReady (plane) {
-    plane.htmlElement.addEventListener('mouseover', (event) => {
-      this.handlePlaneMouseOver(event, plane);
+    plane.htmlElement.addEventListener('mouseover', () => {
+      this.handlePlaneMouseOver(plane);
     });
-    plane.htmlElement.addEventListener('mouseout', (event) => {
-      this.handlePlaneMouseOut(event, plane);
+    plane.htmlElement.addEventListener('mouseout', () => {
+      this.handlePlaneMouseOut(plane);
     });
-    plane.htmlElement.addEventListener('click', (event) => {
-      this.handlePlaneClick(event, plane);
+    plane.htmlElement.addEventListener('click', () => {
+      this.handlePlaneClick(plane);
     });
-    this.planes.push(plane);
+    this.setState((prevState) => {
+      return {
+        ...prevState,
+        planes: [...prevState.planes, plane],
+      };
+    });
 
     // Check when all planes have loaded
-    if (this.planes.length === this.state.nbPlanes) {
+    if (this.state.planes.length === this.state.nbPlanes) {
       this.curtain.needRender();
       this.setupInitialScrollAnimation();
     }
