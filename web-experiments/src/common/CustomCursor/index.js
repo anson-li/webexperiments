@@ -20,10 +20,10 @@ class CustomCursor extends PureComponent {
   }
 
   componentDidMount () {
-    window.addEventListener('mousemove', this.moveCircle);
-    window.addEventListener('scroll', this.onScroll);
-    window.addEventListener('onmouseover', this.hoverFunc);
-    window.addEventListener('onmouseout', this.unhoverFunc);
+    // window.addEventListener('mousemove', this.moveCircle);
+    // window.addEventListener('scroll', this.onScroll);
+    // window.addEventListener('onmouseover', this.hoverFunc);
+    // window.addEventListener('onmouseout', this.unhoverFunc);
   }
 
   moveCircle (event) {

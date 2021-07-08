@@ -84,7 +84,7 @@ class MainLayout extends PureComponent {
   }
 
   moveCursor (event) {
-    this.cursor.current.moveCircle(event);
+    // this.cursor.current.moveCircle(event);
   }
 
   handleEnterHandler (node) {
