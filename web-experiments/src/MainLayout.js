@@ -28,6 +28,8 @@ import InteractiveMoodBoard from './pages/ProjectList/09_InteractiveMoodBoard';
 import GenerativeArt from './pages/ProjectList/10_GenerativeArt';
 import SlideInText from './pages/ProjectList/11_SlideInText';
 import InteractiveParticles from './pages/ProjectList/12_InteractiveParticles';
+import DiagonalAnimated from './pages/ProjectList/13_DiagonalAnimated';
+import KineticType from './pages/ProjectList/14_KineticType';
 import Work from './pages/Work';
 import {
   play, exit,
@@ -198,6 +200,16 @@ class MainLayout extends PureComponent {
                 </Route>
                 <Route path='/interactiveparticles'>
                   <InteractiveParticles
+                    {...componentProps}
+                  />
+                </Route>
+                <Route path='/diagonalanimated'>
+                  <DiagonalAnimated
+                    {...componentProps}
+                  />
+                </Route>
+                <Route path='/kinetictype'>
+                  <KineticType
                     {...componentProps}
                   />
                 </Route>

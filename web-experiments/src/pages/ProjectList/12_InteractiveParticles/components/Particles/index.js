@@ -43,9 +43,7 @@ export default class Particles {
       this.initTouch();
       this.resize();
       this.show();
-    }, undefined, (error) => {
-      console.log(error);
-    });
+    }, undefined, () => {});
   }
 
   initPoints (discard) {

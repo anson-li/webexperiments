@@ -4,10 +4,6 @@ import {
 } from 'three';
 
 export default class InteractiveControls extends EventEmitter {
-  get enabled () {
-    return this._enabled;
-  }
-
   constructor (camera, el) {
     super();
 
@@ -35,7 +31,7 @@ export default class InteractiveControls extends EventEmitter {
       return;
     }
     this.addListeners();
-    this._enabled = true;
+    this.enabled = true;
   }
 
   disable () {
@@ -43,7 +39,7 @@ export default class InteractiveControls extends EventEmitter {
       return;
     }
     this.removeListeners();
-    this._enabled = false;
+    this.enabled = false;
   }
 
   addListeners () {
@@ -99,13 +95,13 @@ export default class InteractiveControls extends EventEmitter {
 
       this.plane.setFromNormalAndCoplanarPoint(this.camera.getWorldDirection(this.plane.normal), object.position);
 
-      if (this.hovered !== object) {
+      if (this.hovered === object) {
+        this.emit('interactive-move', {intersectionData: this.intersectionData,
+          object});
+      } else {
         this.emit('interactive-out', {object: this.hovered});
         this.emit('interactive-over', {object});
         this.hovered = object;
-      } else {
-        this.emit('interactive-move', {intersectionData: this.intersectionData,
-          object});
       }
     } else {
       this.intersectionData = null;

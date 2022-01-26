@@ -1,0 +1,21 @@
+.slidein-background {
+  background-color: #111;
+  width: 100vw;
+  height: fit-content;
+  position: absolute;
+}
+
+.page-content {
+  min-height: 80vh;
+  width: 80vw;
+  padding: 50px;
+  margin: 0vh 10vw; // margin: 15vh 10vw;
+}
+
+.inview-split-parent {
+  overflow: hidden;
+}
+
+.inview-split-child {
+  display: inline-block;
+}

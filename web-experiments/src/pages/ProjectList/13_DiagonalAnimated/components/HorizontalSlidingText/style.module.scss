@@ -1,0 +1,32 @@
+.horizontal-sliding-text-wrapper {
+  font-family: forma-djr-text, sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  font-size: 320px;
+  line-height: 1em;
+  color: white;
+  position: relative;
+  background: none;
+  width: 100vw;
+  height: 1em;
+  overflow: hidden;
+  transform: translateX(-12vw);
+  margin-bottom: 50px;
+
+  .horizontal-slider-list {
+    position: absolute;
+    display: inline-block;
+
+    .box {
+      float: left;
+      padding-left: 50px;
+      opacity: 0.5;
+    }
+  }
+
+  .cloned {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+}

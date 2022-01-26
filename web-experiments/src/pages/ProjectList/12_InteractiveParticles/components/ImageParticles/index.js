@@ -103,10 +103,7 @@ class ImageParticles extends PureComponent {
     // init next
     if (this.currSample === null) {
       this.particles.init(this.samples[index]);
-    }
-
-    // hide curr then init next
-    else {
+    } else {
       this.particles.hide(true).then(() => {
         this.particles.init(this.samples[index]);
       });

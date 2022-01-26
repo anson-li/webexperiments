@@ -1,0 +1,45 @@
+.page-header {
+  width: 120vw;
+  height: 120vh;
+
+  .boxes {
+    width: 100%;
+    height: 100%;
+    transform: skew(15deg)
+      translateX(-10vw)
+      translateY(-25vh);
+    display: flex;
+  }
+
+  .header-text {
+    z-index: 10000;
+    position: fixed;
+    left: 50vw;
+    top: 35vh;
+    transform: translateX(-50%);
+    font-family: forma-djr-text, sans-serif;
+    font-weight: 100;
+    font-style: normal;
+    font-size: 4em;
+    line-height: 1.5em;
+    color: white;
+    perspective-origin: center;
+    flex: 1;
+  }
+
+  .header-subtext {
+    z-index: 10000;
+    position: fixed;
+    left: 50vw;
+    top: 45vh;
+    transform: translateX(-50%);
+    font-family: forma-djr-text, sans-serif;
+    font-weight: 100;
+    font-style: normal;
+    font-size: 1.5em;
+    line-height: 1.5em;
+    color: #aaa;
+    perspective-origin: center;
+    flex: 1;
+  }
+}
