@@ -5,7 +5,7 @@ import React, {
 import {
   Scene, PerspectiveCamera, WebGLRenderTarget, Color, TextureLoader,
   RawShaderMaterial, DoubleSide, Mesh,
-  WebGL1Renderer, Clock, TorusKnotGeometry, ShaderMaterial,
+  WebGL1Renderer, Clock, PlaneBufferGeometry, ShaderMaterial,
 } from 'three';
 import createGeometry from 'three-bmfont-text';
 import MSDFShader from 'three-bmfont-text/shaders/msdf';
@@ -18,7 +18,7 @@ import {
   fragmentShader, vertexShader,
 } from './shader';
 
-class ThreeJS extends PureComponent {
+class WaterfallType extends PureComponent {
   // Reference: https://tympanus.net/codrops/2020/06/02/kinetic-typography-with-three-js/
 
   constructor (props) {
@@ -38,30 +38,45 @@ class ThreeJS extends PureComponent {
     this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
     this.renderer.setSize(window.innerWidth, window.innerHeight);
     this.renderer.setClearColor(0x000000, 1);
+    this.requestId = null;
 
     this.camera = new PerspectiveCamera(
-      45,
+      30,
       window.innerWidth / window.innerHeight,
       1,
-      1000,
+      2000,
     );
 
     this.camera.position.z = 60;
+    this.camera.position.y = -80;
     this.scene = new Scene();
     this.container = document.createElement('div');
     document.body.appendChild(this.container);
 
     this.container.appendChild(this.renderer.domElement);
     this.controls = new OrbitControls(this.camera, this.renderer.domElement);
-    // this.controls.update();
-    // this.controls.autoRotate = true;
     this.clock = new Clock();
   }
 
   componentDidMount () {
-    setTimeout(() => {
-      this.init();
-    }, 1000);
+    this.init();
+  }
+
+  componentWillUnmount () {
+    window.removeEventListener('resize', this.resizeRenderer);
+    this.container.removeChild(this.renderer.domElement);
+    this.stop();
+
+    this.loader = null;
+    this.scene = null;
+    this.camera = null;
+    this.composer = null;
+    this.renderer = null;
+  }
+
+  stop () {
+    cancelAnimationFrame(this.requestId);
+    this.requestId = undefined;
   }
 
   // Create Scene + Camera
@@ -70,7 +85,7 @@ class ThreeJS extends PureComponent {
     loadFont(fontFile, (_err, font) => {
       this.fontGeometry = createGeometry({
         font,
-        text: 'ENDLESS',
+        text: 'WATERFALL',
       });
 
       // Load texture containing font glyps
@@ -101,7 +116,7 @@ class ThreeJS extends PureComponent {
       window.innerHeight,
     );
     this.rtCamera = new PerspectiveCamera(45, 1, 0.1, 1000);
-    this.rtCamera.position.z = 2.5;
+    this.rtCamera.position.z = 6;
 
     this.rtScene = new Scene();
     this.rtScene.background = new Color('#000000');
@@ -110,16 +125,16 @@ class ThreeJS extends PureComponent {
     this.text = new Mesh(this.fontGeometry, this.fontMaterial);
 
     // Adjust dimensions
-    this.text.position.set(-0.965, -0.275, 0);
-    this.text.rotation.set(Math.PI, 0, 0);
-    this.text.scale.set(0.008, 0.02, 1);
+    this.text.position.set(0.965, 0.275, 0.3);
+    this.text.rotation.set(0, Math.PI, 0);
+    this.text.scale.set(0.008, 0.02, 5);
 
     // Add text mesh to buffer scene
     this.rtScene.add(this.text);
   }
 
   createMesh () {
-    this.geometry = new TorusKnotGeometry(9, 3, 768, 3, 4, 3);
+    this.geometry = new PlaneBufferGeometry(240, 60, 16, 14);
     this.material = new ShaderMaterial({
       fragmentShader,
       uniforms: {
@@ -130,11 +145,19 @@ class ThreeJS extends PureComponent {
     });
 
     this.mesh = new Mesh(this.geometry, this.material);
+
+    const peak = 10;
+    const vertices = this.mesh.geometry.attributes.position.array;
+    for (let index = 0; index <= vertices.length; index += 3) {
+      vertices[index + 2] = peak * Math.random();
+    }
+    this.mesh.geometry.attributes.position.array = vertices;
+
     this.scene.add(this.mesh);
   }
 
   animate () {
-    requestAnimationFrame(this.animate.bind(this));
+    this.requestId = requestAnimationFrame(this.animate.bind(this));
     this.renderAnimation();
   }
 
@@ -153,7 +176,6 @@ class ThreeJS extends PureComponent {
 
   renderAnimation () {
     this.controls.update();
-    // this.mesh.rotation.y += 0.005;
 
     // Update time
     this.material.uniforms.uTime.value = this.clock.getElapsedTime();
@@ -175,4 +197,4 @@ class ThreeJS extends PureComponent {
   }
 }
 
-export default ThreeJS;
+export default WaterfallType;
