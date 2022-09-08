@@ -99,7 +99,7 @@ void main() {
   // displacement
   vec3 displaced = offset;
   // randomise
-  displaced.xy += vec2(random(pindex) - 0.5, random(offset.x + pindex) - 0.5) * uRandom;
+  displaced.xy += vec2(random(pindex) - 0.2, random(offset.x + pindex) - 0.2) * uRandom;
   float rndz = (random(pindex) + snoise_1_2(vec2(pindex * 0.1, uTime * 0.1)));
   displaced.z += rndz * (random(pindex) * 2.0 * uDepth);
   // center
@@ -107,9 +107,9 @@ void main() {
 
   // touch
   float t = texture2D(uTouch, puv).r;
-  displaced.z += t * 20.0 * rndz;
-  displaced.x += cos(angle) * t * 20.0 * rndz;
-  displaced.y += sin(angle) * t * 20.0 * rndz;
+  displaced.z += t * 150.0 * rndz;
+  displaced.x += cos(angle) * t * 150.0 * rndz;
+  displaced.y += sin(angle) * t * 150.0 * rndz;
 
   // particle size
   float psize = (snoise_1_2(vec2(uTime, pindex) * 0.5) + 2.0);

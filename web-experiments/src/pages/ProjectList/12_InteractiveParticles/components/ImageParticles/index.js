@@ -28,11 +28,12 @@ class ImageParticles extends PureComponent {
     this.raf = null;
     this.currSample = null;
 
+    this.willunmount = null;
+
     this.samples = [
-      require('../images/sample-1.png'),
+      require('../images/sample-1.jpg'),
       require('../images/sample-2.jpg'),
       require('../images/sample-3.jpg'),
-      require('../images/sample-4.jpeg'),
     ];
 
     this.sample = 0;
@@ -51,6 +52,13 @@ class ImageParticles extends PureComponent {
   }
 
   componentWillUnmount () {
+    this.willunmount = true;
+    cancelAnimationFrame(this.raf);
+    this.raf = null;
+    this.container = null;
+    this.scene = null;
+    this.particles = null;
+    this.mount = null;
   }
 
   animate () {
@@ -61,8 +69,6 @@ class ImageParticles extends PureComponent {
   }
 
   init () {
-    this.container = document.createElement('div');
-    document.body.appendChild(this.container);
     this.scene = new Scene();
     this.camera = new PerspectiveCamera(50, window.innerWidth / window.innerHeight, 1, 10000);
     this.camera.position.z = 300;
@@ -73,13 +79,12 @@ class ImageParticles extends PureComponent {
       this.renderer.setPixelRatio(window.devicePixelRatio);
     }
     this.clock = new Clock(true);
-    this.container.appendChild(this.renderer.domElement);
+    this.mount.appendChild(this.renderer.domElement);
   }
 
   initControls () {
     this.interactive = new InteractiveControls(this.camera, this.renderer.domElement);
-
-    // window.addEventListener('click', this.next);
+    window.addEventListener('click', this.next);
   }
 
   initParticles () {
@@ -100,16 +105,16 @@ class ImageParticles extends PureComponent {
   }
 
   goto (index) {
-    // init next
-    if (this.currSample === null) {
-      this.particles.init(this.samples[index]);
-    } else {
-      this.particles.hide(true).then(() => {
+    if (!this.willunmount) {
+      if (this.currSample === null) {
         this.particles.init(this.samples[index]);
-      });
+      } else {
+        this.particles.hide(true).then(() => {
+          this.particles.init(this.samples[index]);
+        });
+      }
+      this.currSample = index;
     }
-
-    this.currSample = index;
   }
 
   next () {
@@ -147,18 +152,22 @@ class ImageParticles extends PureComponent {
   render () {
     return (
       <>
-        <div
-          className={styles['input-radio']}
-          onChange={this.handleChangeValue}
-        >
-          <input defaultChecked name='image' type='radio' value='0' />
-          <input name='image' type='radio' value='1' />
-          <input name='image' type='radio' value='2' />
-          <input name='image' type='radio' value='3' />
+        <div className={styles['imageparticles-body']}>
+          <div className={styles['imageparticles-title']}>
+            Interactive Particles
+          </div>
+          <div className={styles['imageparticles-description']}>
+            Hover the images to interact with them.
+            <br />
+            Click anywhere to cycle to the next photo.
+          </div>
         </div>
-        <div ref={(ref) => {
-          this.mount = ref;
-        }} />
+        <div
+          className={styles['imageparticles-canvas']}
+          ref={(ref) => {
+            this.mount = ref;
+          }}
+        />
       </>
     );
   }

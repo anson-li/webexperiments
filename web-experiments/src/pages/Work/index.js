@@ -50,21 +50,22 @@ class Work extends PureComponent {
     this.dinosaurloader = React.createRef();
     this.colorshader = React.createRef();
     this.asciishader = React.createRef();
-    this.coffeecup = React.createRef();
-    this.jellicent = React.createRef();
+
+    // this.coffeecup = React.createRef();
+    // this.jellicent = React.createRef();
 
     this.projects = [
-      // {
-      //   description: 'Particle-based Three simulations, with both graphics based animations as well as sinusoidal generation.',
-      //   id: 12,
-      //   link: '/interactiveparticles',
-      //   ref: this.interactiveparticles,
-      //   technology: 'ThreeJS',
-      //   title: 'Interactive Particles',
-      // },
+      {
+        description: 'Particle-based Three simulations, with both graphics based animations as well as sinusoidal generation.',
+        id: 10,
+        link: '/interactiveparticles',
+        ref: this.interactiveparticles,
+        technology: 'ThreeJS',
+        title: 'Interactive Particles',
+      },
       {
         description: 'Text manipulation, warping, and animations driven by scroll and hover interactions, powered by GSAP.',
-        id: 11,
+        id: 9,
         link: '/slideintext',
         ref: this.slideintext,
         technology: 'GSAP',
@@ -72,7 +73,7 @@ class Work extends PureComponent {
       },
       {
         description: 'Hide and reveal shaders, using mouse interactions to slowly peel back layers of a painting.',
-        id: 10,
+        id: 8,
         link: '/generativeart',
         ref: this.generativeart,
         technology: 'Design',
@@ -80,7 +81,7 @@ class Work extends PureComponent {
       },
       {
         description: 'Interactive mood board, with draggable elements built with GSAP and new page structure',
-        id: 9,
+        id: 7,
         link: '/moodboard',
         ref: this.moodboard,
         technology: 'GSAP',
@@ -88,7 +89,7 @@ class Work extends PureComponent {
       },
       {
         description: 'Horizontal gallery designed for image-first navigation, built in WebGL & GSAP.',
-        id: 8,
+        id: 6,
         link: '/webglgallery',
         ref: this.webglgallery,
         technology: 'WebGL',
@@ -96,7 +97,7 @@ class Work extends PureComponent {
       },
       {
         description: 'Collection of various shaders and WebGL examples for reference from book of shaders',
-        id: 7,
+        id: 5,
         link: '/webglcurtains',
         ref: this.webglcurtains,
         technology: 'WebGL',
@@ -104,7 +105,7 @@ class Work extends PureComponent {
       },
       {
         description: 'Proof of concept for Drumheller\'s main page advanced GSAP techniques & video manipulation.',
-        id: 6,
+        id: 4,
         link: '/drumheller',
         ref: this.drumhellerconcept,
         technology: 'GSAP',
@@ -112,7 +113,7 @@ class Work extends PureComponent {
       },
       {
         description: 'Fill loader template built via SVG and GSAP built with offset svg exclusive trans-formations',
-        id: 5,
+        id: 3,
         link: '/dinosaurloader',
         ref: this.dinosaurloader,
         technology: 'SVG',
@@ -120,7 +121,7 @@ class Work extends PureComponent {
       },
       {
         description: 'Additive shader designed to wash out the color & interactive color shifting with dat.gui',
-        id: 4,
+        id: 2,
         link: '/additiveshader',
         ref: this.colorshader,
         technology: 'ThreeJS',
@@ -128,28 +129,29 @@ class Work extends PureComponent {
       },
       {
         description: 'Bitmap shader for threejs to render scene through custom 2d pixel art filter',
-        id: 3,
+        id: 1,
         link: '/asciishader',
         ref: this.asciishader,
         technology: 'ThreeJS',
         title: 'ASCII Shader',
       },
-      {
-        description: 'threejs blender tutorial guru hand-made models imported gltf and animated',
-        id: 2,
-        link: '/coffeecup',
-        ref: this.coffeecup,
-        technology: 'Blender',
-        title: 'Coffee Cup',
-      },
-      {
-        description: 'threejs experimentation imported model camera post-processing mouse interactions',
-        id: 1,
-        link: '/jellicent',
-        ref: this.jellicent,
-        technology: 'ThreeJS',
-        title: 'Jellicent',
-      },
+
+      // {
+      //   description: 'threejs blender tutorial guru hand-made models imported gltf and animated',
+      //   id: 2,
+      //   link: '/coffeecup',
+      //   ref: this.coffeecup,
+      //   technology: 'Blender',
+      //   title: 'Coffee Cup',
+      // },
+      // {
+      //   description: 'threejs experimentation imported model camera post-processing mouse interactions',
+      //   id: 1,
+      //   link: '/jellicent',
+      //   ref: this.jellicent,
+      //   technology: 'ThreeJS',
+      //   title: 'Jellicent',
+      // },
     ];
   }
 

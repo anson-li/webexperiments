@@ -11,6 +11,7 @@ import React, {
 } from 'react';
 import TextLogo from '../../../common/TextLogo';
 import ImageParticles from './components/ImageParticles';
+import styles from './styles.module.scss';
 
 gsap.registerPlugin(SplitText);
 
@@ -20,6 +21,7 @@ class InteractiveParticles extends PureComponent {
 
     return (
       <div
+        className={styles['interactive-particles']}
         id='interactive-particles'
         ref={(element) => {
           this.el = element;
