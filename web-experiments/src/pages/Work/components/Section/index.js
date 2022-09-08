@@ -24,6 +24,7 @@ class Section extends PureComponent {
     this.handleLeaveWorkContent = this.handleLeaveWorkContent.bind(this);
     this.handleFadeIn = this.handleFadeIn.bind(this);
     this.handleCompleteLoadingAnimations = this.handleCompleteLoadingAnimations.bind(this);
+    this.bold = props.bold;
 
     this.childSplit = null;
     this.idSplit = null;
@@ -127,15 +128,15 @@ class Section extends PureComponent {
         this.tweenDescription.kill();
       }
       this.tweenText = TweenLite.to(this.childSplit.chars, 0.2, {
-        color: '#FFFFFF',
+        color: this.bold ? '#FFE9B9' : '#FFFFFF',
         stagger: 0.01,
       });
       this.tweenId = TweenLite.to(this.idSplit.chars, 0.2, {
-        color: '#FFFFFF',
+        color: this.bold ? '#FFE9B9' : '#FFFFFF',
         stagger: 0.01,
       });
       this.tweenDescription = TweenLite.to(this.descriptionSplit.chars, 0.2, {
-        color: '#FFFFFF',
+        color: this.bold ? '#FFE9B9' : '#FFFFFF',
         stagger: 0.01,
       });
     }
@@ -149,13 +150,13 @@ class Section extends PureComponent {
         this.tweenDescription.kill();
       }
       this.tweenText = TweenLite.to(this.childSplit.chars, 0.2, {
-        color: '#FFFFFF',
+        color: this.bold ? '#FFE9B9' : '#FFFFFF',
       });
       this.tweenId = TweenLite.to(this.idSplit.chars, 0.2, {
-        color: '#FFFFFF',
+        color: this.bold ? '#FFE9B9' : '#FFFFFF',
       });
       this.tweenDescription = TweenLite.to(this.descriptionSplit.chars, 0.2, {
-        color: '#FFFFFF',
+        color: this.bold ? '#FFE9B9' : '#FFFFFF',
       });
     }
   }
@@ -200,14 +201,14 @@ class Section extends PureComponent {
           {formattedId}
         </div>
         <div
-          className={styles['section-title']}
+          className={`${styles['section-title']} ${this.bold ? styles.bold : null}`}
           ref={(ref) => {
             this.title = ref;
           }}>
           {title}
         </div>
         <div
-          className={styles['section-description']}
+          className={`${styles['section-description']} ${this.bold ? styles.bold : null}`}
           ref={(ref) => {
             this.description = ref;
           }}>
@@ -219,6 +220,7 @@ class Section extends PureComponent {
 }
 
 Section.propTypes = {
+  bold: PropTypes.bool.isRequired,
   delay: PropTypes.number.isRequired,
   description: PropTypes.string.isRequired,
   id: PropTypes.number.isRequired,

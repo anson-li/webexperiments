@@ -55,6 +55,7 @@ class Work extends PureComponent {
 
     this.projects = [
       {
+        bold: false,
         description: 'Dynamic kinetic type generated in 3D space, designed to fit around specific shapes, traced in movement.',
         id: 12,
         link: '/kinetictype',
@@ -63,6 +64,7 @@ class Work extends PureComponent {
         title: 'Kinetic Type',
       },
       {
+        bold: false,
         description: 'Create a diagonal pulsing effect designed to mimic a sunset, scroll for dramatic effect.',
         id: 11,
         link: '/diagonalanimated',
@@ -71,6 +73,7 @@ class Work extends PureComponent {
         title: 'Diagonal Animated',
       },
       {
+        bold: false,
         description: 'Particle-based Three simulations, with both graphics based animations as well as sinusoidal generation.',
         id: 10,
         link: '/interactiveparticles',
@@ -79,6 +82,7 @@ class Work extends PureComponent {
         title: 'Interactive Particles',
       },
       {
+        bold: false,
         description: 'Text manipulation, warping, and animations driven by scroll and hover interactions, powered by GSAP.',
         id: 9,
         link: '/slideintext',
@@ -87,6 +91,7 @@ class Work extends PureComponent {
         title: 'Slide-in Text',
       },
       {
+        bold: true,
         description: 'Hide and reveal shaders, using mouse interactions to slowly peel back layers of a painting.',
         id: 8,
         link: '/generativeart',
@@ -95,6 +100,7 @@ class Work extends PureComponent {
         title: 'Hide & Seek',
       },
       {
+        bold: false,
         description: 'Interactive mood board, with draggable elements built with GSAP and new page structure',
         id: 7,
         link: '/moodboard',
@@ -103,6 +109,7 @@ class Work extends PureComponent {
         title: 'Polaroid Wall',
       },
       {
+        bold: false,
         description: 'Horizontal gallery designed for image-first navigation, built in WebGL & GSAP.',
         id: 6,
         link: '/webglgallery',
@@ -111,6 +118,7 @@ class Work extends PureComponent {
         title: 'WebGL Gallery',
       },
       {
+        bold: true,
         description: 'Collection of various shaders and WebGL examples for reference from book of shaders',
         id: 5,
         link: '/webglcurtains',
@@ -119,6 +127,7 @@ class Work extends PureComponent {
         title: 'WebGL Shader Library',
       },
       {
+        bold: false,
         description: 'Proof of concept for Drumheller\'s main page advanced GSAP techniques & video manipulation.',
         id: 4,
         link: '/drumheller',
@@ -127,6 +136,7 @@ class Work extends PureComponent {
         title: 'Drumheller Concept',
       },
       {
+        bold: false,
         description: 'Fill loader template built via SVG and GSAP built with offset svg exclusive trans-formations',
         id: 3,
         link: '/dinosaurloader',
@@ -135,6 +145,7 @@ class Work extends PureComponent {
         title: 'SVG Loader',
       },
       {
+        bold: false,
         description: 'Additive shader designed to wash out the color & interactive color shifting with dat.gui',
         id: 2,
         link: '/additiveshader',
@@ -143,6 +154,7 @@ class Work extends PureComponent {
         title: 'Color Shader',
       },
       {
+        bold: true,
         description: 'Bitmap shader for threejs to render scene through custom 2d pixel art filter',
         id: 1,
         link: '/asciishader',
@@ -278,6 +290,7 @@ class Work extends PureComponent {
 
     const renderText = this.projects.map((project) => {
       return <Section
+        bold={project.bold}
         delay={this.projects.length - project.id}
         description={project.description}
         hover={cursorHover}
