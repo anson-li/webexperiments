@@ -18,9 +18,9 @@ class DiagonalBox extends PureComponent {
     gsap.set(this.animatedinnerimage, {
       backgroundImage: `linear-gradient(#111B22 0%, #BC041F  ${25 - delay * 2}%, #D64D22 ${25 + delay * 3}%, #111B22 120%`,
     });
-    gsap.from(this.animatedinnerimage, 32.5, {
+    gsap.from(this.animatedinnerimage, 3.5, {
       backgroundImage: `linear-gradient(#111B22 0%, #111B22 ${15 - delay * 2}%, #47AED3 ${25 + delay * 3}%, #111B22 100%`,
-      delay,
+      delay: delay * 0.2,
       ease: 'none',
       repeat: -1,
       repeatDelay: 0,
@@ -28,7 +28,8 @@ class DiagonalBox extends PureComponent {
     });
     if (timeline) {
       timeline.to(this.animatedinnerimage, {
-        x: `-${2500 - delay * 300}px`,
+        x: `-${1000 - delay * 100}px`,
+        y: `-${1500 - delay * 100}px`,
       }, 0);
     }
   }

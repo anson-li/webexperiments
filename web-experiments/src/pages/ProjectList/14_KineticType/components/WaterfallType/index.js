@@ -12,15 +12,13 @@ import MSDFShader from 'three-bmfont-text/shaders/msdf';
 import {
   OrbitControls,
 } from 'three/examples/jsm/controls/OrbitControls';
-import fontFile from '../assets/Orbulon-Black.fnt';
-import fontAtlas from '../assets/Orbulon-Black.png';
+import fontFile from '../assets/ivymode.fnt';
+import fontAtlas from '../assets/ivymode.png';
 import {
   fragmentShader, vertexShader,
 } from './shader';
 
 class WaterfallType extends PureComponent {
-  // Reference: https://tympanus.net/codrops/2020/06/02/kinetic-typography-with-three-js/
-
   constructor (props) {
     super(props);
 
@@ -85,7 +83,7 @@ class WaterfallType extends PureComponent {
     loadFont(fontFile, (_err, font) => {
       this.fontGeometry = createGeometry({
         font,
-        text: 'WATERFALL',
+        text: 'Do you want to start again?',
       });
 
       // Load texture containing font glyps

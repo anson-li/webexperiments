@@ -40,6 +40,8 @@ class Work extends PureComponent {
     this.workHovered = false;
     this.firstHover = false;
 
+    this.kinetictype = React.createRef();
+    this.diagonalanimated = React.createRef();
     this.interactiveparticles = React.createRef();
     this.slideintext = React.createRef();
     this.generativeart = React.createRef();
@@ -51,10 +53,23 @@ class Work extends PureComponent {
     this.colorshader = React.createRef();
     this.asciishader = React.createRef();
 
-    // this.coffeecup = React.createRef();
-    // this.jellicent = React.createRef();
-
     this.projects = [
+      {
+        description: 'Dynamic kinetic type generated in 3D space, designed to fit around specific shapes, traced in movement.',
+        id: 12,
+        link: '/kinetictype',
+        ref: this.kinetictype,
+        technology: 'ThreeJS',
+        title: 'Kinetic Type',
+      },
+      {
+        description: 'Create a diagonal pulsing effect designed to mimic a sunset, scroll for dramatic effect.',
+        id: 11,
+        link: '/diagonalanimated',
+        ref: this.diagonalanimated,
+        technology: 'GSAP',
+        title: 'Diagonal Animated',
+      },
       {
         description: 'Particle-based Three simulations, with both graphics based animations as well as sinusoidal generation.',
         id: 10,
@@ -135,23 +150,6 @@ class Work extends PureComponent {
         technology: 'ThreeJS',
         title: 'ASCII Shader',
       },
-
-      // {
-      //   description: 'threejs blender tutorial guru hand-made models imported gltf and animated',
-      //   id: 2,
-      //   link: '/coffeecup',
-      //   ref: this.coffeecup,
-      //   technology: 'Blender',
-      //   title: 'Coffee Cup',
-      // },
-      // {
-      //   description: 'threejs experimentation imported model camera post-processing mouse interactions',
-      //   id: 1,
-      //   link: '/jellicent',
-      //   ref: this.jellicent,
-      //   technology: 'ThreeJS',
-      //   title: 'Jellicent',
-      // },
     ];
   }
 

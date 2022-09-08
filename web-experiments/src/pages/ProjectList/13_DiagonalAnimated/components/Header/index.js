@@ -41,14 +41,14 @@ class Header extends PureComponent {
             ref={(element) => {
               this.header = element;
             }}>
-            Engineering the Future
+            Diagonal Effect
           </div>
           <div
             className={styles['header-subtext']}
             ref={(element) => {
               this.subheader = element;
             }}>
-            We strive for creativity-fuelled impact
+            ↓
           </div>
           <div className={`${styles.boxes}`}>
             <DiagonalBox delay={0} timeline={timeline} />

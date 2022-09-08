@@ -1,13 +1,9 @@
-import {
-  GUI,
-} from 'dat.gui';
 import PropTypes from 'prop-types';
 import React, {
   PureComponent,
 } from 'react';
 import Background from '../../../common/Background';
 import TextLogo from '../../../common/TextLogo';
-import TorusType from './components/TorusType';
 import WaterfallType from './components/WaterfallType';
 
 class KineticType extends PureComponent {
@@ -22,30 +18,6 @@ class KineticType extends PureComponent {
     this.setType = this.setType.bind(this);
     this.getActiveType = this.getActiveType.bind(this);
     this.gui = null;
-  }
-
-  componentDidMount () {
-    // Timeout on GUI to account to prevent early pop in
-    this.renderGui();
-  }
-
-  componentWillUnmount () {
-    this.gui.destroy();
-  }
-
-  renderGui () {
-    this.gui = new GUI();
-    this.gui.width = 500;
-    this.gui.closed = false;
-
-    const type = this.gui.addFolder('Type');
-    type.add(this.state.type, 'torus').name('Torus').listen().onChange(() => {
-      this.setType('torus');
-    });
-    type.add(this.state.type, 'waterfall').name('Waterfall').listen().onChange(() => {
-      this.setType('waterfall');
-    });
-    type.open();
   }
 
   setType (prop) {
@@ -72,7 +44,6 @@ class KineticType extends PureComponent {
 
   render () {
     const {cursorHover, cursorUnhover} = this.props;
-    const type = this.getActiveType();
 
     return (
       <div
@@ -84,12 +55,7 @@ class KineticType extends PureComponent {
           unhover={cursorUnhover}
         />
         <Background />
-        {
-          {
-            torus: <TorusType />,
-            waterfall: <WaterfallType />,
-          }[type]
-        }
+        <WaterfallType />
       </div>
     );
   }
