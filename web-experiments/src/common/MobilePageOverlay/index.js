@@ -12,8 +12,8 @@ class MobilePageOverlay extends PureComponent {
           a view that&rsquo;s a bit too small for our web experiments.
           In the meantime, please check out these links for more
           from me: <br /><br />
-          <a href='http://anson.li/resume'>Resume</a><br /><br />
-          <a href='https://github.com/anson-li'>Github</a><br /><br />
+          <a href='http://anson.li/resume'>Resume</a><br />
+          <a href='https://github.com/anson-li'>Github</a><br />
           <a href='https://www.linkedin.com/in/anson-ii'>LinkedIn</a>
         </p>
       </div>

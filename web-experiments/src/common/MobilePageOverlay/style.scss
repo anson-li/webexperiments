@@ -13,6 +13,10 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    font-family: zeitung-mono, monospace;
+    letter-spacing: 2px;
+    font-size: 1.1em;
+    text-transform: uppercase;
 
     a {
       color: rgba(255, 201, 155, 0.9);
