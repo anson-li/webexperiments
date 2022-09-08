@@ -1,5 +1,5 @@
 import {
-  gsap, Power4,
+  gsap,
 } from 'gsap';
 import {
   SplitText,

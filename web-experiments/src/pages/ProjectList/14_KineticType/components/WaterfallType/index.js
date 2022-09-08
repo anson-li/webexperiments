@@ -5,7 +5,7 @@ import React, {
 import {
   Scene, PerspectiveCamera, WebGLRenderTarget, Color, TextureLoader,
   RawShaderMaterial, DoubleSide, Mesh,
-  WebGL1Renderer, Clock, PlaneBufferGeometry, ShaderMaterial,
+  WebGL1Renderer as WebGLRenderer, Clock, PlaneBufferGeometry, ShaderMaterial,
 } from 'three';
 import createGeometry from 'three-bmfont-text';
 import MSDFShader from 'three-bmfont-text/shaders/msdf';
@@ -30,7 +30,7 @@ class WaterfallType extends PureComponent {
     this.resize = this.resize.bind(this);
     this.renderAnimation = this.renderAnimation.bind(this);
 
-    this.renderer = new WebGL1Renderer({
+    this.renderer = new WebGLRenderer({
       alpha: true,
     });
     this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
